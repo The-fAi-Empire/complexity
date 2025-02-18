@@ -1,5 +1,4 @@
 import { PopoverOpenChangeDetails } from "@ark-ui/react";
-import { useState } from "react";
 import { LuX } from "react-icons/lu";
 
 import { Button } from "@/components/ui/button";

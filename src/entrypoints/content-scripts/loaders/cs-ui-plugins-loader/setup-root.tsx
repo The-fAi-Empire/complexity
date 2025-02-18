@@ -8,15 +8,10 @@ import CsUiRoot from "@/entrypoints/content-scripts/loaders/cs-ui-plugins-loader
 import { createRouter } from "@/entrypoints/content-scripts/loaders/cs-ui-plugins-loader/router";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { queryClient } from "@/utils/ts-query-client";
-import { waitForElement } from "@/utils/utils";
 
 csLoaderRegistry.register({
   id: "csui:root",
   loader: async () => {
-    await waitForElement({
-      selector: "body",
-    });
-
     const $root = $("<div>")
       .attr("id", "complexity-root")
       .appendTo(document.body);

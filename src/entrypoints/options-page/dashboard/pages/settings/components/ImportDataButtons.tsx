@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 import { ExtensionData } from "@/data/dashboard/extension-data.types";

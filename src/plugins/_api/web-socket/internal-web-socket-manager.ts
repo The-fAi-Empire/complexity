@@ -1,4 +1,3 @@
-import { decodePacket } from "engine.io-parser";
 import { nanoid } from "nanoid";
 import io, { Socket } from "socket.io-client";
 
@@ -18,34 +17,30 @@ export class InternalWebSocketManager {
     return InternalWebSocketManager.instance;
   }
 
-  public async handShake(
-    namespace?: string,
-    id: string = nanoid(),
-  ): Promise<Socket> {
+  public async handShake(id: string = nanoid()): Promise<Socket> {
     return new Promise((resolve, reject) => {
-      const socket = io(
-        `www.perplexity.ai/${namespace ? `?src=${namespace}` : ""}`,
-        {
-          transports: ["polling", "websocket"],
-          upgrade: true,
-          reconnection: false,
-        },
-      );
+      const socket = io("", {
+        transports: ["polling", "websocket"],
+        upgrade: true,
+        reconnection: false,
+      });
 
       this.sockets.set(id, socket);
 
-      socket.on("message", async (message) => {
-        const decodedData = decodePacket(message);
-        const sid = decodedData.data.match(/^\{"sid":"(.+)"\}$/)?.[1];
-
-        if (decodedData.type === "open" && sid != null) {
-          return resolve(socket);
-        }
+      socket.on("connect", () => {
+        resolve(socket);
       });
 
       socket.on("error", (error) => {
-        return reject(error);
+        reject(error);
       });
+
+      setTimeout(() => {
+        if (!socket.connected) {
+          socket.close();
+          reject(new Error("Connection timeout"));
+        }
+      }, 10000);
     });
   }
 

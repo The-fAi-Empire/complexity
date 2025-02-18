@@ -33,4 +33,9 @@ body#__next {
   a[aria-label="Perplexity"] svg path {
     @apply !x-stroke-primary;
   }
+
+  [data-cplx-component]::selection {
+    @apply x-text-primary;
+    background-color: oklch(var(--teal-200) / 0.1);
+  }
 }

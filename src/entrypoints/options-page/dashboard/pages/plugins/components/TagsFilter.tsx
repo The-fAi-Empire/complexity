@@ -1,5 +1,4 @@
 import { PopoverOpenChangeDetails } from "@ark-ui/react";
-import { useState } from "react";
 import { LuMinus, LuPlus } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";

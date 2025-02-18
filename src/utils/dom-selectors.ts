@@ -81,13 +81,13 @@ export const DOM_SELECTORS = {
   },
   QUERY_BOX: {
     TEXTAREA: {
-      MAIN: '[location="home"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
+      MAIN: 'body[location="home"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
       MAIN_MODAL:
         '[data-testid="quick-search-modal"] textarea[placeholder][autocomplete][style*="height"]',
       SPACE:
-        '[location="collection"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
+        'body[location="collection"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
       FOLLOW_UP:
-        '[location="thread"] .pointer-events-none.fixed.bottom-mobileNavHeight textarea[placeholder][autocomplete]',
+        'body[location="thread"] .pointer-events-none.fixed.bottom-mobileNavHeight textarea[placeholder][autocomplete]',
       ARBITRARY: "textarea[placeholder][autocomplete]",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',

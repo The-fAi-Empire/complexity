@@ -16,7 +16,6 @@ import {
   useSlashCommandMenuFilter,
 } from "@/plugins/slash-command-menu/store";
 import { useCommandFilter } from "@/plugins/slash-command-menu/useCommandFilter";
-import { getPopoverContentClasses } from "@/plugins/slash-command-menu/utils";
 
 type CommandContentProps = {
   commandRef: React.RefObject<HTMLDivElement | null>;
@@ -57,7 +56,12 @@ export const CommandContent = memo((props: CommandContentProps) => {
   return (
     <PopoverContent
       ref={props.commandRef}
-      className={getPopoverContentClasses(storeType)}
+      className={cn(
+        "x-overflow-y-auto x-border-border x-p-0 x-font-medium x-shadow-none",
+        {
+          "x-rounded-b-none x-border-2 x-border-b-0": storeType === "main",
+        },
+      )}
       portal={false}
       style={{ width: anchor.clientWidth }}
     >

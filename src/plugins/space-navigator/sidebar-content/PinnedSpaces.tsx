@@ -153,7 +153,7 @@ export default function SidebarPinnedSpaces() {
     },
   });
 
-  if (isCollapsed || localPinnedSpaces.length === 0) return null;
+  if (localPinnedSpaces.length === 0) return null;
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -178,7 +178,12 @@ export default function SidebarPinnedSpaces() {
   if (isSpacesLoading) return null;
 
   return (
-    <div className="custom-scrollbar x-max-h-[200px] x-overflow-y-auto">
+    <div
+      className={cn(
+        "custom-scrollbar x-max-h-[200px] x-overflow-y-auto",
+        isCollapsed && "x-hidden",
+      )}
+    >
       <div
         className={cn(
           "x-mt-1 x-flex x-flex-col x-gap-1 x-pl-3.5 x-pr-2 x-text-xs x-font-medium x-text-muted-foreground",

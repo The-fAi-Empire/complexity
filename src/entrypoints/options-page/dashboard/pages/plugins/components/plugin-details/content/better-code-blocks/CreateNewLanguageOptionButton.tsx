@@ -1,5 +1,4 @@
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { LuPlus } from "react-icons/lu";
 
 import Tooltip from "@/components/Tooltip";

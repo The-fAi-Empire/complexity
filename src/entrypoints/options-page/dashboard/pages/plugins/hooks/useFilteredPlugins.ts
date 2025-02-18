@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import { PLUGINS_METADATA } from "@/data/plugins-data/plugins-data";
 import { PluginTagValues } from "@/data/plugins-data/plugins-tags";
 import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";

@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { LuPanelLeft } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 

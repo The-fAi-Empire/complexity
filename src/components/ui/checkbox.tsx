@@ -20,7 +20,7 @@ const checkboxVariants = cva(
 );
 
 const labelVariants = cva(
-  "x-text-sm x-font-medium x-leading-none group-data-[disabled]:x-cursor-not-allowed group-data-[disabled]:x-opacity-70",
+  "x-text-sm x-font-medium x-leading-none x-text-muted-foreground group-data-[disabled]:x-cursor-not-allowed group-data-[disabled]:x-opacity-70",
   {
     variants: {
       size: {

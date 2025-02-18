@@ -18,6 +18,7 @@ import { ExportOption } from "@/plugins/export-thread/export-options";
 import { ExportActions } from "@/plugins/export-thread/ExportActions";
 import { ExportFormatSelect } from "@/plugins/export-thread/ExportFormatSelect";
 import { parseUrl } from "@/utils/utils";
+import { P } from "@/components/ui/typography";
 
 const ExportButton = memo(function ExportButton() {
   const messageBlocks = useThreadMessageBlocksDomObserverStore(
@@ -103,32 +104,34 @@ const ExportButton = memo(function ExportButton() {
           </Button>
         </PopoverTrigger>
       </Tooltip>
-      <PopoverContent className="x-flex x-flex-col x-gap-4">
-        <ExportFormatSelect onValueChange={setFormat} />
+      <PopoverContent>
+        <div className="x-text-sm x-font-medium">Export all messages</div>
 
-        <Checkbox
-          label={t("plugin-export-thread:exportButton.includeCitations")}
-          defaultChecked={includeCitations}
-          onCheckedChange={({ checked }) => {
-            setIncludeCitations(checked as boolean);
-          }}
-        />
-
-        <ExportActions
-          onDownload={() => {
-            setOpen(false);
-            handleDownload(includeCitations);
-          }}
-          onCopy={() => {
-            setOpen(false);
-            copyThread({
-              withCitations: includeCitations,
-              onComplete: () => {
-                setCopyConfirmText(<LuCheck className="x-size-4" />);
-              },
-            });
-          }}
-        />
+        <div className="x-flex x-flex-col x-gap-4">
+          <ExportFormatSelect onValueChange={setFormat} />
+          <Checkbox
+            label={t("plugin-export-thread:exportButton.includeCitations")}
+            defaultChecked={includeCitations}
+            onCheckedChange={({ checked }) => {
+              setIncludeCitations(checked as boolean);
+            }}
+          />
+          <ExportActions
+            onDownload={() => {
+              setOpen(false);
+              handleDownload(includeCitations);
+            }}
+            onCopy={() => {
+              setOpen(false);
+              copyThread({
+                withCitations: includeCitations,
+                onComplete: () => {
+                  setCopyConfirmText(<LuCheck className="x-size-4" />);
+                },
+              });
+            }}
+          />
+        </div>
       </PopoverContent>
     </Popover>
   );

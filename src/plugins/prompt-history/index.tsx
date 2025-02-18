@@ -1,5 +1,4 @@
 import { useDebounce } from "@uidotdev/usehooks";
-import { useEffect, useRef } from "react";
 import { LuHistory } from "react-icons/lu";
 
 import { CommandGroup } from "@/components/ui/command";

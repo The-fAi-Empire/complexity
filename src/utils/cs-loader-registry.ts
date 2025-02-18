@@ -159,9 +159,22 @@ class CsLoaderRegistry {
 
   async executeAll(): Promise<void> {
     const registeredLoaders = Array.from(this.loaderMap.keys());
+    // const timings: Record<string, number> = {};
+
     for (const loaderId of registeredLoaders) {
+      // const start = performance.now();
       await this.loadLoader(loaderId);
+      // timings[loaderId] = performance.now() - start;
     }
+
+    // const sortedLoaders = Object.entries(timings)
+    //   .sort(([, a], [, b]) => b - a)
+    //   .map(([id, time]) => ({
+    //     id,
+    //     time: Math.round(time),
+    //   }));
+
+    // console.table(sortedLoaders);
   }
 }
 

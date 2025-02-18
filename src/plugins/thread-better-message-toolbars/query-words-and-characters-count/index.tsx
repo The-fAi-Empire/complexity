@@ -21,9 +21,9 @@ export default function QueryWordsAndCharactersCount({
   const queryCharactersCount = query.length;
 
   return (
-    <div className="x-mx-2 x-flex x-items-center x-gap-2 x-text-xs x-font-medium x-italic x-text-muted-foreground">
-      {t("common:misc.words")}: {queryWordsCount}, {t("common:misc.characters")}
-      : {queryCharactersCount}
+    <div className="x-mx-2 x-flex x-items-center x-gap-2 x-text-xs x-font-medium x-text-muted-foreground">
+      {queryWordsCount} {t("common:misc.words")} | {queryCharactersCount}{" "}
+      {t("common:misc.characters")}
     </div>
   );
 }

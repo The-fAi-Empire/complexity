@@ -4,17 +4,18 @@ import packageJson from "~/package.json";
 
 export default function Version() {
   const { mutation, settings } = useExtensionLocalStorage();
-
   const [clicks, setClicks] = useState(0);
-
   const clickResetTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
+  const handleClick = useCallback(() => {
     if (clickResetTimeoutRef.current) {
       clearTimeout(clickResetTimeoutRef.current);
     }
 
-    if (clicks >= 7) {
+    const newClickCount = clicks + 1;
+    setClicks(newClickCount);
+
+    if (newClickCount >= 7) {
       setClicks(0);
 
       if (settings?.devMode) {
@@ -36,18 +37,12 @@ export default function Version() {
     clickResetTimeoutRef.current = setTimeout(() => {
       setClicks(0);
     }, 1000);
-
-    return () => {
-      if (clickResetTimeoutRef.current) {
-        clearTimeout(clickResetTimeoutRef.current);
-      }
-    };
   }, [clicks, settings?.devMode, mutation]);
 
   return (
     <div
       className="x-mx-auto x-mb-4 x-w-fit x-text-xs x-text-muted-foreground"
-      onClick={() => setClicks((prev) => prev + 1)}
+      onClick={handleClick}
     >
       v{packageJson.version}
     </div>
