@@ -16,7 +16,7 @@ import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { queryClient } from "@/utils/ts-query-client";
 import { getCookie, setCookie, whereAmI } from "@/utils/utils";
 
-export function findToolbarPortalContainer(queryBox: HTMLElement): {
+export function createToolbarPortalContainers(queryBox: HTMLElement): {
   leftContainer: HTMLElement | null;
   rightContainer: HTMLElement | null;
 } {

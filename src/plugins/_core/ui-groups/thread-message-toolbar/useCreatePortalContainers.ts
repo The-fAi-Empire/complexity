@@ -3,7 +3,7 @@ import { DOM_SELECTORS } from "@/utils/dom-selectors";
 
 const OBSERVER_ID = "cplx-thread-message-toolbar-extra-buttons-wrapper";
 
-export function useObserver(): (Element | null)[] {
+export function useCreatePortalContainers(): (Element | null)[] {
   const messageBlocks = useThreadMessageBlocksDomObserverStore(
     (state) => state.messageBlocks,
     deepEqual,

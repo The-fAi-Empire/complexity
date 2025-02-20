@@ -20,7 +20,9 @@
     "expand": "Kibontás",
     "collapse": "Összecsukás",
     "instantRewriteShort": "Átírás",
-    "instantRewrite": "Átírás ugyanazzal a modellel"
+    "instantRewrite": "Átírás ugyanazzal a modellel",
+    "speakAloud": "Felolvasás",
+    "stop": "Leállítás"
   },
   "releaseNotes": {
     "title": "Frissítve v{{version}} verzióra",

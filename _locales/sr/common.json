@@ -20,7 +20,9 @@
     "expand": "Прошири",
     "collapse": "Скупи",
     "instantRewriteShort": "Препиши",
-    "instantRewrite": "Препиши истим моделом"
+    "instantRewrite": "Препиши истим моделом",
+    "speakAloud": "Проčitaj naglas",
+    "stop": "Zaustavi"
   },
   "releaseNotes": {
     "title": "Ажурирано на v{{version}}",

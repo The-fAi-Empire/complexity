@@ -60,6 +60,10 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       tokensCount: false,
       collapsibleQuery: false,
     },
+    "thread:messageTts": {
+      enabled: false,
+      voice: "Mike",
+    },
     "thread:instantRewriteButton": {
       enabled: false,
     },

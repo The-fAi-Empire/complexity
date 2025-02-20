@@ -14,7 +14,6 @@ export default function InstantRewriteButton({
         onClick={() => handleInstantRewrite({ messageBlockIndex })}
       >
         <PplxRewrite />
-        <span>{t("misc.instantRewriteShort")}</span>
       </button>
     </Tooltip>
   );

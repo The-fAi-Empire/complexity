@@ -1,0 +1,5 @@
+[data-cplx-component="message-block-query-hover-container"] {
+  width: max-content;
+  transform: translateY(50%);
+  @apply md:x-absolute;
+}

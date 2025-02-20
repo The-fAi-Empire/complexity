@@ -37,7 +37,7 @@ export default function CollapsibleQueryToggleButton({
 
   return (
     <>
-      <div className="mx-2xs h-4 border-l border-borderMain/50 ring-borderMain/50 divide-borderMain/50 dark:divide-borderMainDark/50 dark:ring-borderMainDark/50 dark:border-borderMainDark/50 bg-transparent" />
+      <div className="m-[1.5px] w-px border-r border-borderMain/50 ring-borderMain/50 divide-borderMain/50 dark:divide-borderMainDark/50 dark:ring-borderMainDark/50 dark:border-borderMainDark/50 bg-transparent" />
       <Tooltip
         content={
           isCollapsed ? t("common:misc.expand") : t("common:misc.collapse")
@@ -45,7 +45,7 @@ export default function CollapsibleQueryToggleButton({
       >
         <div
           role="button"
-          className="x-cursor-pointer x-rounded-md x-bg-primary x-p-1 x-text-primary-foreground x-transition-all hover:x-opacity-80 active:x-scale-95"
+          className="x-cursor-pointer x-rounded-md x-p-1 x-text-muted-foreground x-transition-all hover:x-bg-secondary hover:x-text-foreground active:x-scale-95"
           onClick={() => setIsCollapsed(!isCollapsed)}
         >
           {isCollapsed ? <LuChevronDown /> : <LuChevronUp />}

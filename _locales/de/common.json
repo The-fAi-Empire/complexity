@@ -19,8 +19,10 @@
     "characters": "Zeichen",
     "expand": "Erweitern",
     "collapse": "Einklappen",
-    "instantRewriteShort": "Umschreiben",
-    "instantRewrite": "Mit demselben Modell umschreiben"
+    "instantRewriteShort": "Neu schreiben",
+    "instantRewrite": "Mit gleichem Modell neu schreiben",
+    "speakAloud": "Laut vorlesen",
+    "stop": "Stopp"
   },
   "releaseNotes": {
     "title": "Aktualisiert auf v{{version}}",

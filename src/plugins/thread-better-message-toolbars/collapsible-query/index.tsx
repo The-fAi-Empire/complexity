@@ -5,24 +5,34 @@ import collapsibleQueryCss from "@/plugins/thread-better-message-toolbars/collap
 import CollapsibleQueryToggleButton from "@/plugins/thread-better-message-toolbars/collapsible-query/CollapsibleQueryToggleButton";
 
 export default function CollapsibleQueryWrapper() {
-  const $queryHoverContainers = useThreadMessageBlocksDomObserverStore(
-    (store) =>
-      store.messageBlocks?.map((block) => block.nodes.$queryHoverContainer),
-  );
+  const $queryHoverContainersButtonsWrapper =
+    useThreadMessageBlocksDomObserverStore((store) =>
+      store.messageBlocks?.map((block) => {
+        if (block.states.isEditingQuery || block.states.isInFlight) return null;
+        return block.nodes.$queryHoverContainer.find(">div.bg-background-100");
+      }),
+    );
 
   useInsertCss({
     css: collapsibleQueryCss,
     id: "collapsible-query",
   });
 
-  if ($queryHoverContainers == null || !$queryHoverContainers.length)
+  if (
+    $queryHoverContainersButtonsWrapper == null ||
+    !$queryHoverContainersButtonsWrapper.length
+  )
     return null;
 
-  return $queryHoverContainers.map(($queryHoverContainer, index) => {
-    return (
-      <Portal key={index} container={$queryHoverContainer[0]}>
-        <CollapsibleQueryToggleButton messageIndex={index} />
-      </Portal>
-    );
-  });
+  return $queryHoverContainersButtonsWrapper.map(
+    ($queryHoverContainer, index) => {
+      if (!$queryHoverContainer) return null;
+
+      return (
+        <Portal key={index} container={$queryHoverContainer[0]}>
+          <CollapsibleQueryToggleButton messageIndex={index} />
+        </Portal>
+      );
+    },
+  );
 }

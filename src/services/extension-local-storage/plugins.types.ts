@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { BetterCodeBlockGlobalOptionsSchema } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
+import { TtsVoiceSchema } from "@/data/plugins/thread-message-tts/types";
 
 export const PluginSettingsSchema = z.object({
   enabled: z.boolean(),
@@ -39,6 +40,9 @@ export const PluginsSchema = z.object({
     wordsAndCharactersCount: z.boolean(),
     tokensCount: z.boolean(),
     collapsibleQuery: z.boolean(),
+  }),
+  "thread:messageTts": PluginSettingsSchema.extend({
+    voice: TtsVoiceSchema,
   }),
   "thread:instantRewriteButton": PluginSettingsSchema,
   "thread:betterCodeBlocks": PluginSettingsSchema.merge(

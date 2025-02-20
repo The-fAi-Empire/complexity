@@ -20,7 +20,9 @@
     "expand": "Expandir",
     "collapse": "Recolher",
     "instantRewriteShort": "Reescrever",
-    "instantRewrite": "Reescrever com o mesmo modelo"
+    "instantRewrite": "Reescrever com o mesmo modelo",
+    "speakAloud": "Ler em voz alta",
+    "stop": "Parar"
   },
   "releaseNotes": {
     "title": "Atualizado para v{{version}}",

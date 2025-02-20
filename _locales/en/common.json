@@ -20,7 +20,9 @@
     "expand": "Expand",
     "collapse": "Collapse",
     "instantRewriteShort": "Rewrite",
-    "instantRewrite": "Rewrite with the same model"
+    "instantRewrite": "Rewrite with the same model",
+    "speakAloud": "Speak aloud",
+    "stop": "Stop"
   },
   "releaseNotes": {
     "title": "Updated to v{{version}}",

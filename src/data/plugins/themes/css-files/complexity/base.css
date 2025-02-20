@@ -1,20 +1,29 @@
 body#__next {
   &[location="thread"] {
-    /* Typography */
-    strong,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      @apply x-text-primary;
-    }
-
     /* Message Block Dividers */
     [data-cplx-component="message-block"]
-      [data-cplx-component="message-block-text-col"]
+      [data-cplx-component="message-block-text-col"] {
       > .border-b {
-      @apply x-border-b-ring/50;
+        @apply x-border-b-ring/50;
+      }
+
+      [data-cplx-component="message-block-answer"] {
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        strong {
+          @apply x-text-primary;
+        }
+
+        h1 {
+          text-wrap: balance;
+          text-align: center;
+        }
+      }
     }
   }
 

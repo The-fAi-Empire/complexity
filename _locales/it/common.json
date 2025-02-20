@@ -20,7 +20,9 @@
     "expand": "Espandi",
     "collapse": "Comprimi",
     "instantRewriteShort": "Riscrivere",
-    "instantRewrite": "Riscrivere con lo stesso modello"
+    "instantRewrite": "Riscrivere con lo stesso modello",
+    "speakAloud": "Leggi ad alta voce",
+    "stop": "Ferma"
   },
   "releaseNotes": {
     "title": "Aggiornato alla v{{version}}",

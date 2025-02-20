@@ -12,7 +12,7 @@ import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 const MODEL_BADGE_COMPONENT_SELECTOR = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.ANSWER_HEADING_MODEL_NAME}"]`;
 
 function createModelBadge(modelName: string) {
-  return $(`<div>${modelName.toLocaleUpperCase()}</div>`)
+  return $(`<div>${modelName}</div>`)
     .addClass("x-font-medium x-text-sm md:x-text-base")
     .internalComponentAttr(
       INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD

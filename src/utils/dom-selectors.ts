@@ -34,9 +34,9 @@ export const DOM_SELECTORS = {
       VISUAL_COL: ".col-span-4",
       TEXT_COL_CHILD: {
         /** The query box */
-        QUERY_WRAPPER: `div.mt-md.md\\:mt-lg.mb-3.md\\:mb-6:has(> .group\\/title), div.mt-md.md\\:mt-lg.mb-3.md\\:mb-6:has(div[style*="height"])`,
+        QUERY_WRAPPER: `.relative.z-10 div.mt-md.md\\:mt-lg.mb-3.md\\:mb-6`,
         QUERY: ".group\\/query",
-        QUERY_HOVER_CONTAINER: ".pointer-events-none.absolute.bottom-0.right-0",
+        QUERY_HOVER_CONTAINER: ".absolute:not(.-inset-md):last",
         QUERY_HOVER_CONTAINER_CHILD: {
           EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
         },

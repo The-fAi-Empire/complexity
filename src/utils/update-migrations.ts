@@ -8,6 +8,17 @@ type MigrationFn = ({
   oldRawSettings: ExtensionLocalStorage;
 }) => Promise<ExtensionLocalStorage>;
 
+export const enableThreadMessageTtsKey: MigrationFn = async ({
+  oldRawSettings,
+}) => {
+  return produce(oldRawSettings, (draft) => {
+    draft.plugins["thread:messageTts"] = {
+      enabled: true,
+      voice: "Mike",
+    };
+  });
+};
+
 export const migrateHideHomepageWidgetsKey: MigrationFn = async ({
   oldRawSettings,
 }) => {
@@ -99,4 +110,5 @@ export const EXT_UPDATE_MIGRATIONS: Record<string, MigrationFn[]> = {
   "1.3.3.0": [migrateSlashCommandMenuKey],
   "1.3.5.0": [migrateShowPostUpdateReleaseNotesPopupKey],
   "1.4.2.0": [migrateInstantRewriteButtonKey, migrateHideHomepageWidgetsKey],
+  "1.6.8.0": [enableThreadMessageTtsKey],
 };

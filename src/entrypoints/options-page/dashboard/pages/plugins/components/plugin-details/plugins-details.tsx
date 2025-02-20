@@ -19,6 +19,7 @@ import SidebarToggleableRecentThreadsPluginDetails from "@/entrypoints/options-p
 import SlashCommandMenuPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SlashCommandMenu";
 import SpaceNavigatorPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SpaceNavigator";
 import SubmitOnCtrlEnterPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SubmitOnCtrlEnterPluginDetails";
+import ThreadMessageTtsPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/ThreadMessageTts";
 import ThreadToCPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/ThreadToC";
 import ZenModePluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/ZenMode";
 import { PluginId } from "@/services/extension-local-storage/plugins.types";
@@ -38,6 +39,7 @@ export const PLUGIN_DETAILS: PluginPluginDetails = {
   spaceNavigator: <SpaceNavigatorPluginDetails />,
   commandMenu: <CommandMenuPluginDetails />,
   "thread:betterMessageToolbars": <BetterThreadMessageToolbarsPluginDetails />,
+  "thread:messageTts": <ThreadMessageTtsPluginDetails />,
   "thread:rawHeadings": <RawHeadingsPluginDetails />,
   "thread:betterCodeBlocks": <BetterCodeBlocksPluginDetails />,
   "thread:toc": <ThreadToCPluginDetails />,

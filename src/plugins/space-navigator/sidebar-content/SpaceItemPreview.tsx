@@ -76,26 +76,27 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
           </ScrollArea>
         </div>
       )}
-      {space.focused_web_config?.link_configs.length > 0 && (
-        <div className="x-flex x-flex-col x-justify-between x-gap-2">
-          <div className="x-truncate x-text-sm x-font-medium x-text-muted-foreground">
-            {t(
-              "plugin-space-navigator:spaceNavigator.spaceItem.details.focusedWebLinks",
-              {
-                count: space.focused_web_config.link_configs.length,
-              },
-            )}
+      {space.focused_web_config &&
+        space.focused_web_config.link_configs.length > 0 && (
+          <div className="x-flex x-flex-col x-justify-between x-gap-2">
+            <div className="x-truncate x-text-sm x-font-medium x-text-muted-foreground">
+              {t(
+                "plugin-space-navigator:spaceNavigator.spaceItem.details.focusedWebLinks",
+                {
+                  count: space.focused_web_config.link_configs.length,
+                },
+              )}
+            </div>
+            <div className="x-flex x-flex-wrap x-items-center x-gap-2">
+              {space.focused_web_config.link_configs.map((link, idx) => (
+                <div key={idx} className="x-flex x-items-center x-gap-2">
+                  <LuLink className="x-size-4" />
+                  <div className="x-line-clamp-1 x-underline">{link.link}</div>
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="x-flex x-flex-wrap x-items-center x-gap-2">
-            {space.focused_web_config.link_configs.map((link, idx) => (
-              <div key={idx} className="x-flex x-items-center x-gap-2">
-                <LuLink className="x-size-4" />
-                <div className="x-line-clamp-1 x-underline">{link.link}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
+        )}
       {files && files?.num_total_files > 0 && (
         <div className="x-flex x-flex-col x-justify-between x-gap-2">
           <div className="x-text-sm x-font-medium x-text-muted-foreground">

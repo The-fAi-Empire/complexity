@@ -17,6 +17,9 @@ export type ReactVdomEvents = {
     answer: string;
     webResults: PplxWebResult[] | undefined;
   } | null;
+  "reactVdom:getMessageBackendUuid": (params: {
+    index: number;
+  }) => string | null;
   "reactVdom:getCodeBlockContent": (params: {
     messageBlockIndex: number;
     codeBlockIndex: number;
@@ -117,6 +120,30 @@ export function setupReactVdomListeners() {
     return result;
   });
 
+  onMessage("reactVdom:getMessageBackendUuid", ({ data: { index } }) => {
+    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${index}"]`;
+
+    const $el = $(selector).prev();
+
+    if (!$el.length) return null;
+
+    const [backendUuid, error] = errorWrapper(() =>
+      findReactFiberNodeValue({
+        fiberNode: ($el[0] as any)[getReactFiberKey($el[0])],
+        condition: (node) =>
+          node.return.memoizedProps.result.backend_uuid != null,
+        select: (node) =>
+          node.return.memoizedProps.result.backend_uuid as string,
+      }),
+    )();
+
+    if (error) console.warn("[VDOM Plugin] getMessageBackendUuid", error);
+
+    if (error || backendUuid == null) return null;
+
+    return backendUuid;
+  });
+
   onMessage(
     "reactVdom:getCodeBlockContent",
     ({ data: { messageBlockIndex, codeBlockIndex } }) => {
@@ -184,7 +211,7 @@ export function setupReactVdomListeners() {
           fiberNode,
           condition: (node) => {
             const items = node.memoizedProps.children.props.items;
-            const index = optionIndex ?? items.length - 1;
+            const index = optionIndex ?? items.length - 3;
             return items[index].onClick != null;
           },
           select: (node) => {

@@ -17,11 +17,14 @@ export class InternalWebSocketManager {
     return InternalWebSocketManager.instance;
   }
 
-  public async handShake(id: string = nanoid()): Promise<Socket> {
+  public async handShake(
+    id: string = nanoid(),
+    upgrade = true,
+  ): Promise<Socket> {
     return new Promise((resolve, reject) => {
       const socket = io("", {
-        transports: ["polling", "websocket"],
-        upgrade: true,
+        transports: upgrade ? ["polling", "websocket"] : ["polling"],
+        upgrade,
         reconnection: false,
       });
 
@@ -29,10 +32,6 @@ export class InternalWebSocketManager {
 
       socket.on("connect", () => {
         resolve(socket);
-      });
-
-      socket.on("error", (error) => {
-        reject(error);
       });
 
       setTimeout(() => {
