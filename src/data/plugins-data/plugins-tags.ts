@@ -47,4 +47,8 @@ export const PLUGIN_TAGS = {
     description:
       "May have a noticeable impact on performance in large threads with a large amount of code blocks.",
   },
+  chromiumOnly: {
+    label: "Chromium Only",
+    description: "Can only be used on Chromium-based browsers",
+  },
 } as const;

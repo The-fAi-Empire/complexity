@@ -16,11 +16,22 @@ const WAV_HEADER = {
   dataChunkId: 0x64617461,
 } as const;
 
+type PlaybackState = {
+  isPlaying: boolean;
+  isPending: boolean;
+};
+
 export class PplxStreamingTtsPlayer {
-  private buffer: Int16Array[] = [];
-  private currentSound: Howl | null = null;
+  private audioChunks: Int16Array[] = [];
+  private activeSound: Howl | null = null;
+
+  private playbackState: PlaybackState = {
+    isPlaying: false,
+    isPending: false,
+  };
 
   private speed: number = 1;
+  private isSessionActive: boolean = false;
 
   private onStart: (() => void) | null = null;
   private onComplete: (() => void) | null = null;
@@ -37,6 +48,19 @@ export class PplxStreamingTtsPlayer {
     this.onStart = onStart ?? null;
     this.onComplete = onComplete ?? null;
     this.speed = speed ?? 1;
+  }
+
+  public startSession() {
+    this.clearBuffer();
+    this.isSessionActive = true;
+    this.resetPlaybackState();
+  }
+
+  private resetPlaybackState() {
+    this.playbackState = {
+      isPlaying: false,
+      isPending: false,
+    };
   }
 
   private createWavHeader(dataLength: number): ArrayBuffer {
@@ -78,65 +102,100 @@ export class PplxStreamingTtsPlayer {
     return new Blob([wavBuffer], { type: "audio/wav" });
   }
 
-  private handlePlaybackEnd(url: string) {
+  private handleSoundEnd = (url: string) => {
+    if (!this.isSessionActive) return;
+
     URL.revokeObjectURL(url);
-    this.buffer.shift();
-    this.currentSound = null;
-    this.playNextChunk();
-  }
+    this.audioChunks.shift();
+    this.activeSound?.unload();
+    this.activeSound = null;
+
+    this.playbackState.isPlaying = false;
+    this.playbackState.isPending = false;
+
+    if (this.isSessionActive) {
+      this.playNextChunk();
+    }
+  };
 
   public addChunk(chunk: Int16Array, autoPlay = true) {
-    if (this.onStart && this.buffer.length === 0) {
+    if (!this.isSessionActive) return;
+
+    if (this.onStart && this.audioChunks.length === 0) {
       this.onStart();
     }
 
-    this.buffer.push(chunk);
-    if (autoPlay) {
-      this.playNextChunk();
-    }
+    this.audioChunks.push(chunk);
+    if (autoPlay) this.playNextChunk();
   }
 
-  public playNextChunk() {
-    if (!this.buffer.length || this.currentSound?.playing()) {
-      if (this.onComplete && this.buffer.length === 0) {
+  public async playNextChunk(): Promise<void> {
+    if (!this.isSessionActive) return;
+
+    if (this.playbackState.isPlaying || this.playbackState.isPending) {
+      return;
+    }
+
+    if (!this.audioChunks.length) {
+      if (this.onComplete) {
         this.onComplete();
       }
       return;
     }
 
-    const audioChunk = this.buffer[0];
-    if (!audioChunk) return;
+    const chunk = this.audioChunks[0];
+    if (!chunk) return;
+
+    this.playbackState.isPending = true;
 
     try {
-      const blob = this.createWavBlob(audioChunk);
+      const blob = this.createWavBlob(chunk);
       const objectUrl = URL.createObjectURL(blob);
 
-      this.currentSound = new Howl({
+      this.activeSound = new Howl({
         src: [objectUrl],
         format: ["wav"],
         autoplay: true,
         rate: this.speed,
-        onend: () => this.handlePlaybackEnd(objectUrl),
-        onloaderror: () => this.handlePlaybackEnd(objectUrl),
+        onend: () => this.handleSoundEnd(objectUrl),
+        onloaderror: () => {
+          URL.revokeObjectURL(objectUrl);
+          this.audioChunks.shift();
+          this.playbackState.isPending = false;
+          this.playNextChunk();
+        },
       });
+
+      this.playbackState.isPlaying = true;
     } catch (error) {
       console.error("Audio playback failed:", error);
-      this.buffer.shift();
+      this.audioChunks.shift();
+      this.playbackState.isPending = false;
       this.playNextChunk();
     }
   }
 
   public stop() {
-    this.currentSound?.stop();
-    this.currentSound?.unload();
-    this.currentSound = null;
-    this.buffer = [];
+    this.isSessionActive = false;
+
+    if (this.activeSound) {
+      this.activeSound.stop();
+      this.activeSound.unload();
+      this.activeSound = null;
+    }
+
+    this.resetPlaybackState();
+    this.clearBuffer();
+  }
+
+  public clearBuffer() {
+    this.audioChunks = [];
   }
 
   public setSpeed(speed: number) {
     this.speed = speed;
-    if (this.currentSound) {
-      this.currentSound.rate(speed);
+    if (this.activeSound) {
+      this.activeSound.rate(speed);
     }
   }
 }

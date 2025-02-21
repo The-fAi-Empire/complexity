@@ -1,6 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { Socket } from "socket.io-client";
 
+import { APP_CONFIG } from "@/app.config";
 import { TtsVoice } from "@/data/plugins/thread-message-tts/types";
 import { InternalWebSocketManager } from "@/plugins/_api/web-socket/internal-web-socket-manager";
 
@@ -25,7 +26,9 @@ export default function usePplxTtsRequest() {
       onBufferUpdate?: (chunk: Int16Array) => void;
     }) => {
       socketRef.current =
-        await InternalWebSocketManager.getInstance().handShake();
+        await InternalWebSocketManager.getInstance().handShake({
+          upgrade: APP_CONFIG.BROWSER === "chrome",
+        });
 
       const socket = socketRef.current;
 

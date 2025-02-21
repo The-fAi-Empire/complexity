@@ -37,6 +37,7 @@ export class PplxTtsPlayerCoordinator {
   public stopAllPlayers(): void {
     this.players.forEach((player, index) => {
       player.stop();
+      player.clearBuffer();
       this.stopFns[index]?.();
     });
   }
@@ -44,6 +45,8 @@ export class PplxTtsPlayerCoordinator {
   public removePlayer(player: PplxStreamingTtsPlayer): void {
     const index = this.players.indexOf(player);
     if (index !== -1) {
+      player.stop();
+      player.clearBuffer();
       this.players.splice(index, 1);
       this.stopFns.splice(index, 1);
     }

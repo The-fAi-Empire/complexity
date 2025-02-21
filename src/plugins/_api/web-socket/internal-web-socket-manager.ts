@@ -17,13 +17,15 @@ export class InternalWebSocketManager {
     return InternalWebSocketManager.instance;
   }
 
-  public async handShake(
-    id: string = nanoid(),
-    upgrade = true,
-  ): Promise<Socket> {
+  public async handShake(params?: {
+    id?: string;
+    upgrade?: boolean;
+  }): Promise<Socket> {
+    const { id = nanoid(), upgrade = true } = params ?? {};
+
     return new Promise((resolve, reject) => {
       const socket = io("", {
-        transports: upgrade ? ["polling", "websocket"] : ["polling"],
+        transports: ["polling", "websocket"],
         upgrade,
         reconnection: false,
       });
@@ -65,7 +67,7 @@ export class InternalWebSocketManager {
     let socket = this.getSocket(id);
 
     if (socket == null) {
-      socket = await this.handShake(id);
+      socket = await this.handShake({ id });
     }
 
     if (socket.io.engine.readyState === "opening") {

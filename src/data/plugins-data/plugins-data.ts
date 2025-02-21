@@ -122,7 +122,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     routeSegment: "thread-message-tts",
     title: "Thread Message TTS",
     description: "Enable text-to-speech for messages in threads",
-    tags: ["new", "ui", "ux"],
+    tags: ["new", "experimental", "ui", "ux"],
     dependentDomObservers: ["coreDomObserver:thread:messageBlocks"],
     dependentCorePlugins: ["spaRouter", "reactVdom"],
   },

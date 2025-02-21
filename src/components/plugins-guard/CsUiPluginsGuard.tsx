@@ -13,6 +13,7 @@ import {
   checkPluginDependencies,
   checkIncognito,
   checkLocation,
+  checkBrowser,
 } from "@/components/plugins-guard/guards";
 import { usePluginGuardsStore } from "@/components/plugins-guard/store";
 import {
@@ -78,6 +79,7 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
     currentLocation,
   });
   const incognitoValid = checkIncognito(props, { isIncognito });
+  const browserValid = checkBrowser(props);
 
   return {
     deviceValid,
@@ -86,6 +88,7 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
     dependenciesValid,
     locationValid,
     incognitoValid,
+    browserValid,
     pluginsEnableStates,
   };
 }
@@ -98,6 +101,7 @@ export default function CsUiPluginsGuard(props: CsUiPluginsGuardProps) {
     dependenciesValid,
     locationValid,
     incognitoValid,
+    browserValid,
     pluginsEnableStates,
   } = useGuardConditions(props);
 
@@ -117,6 +121,7 @@ export default function CsUiPluginsGuard(props: CsUiPluginsGuardProps) {
     dependenciesValid,
     locationValid,
     incognitoValid,
+    browserValid,
     additionalCheckValid,
   ].every(Boolean);
 

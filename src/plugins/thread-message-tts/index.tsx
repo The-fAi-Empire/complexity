@@ -20,14 +20,20 @@ export default function ThreadMessageTtsButton({
 }: {
   messageBlockIndex: number;
 }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const [firstChunkArrived, setFirstChunkArrived] = useState(false);
 
   const {
-    mutation: { mutateAsync: playTts },
+    mutation: { mutateAsync: playTts, isPending },
     abort,
   } = usePplxTtsRequest();
+
+  const pendingRef = useRef(isPending);
+
+  useEffect(() => {
+    pendingRef.current = isPending;
+  }, [isPending]);
 
   const [player] = useState(() =>
     PplxTtsPlayerCoordinator.getInstance().createPlayer({
@@ -35,66 +41,69 @@ export default function ThreadMessageTtsButton({
         setFirstChunkArrived(true);
       },
       onComplete: () => {
-        setIsPlaying(false);
+        if (pendingRef.current) return;
+        setPlaying(false);
+        setFirstChunkArrived(false);
+        abort();
       },
       stop: () => {
-        setIsPlaying(false);
+        setPlaying(false);
         setFirstChunkArrived(false);
         abort();
       },
     }),
   );
 
-  const stop = useCallback(() => {
+  const stopTts = useCallback(() => {
     PplxTtsPlayerCoordinator.getInstance().stopAllPlayers();
+    setPlaying(false);
+    setFirstChunkArrived(false);
   }, []);
 
   const initTts = useCallback(
     async (params?: { voice: TtsVoice }) => {
-      stop();
-
-      if (isPlaying) {
+      if (playing) {
+        stopTts();
         return;
       }
 
-      setIsPlaying(true);
+      stopTts();
+      player.startSession();
+      setPlaying(true);
 
       const backendUuid = await sendMessage(
         "reactVdom:getMessageBackendUuid",
-        {
-          index: messageBlockIndex,
-        },
+        { index: messageBlockIndex },
         "window",
       );
 
-      if (backendUuid == null) {
-        setIsPlaying(false);
+      if (!backendUuid) {
+        setPlaying(false);
         return;
       }
 
+      const extensionSettings = await ExtensionLocalStorageService.get();
+      const selectedVoice =
+        params?.voice || extensionSettings.plugins["thread:messageTts"].voice;
+
       playTts({
         backendUuid,
-        voice:
-          params?.voice ??
-          (await ExtensionLocalStorageService.get()).plugins[
-            "thread:messageTts"
-          ].voice,
-        onBufferUpdate(chunk) {
-          player.addChunk(chunk);
-        },
+        voice: selectedVoice,
+        onBufferUpdate: (chunk: Int16Array) => player.addChunk(chunk),
       });
     },
-    [isPlaying, stop, messageBlockIndex, playTts, player],
+    [playing, player, messageBlockIndex, stopTts, playTts],
   );
 
   useEffect(() => {
     return () => {
-      stop();
+      stopTts();
+      player.clearBuffer();
       PplxTtsPlayerCoordinator.getInstance().removePlayer(player);
     };
-  }, [player, stop]);
+  }, [player, stopTts]);
 
-  if (isPlaying && !firstChunkArrived) {
+  if (playing && !firstChunkArrived) {
     return (
       <div className="x-rounded-md x-p-2 x-text-muted-foreground">
         <LuLoaderCircle className="x-size-4 x-animate-spin" />
@@ -106,8 +115,8 @@ export default function ThreadMessageTtsButton({
     <DropdownMenu
       lazyMount
       unmountOnExit
-      open={isOpen}
-      onOpenChange={({ open }) => setIsOpen(open)}
+      open={menuOpen}
+      onOpenChange={({ open }) => setMenuOpen(open)}
       onSelect={({ value }) => {
         initTts({ voice: value as TtsVoice });
         ExtensionLocalStorageService.set((draft) => {
@@ -115,28 +124,28 @@ export default function ThreadMessageTtsButton({
         });
       }}
     >
-      <Tooltip content={isPlaying ? t("misc.stop") : t("misc.speakAloud")}>
+      <Tooltip content={playing ? t("misc.stop") : t("misc.speakAloud")}>
         <DropdownMenuTrigger asChild>
           <div
             className="x-cursor-pointer x-rounded-md x-p-2 x-text-muted-foreground x-transition-all hover:x-bg-secondary hover:x-text-foreground active:x-scale-95"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              if (isOpen) {
+              if (menuOpen) {
                 return;
               }
               initTts();
             }}
             onContextMenu={(e) => {
-              if (isPlaying) {
+              if (playing) {
                 return;
               }
 
               e.preventDefault();
-              setIsOpen(true);
+              setMenuOpen(true);
             }}
           >
-            {isPlaying ? (
+            {playing ? (
               <FaStopCircle className="x-size-4 x-text-primary" />
             ) : (
               <HiOutlineSpeakerWave className="x-size-4" />
