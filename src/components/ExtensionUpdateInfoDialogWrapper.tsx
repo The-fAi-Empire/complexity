@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { LuArrowRight, LuInfo } from "react-icons/lu";
+import { LuArrowRight, LuExternalLink, LuInfo } from "react-icons/lu";
 import { sendMessage } from "webext-bridge/content-script";
 
 import { APP_CONFIG } from "@/app.config";
@@ -28,7 +28,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
 
   return (
     <Dialog>
-      <DialogTrigger>{children}</DialogTrigger>
+      <DialogTrigger className="x-w-full">{children}</DialogTrigger>
       <DialogContent className="x-max-h-[80vh] x-overflow-y-auto">
         <DialogHeader className="x-text-lg x-font-semibold">
           A new version of the extension is available!
@@ -46,7 +46,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
           </div>
 
           <div
-            className="x-mx-auto x-cursor-pointer x-text-muted-foreground hover:x-text-foreground hover:x-underline"
+            className="x-mx-auto x-flex x-cursor-pointer x-items-center x-gap-2 x-text-muted-foreground hover:x-text-foreground x-underline"
             role="link"
             onClick={() => {
               if (!latestVersion) return;
@@ -60,7 +60,8 @@ export default function ExtensionUpdateInfoDialogWrapper({
               );
             }}
           >
-            Release Notes
+            <span>Release Notes</span>
+            <LuExternalLink className="x-size-4" />
           </div>
 
           <div className="x-space-y-2">

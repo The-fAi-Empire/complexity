@@ -93,9 +93,7 @@ export class ExtensionLocalStorageService {
   }
 
   public static async import(data: ExtensionLocalStorage): Promise<void> {
-    await ExtensionLocalStorageApi.set(
-      await mergeData(data, await ExtensionLocalStorageService.get()),
-    );
+    await ExtensionLocalStorageApi.set(await validateData(data));
   }
 
   public static async clearAll(): Promise<void> {
@@ -106,12 +104,11 @@ export class ExtensionLocalStorageService {
 async function parseStoreData(
   rawSettings: ExtensionLocalStorage,
 ): Promise<ExtensionLocalStorage> {
-  return mergeData(rawSettings, DEFAULT_STORAGE);
+  return validateData(rawSettings);
 }
 
-async function mergeData(
+async function validateData(
   rawSettings: ExtensionLocalStorage,
-  defaultSettings: ExtensionLocalStorage,
 ): Promise<ExtensionLocalStorage> {
   const { error } = ExtensionLocalStorageSchema.safeParse(rawSettings);
 
@@ -119,19 +116,18 @@ async function mergeData(
     return rawSettings;
   }
 
-  if (!isZodError(error)) {
+  if (!isZodError(error) || !Object.keys(rawSettings).length) {
     return DEFAULT_STORAGE;
   }
 
   console.log("[Cplx] Settings schema mismatch");
 
   if (error.issues.some((issue) => issue.path[0] === "schemaVersion")) {
-    return mergeData(
-      (await updateMigrations({
+    return validateData(
+      await updateMigrations({
         previousVersion: rawSettings.schemaVersion,
         rawSettings,
-      })) ?? rawSettings,
-      DEFAULT_STORAGE,
+      }),
     );
   }
 
@@ -145,7 +141,7 @@ async function mergeData(
   const updatedSettings = {
     ...mergeUndefined({
       target: cleanSettings,
-      source: defaultSettings,
+      source: await ExtensionLocalStorageService.get(),
     }),
     schemaVersion: packageJson.version,
   };
@@ -175,7 +171,11 @@ async function updateMigrations({
   previousVersion: string;
   rawSettings: ExtensionLocalStorage;
 }) {
-  if (!previousVersion) return;
+  if (!previousVersion)
+    return {
+      ...rawSettings,
+      schemaVersion: packageJson.version,
+    };
 
   console.log("Migrate schema from", previousVersion, "to", APP_CONFIG.VERSION);
 
