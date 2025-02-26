@@ -123,6 +123,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       lastState: false,
       alwaysHideRelatedQuestions: false,
       alwaysHideVisualCols: false,
+      hotkey: [getPlatform() === "mac" ? Key.Meta : Key.Control, Key.Alt, "z"],
     },
     "home:hideHomepageWidgets": {
       enabled: false,

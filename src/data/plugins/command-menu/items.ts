@@ -42,7 +42,6 @@ export const ZENMODE_ITEMS: ZenModeItem[] = [
         });
       }
     },
-    shortcut: ["Ctrl", "Alt", "Z"],
   },
   {
     type: "disable",
@@ -64,7 +63,6 @@ export const ZENMODE_ITEMS: ZenModeItem[] = [
         });
       }
     },
-    shortcut: ["Ctrl", "Alt", "Z"],
   },
 ];
 

@@ -6,7 +6,7 @@
   [data-cplx-component="message-block-text-col"]
     div
     > div:not([class])
-    > div.bg-transparent:not(.mb-lg) {
+    > div.bg-transparent:not(.overflow-hidden):not(.my-xs.pl-sm) {
     isolation: isolate;
     display: flex;
     flex-direction: column;

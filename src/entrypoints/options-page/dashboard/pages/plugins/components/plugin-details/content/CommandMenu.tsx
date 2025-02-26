@@ -24,14 +24,6 @@ export default function CommandMenuPluginDetails() {
         Similar to Mac&apos;s Spotlight / Windows&apos;s PowerToys Run, but
         inside Perplexity.
       </div>
-      <div className="x-flex x-flex-col x-gap-2">
-        <div>Activation hotkey:</div>
-        <HotkeyRecorderUI />
-      </div>
-      <div className="x-text-sm x-text-muted-foreground">
-        Side note: Thread search is subject to rate limiting by Perplexity at
-        any time.
-      </div>
       <Switch
         textLabel="Enable"
         checked={settings?.plugins["commandMenu"].enabled ?? false}
@@ -41,6 +33,18 @@ export default function CommandMenuPluginDetails() {
           });
         }}
       />
+      {settings?.plugins["commandMenu"].enabled && (
+        <>
+          <div className="x-flex x-flex-col x-gap-2">
+            <div>Activation hotkey:</div>
+            <HotkeyRecorderUI />
+          </div>
+          <div className="x-text-sm x-text-muted-foreground">
+            Side note: Thread search is subject to rate limiting by Perplexity
+            at any time.
+          </div>
+        </>
+      )}
       <div className="x-mx-auto x-w-full x-max-w-[700px]">
         <Image
           src="https://i.imgur.com/m8x0hm1.png"

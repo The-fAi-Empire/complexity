@@ -5,7 +5,6 @@ import {
   commandMenuStore,
   useCommandMenuStore,
 } from "@/data/plugins/command-menu/store";
-import { getPlatform } from "@/hooks/usePlatformDetection";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { keysToString } from "@/utils/utils";
@@ -15,14 +14,12 @@ export default function useBindCommandMenuHotkeys() {
 
   const settings = ExtensionLocalStorageService.getCachedSync();
 
-  const state = useCommandMenuStore();
+  const { open, setOpen, filter } = useCommandMenuStore();
 
   const [historyPosition, setHistoryPosition] = useState(-1);
   const [filterHistory, setFilterHistory] = useState<(SearchFilter | null)[]>(
     [],
   );
-
-  const { open, setOpen, filter } = state;
 
   const activationHotkey = settings.plugins.commandMenu.hotkey ?? [];
 
@@ -82,11 +79,7 @@ export default function useBindCommandMenuHotkeys() {
   );
 
   useHotkeys(
-    keysToString([
-      getPlatform() === "mac" ? Key.Meta : Key.Control,
-      Key.Alt,
-      "z",
-    ]),
+    keysToString(settings.plugins.zenMode.hotkey),
     () => {
       const previousZenMode = $("body").attr("data-cplx-zen-mode");
       const newZenMode = previousZenMode === "true" ? "false" : "true";

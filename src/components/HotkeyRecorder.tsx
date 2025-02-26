@@ -113,7 +113,7 @@ export function useHotkeyRecorder({
               Recording...
             </div>
           ) : (
-            <KeyCombo keys={displayKeys} />
+            <KeyCombo keys={formatKeys(displayKeys)} />
           )}
         </div>
         {isRecording ? (
@@ -143,8 +143,8 @@ export function useHotkeyRecorder({
           <div className="x-i-lucide-alert-circle x-h-4 x-w-4" />
           Invalid combination. Use one modifier key ({isMac
             ? "⌘"
-            : "Ctrl"}, {isMac ? "Option" : "Alt"}, {isMac ? "Shift" : "Shift"})
-          + one regular key
+            : "Ctrl"}, {isMac ? "⌥" : "Alt"}, {isMac ? "⇧" : "Shift"}) + one
+          regular key
         </div>
       )}
     </div>
@@ -158,4 +158,8 @@ export function useHotkeyRecorder({
     stopRecording: handleStopRecording,
     isValidCombination,
   };
+}
+
+export function formatKeys(keys: string[]): string[] {
+  return keys.map((key) => key.charAt(0).toUpperCase() + key.slice(1));
 }
