@@ -9,6 +9,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { P } from "@/components/ui/typography";
 import { toast } from "@/components/ui/use-toast";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useCopyPplxThread } from "@/hooks/useCopyPplxThread";
@@ -18,7 +19,6 @@ import { ExportOption } from "@/plugins/export-thread/export-options";
 import { ExportActions } from "@/plugins/export-thread/ExportActions";
 import { ExportFormatSelect } from "@/plugins/export-thread/ExportFormatSelect";
 import { parseUrl } from "@/utils/utils";
-import { P } from "@/components/ui/typography";
 
 const ExportButton = memo(function ExportButton() {
   const messageBlocks = useThreadMessageBlocksDomObserverStore(

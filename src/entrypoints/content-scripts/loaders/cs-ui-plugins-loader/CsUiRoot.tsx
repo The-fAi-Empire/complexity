@@ -71,7 +71,7 @@ export default function CsUiRoot() {
         {/* <SponsorHomeLink /> */}
       </CsUiPluginsGuard>
       <QueryBoxWrapper />
-      <CsUiPluginsGuard desktopOnly dependentPluginIds={["commandMenu"]}>
+      <CsUiPluginsGuard dependentPluginIds={["commandMenu"]}>
         <CommandMenuWrapper />
       </CsUiPluginsGuard>
       <CsUiPluginsGuard>

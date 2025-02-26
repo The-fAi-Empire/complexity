@@ -8,7 +8,7 @@ import { queryClient } from "@/utils/ts-query-client";
 
 export const localLanguageModels = [
   {
-    label: "Claude 3.5 Sonnet",
+    label: "Claude 3.7 Sonnet",
     shortLabel: "Sonnet",
     code: "claude2",
     provider: "Anthropic",

@@ -122,13 +122,13 @@ const TocItem = memo(function TocItem({
       onClick={onClick}
     >
       <div
-        className={cn("x-min-w-[2px] x-h-5 x-rounded-full", {
+        className={cn("x-h-5 x-min-w-[2px] x-rounded-full", {
           "x-bg-foreground": item.isActive,
           "x-bg-muted-foreground": !item.isActive,
         })}
       />
       <div
-        className={cn("x-text-sm x-block x-truncate x-transition-colors", {
+        className={cn("x-block x-truncate x-text-sm x-transition-colors", {
           "x-font-medium x-text-foreground": item.isActive,
           "x-text-muted-foreground hover:x-text-foreground": !item.isActive,
         })}

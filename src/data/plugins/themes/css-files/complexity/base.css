@@ -18,11 +18,6 @@ body#__next {
         strong {
           @apply x-text-primary;
         }
-
-        h1 {
-          text-wrap: balance;
-          text-align: center;
-        }
       }
     }
   }

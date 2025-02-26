@@ -21,8 +21,6 @@ const defineMozManifest = defineManifest as unknown as (
 
 export default defineMozManifest(
   produce(baseManifest as MozManifest, (draft) => {
-    draft.permissions = ["storage", "unlimitedStorage", "contextMenus"];
-    draft.optional_permissions = [];
     draft.browser_specific_settings = {
       gecko: {
         id: "complexity@ngocdg",
