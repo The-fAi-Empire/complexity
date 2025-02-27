@@ -14,12 +14,9 @@ export function PluginsGrid({ pluginIds }: PluginGridProps) {
   return (
     <div className="x-grid x-gap-4 sm:x-grid-cols-2 xl:x-grid-cols-3 2xl:x-grid-cols-4">
       {pluginIds.map((pluginId) => {
-        if (pluginsStates[pluginId].isHiddenFromDashboard) return null;
-
         const isLockedDown =
           pluginsStates[pluginId].isOutdated ||
-          pluginsStates[pluginId].isOnMaintenance ||
-          pluginsStates[pluginId].isForceDisabled;
+          pluginsStates[pluginId].isOnMaintenance;
 
         return (
           <div key={pluginId} className="x-relative">
@@ -38,10 +35,8 @@ export function PluginsGrid({ pluginIds }: PluginGridProps) {
 }
 
 function getLockdownText(pluginId: PluginId, pluginsStates: PluginsStates) {
-  const { isOutdated, isOnMaintenance, isForceDisabled } =
-    pluginsStates[pluginId];
+  const { isOutdated, isOnMaintenance } = pluginsStates[pluginId];
 
-  if (isForceDisabled) return "This plugin is not available at the moment";
   if (isOnMaintenance) return "This plugin is on maintenance";
   if (isOutdated) return "This plugin is outdated";
 
@@ -49,10 +44,8 @@ function getLockdownText(pluginId: PluginId, pluginsStates: PluginsStates) {
 }
 
 function getLockdownSubText(pluginId: PluginId, pluginsStates: PluginsStates) {
-  const { isOutdated, isOnMaintenance, isForceDisabled } =
-    pluginsStates[pluginId];
+  const { isOutdated, isOnMaintenance } = pluginsStates[pluginId];
 
-  if (isForceDisabled) return "Please check back later";
   if (isOnMaintenance) return "Please check back later";
   if (isOutdated) return "Please update the extension";
 

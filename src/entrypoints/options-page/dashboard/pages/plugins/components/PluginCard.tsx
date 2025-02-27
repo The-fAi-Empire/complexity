@@ -55,7 +55,9 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
   const areAnyDependentPluginsDisabled = useMemo(
     () =>
       PLUGINS_METADATA?.[pluginId]?.dependentPlugins?.some(
-        (dependentPluginId) => pluginsStates[dependentPluginId].isForceDisabled,
+        (dependentPluginId) =>
+          pluginsStates[dependentPluginId].isOnMaintenance ||
+          pluginsStates[dependentPluginId].isOutdated,
       ) ?? false,
     [pluginId, pluginsStates],
   );

@@ -37,8 +37,8 @@ export default function PluginDetailsWrapper() {
   }
 
   if (
-    pluginsStates[plugin.id].isForceDisabled ||
-    pluginsStates[plugin.id].isHiddenFromDashboard
+    pluginsStates[plugin.id].isOnMaintenance ||
+    pluginsStates[plugin.id].isOutdated
   ) {
     return <PluginUnavailable onBackClick={() => navigate("/plugins")} />;
   }

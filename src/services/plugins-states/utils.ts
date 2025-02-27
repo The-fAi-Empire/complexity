@@ -7,8 +7,6 @@ import { ExtensionVersion } from "@/utils/ext-version";
 export type PluginState = {
   isOutdated: boolean;
   isOnMaintenance: boolean; // if no publicly available newer version
-  isForceDisabled: boolean;
-  isHiddenFromDashboard: boolean;
 };
 
 export type PluginsStates = Record<PluginId, PluginState>;
@@ -20,8 +18,6 @@ export const initializePluginStates = (): PluginsStates => {
       [pluginId]: {
         isOutdated: false,
         isOnMaintenance: false,
-        isForceDisabled: false,
-        isHiddenFromDashboard: false,
       } satisfies PluginState,
     }),
     {} as PluginsStates,
@@ -95,8 +91,6 @@ export const updatePluginStatesWithEnableStates = (
 function isPluginLockedDown(pluginsStates: PluginsStates, pluginId: PluginId) {
   return (
     pluginsStates[pluginId].isOutdated ||
-    pluginsStates[pluginId].isOnMaintenance ||
-    pluginsStates[pluginId].isForceDisabled ||
-    pluginsStates[pluginId].isHiddenFromDashboard
+    pluginsStates[pluginId].isOnMaintenance
   );
 }
