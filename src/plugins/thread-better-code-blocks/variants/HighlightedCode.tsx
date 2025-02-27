@@ -35,6 +35,9 @@ const HighlightedCodeWrapper = memo(() => {
 
   if (!codeBlock) return null;
 
+  const showLineNumbers =
+    fineGrainedSettings?.showLineNumbers ?? globalSettings?.showLineNumbers;
+
   return (
     <div
       ref={wrapperRef}
@@ -51,9 +54,11 @@ const HighlightedCodeWrapper = memo(() => {
             "[&_span]:x-duration-300 [&_span]:x-animate-in [&_span]:x-fade-in":
               isInFlight,
           },
+          showLineNumbers && "[&_span.linenumber]:!x-text-muted-foreground",
         )}
       >
         <CodeHighlighter
+          showLineNumbers={showLineNumbers}
           language={interpretedLanguage}
           codeRef={codeRef}
           PreTag={PreTag}

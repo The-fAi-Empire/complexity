@@ -47,6 +47,19 @@ export default function BetterCodeBlockFineGrainedOptions({
             });
           }}
         />
+        <Switch
+          textLabel="Show line numbers"
+          checked={settings?.showLineNumbers}
+          onCheckedChange={({ checked }) => {
+            mutation.mutate({
+              language,
+              newDraft: {
+                showLineNumbers: checked,
+              },
+            });
+          }}
+        />
+
         <div className="x-flex x-flex-col x-gap-2">
           <Switch
             textLabel="Unwrap lines by default"

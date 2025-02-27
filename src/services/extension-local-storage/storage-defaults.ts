@@ -70,6 +70,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
     "thread:betterCodeBlocks": {
       enabled: false,
       stickyHeader: true,
+      showLineNumbers: false,
       unwrap: {
         enabled: true,
         showToggleButton: true,

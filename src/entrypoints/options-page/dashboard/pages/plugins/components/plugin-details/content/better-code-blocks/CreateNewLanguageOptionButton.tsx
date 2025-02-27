@@ -32,6 +32,7 @@ export default function CreateNewLanguageOptionButton() {
 
       const options: BetterCodeBlockFineGrainedOptions = {
         language,
+        showLineNumbers: false,
         stickyHeader: false,
         unwrap: {
           enabled: false,

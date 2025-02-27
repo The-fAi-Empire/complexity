@@ -28,6 +28,16 @@ export default function BetterCodeBlockGlobalOptions() {
             });
           }}
         />
+        <Switch
+          textLabel="Show line numbers"
+          checked={settings?.plugins["thread:betterCodeBlocks"].showLineNumbers}
+          onCheckedChange={({ checked }) => {
+            mutation.mutate((draft) => {
+              draft.plugins["thread:betterCodeBlocks"].showLineNumbers =
+                checked;
+            });
+          }}
+        />
         <div className="x-flex x-flex-col x-gap-2">
           <Switch
             textLabel="Unwrap lines by default"
