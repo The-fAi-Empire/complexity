@@ -73,7 +73,7 @@ export const updatePluginStatesWithFeatureCompat = (
   );
 };
 
-export const updatePluginStatesWithEnableStates = (
+export const getEnableStates = (
   pluginsStates: PluginsStates,
   localEnableStates: ExtensionLocalStorage["plugins"],
 ): Record<PluginId, boolean> => {
@@ -81,12 +81,26 @@ export const updatePluginStatesWithEnableStates = (
     (acc, pluginId) => ({
       ...acc,
       [pluginId as PluginId]:
+        areAllDependenciesAvailable(pluginId as PluginId, pluginsStates) &&
         !isPluginLockedDown(pluginsStates, pluginId as PluginId) &&
         localEnableStates[pluginId as PluginId].enabled,
     }),
     {} as Record<PluginId, boolean>,
   );
 };
+
+function areAllDependenciesAvailable(
+  pluginId: PluginId,
+  pluginsStates: PluginsStates,
+) {
+  if (!PLUGINS_METADATA[pluginId]?.dependentPlugins) return true;
+
+  return PLUGINS_METADATA[pluginId]?.dependentPlugins?.every(
+    (dependentPluginId) =>
+      !pluginsStates[dependentPluginId].isOnMaintenance &&
+      !pluginsStates[dependentPluginId].isOutdated,
+  );
+}
 
 function isPluginLockedDown(pluginsStates: PluginsStates, pluginId: PluginId) {
   return (
