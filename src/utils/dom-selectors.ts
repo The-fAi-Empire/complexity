@@ -1,3 +1,6 @@
+/**
+ * Mixes of both native css and jquery selectors
+ */
 export const DOM_SELECTORS = {
   SIDEBAR: {
     WRAPPER: ".group\\/bar",
@@ -16,22 +19,20 @@ export const DOM_SELECTORS = {
   },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
-    WRAPPER:
-      ".flex-1.basis-0.overflow-auto.scrollbar-thin:has(>.max-w-threadWidth)",
+    WRAPPER: "div:has(>.max-w-threadWidth):first",
     NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
     /** The container that wraps all messages */
     CONTAINER: {
       /** Normal thread*/
-      NORMAL: ".size-full.max-w-threadWidth > div.relative > div:first-child",
+      NORMAL: ".max-w-threadWidth:last",
       /** Branched thread */
-      BRANCHED:
-        ".size-full.max-w-threadWidth > div.relative > div:first-of-type",
+      BRANCHED: ".max-w-threadWidth:last",
     },
     MESSAGE: {
       WRAPPER: ".grid-cols-12",
-      TEXT_COL: ".col-span-8",
+      TEXT_COL: ".isolate.col-span-8",
       /** Columns that contain images, videos, image gen popover */
-      VISUAL_COL: ".col-span-4",
+      VISUAL_COL: ".isolate.col-span-4",
       TEXT_COL_CHILD: {
         /** The query box */
         QUERY_WRAPPER: `.relative.z-10 div.mt-md.md\\:mt-lg.mb-3.md\\:mb-6`,
@@ -99,7 +100,7 @@ export const DOM_SELECTORS = {
     INCOGNITO_TOGGLE: ".mr-xs.flex.shrink-0.items-center",
   },
   SPACES_PAGE: {
-    INFO_CARD: ".col-span-4 > div > div",
+    INFO_CARD: ".isolate.col-span-4 > div > div",
     SPACE_CARD: `.contents a[data-testid="collection-preview"]`,
   },
   SETTINGS_PAGE: {
