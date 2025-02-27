@@ -46,7 +46,7 @@ export const DOM_SELECTORS = {
         ANSWER_HEADING:
           ".mb-sm.flex.w-full.items-center.justify-between:has(svg.transform-gpu)",
         /** The sources heading */
-        SOURCES: ".mb-md.border-borderMain\\/50.ring-borderMain\\/50",
+        SOURCES: ".grid.grid-flow-col.md\\:grid-cols-4",
         /** The answer wrapper */
         ANSWER: ".mb-md > .relative.default.font-sans.text-base",
         /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
