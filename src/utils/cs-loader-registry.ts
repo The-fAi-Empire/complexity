@@ -29,6 +29,8 @@ export const LOADER_IDS = [
 
   "plugins:core",
 
+  "plugin:cookiesNormalization",
+
   "plugin:pplxThemeLoader",
 
   "plugin:hideGetMobileAppCtaBtn",
@@ -44,7 +46,9 @@ export const LOADER_IDS = [
   "plugin:thread:betterMessageToolbars:collapsibleQuery",
   "plugin:thread:instantRewriteButton:nativeBtnBind",
   "plugin:thread:customThreadContainerWidth",
+
   "plugin:spaceNavigator:networkInterceptMiddleware",
+
   "plugin:queryBox:initSharedStore",
   "plugin:queryBox:languageModelSelector:respectSpaceModel",
   "plugin:queryBox:promptHistory:networkInterceptMiddleware",
@@ -52,8 +56,10 @@ export const LOADER_IDS = [
   "plugin:queryBox:noFileCreationOnPaste",
   "plugin:queryBox:submitOnCtrlEnter",
   "plugin:queryBox:fullWidthFollowUp",
+
   "plugin:home:customSlogan",
   "plugin:home:hideHomepageWidgets",
+
   "plugin:thread:rawHeadings",
 
   "store:colorScheme",
