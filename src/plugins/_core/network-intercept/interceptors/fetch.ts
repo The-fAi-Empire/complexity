@@ -39,6 +39,31 @@ async function interceptRequest(input: RequestInfo | URL, body: string) {
   return resp?.data;
 }
 
+function parseSSEChunk(chunk: string): { event: string; data: string }[] {
+  const events: { event: string; data: string }[] = [];
+  const eventStrings = chunk.split("\n\n").filter(Boolean);
+
+  for (const eventString of eventStrings) {
+    const lines = eventString.split("\n");
+    let event = "message";
+    let data = "";
+
+    for (const line of lines) {
+      if (line.startsWith("event:")) {
+        event = line.slice(6).trim();
+      } else if (line.startsWith("data:")) {
+        data = line.slice(5).trim();
+      }
+    }
+
+    if (data) {
+      events.push({ event, data });
+    }
+  }
+
+  return events;
+}
+
 function handleStreamingResponse(response: Response, url: string) {
   const reader = response.body?.getReader();
   if (!reader) return response;
@@ -52,7 +77,12 @@ function handleStreamingResponse(response: Response, url: string) {
           let result = await reader.read();
           while (!result.done) {
             const chunk = decoder.decode(result.value, { stream: true });
-            await notifyContentScript(url, response.status, chunk);
+            const events = parseSSEChunk(chunk);
+
+            for (const event of events) {
+              await notifyContentScript(url, response.status, event.data);
+            }
+
             controller.enqueue(result.value);
             result = await reader.read();
           }
