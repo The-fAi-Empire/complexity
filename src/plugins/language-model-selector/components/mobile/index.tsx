@@ -16,7 +16,7 @@ export default function MobileContent({
         className="x-flex x-flex-col x-gap-2"
       >
         <ProSearchSwitch setHighlightedItem={setHighlightedItem} />
-        <div className="x-mx-auto x-my-4 x-min-h-px x-w-[90%] x-bg-border" />
+        <div className="x-mx-auto x-my-2 x-min-h-px x-w-[90%] x-bg-border" />
         <ReasoningLanguageModels />
         <FastLanguageModels />
       </SheetContent>

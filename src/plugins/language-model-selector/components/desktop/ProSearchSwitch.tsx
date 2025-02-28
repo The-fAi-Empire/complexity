@@ -43,10 +43,16 @@ export default function ProSearchSwitch({
   );
 
   return (
-    <div className="x-flex x-w-full x-items-center x-justify-between x-gap-4">
+    <div
+      className="x-flex x-w-full x-cursor-pointer x-items-center x-justify-between x-gap-4 x-rounded-md x-p-2 x-transition-all hover:x-bg-secondary"
+      onClick={() => {
+        setIsProSearchEnabled(!isProSearchEnabled);
+        handleToggleOff(isProSearchEnabled);
+      }}
+    >
       <div
         className={cn(
-          "x-items-start x-flex x-gap-2 x-transition-all",
+          "x-flex x-items-start x-gap-2 x-transition-all",
           isProSearchEnabled && "x-text-primary",
         )}
       >
@@ -60,14 +66,7 @@ export default function ProSearchSwitch({
           </div>
         </div>
       </div>
-      <Switch
-        size="sm"
-        checked={isProSearchEnabled}
-        onCheckedChange={({ checked }) => {
-          setIsProSearchEnabled(checked);
-          handleToggleOff(checked);
-        }}
-      />
+      <Switch size="sm" checked={isProSearchEnabled} />
     </div>
   );
 }
