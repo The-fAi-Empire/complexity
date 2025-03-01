@@ -108,38 +108,6 @@ export default function BetterThreadMessageToolbarsPluginDetails() {
               onCheckedChange={handleCheckedChange("tokensCount")}
             />
           )}
-          <Switch
-            className="x-items-start"
-            textLabel={
-              <div>
-                <div>Collapsible Query</div>
-                <div className="x-text-sm x-text-muted-foreground">
-                  Limit the maximum height of the query container
-                </div>
-              </div>
-            }
-            checked={
-              settings?.plugins["thread:betterMessageToolbars"].collapsibleQuery
-            }
-            onCheckedChange={handleCheckedChange("collapsibleQuery")}
-          />
-          <Switch
-            className="x-items-start"
-            textLabel={
-              <div>
-                <div>Dynamic Query Font Size</div>
-                <div className="x-text-sm x-text-muted-foreground">
-                  Automatically adjust the font size of the query based on its
-                  length
-                </div>
-              </div>
-            }
-            checked={
-              settings?.plugins["thread:betterMessageToolbars"]
-                .dynamicQueryFontSize
-            }
-            onCheckedChange={handleCheckedChange("dynamicQueryFontSize")}
-          />
         </div>
       )}
       <div className="x-mx-auto x-w-full x-max-w-[700px]">

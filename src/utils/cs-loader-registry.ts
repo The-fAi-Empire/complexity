@@ -41,11 +41,9 @@ export const LOADER_IDS = [
   "plugin:thread:canvas:codeBlockPlaceholdersData",
   "plugin:thread:dragAndDropFileToUploadInThread",
   "plugin:thread:rawHeadings",
-  "plugin:thread:dynamicQueryFontSize",
   "plugin:thread:collapseEmptyThreadVisualCols",
   "plugin:thread:betterMessageToolbars:explicitModelName",
   "plugin:thread:betterMessageToolbars:messageWordsAndCharactersCount",
-  "plugin:thread:betterMessageToolbars:collapsibleQuery",
   "plugin:thread:instantRewriteButton:nativeBtnBind",
   "plugin:thread:customThreadContainerWidth",
 

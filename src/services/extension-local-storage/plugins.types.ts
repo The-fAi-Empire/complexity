@@ -39,8 +39,6 @@ export const PluginsSchema = z.object({
     explicitModelName: z.boolean(),
     wordsAndCharactersCount: z.boolean(),
     tokensCount: z.boolean(),
-    collapsibleQuery: z.boolean(),
-    dynamicQueryFontSize: z.boolean(),
   }),
   "thread:messageTts": PluginSettingsSchema.extend({
     voice: TtsVoiceSchema,

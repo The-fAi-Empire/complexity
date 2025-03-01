@@ -35,7 +35,7 @@ export const DOM_SELECTORS = {
       VISUAL_COL: ".isolate.col-span-4",
       TEXT_COL_CHILD: {
         /** The query box */
-        QUERY_WRAPPER: `.relative.z-10 div.mt-md.md\\:mt-lg.mb-3.md\\:mb-6`,
+        QUERY_WRAPPER: `.isolate.col-span-8>div:first-child`,
         QUERY: ".group\\/query",
         QUERY_HOVER_CONTAINER: ".absolute:not(.-inset-md):last",
         QUERY_HOVER_CONTAINER_CHILD: {

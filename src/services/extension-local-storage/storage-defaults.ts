@@ -58,8 +58,6 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       explicitModelName: true,
       wordsAndCharactersCount: true,
       tokensCount: false,
-      collapsibleQuery: false,
-      dynamicQueryFontSize: true,
     },
     "thread:messageTts": {
       enabled: false,

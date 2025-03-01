@@ -23,9 +23,6 @@ const BetterMessageToolbarsWrapper = lazy(
   () => import("@/plugins/thread-better-message-toolbars"),
 );
 const CanvasWrapper = lazy(() => import("@/plugins/canvas"));
-const CollapsibleQueryWrapper = lazy(
-  () => import("@/plugins/thread-better-message-toolbars/collapsible-query"),
-);
 const CommandMenuWrapper = lazy(() => import("@/plugins/command-menu"));
 const ExportThreadWrapper = lazy(() => import("@/plugins/export-thread"));
 const HomepageUpdateAnnouncer = lazy(
@@ -117,13 +114,6 @@ function ThreadComponents() {
 
       <CsUiPluginsGuard dependentPluginIds={["thread:betterMessageToolbars"]}>
         <BetterMessageToolbarsWrapper />
-        <CsUiPluginsGuard
-          additionalCheck={({ settings }) =>
-            settings.plugins["thread:betterMessageToolbars"].collapsibleQuery
-          }
-        >
-          <CollapsibleQueryWrapper />
-        </CsUiPluginsGuard>
       </CsUiPluginsGuard>
 
       <CsUiPluginsGuard dependentPluginIds={["thread:betterCodeBlocks"]}>
