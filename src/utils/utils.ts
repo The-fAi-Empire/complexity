@@ -344,8 +344,14 @@ export function injectMainWorldScriptBlock({
 }
 
 export async function waitForDocumentReady() {
+  if (APP_CONFIG.BROWSER === "firefox") {
+    return new Promise((resolve) => {
+      return $(resolve);
+    });
+  }
+
   while (document.head == null || document.body == null) {
-    await sleep(100);
+    await sleep(50);
   }
 }
 
