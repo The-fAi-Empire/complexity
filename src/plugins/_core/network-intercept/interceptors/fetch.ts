@@ -9,9 +9,12 @@ export function initFetchInterceptor() {
     }
 
     const modifiedBody = await interceptRequest(input, init.body);
-    if (modifiedBody) {
-      init.body = modifiedBody;
+
+    if (modifiedBody === "") {
+      return new Response("", { status: 200 });
     }
+
+    init.body = modifiedBody;
 
     const response = await originalFetch.call(window, input, init);
     const url = constructUrl(input);
@@ -36,6 +39,7 @@ async function interceptRequest(input: RequestInfo | URL, body: string) {
     },
     "content-script",
   );
+
   return resp?.data;
 }
 
