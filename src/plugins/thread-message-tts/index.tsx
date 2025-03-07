@@ -78,6 +78,7 @@ export default function ThreadMessageTtsButton({
       );
 
       if (!backendUuid) {
+        console.error("No backendUuid found");
         setPlaying(false);
         return;
       }
@@ -134,9 +135,8 @@ export default function ThreadMessageTtsButton({
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              if (menuOpen) {
-                return;
-              }
+
+              if (menuOpen) return;
               initTts();
             }}
             onContextMenu={(e) => {

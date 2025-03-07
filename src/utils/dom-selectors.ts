@@ -25,10 +25,10 @@ export const DOM_SELECTORS = {
     CONTAINER: {
       /** Normal thread*/
       NORMAL:
-        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child",
+        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
       /** Branched thread */
       BRANCHED:
-        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child",
+        ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
     },
     MESSAGE: {
       WRAPPER: ".grid-cols-12",

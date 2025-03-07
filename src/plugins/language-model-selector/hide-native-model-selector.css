@@ -2,13 +2,7 @@
 [cplx-main-modal-query-box] {
   [data-cplx-component="query-box-components-wrapper"]
     [data-cplx-component="query-box-pplx-components-wrapper"] {
-    > :nth-last-child(2) {
-      display: none;
-    }
-
-    .mr-xs.flex.shrink-0.items-center {
-      @apply x-ml-2;
-    }
+    display: none;
   }
 }
 

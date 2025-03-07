@@ -2,13 +2,13 @@
   "languageModelSelector": {
     "tooltip": "言語モデルを選択",
     "proSearch": {
-      "tooltip": "3倍の情報源と詳細な回答"
+      "tooltip": "より多くのソース、Pythonコードインタープリター"
     },
     "reasoningModels": {
       "label": "推論モデル",
       "tooltip": {
-        "description": "回答の生成に時間がかかりますが、より詳細で正確な傾向があります。",
-        "proSearchNote": "推論モデルを選択すると、<emphasis>Pro Search</emphasis>は常に有効になります。"
+        "description": "回答の生成に時間がかかりますが、より詳細で正確な回答が得られます。",
+        "proSearchNote": "推論モデルを選択すると、<emphasis>Pro</emphasis>が常に有効になります。"
       },
       "usesLeft": {
         "unlimited": "無制限",

@@ -16,6 +16,10 @@
 
     & > div:nth-child(3) {
       max-height: max-content;
+
+      button.rounded-full:not([aria-label="Submit"]) {
+        @apply x-rounded-md;
+      }
     }
   }
 }

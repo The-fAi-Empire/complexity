@@ -5,7 +5,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "queryBox:languageModelSelector": {
     id: "queryBox:languageModelSelector",
     routeSegment: "query-box-language-model-selector",
-    title: "Language Model Selector",
+    title: "Better Language Model Selector",
     description: "Take complete control of all available language models.",
     categories: ["queryBox"],
     tags: ["ui", "ux", "pplxPro"],

@@ -2,13 +2,13 @@
   "languageModelSelector": {
     "tooltip": "Choisir le modèle de langage",
     "proSearch": {
-      "tooltip": "3 fois plus de sources et des réponses détaillées"
+      "tooltip": "Plus de sources, interpréteur de code Python"
     },
     "reasoningModels": {
       "label": "Modèles de raisonnement",
       "tooltip": {
-        "description": "Les réponses prendront plus de temps à générer, mais ont tendance à être plus détaillées et précises.",
-        "proSearchNote": "<emphasis>Pro Search</emphasis> est toujours activé lors du choix d'un modèle de raisonnement."
+        "description": "Les réponses prendront plus de temps à générer, mais tendent à être plus détaillées et précises.",
+        "proSearchNote": "<emphasis>Pro</emphasis> est toujours activé lors du choix d'un modèle de raisonnement."
       },
       "usesLeft": {
         "unlimited": "Illimité",

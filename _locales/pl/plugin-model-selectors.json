@@ -2,13 +2,13 @@
   "languageModelSelector": {
     "tooltip": "Wybierz model językowy",
     "proSearch": {
-      "tooltip": "3 razy więcej źródeł i szczegółowe odpowiedzi"
+      "tooltip": "Więcej źródeł, interpreter kodu Python"
     },
     "reasoningModels": {
       "label": "Modele rozumowania",
       "tooltip": {
         "description": "Generowanie odpowiedzi zajmie więcej czasu, ale odpowiedzi są zazwyczaj bardziej szczegółowe i dokładne.",
-        "proSearchNote": "<emphasis>Pro Search</emphasis> jest zawsze aktywny przy wyborze modelu rozumowania."
+        "proSearchNote": "<emphasis>Pro</emphasis> jest zawsze aktywne przy wyborze modelu rozumowania."
       },
       "usesLeft": {
         "unlimited": "Bez limitu",

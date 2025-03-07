@@ -134,7 +134,7 @@ export function getCookie(name: string): string | null {
   for (const cookie of cookies) {
     const trimmedCookie = cookie.trim();
     if (trimmedCookie.startsWith(nameEQ)) {
-      return trimmedCookie.substring(nameEQ.length);
+      return decodeURIComponent(trimmedCookie.substring(nameEQ.length));
     }
   }
 

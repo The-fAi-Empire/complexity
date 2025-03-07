@@ -5,11 +5,7 @@ import {
   fastLanguageModels,
   reasoningLanguageModels,
 } from "@/data/plugins/query-box/language-model-selector/language-models";
-import {
-  isFastLanguageModelCode,
-  isReasoningLanguageModelCode,
-  LanguageModelCode,
-} from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import useBindBetterLanguageModelSelectorHotKeys from "@/plugins/_core/ui-groups/query-box/hooks/useBindHotKeys";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
@@ -18,10 +14,7 @@ import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { useColumnNavigation } from "@/plugins/language-model-selector/hooks/useColumnNavigation";
-import { PplxUserSettingsApiResponse } from "@/services/pplx-api/pplx-api.types";
-import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
-import { queryClient } from "@/utils/ts-query-client";
 import { UiUtils } from "@/utils/ui-utils";
 
 const selectItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
@@ -55,6 +48,10 @@ export default function BetterLanguageModelSelectorWrapper() {
   });
 
   useBindBetterLanguageModelSelectorHotKeys();
+
+  useEffect(() => {
+    setHighlightedItem(selectedLanguageModel);
+  }, [selectedLanguageModel]);
 
   return (
     <Select
@@ -98,26 +95,7 @@ export default function BetterLanguageModelSelectorWrapper() {
           component: "select",
           isProSearchEnabled,
           hotkeyRef,
-          setIsProSearchEnabled: (isEnabled) => {
-            setIsProSearchEnabled(isEnabled);
-
-            if (isEnabled) return;
-
-            if (!isReasoningLanguageModelCode(selectedLanguageModel)) return;
-
-            const userSettings =
-              queryClient.getQueryData<PplxUserSettingsApiResponse>(
-                pplxApiQueries.userSettings.queryKey,
-              );
-
-            if (
-              userSettings?.default_model == null ||
-              !isFastLanguageModelCode(userSettings?.default_model)
-            )
-              return;
-
-            setHighlightedItem(userSettings?.default_model);
-          },
+          setIsProSearchEnabled,
           setHighlightedItem,
         }}
       >

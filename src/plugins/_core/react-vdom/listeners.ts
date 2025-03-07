@@ -233,7 +233,7 @@ export function setupReactVdomListeners() {
   );
 
   onMessage("reactVdom:syncNativeModelSelector", ({ data: { searchMode } }) => {
-    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER}"]:last > :first-child`;
+    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER}"]:last > :last-child > :first-child`;
 
     const $modelSelector = $(selector);
 

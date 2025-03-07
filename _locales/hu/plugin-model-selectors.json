@@ -1,14 +1,14 @@
 {
   "languageModelSelector": {
-    "tooltip": "Nyelvi modell választása",
+    "tooltip": "Nyelvi modell kiválasztása",
     "proSearch": {
-      "tooltip": "3-szor több forrás és részletes válaszok"
+      "tooltip": "Több forrás, Python kód értelmező"
     },
     "reasoningModels": {
       "label": "Következtető modellek",
       "tooltip": {
         "description": "A válaszok generálása tovább tart, de általában részletesebbek és pontosabbak.",
-        "proSearchNote": "A <emphasis>Pro Search</emphasis> mindig aktív következtető modell választásakor."
+        "proSearchNote": "A következtető modell választásakor a <emphasis>Pro</emphasis> mindig aktív."
       },
       "usesLeft": {
         "unlimited": "Korlátlan",
@@ -17,6 +17,6 @@
     }
   },
   "imageGenModelSelector": {
-    "tooltip": "Képmodell választása"
+    "tooltip": "Képgeneráló modell kiválasztása"
   }
 }

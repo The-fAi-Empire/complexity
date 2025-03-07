@@ -2,17 +2,17 @@
   "languageModelSelector": {
     "tooltip": "Sprachmodell auswählen",
     "proSearch": {
-      "tooltip": "3-mal mehr Quellen und detaillierte Antworten"
+      "tooltip": "Mehr Quellen, Python-Code-Interpreter"
     },
     "reasoningModels": {
       "label": "Reasoning-Modelle",
       "tooltip": {
-        "description": "Antworten brauchen länger zur Generierung, sind aber meist detaillierter und genauer.",
-        "proSearchNote": "<emphasis>Pro Search</emphasis> ist bei der Auswahl eines Reasoning-Modells immer aktiviert."
+        "description": "Antworten brauchen länger zur Generierung, sind aber tendenziell detaillierter und genauer.",
+        "proSearchNote": "<emphasis>Pro</emphasis> ist bei der Auswahl eines Reasoning-Modells immer aktiviert."
       },
       "usesLeft": {
         "unlimited": "Unbegrenzt",
-        "limited": "Noch {{count}} Verwendungen"
+        "limited": "{{count}} Verwendungen übrig"
       }
     }
   },
