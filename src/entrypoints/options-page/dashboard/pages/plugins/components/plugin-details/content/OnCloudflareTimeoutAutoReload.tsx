@@ -23,6 +23,11 @@ const BEHAVIOR_LABELS: Record<BehaviorType, string> = {
 
 const BEHAVIOR_OPTIONS: BehaviorType[] = ["reload", "warn-only"];
 
+const itemCollection = createListCollection<BehaviorType>({
+  items: BEHAVIOR_OPTIONS,
+  itemToString: (item) => BEHAVIOR_LABELS[item],
+});
+
 export default function OnCloudflareTimeoutAutoReloadPluginDetails() {
   const { settings, mutation } = useExtensionLocalStorage();
   const pluginSettings = settings?.plugins["onCloudflareTimeoutAutoReload"];
@@ -59,10 +64,7 @@ export default function OnCloudflareTimeoutAutoReloadPluginDetails() {
         <Label className="x-text-muted-foreground">Behavior</Label>
         <Select
           portal={false}
-          collection={createListCollection<BehaviorType>({
-            items: BEHAVIOR_OPTIONS,
-            itemToString: (item) => BEHAVIOR_LABELS[item],
-          })}
+          collection={itemCollection}
           value={[pluginSettings?.behavior ?? "reload"]}
           positioning={{ sameWidth: true }}
           onValueChange={({ value }) => handleBehaviorChange(value)}

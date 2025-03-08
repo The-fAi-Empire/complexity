@@ -75,25 +75,21 @@ export default function BetterLanguageModelSelectorTriggerButton() {
     modelInfo?.provider,
   ]);
 
-  const className = useMemo(
-    () =>
-      cn(
-        "x-flex x-h-8 x-items-center x-gap-2 x-rounded-md x-border x-border-transparent x-px-2 x-text-sm x-font-medium x-text-muted-foreground x-transition-all active:x-scale-95",
-        {
-          "x-border-primary/30 x-bg-primary/10 x-text-primary":
-            isProSearchEnabled && selectedLanguageModel !== "turbo",
-          "x-border-border/50 hover:x-bg-primary-foreground hover:x-text-foreground":
-            !isProSearchEnabled || selectedLanguageModel === "turbo",
-        },
-      ),
-    [isProSearchEnabled, selectedLanguageModel],
-  );
-
   return (
     <Tooltip
       content={t("plugin-model-selectors:languageModelSelector.tooltip")}
     >
-      <div className={className}>
+      <div
+        className={cn(
+          "x-flex x-h-8 x-items-center x-gap-2 x-rounded-md x-border x-border-transparent x-px-2 x-text-sm x-font-medium x-text-muted-foreground x-transition-all active:x-scale-95",
+          {
+            "x-border-primary/30 x-bg-primary/10 x-text-primary":
+              isProSearchEnabled && selectedLanguageModel !== "turbo",
+            "x-border-border/50 hover:x-bg-primary-foreground hover:x-text-foreground":
+              !isProSearchEnabled || selectedLanguageModel === "turbo",
+          },
+        )}
+      >
         <Icon className="x-size-4 x-shrink-0" />
         <span className="x-truncate">{label}</span>
       </div>

@@ -19,10 +19,10 @@ const SelectLocalContextProvider = SelectLocalContext.Provider;
 
 const SelectContext = ArkSelect.Context;
 
-function Select({
+function Select<T>({
   portal,
   ...props
-}: ComponentProps<typeof ArkSelect.Root> & {
+}: ComponentProps<typeof ArkSelect.Root<T>> & {
   portal?: boolean;
 }) {
   return (
@@ -31,7 +31,7 @@ function Select({
         portal: portal ?? true,
       }}
     >
-      <ArkSelect.Root unmountOnExit={false} lazyMount={true} {...props} />
+      <ArkSelect.Root<T> unmountOnExit={false} lazyMount={true} {...props} />
     </SelectLocalContextProvider>
   );
 }

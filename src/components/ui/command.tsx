@@ -62,7 +62,6 @@ const CommandInput = ({
       "x-flex x-items-center x-border-b x-border-border/50 x-px-3",
       className,
     )}
-     
     cmdk-input-wrapper=""
   >
     {searchIcon && (
@@ -96,10 +95,11 @@ const CommandList = ({
 CommandList.displayName = CommandPrimitive.List.displayName;
 
 const CommandEmpty = ({
+  className,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) => (
   <CommandPrimitive.Empty
-    className="x-py-6 x-text-center x-text-sm"
+    className={cn("x-py-6 x-text-center x-text-sm", className)}
     {...props}
   />
 );
