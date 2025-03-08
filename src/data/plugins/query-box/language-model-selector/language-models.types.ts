@@ -15,6 +15,7 @@ export const LanguageModelSchema = z.object({
   isReasoningModel: z.boolean(),
   limitKey: z.string().optional(),
   description: z.string().optional(),
+  hideFromList: z.boolean().optional(),
 });
 
 export type LanguageModel = z.infer<typeof LanguageModelSchema>;

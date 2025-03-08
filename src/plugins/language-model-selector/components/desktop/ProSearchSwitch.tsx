@@ -11,7 +11,7 @@ export default function ProSearchSwitch() {
 
   return (
     <div
-      className="x-flex x-w-full x-cursor-pointer x-items-start x-justify-between x-gap-8 x-rounded-md x-p-2 x-transition-all hover:x-bg-secondary"
+      className="x-flex x-w-full x-cursor-pointer x-items-start x-justify-between x-gap-8 x-rounded-md x-p-2 x-transition-all hover:x-bg-primary-foreground"
       onClick={() => {
         setIsProSearchEnabled(!isProSearchEnabled);
       }}

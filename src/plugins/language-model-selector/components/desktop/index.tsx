@@ -1,5 +1,6 @@
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { SelectContent } from "@/components/ui/select";
+import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import FastLanguageModels from "@/plugins/language-model-selector/components/desktop/FastLanguageModels";
 import ProSearchSwitch from "@/plugins/language-model-selector/components/desktop/ProSearchSwitch";
 import ReasoningLanguageModels from "@/plugins/language-model-selector/components/desktop/ReasoningLanguageModels";
@@ -23,6 +24,8 @@ export default function DesktopContent() {
       )}
     >
       <div ref={hotkeyRef}>
+        <AutoModeOption />
+        <div className="x-mx-auto x-my-2 x-h-px x-w-full x-bg-border/50" />
         <ProSearchSwitch />
         <div className="x-mx-auto x-my-2 x-h-px x-w-full x-bg-border/50" />
         <div className="x-flex x-items-start x-justify-between x-gap-2">

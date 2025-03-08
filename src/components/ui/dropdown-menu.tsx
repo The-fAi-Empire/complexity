@@ -53,7 +53,7 @@ const DropdownMenuItem = ({
 }: Menu.ItemProps & { inset?: boolean }) => (
   <Menu.Item
     className={cn(
-      "x-relative x-flex x-cursor-default x-select-none x-items-center x-rounded-sm x-px-2 x-py-1.5 x-text-sm x-outline-none x-transition-colors focus:x-bg-primary-foreground focus:x-text-primary data-[disabled]:x-pointer-events-none data-[highlighted]:x-bg-primary-foreground data-[highlighted]:x-text-primary data-[disabled]:x-opacity-50",
+      "x-relative x-flex x-cursor-default x-select-none x-items-center x-rounded-sm x-px-2 x-py-1.5 x-text-sm x-outline-none x-transition-colors focus:x-bg-primary-foreground focus:x-text-primary data-[disabled]:x-pointer-events-none data-[highlighted]:x-bg-primary-foreground data-[disabled]:x-opacity-50",
       inset && "x-pl-8",
       className,
     )}

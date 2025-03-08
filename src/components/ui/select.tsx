@@ -2,7 +2,7 @@ import { Portal, Select as ArkSelect } from "@ark-ui/react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { ComponentProps, createContext, use } from "react";
-import { FaCheckCircle } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa6";
 import { LuChevronDown as ChevronDown } from "react-icons/lu";
 
 import { untrapWheel } from "@/utils/utils";
@@ -144,11 +144,13 @@ SelectLabel.displayName = "SelectLabel";
 
 export type SelectItemProps = ArkSelect.ItemProps & {
   checkboxOnSingleItem?: boolean;
+  checkIconClassName?: string;
   item: string;
 };
 
 const SelectItem = ({
   className,
+  checkIconClassName,
   children,
   checkboxOnSingleItem = false,
   ...props
@@ -164,6 +166,7 @@ const SelectItem = ({
             "x-justify-between x-text-muted-foreground data-[state=checked]:x-text-primary",
             {
               "x-flex x-justify-between": multiple,
+              "x-bg-secondary": value.includes(props.item),
             },
             className,
           )}
@@ -171,7 +174,12 @@ const SelectItem = ({
         >
           {children}
           {(multiple || checkboxOnSingleItem) && value.includes(props.item) && (
-            <FaCheckCircle className="x-ml-auto x-size-4 x-shrink-0" />
+            <FaCheck
+              className={cn(
+                "x-ml-auto x-size-3.5 x-shrink-0",
+                checkIconClassName,
+              )}
+            />
           )}
         </ArkSelect.Item>
       )}

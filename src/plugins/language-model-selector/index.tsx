@@ -17,12 +17,7 @@ import { useColumnNavigation } from "@/plugins/language-model-selector/hooks/use
 import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 
-const selectItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
-  (model) => ({
-    id: model.code,
-    label: model.label,
-  }),
-);
+const selectItems = getSelectItems();
 
 export default function BetterLanguageModelSelectorWrapper() {
   const { isMobile } = useIsMobileStore();
@@ -114,4 +109,15 @@ export default function BetterLanguageModelSelectorWrapper() {
       </LanguageModelSelectorContext>
     </Select>
   );
+}
+
+function getSelectItems() {
+  const modelItems = [...fastLanguageModels, ...reasoningLanguageModels].map(
+    (model) => ({
+      id: model.code,
+      label: model.label,
+    }),
+  );
+
+  return modelItems;
 }

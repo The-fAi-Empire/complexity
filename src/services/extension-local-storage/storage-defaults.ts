@@ -133,7 +133,7 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
   preloadTheme: false,
   theme: "complexity",
   energySavingMode: false,
-  extensionIconAction: "perplexity",
+  extensionIconAction: "dashboard",
   cdnLastUpdated: 0,
   devMode: false,
 } as const;

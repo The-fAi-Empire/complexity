@@ -28,6 +28,7 @@ export default function FastLanguageModels() {
     <GroupComp className="x-m-0 x-p-0">
       <LabelComp className="x-text-base">Standard</LabelComp>
       {fastLanguageModels.map((model, index) => {
+        if (model.hideFromList) return null;
         const Icon = languageModelProviderIcons[model.provider] ?? LuCpu;
 
         const modelLimit = modelsLimits[model.code];

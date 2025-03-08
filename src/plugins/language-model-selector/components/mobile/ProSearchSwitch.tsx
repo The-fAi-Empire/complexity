@@ -18,11 +18,11 @@ export default function ProSearchSwitch() {
     >
       <div
         className={cn(
-          "x-flex x-items-baseline x-gap-2 x-transition-all",
+          "x-flex x-items-start x-gap-2 x-transition-all",
           isProSearchEnabled && "x-text-primary",
         )}
       >
-        <ProSearchIcon className="x-size-4" />
+        <ProSearchIcon className="x-size-4 x-mt-1" />
         <div className="x-flex x-flex-col x-gap-y-1">
           <div className="x-text-lg x-font-medium">Pro</div>
           <div className="x-text-sm x-text-muted-foreground">

@@ -7,13 +7,17 @@
     "reasoningModels": {
       "label": "Reasoning-Modelle",
       "tooltip": {
-        "description": "Antworten brauchen länger zur Generierung, sind aber tendenziell detaillierter und genauer.",
+        "description": "Antworten brauchen länger zur Generierung, sind aber meist detaillierter und genauer.",
         "proSearchNote": "<emphasis>Pro</emphasis> ist bei der Auswahl eines Reasoning-Modells immer aktiviert."
       },
       "usesLeft": {
         "unlimited": "Unbegrenzt",
-        "limited": "{{count}} Verwendungen übrig"
+        "limited": "Noch {{count}} Verwendungen"
       }
+    },
+    "autoMode": {
+      "title": "Auto",
+      "description": "Passt sich Ihrer Anfrage an"
     }
   },
   "imageGenModelSelector": {

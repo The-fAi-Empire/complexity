@@ -40,11 +40,15 @@ async function displayModelBadge({
 
   if (!$bottomBar.length) return;
 
-  const modelCode = await sendMessage(
+  let modelCode = await sendMessage(
     "reactVdom:getMessageDisplayModelCode",
     { index },
     "window",
   );
+
+  if (modelCode === "pplx_pro" || modelCode === "pplx_pro_upgraded") {
+    modelCode = "turbo";
+  }
 
   if (!modelCode || !isLanguageModelCode(modelCode)) return;
 

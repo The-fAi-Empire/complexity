@@ -21,11 +21,11 @@ export const handleRewrite = ({
   messageBlockIndex: number;
   isProSearchEnabled: boolean;
 }) => {
-  sharedQueryBoxStore
-    .getState()
-    .setIsProSearchEnabled(
-      isReasoningLanguageModelCode(selectedModel) || isProSearchEnabled,
-    );
+  const shouldEnableProSearch =
+    (isReasoningLanguageModelCode(selectedModel) || isProSearchEnabled) &&
+    selectedModel !== "turbo";
+
+  sharedQueryBoxStore.getState().setIsProSearchEnabled(shouldEnableProSearch);
 
   setTimeout(() => {
     networkInterceptMiddlewareManager.addMiddleware({
@@ -61,7 +61,9 @@ export const handleRewrite = ({
 
         const newParams = produce(parsedData.params, (draft: any) => {
           draft.mode =
-            isReasoningMode || isProSearchEnabled ? "copilot" : "concise";
+            (isReasoningMode || isProSearchEnabled) && selectedModel !== "turbo"
+              ? "copilot"
+              : "concise";
           draft.model_preference = selectedModel;
         });
 

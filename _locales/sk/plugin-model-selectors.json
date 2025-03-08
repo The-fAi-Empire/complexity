@@ -2,7 +2,7 @@
   "languageModelSelector": {
     "tooltip": "Vybrať jazykový model",
     "proSearch": {
-      "tooltip": "Viac zdrojov, Python interpreter kódu"
+      "tooltip": "Viac zdrojov, interpreter kódu Python"
     },
     "reasoningModels": {
       "label": "Modely uvažovania",
@@ -14,6 +14,10 @@
         "unlimited": "Neobmedzene",
         "limited": "Zostáva {{count}} použití"
       }
+    },
+    "autoMode": {
+      "title": "Auto",
+      "description": "Prispôsobí sa vášmu dopytu"
     }
   },
   "imageGenModelSelector": {

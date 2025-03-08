@@ -135,7 +135,11 @@ export function handleSearchModeChange() {
           searchModelsCookie.reasoning = selectedLanguageModel;
         }
       } else {
-        searchMode = isProSearchEnabled ? "pro" : "auto";
+        searchMode =
+          !isProSearchEnabled || selectedLanguageModel === "turbo"
+            ? "auto"
+            : "pro";
+
         searchModelsCookie.pro = selectedLanguageModel;
       }
 

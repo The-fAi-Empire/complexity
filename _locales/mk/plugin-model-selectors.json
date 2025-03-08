@@ -12,8 +12,12 @@
       },
       "usesLeft": {
         "unlimited": "Неограничено",
-        "limited": "Преостанати {{count}} користења"
+        "limited": "Преостануваат {{count}} користења"
       }
+    },
+    "autoMode": {
+      "title": "Авто",
+      "description": "Се прилагодува на вашето барање"
     }
   },
   "imageGenModelSelector": {

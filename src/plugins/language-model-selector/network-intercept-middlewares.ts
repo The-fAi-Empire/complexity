@@ -68,7 +68,10 @@ csLoaderRegistry.register({
 
               draft.model_preference = selectedLanguageModel;
               draft.mode =
-                isProSearchEnabled || isReasoningMode ? "copilot" : "concise";
+                (isProSearchEnabled || isReasoningMode) &&
+                selectedLanguageModel !== "turbo"
+                  ? "copilot"
+                  : "concise";
             }
           });
 

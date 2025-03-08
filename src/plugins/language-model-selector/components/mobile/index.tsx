@@ -1,5 +1,6 @@
 import { DialogProps } from "@/components/ui/dialog";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
+import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import FastLanguageModels from "@/plugins/language-model-selector/components/mobile/FastLanguageModels";
 import ProSearchSwitch from "@/plugins/language-model-selector/components/mobile/ProSearchSwitch";
 import ReasoningLanguageModels from "@/plugins/language-model-selector/components/mobile/ReasoningLanguageModels";
@@ -13,6 +14,8 @@ export default function MobileContent({ ...props }: DialogProps) {
         className="x-flex x-flex-col x-gap-2"
       >
         <ProSearchSwitch />
+        <div className="x-mx-auto x-my-2 x-min-h-px x-w-full x-bg-border/50" />
+        <AutoModeOption />
         <div className="x-mx-auto x-my-2 x-min-h-px x-w-full x-bg-border/50" />
         <ReasoningLanguageModels />
         <FastLanguageModels />
