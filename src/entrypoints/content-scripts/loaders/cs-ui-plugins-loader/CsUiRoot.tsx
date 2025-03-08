@@ -1,4 +1,4 @@
-/* eslint-disable import/no-duplicates */
+ 
 // must keep this for tailwind to generate and hmr arbitrary classes in dev mode (this will be removed in prod)
 import "@/assets/cs.css";
 

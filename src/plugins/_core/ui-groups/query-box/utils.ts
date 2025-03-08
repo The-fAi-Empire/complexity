@@ -121,10 +121,12 @@ export function handleSearchModeChange() {
         jsonUtils.safeParse(getCookie("pplx.search-models-raw") ?? ""),
       );
 
-      const searchModelsCookie: PplxCookieSearchModels = searchModels ?? {
-        pro: "turbo",
-        reasoning: "",
-      };
+      const searchModelsCookie =
+        searchModels ??
+        ({
+          pro: "turbo",
+          reasoning: "",
+        } as PplxCookieSearchModels);
 
       let searchMode: PplxCookieSearchModes;
 

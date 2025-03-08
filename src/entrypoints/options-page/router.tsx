@@ -1,4 +1,4 @@
-/* eslint-disable react-refresh/only-export-components */
+ 
 import { Suspense } from "react";
 import { createHashRouter, redirect } from "react-router-dom";
 

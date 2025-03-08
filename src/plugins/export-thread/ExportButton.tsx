@@ -9,7 +9,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { P } from "@/components/ui/typography";
 import { toast } from "@/components/ui/use-toast";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useCopyPplxThread } from "@/hooks/useCopyPplxThread";

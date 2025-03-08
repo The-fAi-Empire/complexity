@@ -1,3 +1,4 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 import { defineManifest } from "@crxjs/vite-plugin";
 import { ExtendedManifestV3Export, baseManifest } from "./manifest.base";
 import { produce } from "immer";

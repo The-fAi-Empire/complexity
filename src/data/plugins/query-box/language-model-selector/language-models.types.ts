@@ -22,11 +22,11 @@ export type LanguageModel = z.infer<typeof LanguageModelSchema>;
 
 export type LanguageModelCode =
   | (typeof localLanguageModels)[number]["code"]
-  | (string & {});
+  | (string & Record<string, unknown>);
 
 export type LanguageModelProvider =
   | (typeof localLanguageModels)[number]["provider"]
-  | (string & {});
+  | (string & Record<string, unknown>);
 
 export function isLanguageModelCode(
   value: string,

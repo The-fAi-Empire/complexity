@@ -1,3 +1,4 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 import { ManifestV3Export } from "@crxjs/vite-plugin";
 
 import { APP_CONFIG } from "./app.config";

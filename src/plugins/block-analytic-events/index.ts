@@ -15,6 +15,12 @@ csLoaderRegistry.register({
         id: "block-analytic-events",
         priority: { position: "first" },
         middlewareFn({ data, stopPropagation, skip }) {
+          const a: number | null = 1;
+
+          if (!a) {
+            return skip();
+          }
+
           switch (data.type) {
             case "network-intercept:webSocketEvent": {
               const wsMessage = parseWebSocketData(data.payload.data);

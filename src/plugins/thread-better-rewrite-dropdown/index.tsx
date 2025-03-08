@@ -7,7 +7,9 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { fastLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import {
+  isLanguageModelCode,
   isReasoningLanguageModelCode,
   LanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
@@ -34,7 +36,7 @@ export default function ThreadBetterRewriteDropdown({
     deepEqual,
   );
   const hotkeyRef = useColumnNavigation({
-    highlightedItem: highlightedItem ?? "",
+    highlightedItem: highlightedItem ?? fastLanguageModels[0]!.code,
     setHighlightedItem,
     enabled: isOpen,
   });
@@ -78,11 +80,13 @@ export default function ThreadBetterRewriteDropdown({
         setIsOpen(open);
       }}
       onHighlightChange={({ highlightedValue }) => {
-        setHighlightedItem(highlightedValue);
+        if (highlightedValue && isLanguageModelCode(highlightedValue)) {
+          setHighlightedItem(highlightedValue);
+        }
       }}
       onSelect={({ value }) => {
         handleRewrite({
-          selectedModel: value,
+          selectedModel: value as LanguageModelCode,
           messageBlockIndex,
           isProSearchEnabled,
         });

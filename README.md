@@ -45,7 +45,7 @@ A powerful browser extension that enhances your PerplexityAI experience with adv
 
 ### Build and use the extension locally
 
-Make sure you have `pnpm` and `Node.js >= v14` installed.
+Make sure you have `pnpm` and `Node.js` (^20.9.0) installed.
 
 1. Install the dependencies
 

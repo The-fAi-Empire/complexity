@@ -62,7 +62,7 @@ const CommandInput = ({
       "x-flex x-items-center x-border-b x-border-border/50 x-px-3",
       className,
     )}
-    // eslint-disable-next-line react/no-unknown-property
+     
     cmdk-input-wrapper=""
   >
     {searchIcon && (
