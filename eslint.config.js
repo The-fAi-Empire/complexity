@@ -194,6 +194,7 @@ export default [
     languageOptions: {
       parser: tsParser,
       parserOptions: {
+        alwaysTryTypes: true,
         project: "./tsconfig.json",
       },
     },
