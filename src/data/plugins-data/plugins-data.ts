@@ -250,8 +250,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     id: "blockAnalyticEvents",
     routeSegment: "block-analytic-events",
     title: "Block Analytic Events",
-    description:
-      "Prevent Perplexity from sending analytic/tracking events. For debugging purposes only",
+    description: "Prevent Perplexity from sending analytic/tracking events",
     categories: ["misc"],
     tags: ["privacy"],
     dependentCorePlugins: ["networkIntercept"],
