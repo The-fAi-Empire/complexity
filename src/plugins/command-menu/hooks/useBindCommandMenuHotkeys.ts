@@ -5,6 +5,7 @@ import {
   commandMenuStore,
   useCommandMenuStore,
 } from "@/data/plugins/command-menu/store";
+import { toggleZenMode } from "@/data/plugins/zen-mode/utils";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { keysToString } from "@/utils/utils";
@@ -81,17 +82,7 @@ export default function useBindCommandMenuHotkeys() {
   useHotkeys(
     keysToString(settings.plugins.zenMode.hotkey),
     () => {
-      const previousZenMode = $("body").attr("data-cplx-zen-mode");
-      const newZenMode = previousZenMode === "true" ? "false" : "true";
-      $("body").attr("data-cplx-zen-mode", newZenMode);
-      if (
-        ExtensionLocalStorageService.getCachedSync()?.plugins["zenMode"]
-          .persistent
-      ) {
-        ExtensionLocalStorageService.set((draft) => {
-          draft.plugins["zenMode"].lastState = newZenMode === "true";
-        });
-      }
+      toggleZenMode();
       setOpen(false);
     },
     {
