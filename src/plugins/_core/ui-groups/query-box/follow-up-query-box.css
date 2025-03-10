@@ -1,24 +1,4 @@
 [cplx-follow-up-query-box] {
-  /* Normalize the size and shape of native buttons */
-  button:has(svg[data-icon="paperclip"]),
-  button:has(svg[data-icon="file"]) {
-    @apply x-size-8 x-rounded-md;
-
-    svg {
-      @apply x-size-4;
-    }
-  }
-
-  [data-cplx-component="query-box-components-wrapper"]
-    > div:nth-child(2)
-    button {
-    @apply x-h-8 x-rounded-md;
-  }
-
-  [data-cplx-component="query-box-components-wrapper"] > div:nth-child(2) {
-    @apply x-gap-2;
-  }
-
   [data-cplx-component="query-box-components-wrapper"] > div:nth-child(3) {
     max-height: max-content;
   }

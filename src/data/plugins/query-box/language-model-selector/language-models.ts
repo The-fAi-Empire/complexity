@@ -8,16 +8,8 @@ import { queryClient } from "@/utils/ts-query-client";
 
 export const localLanguageModels = [
   {
-    label: "Auto",
-    shortLabel: "Auto",
-    code: "turbo",
-    provider: "Perplexity",
-    isReasoningModel: false,
-    hideFromList: true,
-  },
-  {
-    label: "Claude 3.7",
-    shortLabel: "Claude 3.7",
+    label: "Claude 3.7 Sonnet",
+    shortLabel: "Sonnet",
     code: "claude2",
     provider: "Anthropic",
     limitKey: "gpt4_limit",
@@ -25,8 +17,8 @@ export const localLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Claude 3.7 Thinking",
-    shortLabel: "Claude 3.7",
+    label: "Claude 3.7 Sonnet",
+    shortLabel: "Sonnet",
     code: "claude37sonnetthinking",
     provider: "Anthropic",
     limitKey: "pro_reasoning_limit",
@@ -104,6 +96,14 @@ export const localLanguageModels = [
     limitKey: "gpt4_limit",
     isReasoningModel: false,
     hideFromList: false,
+  },
+  {
+    label: "Auto",
+    shortLabel: "Auto",
+    code: "turbo",
+    provider: "Perplexity",
+    isReasoningModel: false,
+    hideFromList: true,
   },
 ] as const;
 

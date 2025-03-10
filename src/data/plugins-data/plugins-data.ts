@@ -167,9 +167,9 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     routeSegment: "thread-canvas",
     title: "Canvas",
     description:
-      "Visualize and interact with generated content side by side. Similar to claude.ai's artifacts. Very experimental",
+      "Visualize and interact with generated content side by side - similar to claude.ai's artifacts",
     categories: ["thread"],
-    tags: ["experimental", "desktopOnly", "ui"],
+    tags: ["desktopOnly", "ui"],
     dependentPlugins: ["thread:betterCodeBlocks"],
     dependentDomObservers: [
       "coreDomObserver:thread:messageBlocks",

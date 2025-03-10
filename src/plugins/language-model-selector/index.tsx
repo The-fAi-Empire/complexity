@@ -44,10 +44,6 @@ export default function BetterLanguageModelSelectorWrapper() {
 
   useBindBetterLanguageModelSelectorHotKeys();
 
-  useEffect(() => {
-    setHighlightedItem(selectedLanguageModel);
-  }, [selectedLanguageModel]);
-
   return (
     <Select
       lazyMount

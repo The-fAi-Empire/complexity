@@ -81,7 +81,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
     >
       <div
         className={cn(
-          "x-flex x-h-8 x-items-center x-gap-2 x-rounded-md x-border x-border-transparent x-px-2 x-text-sm x-font-medium x-text-muted-foreground x-transition-all active:x-scale-95",
+          "x-flex x-h-8 x-items-center x-justify-center x-gap-2 x-rounded-full x-border x-border-transparent x-bg-buttonBackground x-px-2.5 x-text-sm x-font-medium x-text-foreground x-transition-all active:x-scale-95",
           {
             "x-border-primary/30 x-bg-primary/10 x-text-primary":
               isProSearchEnabled && selectedLanguageModel !== "turbo",
@@ -90,7 +90,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
           },
         )}
       >
-        <Icon className="x-size-4 x-shrink-0" />
+        <Icon className="x-size-3.5 x-shrink-0" />
         <span className="x-truncate">{label}</span>
       </div>
     </Tooltip>

@@ -19,11 +19,7 @@ export default function MobileSidebar({
 
   return (
     <MobileSidebarContext value={{ isOpen, setIsOpen }}>
-      <Sheet
-        defaultOpen
-        open={isOpen}
-        onOpenChange={({ open }) => setIsOpen(open)}
-      >
+      <Sheet open={isOpen} onOpenChange={({ open }) => setIsOpen(open)}>
         <div className="x-fixed x-left-0 x-top-0 x-z-10 x-flex x-size-max x-w-full x-cursor-pointer x-items-start x-gap-4 x-bg-background x-p-4">
           <SheetTrigger asChild>
             <LuPanelLeft className="x-my-auto x-size-4" />

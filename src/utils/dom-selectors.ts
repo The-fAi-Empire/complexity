@@ -39,14 +39,15 @@ export const DOM_SELECTORS = {
         /** The query box */
         QUERY_WRAPPER: `.isolate.col-span-8>div:first-child`,
         QUERY: ".group\\/query",
-        QUERY_HOVER_CONTAINER: ".absolute:not(.-inset-md):last",
+        QUERY_HOVER_CONTAINER:
+          ".absolute.bottom-0.right-0:not(.pointer-events-none)",
         QUERY_HOVER_CONTAINER_CHILD: {
           EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
         },
         EDIT_TEXT_AREA: "textarea[placeholder]",
         /** The answer heading */
         ANSWER_HEADING:
-          ".mb-sm.flex.w-full.items-center.justify-between:has(svg.transform-gpu)",
+          ".flex.w-full.items-center.justify-between:has(svg.transform-gpu)",
         /** The sources heading */
         SOURCES: ".grid.grid-flow-col.md\\:grid-cols-4",
         /** The answer wrapper */

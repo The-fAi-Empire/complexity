@@ -4,9 +4,7 @@
   }
 
   [data-cplx-component="message-block-text-col"]
-    div
-    > div:not([class])
-    > div.bg-transparent:not(.overflow-hidden):not(.my-xs.pl-sm) {
+    div:has(> [data-cplx-component="message-block-bottom-bar"]) {
     isolation: isolate;
     display: flex;
     flex-direction: column;

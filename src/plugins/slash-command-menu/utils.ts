@@ -7,12 +7,12 @@ type PopoverPositionConfig = {
 };
 
 export const getPopoverPositionConfig = (
-  storeType: QueryBoxType,
+  queryBoxType: QueryBoxType,
 ): PopoverPositionConfig => {
-  const isSpaceQueryBox = storeType === "space";
+  const isSpaceQueryBox = queryBoxType === "space";
   return {
     placement: isSpaceQueryBox ? "bottom-start" : "top-start",
-    gutter: storeType === "main" ? 1 : 5,
+    gutter: 1,
     flip: isSpaceQueryBox,
   };
 };

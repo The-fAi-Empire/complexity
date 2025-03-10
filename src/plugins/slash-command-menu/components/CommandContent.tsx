@@ -59,7 +59,8 @@ export const CommandContent = memo((props: CommandContentProps) => {
       className={cn(
         "x-overflow-y-auto x-border-border x-p-0 x-font-medium x-shadow-none",
         {
-          "x-rounded-b-none x-border-2 x-border-b-0": storeType === "main",
+          "x-rounded-b-none x-border-2 x-border-b-0": storeType !== "space",
+          "x-rounded-t-none x-border-2 x-border-t-0": storeType === "space",
         },
       )}
       portal={false}
@@ -70,7 +71,8 @@ export const CommandContent = memo((props: CommandContentProps) => {
         shouldFilter={shouldFilterItems(filter)}
         value={selectedValue}
         className={cn("x-bg-background dark:x-bg-secondary", {
-          "x-rounded-b-none": storeType === "main",
+          "x-rounded-b-none": storeType !== "space",
+          "x-rounded-t-none": storeType === "space",
         })}
         onValueChange={handleValueChange}
       >

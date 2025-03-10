@@ -15,7 +15,6 @@ export default function SlashCommandMenuWrapper({
 }: SlashCommandMenuWrapperProps) {
   const { store } = useScopedQueryBoxContext();
 
-  const isMainQueryBox = store.type === "main";
   const isActive = UiUtils.getActiveQueryBox()[0] === anchor;
 
   const { isOpen } = useSlashCommandMenuStore();
@@ -29,8 +28,14 @@ export default function SlashCommandMenuWrapper({
 
   if (!anchor || !document.contains(anchor) || !isActive) return null;
 
-  if (isMainQueryBox) {
+  const isMainQueryBox = store.type === "main";
+  const isFollowUpQueryBox = store.type === "follow-up";
+  const isSpaceQueryBox = store.type === "space";
+
+  if (isMainQueryBox || isFollowUpQueryBox) {
     $(anchor).find(">div").toggleClass("[&>div]:!x-rounded-t-none", isOpen);
+  } else if (isSpaceQueryBox) {
+    $(anchor).find(">div").toggleClass("[&>div]:!x-rounded-b-none", isOpen);
   }
 
   return (
