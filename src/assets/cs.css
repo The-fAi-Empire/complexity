@@ -4,7 +4,7 @@
 
 @reference "./index.css";
 
-main {
+body {
   --font-sans: var(--font-fk-grotesk);
   --font-mono: var(--font-berkeley-mono);
   --offset-plus: var(--pale-cyan-200);

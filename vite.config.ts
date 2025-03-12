@@ -53,7 +53,7 @@ export default defineConfig(() => ({
     }),
     Unimport.vite(unimportConfig),
     vitePluginReloadOnDynamicallyInjectedStyleChanges({
-      excludeString: ["@/assets/cs.css"],
+      excludeString: ["@/assets/index.css", "@/assets/cs.css"],
     }),
     vitePluginForceRestartOnChanges({
       folders: ["public"],

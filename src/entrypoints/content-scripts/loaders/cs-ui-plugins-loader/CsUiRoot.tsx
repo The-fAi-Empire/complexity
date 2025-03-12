@@ -4,7 +4,8 @@ import "@/assets/cs.css";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import csUiRootCss from "@/assets/cs.css?inline";
+import csCss from "@/assets/cs.css?inline";
+import indexCss from "@/assets/index.css?inline";
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { PostUpdateReleaseNotesDialog } from "@/components/PostUpdateReleaseNotesDialog";
 // import { SponsorHomeLink } from "@/components/SponsorHomeLink";
@@ -154,4 +155,4 @@ function SidebarComponents() {
   );
 }
 
-export { csUiRootCss };
+export const csUiRootCss = indexCss + csCss;

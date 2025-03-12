@@ -32,7 +32,6 @@ export default function PreloadThemeSwitch() {
   return (
     <div className="x:flex x:items-center x:gap-2 x:md:ml-auto">
       <Switch
-        className="x:flex-col x:gap-2 x:md:flex-row x:md:gap-0"
         textLabel="Preload theme for a better experience"
         disabled={!hasPermissions}
         checked={settings.preloadTheme}
