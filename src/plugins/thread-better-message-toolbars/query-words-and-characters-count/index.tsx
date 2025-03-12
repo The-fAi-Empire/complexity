@@ -16,7 +16,7 @@ export default function QueryWordsAndCharactersCount({
   const queryCharactersCount = title.length;
 
   return (
-    <div className="x-mx-2 x-flex x-items-center x-gap-2 x-text-xs x-font-medium x-text-muted-foreground">
+    <div className="x:mx-2 x:flex x:items-center x:gap-2 x:text-xs x:font-medium x:text-muted-foreground">
       {queryWordsCount} {t("common:misc.words")} | {queryCharactersCount}{" "}
       {t("common:misc.characters")}
     </div>

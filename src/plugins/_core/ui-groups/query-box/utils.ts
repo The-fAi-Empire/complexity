@@ -50,7 +50,7 @@ export function createToolbarPortalContainers(queryBox: HTMLElement): {
 
     if ($existingLeftContainer.length) return $existingLeftContainer;
 
-    const $newLeftContainer = $("<div>").addClass("[&:empty]:x-hidden");
+    const $newLeftContainer = $("<x:div>").addClass("x:[&:empty]:hidden");
 
     $newLeftContainer.internalComponentAttr(
       INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_LEFT_WRAPPER,
@@ -72,7 +72,7 @@ export function createToolbarPortalContainers(queryBox: HTMLElement): {
 
     if ($existingRightContainer.length) return $existingRightContainer;
 
-    const $newRightContainer = $("<div>").addClass("[&:empty]:x-hidden");
+    const $newRightContainer = $("<x:div>").addClass("x:[&:empty]:hidden");
 
     $newRightContainer.internalComponentAttr(
       INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_RIGHT_WRAPPER,

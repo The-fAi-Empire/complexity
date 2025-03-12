@@ -35,10 +35,10 @@ export function PluginSections({ pluginsByCategory }: PluginSectionsProps) {
 
 function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
   return (
-    <div className="x-flex x-flex-col">
+    <div className="x:flex x:flex-col">
       <PluginsEnableSet />
       <Tabs defaultValue="queryBox">
-        <TabsList className="x-w-full">
+        <TabsList className="x:w-full">
           {Object.keys(pluginsByCategory).map((category) => (
             <TabsTrigger key={category} value={category}>
               {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
@@ -46,7 +46,7 @@ function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
           ))}
         </TabsList>
         {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
-          <TabsContent key={category} value={category} className="x-mt-4">
+          <TabsContent key={category} value={category} className="x:mt-4">
             <PluginsGrid pluginIds={pluginIds} />
           </TabsContent>
         ))}
@@ -57,18 +57,18 @@ function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
 
 function DesktopPluginSections({ pluginsByCategory }: PluginSectionsProps) {
   return (
-    <div className="x-flex x-flex-col x-gap-8">
-      <div className="x-flex x-items-center x-justify-end x-gap-4">
+    <div className="x:flex x:flex-col x:gap-8">
+      <div className="x:flex x:items-center x:justify-end x:gap-4">
         <PluginsEnableSet />
       </div>
 
       {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
         <section key={category}>
-          <H2 className="!x-text-lg x-font-semibold">
+          <H2 className="x:!text-lg x:font-semibold">
             {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
           </H2>
           {!!PLUGIN_CATEGORIES[category as PluginCategory]?.description && (
-            <div className="x-mb-4 x-text-sm x-text-muted-foreground">
+            <div className="x:mb-4 x:text-sm x:text-muted-foreground">
               {PLUGIN_CATEGORIES[category as PluginCategory].description}
             </div>
           )}

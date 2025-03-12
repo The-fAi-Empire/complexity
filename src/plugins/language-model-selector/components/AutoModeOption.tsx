@@ -25,7 +25,7 @@ export default function AutoModeOption() {
     if (component === "select") {
       return {
         checkboxOnSingleItem: true,
-        checkIconClassName: "x-size-5",
+        checkIconClassName: "x:size-5",
       };
     }
   }, [component]);
@@ -34,32 +34,32 @@ export default function AutoModeOption() {
     <ItemComp
       value="turbo"
       item="turbo"
-      className={cn("x-w-full x-cursor-pointer x-items-start x-p-2", {
-        "x-p-4": isMobile,
+      className={cn("x:w-full x:cursor-pointer x:items-start x:p-2", {
+        "x:p-4": isMobile,
       })}
       {...extraProps}
     >
-      <div className="x-flex x-items-start x-justify-start x-gap-2">
+      <div className="x:flex x:items-start x:justify-start x:gap-2">
         <FaShuffle
-          className={cn("x-mt-1 x-size-3.5 x-text-foreground", {
-            "x-text-primary":
+          className={cn("x:mt-1 x:size-3.5 x:text-foreground", {
+            "x:text-primary":
               component === "select" && selectedLanguageModel === "turbo",
-            "x-size-4": isMobile,
+            "x:size-4": isMobile,
           })}
         />
-        <div className="x-flex x-flex-col x-gap-y-0.5">
+        <div className="x:flex x:flex-col x:gap-y-0.5">
           <div
-            className={cn("x-font-medium x-text-foreground", {
-              "x-text-primary":
+            className={cn("x:font-medium x:text-foreground", {
+              "x:text-primary":
                 component === "select" && selectedLanguageModel === "turbo",
-              "x-text-lg": isMobile,
+              "x:text-lg": isMobile,
             })}
           >
             {t("plugin-model-selectors:languageModelSelector:autoMode.title")}
           </div>
           <div
-            className={cn("x-text-muted-foreground", {
-              "x-text-xs": !isMobile,
+            className={cn("x:text-muted-foreground", {
+              "x:text-xs": !isMobile,
             })}
           >
             {t(

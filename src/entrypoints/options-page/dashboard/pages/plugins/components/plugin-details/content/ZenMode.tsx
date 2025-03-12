@@ -16,7 +16,7 @@ export default function ZenModePluginDetails() {
   });
 
   return (
-    <div className="x-flex x-flex-col x-gap-4">
+    <div className="x:flex x:flex-col x:gap-4">
       <Switch
         textLabel="Enable"
         checked={settings?.plugins["zenMode"].enabled ?? false}
@@ -28,7 +28,7 @@ export default function ZenModePluginDetails() {
       />
       {settings?.plugins["zenMode"].enabled && (
         <>
-          <div className="x-flex x-flex-col x-gap-2">
+          <div className="x:flex x:flex-col x:gap-2">
             <div>Activation hotkey:</div>
             <HotkeyRecorderUI />
           </div>

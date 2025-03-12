@@ -37,13 +37,13 @@ export default function SpaceNavigator({ ...props }: SpaceNavigator) {
               setOpen((prev) => !prev);
             }}
           >
-            <div className="x-flex x-size-6 x-items-center x-justify-center x-text-muted-foreground x-transition-all hover:x-bg-black/5 group-hover:x-text-foreground dark:hover:x-bg-white/5">
+            <div className="x:flex x:size-6 x:items-center x:justify-center x:text-muted-foreground x:transition-all x:group-hover:text-foreground x:hover:bg-black/5 x:dark:hover:bg-white/5">
               <LuSearch />
             </div>
           </div>
         </PopoverTrigger>
       </Tooltip>
-      <PopoverContent className="x-p-0">
+      <PopoverContent className="x:p-0">
         <SpaceNavigatorContent setOpen={setOpen} />
       </PopoverContent>
     </Popover>

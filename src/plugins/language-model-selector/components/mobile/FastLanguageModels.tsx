@@ -25,8 +25,8 @@ export default function FastLanguageModels() {
   const modelsLimits = useModelLimits();
 
   return (
-    <GroupComp className="x-m-0 x-p-0">
-      <LabelComp className="x-text-base">Standard</LabelComp>
+    <GroupComp className="x:m-0 x:p-0">
+      <LabelComp className="x:text-base">Standard</LabelComp>
       {fastLanguageModels.map((model, index) => {
         if (model.hideFromList) return null;
         const Icon = languageModelProviderIcons[model.provider] ?? LuCpu;
@@ -55,13 +55,13 @@ export default function FastLanguageModels() {
             value={model.code}
             data-column="fast"
             data-index={index}
-            className="x-flex x-items-center x-justify-between x-gap-2 x-p-4 x-text-base x-text-foreground"
+            className="x:flex x:items-center x:justify-between x:gap-2 x:p-4 x:text-base x:text-foreground"
           >
-            <div className="x-flex x-items-center x-gap-2">
-              <Icon className="x-size-4" />
-              <span className="x-truncate">{model.label}</span>
+            <div className="x:flex x:items-center x:gap-2">
+              <Icon className="x:size-4" />
+              <span className="x:truncate">{model.label}</span>
             </div>
-            <div className="x-text-xs x-text-muted-foreground">
+            <div className="x:text-xs x:text-muted-foreground">
               {tooltipContent}
             </div>
           </ItemComp>

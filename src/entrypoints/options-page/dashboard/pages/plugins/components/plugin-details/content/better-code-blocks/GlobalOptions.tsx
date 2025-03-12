@@ -17,8 +17,8 @@ export default function BetterCodeBlockGlobalOptions() {
   );
 
   return (
-    <div className="x-flex x-flex-col x-gap-4">
-      <div className="x-flex x-flex-col x-gap-4">
+    <div className="x:flex x:flex-col x:gap-4">
+      <div className="x:flex x:flex-col x:gap-4">
         <Switch
           textLabel="Sticky header"
           checked={settings?.plugins["thread:betterCodeBlocks"].stickyHeader}
@@ -38,7 +38,7 @@ export default function BetterCodeBlockGlobalOptions() {
             });
           }}
         />
-        <div className="x-flex x-flex-col x-gap-2">
+        <div className="x:flex x:flex-col x:gap-2">
           <Switch
             textLabel="Unwrap lines by default"
             checked={
@@ -53,7 +53,7 @@ export default function BetterCodeBlockGlobalOptions() {
           />
           <Switch
             textLabel="Show toggle button"
-            className="x-ml-8"
+            className="x:ml-8"
             checked={
               settings?.plugins["thread:betterCodeBlocks"].unwrap
                 .showToggleButton
@@ -67,8 +67,8 @@ export default function BetterCodeBlockGlobalOptions() {
             }}
           />
         </div>
-        <div className="x-flex x-flex-col x-gap-2">
-          <div className="x-flex x-gap-2">
+        <div className="x:flex x:flex-col x:gap-2">
+          <div className="x:flex x:gap-2">
             <Switch
               textLabel="Max height"
               checked={
@@ -81,14 +81,14 @@ export default function BetterCodeBlockGlobalOptions() {
                 });
               }}
             />
-            <div className="x-flex x-items-center x-gap-2">
+            <div className="x:flex x:items-center x:gap-2">
               <Input
                 type="number"
                 min={300}
                 defaultValue={
                   settings?.plugins["thread:betterCodeBlocks"].maxHeight?.value
                 }
-                className="x-w-[100px]"
+                className="x:w-[100px]"
                 disabled={
                   !settings?.plugins["thread:betterCodeBlocks"].maxHeight
                     ?.enabled
@@ -103,12 +103,12 @@ export default function BetterCodeBlockGlobalOptions() {
                   });
                 }}
               />
-              <div className="x-text-muted-foreground">px (&gt;= 300px)</div>
+              <div className="x:text-muted-foreground">px (&gt;= 300px)</div>
             </div>
           </div>
           <Switch
             textLabel="Collapse by default"
-            className="x-ml-8"
+            className="x:ml-8"
             checked={
               settings?.plugins["thread:betterCodeBlocks"].maxHeight
                 ?.collapseByDefault
@@ -123,7 +123,7 @@ export default function BetterCodeBlockGlobalOptions() {
           />
           <Switch
             textLabel="Show toggle button"
-            className="x-ml-8"
+            className="x:ml-8"
             checked={
               settings?.plugins["thread:betterCodeBlocks"].maxHeight
                 ?.showToggleButton

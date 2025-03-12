@@ -4,7 +4,7 @@ body#__next {
     [data-cplx-component="message-block"]
       [data-cplx-component="message-block-text-col"] {
       > .border-b {
-        @apply x-border-b-ring/50;
+        border-bottom-color: --alpha(var(--ring) / 30%);
       }
 
       [data-cplx-component="message-block-answer"] {
@@ -16,7 +16,7 @@ body#__next {
         h5,
         h6,
         strong {
-          @apply x-text-primary;
+          color: var(--primary);
         }
       }
     }
@@ -24,17 +24,17 @@ body#__next {
 
   /* Inline Code */
   code:not(pre code) {
-    @apply x-text-primary;
+    color: var(--primary);
   }
 
   font-variant-ligatures: none;
 
   a[aria-label="Perplexity"] svg path {
-    @apply !x-stroke-primary;
+    stroke: var(--primary);
   }
 
   [data-cplx-component]::selection {
-    @apply x-text-primary;
+    color: var(--primary);
     background-color: oklch(var(--teal-200) / 0.1);
   }
 }

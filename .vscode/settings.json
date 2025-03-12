@@ -12,6 +12,10 @@
   "editor.quickSuggestionsDelay": 1,
   "editor.suggest.showWords": false,
   "eslint.useFlatConfig": true,
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.configFile": "src/assets/index.css",
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.git": true,

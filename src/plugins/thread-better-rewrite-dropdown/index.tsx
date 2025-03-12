@@ -94,8 +94,8 @@ export default function ThreadBetterRewriteDropdown({
     >
       <Tooltip content={t("misc.rewrite")}>
         <DropdownMenuTrigger asChild>
-          <div className="x-cursor-pointer x-rounded-md x-p-2 x-text-muted-foreground x-transition-all hover:x-bg-muted/50 hover:x-text-foreground active:x-scale-95">
-            <PplxRewrite className="x-size-4" />
+          <div className="x:cursor-pointer x:rounded-md x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95">
+            <PplxRewrite className="x:size-4" />
           </div>
         </DropdownMenuTrigger>
       </Tooltip>

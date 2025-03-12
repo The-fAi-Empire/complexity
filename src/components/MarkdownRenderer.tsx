@@ -25,7 +25,7 @@ export default function MarkdownRenderer({
   return (
     <div
       className={cn(
-        "x-prose x-flex x-max-w-max x-flex-col dark:x-prose-invert",
+        "x:prose x:flex x:max-w-max x:flex-col x:dark:prose-invert",
         className,
       )}
       {...props}

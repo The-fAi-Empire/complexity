@@ -58,28 +58,28 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
   if (!settings) return null;
 
   return (
-    <Card className="x-flex x-h-full x-flex-col x-bg-secondary">
-      <CardHeader className="x-flex x-flex-row x-items-start x-justify-between x-space-y-0">
+    <Card className="x:flex x:h-full x:flex-col x:bg-secondary">
+      <CardHeader className="x:flex x:flex-row x:items-start x:justify-between x:space-y-0">
         <div>
           <CardTitle>
-            <span className="x-text-lg">{title}</span>
+            <span className="x:text-lg">{title}</span>
           </CardTitle>
           <CardDescription>{description}</CardDescription>
         </div>
       </CardHeader>
       {tags != null && tags.length > 0 && (
         <CardContent>
-          <div className="x-flex x-flex-wrap x-gap-2">
+          <div className="x:flex x:flex-wrap x:gap-2">
             {tags.map((tag) => (
               <Tooltip key={tag} content={PLUGIN_TAGS[tag].description}>
                 <Badge
                   variant="secondary"
                   className={cn(
-                    "x-border x-border-border/50 hover:x-bg-background",
+                    "x:border x:border-border/50 x:hover:bg-background",
                     {
-                      "x-bg-destructive x-text-destructive-foreground hover:x-bg-destructive/80":
+                      "x:bg-destructive x:text-destructive-foreground x:hover:bg-destructive/80":
                         tag === "experimental",
-                      "x-bg-primary x-text-primary-foreground hover:x-bg-primary/80":
+                      "x:bg-primary x:text-primary-foreground x:hover:bg-primary/80":
                         tag === "new",
                     },
                   )}
@@ -91,8 +91,8 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
           </div>
         </CardContent>
       )}
-      <CardFooter className="x-mt-auto x-flex x-justify-between">
-        <div className="x-flex x-gap-2">
+      <CardFooter className="x:mt-auto x:flex x:justify-between">
+        <div className="x:flex x:gap-2">
           {dialogContent != null && (
             <Button
               onClick={() =>
@@ -129,7 +129,7 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
                 </div>
               }
             >
-              <LuTriangleAlert className="x-size-4 x-text-yellow-300 dark:x-text-yellow-500" />
+              <LuTriangleAlert className="x:size-4 x:text-yellow-300 x:dark:text-yellow-500" />
             </Tooltip>
           )}
 
@@ -142,7 +142,7 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
               </div>
             }
           >
-            <LuTriangleAlert className="x-size-4 x-text-destructive" />
+            <LuTriangleAlert className="x:size-4 x:text-destructive" />
           </Tooltip>
         )}
 

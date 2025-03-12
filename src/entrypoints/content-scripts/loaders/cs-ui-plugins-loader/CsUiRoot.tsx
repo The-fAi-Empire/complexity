@@ -1,5 +1,5 @@
- 
 // must keep this for tailwind to generate and hmr arbitrary classes in dev mode (this will be removed in prod)
+import "@/assets/index.css";
 import "@/assets/cs.css";
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";

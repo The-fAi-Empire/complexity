@@ -14,7 +14,7 @@ const MODEL_BADGE_COMPONENT_SELECTOR = `[data-cplx-component="${INTERNAL_ATTRIBU
 
 function createModelBadge(modelName: string) {
   return $(`<div>${modelName}</div>`)
-    .addClass("x-font-medium x-text-sm md:x-text-base")
+    .addClass("x:font-medium x:text-sm x:md:text-base")
     .internalComponentAttr(
       INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD
         .ANSWER_HEADING_MODEL_NAME,
@@ -34,7 +34,7 @@ async function displayModelBadge({
 }) {
   if (isInFlight) {
     $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR).remove();
-    $answerHeading.find(":nth-child(2)").removeClass("x-hidden");
+    $answerHeading.find(":nth-child(2)").removeClass("x:hidden");
     return;
   }
 
@@ -59,11 +59,11 @@ async function displayModelBadge({
   const $target = $answerHeading.find('[color="super"]');
   if (!$target.length) return;
 
-  $target.find(":nth-child(2)").addClass("x-hidden");
+  $target.find(":nth-child(2)").addClass("x:hidden");
   $bottomBar
     .find("button:has(svg.tabler-icon-cpu)")
     .parent()
-    .addClass("x-hidden");
+    .addClass("x:hidden");
 
   const $existingBadge = $answerHeading.find(MODEL_BADGE_COMPONENT_SELECTOR);
 
@@ -142,7 +142,7 @@ csLoaderRegistry.register({
             messageBlock.nodes.$bottomBar
               .find("button:has(svg.tabler-icon-cpu)")
               .parent()
-              .addClass("x-hidden");
+              .addClass("x:hidden");
           });
       },
     );

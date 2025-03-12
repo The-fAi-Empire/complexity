@@ -78,7 +78,7 @@ export default function BetterLanguageModelSelectorWrapper() {
         }
       }}
     >
-      <SelectTrigger variant="noStyle" className="x-m-0 x-p-0">
+      <SelectTrigger variant="noStyle" className="x:m-0 x:p-0">
         <BetterLanguageModelSelectorTriggerButton />
       </SelectTrigger>
       <LanguageModelSelectorContext

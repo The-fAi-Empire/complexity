@@ -25,8 +25,8 @@ export default function ReasoningLanguageModels() {
   const modelsLimits = useModelLimits();
 
   return (
-    <GroupComp className="x-m-0 x-p-0">
-      <LabelComp className="x-text-base">Reasoning</LabelComp>
+    <GroupComp className="x:m-0 x:p-0">
+      <LabelComp className="x:text-base">Reasoning</LabelComp>
       {reasoningLanguageModels.map((model, index) => {
         const Icon = languageModelProviderIcons[model.provider] ?? LuCpu;
 
@@ -54,13 +54,13 @@ export default function ReasoningLanguageModels() {
             value={model.code}
             data-column="reasoning"
             data-index={index}
-            className="x-flex x-items-center x-justify-between x-gap-2 x-p-4 x-text-base x-text-foreground"
+            className="x:flex x:items-center x:justify-between x:gap-2 x:p-4 x:text-base x:text-foreground"
           >
-            <div className="x-flex x-items-center x-gap-2">
-              <Icon className="x-size-4" />
+            <div className="x:flex x:items-center x:gap-2">
+              <Icon className="x:size-4" />
               <span>{model.label}</span>
             </div>
-            <div className="x-text-xs x-text-muted-foreground">
+            <div className="x:text-xs x:text-muted-foreground">
               {tooltipContent}
             </div>
           </ItemComp>

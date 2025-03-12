@@ -9,7 +9,7 @@ export default function ThreadMessageTtsPluginDetails() {
   if (!settings) return null;
 
   return (
-    <div className="x-flex x-max-w-lg x-flex-col x-gap-4">
+    <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
       <div>
         <div>
           Right-click to open voice menu. Only supports English content.
@@ -25,11 +25,11 @@ export default function ThreadMessageTtsPluginDetails() {
         }}
       />
 
-      <div className="x-mx-auto x-w-full x-max-w-[700px]">
+      <div className="x:mx-auto x:w-full x:max-w-[700px]">
         <Image
           src="https://i.imgur.com/1aNm9q0.png"
           alt="thread-message-tts"
-          className="x-w-full"
+          className="x:w-full"
         />
       </div>
     </div>

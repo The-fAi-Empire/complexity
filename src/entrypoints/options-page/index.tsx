@@ -1,4 +1,6 @@
+import "@/assets/index.css";
 import "@/assets/extension.css";
+
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ReactDOM from "react-dom/client";

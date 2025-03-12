@@ -15,7 +15,7 @@ export default function MarkdownRenderer() {
   const code = selectedCodeBlock?.content.code;
 
   return (
-    <div className="x-prose x-mx-auto x-p-4 x-py-8 dark:x-prose-invert">
+    <div className="x:mx-auto x:prose x:p-4 x:py-8 x:dark:prose-invert">
       <MarkdownRendererComponent markdown={code ?? ""} />
     </div>
   );

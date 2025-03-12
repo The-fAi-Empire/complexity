@@ -36,11 +36,11 @@ function PluginsListing() {
   );
 
   return (
-    <div className="x-size-full">
-      <h1 className="x-sr-only x-text-2xl x-font-bold">Plugins</h1>
+    <div className="x:size-full">
+      <h1 className="x:sr-only x:text-2xl x:font-bold">Plugins</h1>
 
-      <div className="x-flex x-size-full x-flex-col x-gap-4 md:x-mt-0">
-        <div className="x-ml-auto x-flex x-w-full x-flex-row-reverse x-gap-4 md:x-w-fit md:x-flex-row md:x-justify-end">
+      <div className="x:flex x:size-full x:flex-col x:gap-4 x:md:mt-0">
+        <div className="x:ml-auto x:flex x:w-full x:flex-row-reverse x:gap-4 x:md:w-fit x:md:flex-row x:md:justify-end">
           <TagsFilter />
           <Input
             type="search"
@@ -50,14 +50,14 @@ function PluginsListing() {
           />
         </div>
 
-        <div className="x-ml-auto x-text-balance x-text-center x-text-sm x-text-muted-foreground md:x-text-left">
+        <div className="x:ml-auto x:text-center x:text-sm x:text-balance x:text-muted-foreground x:md:text-left">
           A full page reload on Perplexity.ai is required when changing plugin
           settings.
         </div>
 
         {isFetchingPLuginsStates ? (
-          <div className="x-m-auto x-flex x-size-max x-items-center x-gap-2">
-            <LuLoaderCircle className="x-animate-spin" />
+          <div className="x:m-auto x:flex x:size-max x:items-center x:gap-2">
+            <LuLoaderCircle className="x:animate-spin" />
             Fetching plugins...
           </div>
         ) : (

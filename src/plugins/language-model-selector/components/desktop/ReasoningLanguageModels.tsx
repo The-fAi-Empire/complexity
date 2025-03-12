@@ -28,10 +28,10 @@ export default function ReasoningLanguageModels() {
   const modelsLimits = useModelLimits();
 
   return (
-    <GroupComp className="x-m-0 x-p-0">
+    <GroupComp className="x:m-0 x:p-0">
       <Tooltip
         content={
-          <div className="x-max-w-[250px]">
+          <div className="x:max-w-[250px]">
             <div>
               {t(
                 "plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.description",
@@ -40,7 +40,7 @@ export default function ReasoningLanguageModels() {
             <Trans
               i18nKey="plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.proSearchNote"
               components={{
-                emphasis: <span className="x-text-primary" />,
+                emphasis: <span className="x:text-primary" />,
               }}
             />
           </div>
@@ -75,7 +75,7 @@ export default function ReasoningLanguageModels() {
           <Tooltip
             key={model.code}
             content={
-              <div className="x-max-w-48 x-text-pretty">{tooltipContent}</div>
+              <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
             }
             disabled={modelsLimits[model.code] == null}
             positioning={{ placement: "right", gutter: 10 }}
@@ -86,9 +86,9 @@ export default function ReasoningLanguageModels() {
               value={model.code}
               data-column="reasoning"
               data-index={index}
-              className="x-flex x-cursor-pointer x-items-center x-justify-start x-gap-2 x-text-foreground"
+              className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
             >
-              <Icon className="x-size-4" />
+              <Icon className="x:size-4" />
               <span>{model.label}</span>
             </ItemComp>
           </Tooltip>

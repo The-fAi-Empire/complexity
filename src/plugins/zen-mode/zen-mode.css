@@ -1,3 +1,5 @@
+@reference "../../assets/index.css";
+
 body[data-cplx-zen-mode="true"] {
   .min-h-\[100dvh\] {
     /* Sidebar */
@@ -7,7 +9,7 @@ body[data-cplx-zen-mode="true"] {
 
     /* Padding compensation */
     > div:last-child {
-      @apply x-pl-2;
+      @apply x:pl-2;
     }
   }
 

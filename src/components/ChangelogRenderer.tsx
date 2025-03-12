@@ -21,7 +21,7 @@ export default function ChangelogRenderer({
       <img
         src={src}
         alt={alt}
-        className="x-max-w-[1000px] x-rounded-md x-border x-border-border/50"
+        className="x:max-w-[1000px] x:rounded-md x:border x:border-border/50"
       />
     ),
   } as ChangelogComponents;

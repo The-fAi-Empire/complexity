@@ -28,15 +28,21 @@ export default function SlashCommandMenuWrapper({
 
   if (!anchor || !document.contains(anchor) || !isActive) return null;
 
-  const isMainQueryBox = store.type === "main";
-  const isFollowUpQueryBox = store.type === "follow-up";
-  const isSpaceQueryBox = store.type === "space";
-
-  if (isMainQueryBox || isFollowUpQueryBox) {
-    $(anchor).find(">div").toggleClass("[&>div]:!x-rounded-t-none", isOpen);
-  } else if (isSpaceQueryBox) {
-    $(anchor).find(">div").toggleClass("[&>div]:!x-rounded-b-none", isOpen);
-  }
+  useEffect(() => {
+    $(anchor)
+      .find(">div>div")
+      .toggleClass(
+        cn({
+          "x:!rounded-t-none":
+            (popover.getContentProps() as any)?.["data-placement"] ===
+            "top-start",
+          "x:!rounded-b-none":
+            (popover.getContentProps() as any)?.["data-placement"] ===
+            "bottom-start",
+        }),
+        isOpen,
+      );
+  }, [isOpen, anchor, popover]);
 
   return (
     <PopoverRootProvider value={popover} unmountOnExit={true} lazyMount={true}>

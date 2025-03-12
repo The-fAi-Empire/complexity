@@ -43,7 +43,7 @@ const MemoizedWrapper = memo(function MemoizedWrapper({
   messageBlockIndex: number;
 }) {
   return (
-    <div className="x-flex x-items-center x-gap-1">
+    <div className="x:flex x:items-center x:gap-1">
       <CsUiPluginsGuard
         requiresLoggedIn
         dependentPluginIds={["thread:messageTts"]}

@@ -19,7 +19,7 @@ export default function CommandMenuPluginDetails() {
   if (!settings) return null;
 
   return (
-    <div className="x-flex x-flex-col x-gap-4">
+    <div className="x:flex x:flex-col x:gap-4">
       <div>
         Similar to Mac&apos;s Spotlight / Windows&apos;s PowerToys Run, but
         inside Perplexity.
@@ -35,21 +35,21 @@ export default function CommandMenuPluginDetails() {
       />
       {settings?.plugins["commandMenu"].enabled && (
         <>
-          <div className="x-flex x-flex-col x-gap-2">
+          <div className="x:flex x:flex-col x:gap-2">
             <div>Activation hotkey:</div>
             <HotkeyRecorderUI />
           </div>
-          <div className="x-text-sm x-text-muted-foreground">
+          <div className="x:text-sm x:text-muted-foreground">
             Side note: Thread search is subject to rate limiting by Perplexity
             at any time.
           </div>
         </>
       )}
-      <div className="x-mx-auto x-w-full x-max-w-[700px]">
+      <div className="x:mx-auto x:w-full x:max-w-[700px]">
         <Image
           src="https://i.imgur.com/m8x0hm1.png"
           alt="command-menu"
-          className="x-w-full"
+          className="x:w-full"
         />
       </div>
     </div>

@@ -20,17 +20,17 @@ export default function DesktopContent() {
     <Comp
       className={cn(
         PPLX_SCROLLBAR_CLASSES,
-        "x-flex x-max-h-[45vh] x-items-start x-justify-between x-gap-2 x-overflow-y-auto x-p-2",
+        "x:flex x:max-h-[45vh] x:items-start x:justify-between x:gap-2 x:overflow-y-auto x:p-2",
       )}
     >
       <div ref={hotkeyRef}>
         <ProSearchSwitch />
-        <div className="x-mx-auto x-my-2 x-h-px x-w-full x-bg-border/50" />
-        <div className="x-flex x-items-start x-justify-between x-gap-2">
+        <div className="x:mx-auto x:my-2 x:h-px x:w-full x:bg-border/50" />
+        <div className="x:flex x:items-start x:justify-between x:gap-2">
           <FastLanguageModels />
           <ReasoningLanguageModels />
         </div>
-        <div className="x-mx-auto x-my-2 x-h-px x-w-full x-bg-border/50" />
+        <div className="x:mx-auto x:my-2 x:h-px x:w-full x:bg-border/50" />
         <AutoModeOption />
       </div>
     </Comp>

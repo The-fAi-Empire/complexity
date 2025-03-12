@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import { I18nextProvider } from "react-i18next";
 import { RouterProvider } from "react-router-dom";
 
-import { removeInitializingIndicator } from "@/components/loading-indicator";
 import CsUiRoot from "@/entrypoints/content-scripts/loaders/cs-ui-plugins-loader/CsUiRoot";
 import { createRouter } from "@/entrypoints/content-scripts/loaders/cs-ui-plugins-loader/router";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
@@ -20,8 +19,6 @@ csLoaderRegistry.register({
 
     const root = createRoot($root[0]);
     const router = createRouter();
-
-    removeInitializingIndicator();
 
     root.render(
       <QueryClientProvider client={queryClient}>

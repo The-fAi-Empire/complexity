@@ -26,7 +26,7 @@ export default function FastLanguageModels() {
   const modelsLimits = useModelLimits();
 
   return (
-    <GroupComp className="x-m-0 x-p-0">
+    <GroupComp className="x:m-0 x:p-0">
       <LabelComp>Standard</LabelComp>
       {fastLanguageModels.map((model, index) => {
         if (model.hideFromList) return null;
@@ -54,7 +54,7 @@ export default function FastLanguageModels() {
           <Tooltip
             key={model.code}
             content={
-              <div className="x-max-w-48 x-text-pretty">{tooltipContent}</div>
+              <div className="x:max-w-48 x:text-pretty">{tooltipContent}</div>
             }
             disabled={modelsLimits[model.code] == null}
             positioning={{ placement: "left", gutter: 10 }}
@@ -65,10 +65,10 @@ export default function FastLanguageModels() {
               value={model.code}
               data-column="fast"
               data-index={index}
-              className="x-flex x-cursor-pointer x-items-center x-justify-start x-gap-2 x-text-foreground"
+              className="x:flex x:cursor-pointer x:items-center x:justify-start x:gap-2 x:text-foreground"
             >
-              <Icon className="x-size-4" />
-              <span className="x-truncate">{model.label}</span>
+              <Icon className="x:size-4" />
+              <span className="x:truncate">{model.label}</span>
             </ItemComp>
           </Tooltip>
         );

@@ -30,7 +30,7 @@ export default function EditQueryButton({
   return (
     <div
       role="button"
-      className="x-cursor-pointer x-rounded-md x-p-2 x-text-base x-text-muted-foreground x-transition-all x-animate-in x-fade-in hover:x-bg-muted/50 hover:x-text-foreground active:x-scale-95"
+      className="x:cursor-pointer x:rounded-md x:p-2 x:text-base x:text-muted-foreground x:transition-all x:animate-in x:fade-in x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95"
       onClick={() => {
         const $editQueryButton = threadMessageBlocksDomObserverStore
           .getState()
@@ -43,7 +43,7 @@ export default function EditQueryButton({
         $editQueryButton.trigger("click");
       }}
     >
-      <FaPencilSquare className="x-size-3.5" />
+      <FaPencilSquare className="x:size-3.5" />
     </div>
   );
 }

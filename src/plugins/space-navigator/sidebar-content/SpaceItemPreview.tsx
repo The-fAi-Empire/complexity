@@ -41,7 +41,7 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
 
   if (isEmptyView)
     return (
-      <div className="x-relative x-flex x-size-full x-items-center x-justify-center x-text-muted-foreground">
+      <div className="x:relative x:flex x:size-full x:items-center x:justify-center x:text-muted-foreground">
         <PinSpaceButton space={space} />
         <div>
           {t("plugin-space-navigator:spaceNavigator.spaceItem.noPreviewData")}
@@ -50,24 +50,24 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
     );
 
   return (
-    <div className="x-relative x-flex x-flex-col x-gap-4 x-p-4">
+    <div className="x:relative x:flex x:flex-col x:gap-4 x:p-4">
       <PinSpaceButton space={space} />
 
       {space.description && (
-        <div className="x-flex x-flex-col x-justify-between x-gap-2">
-          <div className="x-text-sm x-font-medium x-text-muted-foreground">
+        <div className="x:flex x:flex-col x:justify-between x:gap-2">
+          <div className="x:text-sm x:font-medium x:text-muted-foreground">
             {t(
               "plugin-space-navigator:spaceNavigator.spaceItem.details.description",
             )}
           </div>
-          <div className="x-line-clamp-1 x-whitespace-pre-wrap">
+          <div className="x:line-clamp-1 x:whitespace-pre-wrap">
             {space.description}
           </div>
         </div>
       )}
       {space.instructions && (
-        <div className="x-flex x-flex-col x-justify-between x-gap-2">
-          <div className="x-text-sm x-font-medium x-text-muted-foreground">
+        <div className="x:flex x:flex-col x:justify-between x:gap-2">
+          <div className="x:text-sm x:font-medium x:text-muted-foreground">
             {t(
               "plugin-space-navigator:spaceNavigator.spaceItem.details.instructions",
             )}
@@ -75,7 +75,7 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
           <div
             className={cn(
               PPLX_SCROLLBAR_CLASSES,
-              "x-max-h-[240px] x-overflow-y-auto x-rounded-md x-bg-secondary x-p-2",
+              "x:max-h-[240px] x:overflow-y-auto x:rounded-md x:bg-secondary x:p-2",
             )}
           >
             <MarkdownRenderer markdown={space.instructions} />
@@ -84,8 +84,8 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
       )}
       {space.focused_web_config &&
         space.focused_web_config.link_configs.length > 0 && (
-          <div className="x-flex x-flex-col x-justify-between x-gap-2">
-            <div className="x-truncate x-text-sm x-font-medium x-text-muted-foreground">
+          <div className="x:flex x:flex-col x:justify-between x:gap-2">
+            <div className="x:truncate x:text-sm x:font-medium x:text-muted-foreground">
               {t(
                 "plugin-space-navigator:spaceNavigator.spaceItem.details.focusedWebLinks",
                 {
@@ -93,19 +93,19 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
                 },
               )}
             </div>
-            <div className="x-flex x-flex-wrap x-items-center x-gap-2">
+            <div className="x:flex x:flex-wrap x:items-center x:gap-2">
               {space.focused_web_config.link_configs.map((link, idx) => (
-                <div key={idx} className="x-flex x-items-center x-gap-2">
-                  <LuLink className="x-size-4" />
-                  <div className="x-line-clamp-1 x-underline">{link.link}</div>
+                <div key={idx} className="x:flex x:items-center x:gap-2">
+                  <LuLink className="x:size-4" />
+                  <div className="x:line-clamp-1 x:underline">{link.link}</div>
                 </div>
               ))}
             </div>
           </div>
         )}
       {files && files?.num_total_files > 0 && (
-        <div className="x-flex x-flex-col x-justify-between x-gap-2">
-          <div className="x-text-sm x-font-medium x-text-muted-foreground">
+        <div className="x:flex x:flex-col x:justify-between x:gap-2">
+          <div className="x:text-sm x:font-medium x:text-muted-foreground">
             {t(
               "plugin-space-navigator:spaceNavigator.spaceItem.details.files",
               {
@@ -133,14 +133,14 @@ function PinSpaceButton({ space }: { space: Space }) {
   const { mutate: unpinSpace } = useUnpinSpaceMutation();
 
   return (
-    <div className="x-absolute x-right-2 x-top-2">
+    <div className="x:absolute x:top-2 x:right-2">
       <Tooltip
         content={t(
           `plugin-space-navigator:spaceNavigator.spaceItem.pinActions.${isPinned ? "unpin" : "pin"}`,
         )}
       >
         <div
-          className="x-cursor-pointer x-rounded-md x-p-2 x-text-muted-foreground x-transition-all hover:x-bg-secondary hover:x-text-foreground active:x-scale-95"
+          className="x:cursor-pointer x:rounded-md x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-secondary x:hover:text-foreground x:active:scale-95"
           onClick={() => {
             if (isPinned) {
               unpinSpace({ uuid: space.uuid });
@@ -150,9 +150,9 @@ function PinSpaceButton({ space }: { space: Space }) {
           }}
         >
           {isPinned ? (
-            <LuPinOff className="x-size-4" />
+            <LuPinOff className="x:size-4" />
           ) : (
-            <LuPin className="x-size-4" />
+            <LuPin className="x:size-4" />
           )}
         </div>
       </Tooltip>
