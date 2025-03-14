@@ -33,7 +33,7 @@ const CanvasPlaceholderWrapper = memo(function CanvasPlaceholderWrapper() {
   return (
     <div
       className={cn(
-        "x:group x:my-4 x:flex x:w-max x:cursor-pointer x:items-center x:divide-x-2 x:divide-border/50 x:overflow-hidden x:rounded-lg x:border x:border-border/50 x:bg-secondary x:transition-all x:select-none x:hover:border-primary",
+        "x:group x:my-4 x:flex x:w-max x:cursor-pointer x:items-center x:overflow-hidden x:rounded-lg x:border x:bg-secondary x:transition-all x:select-none x:hover:border-primary",
         {
           "x:border-primary": isSelected,
         },

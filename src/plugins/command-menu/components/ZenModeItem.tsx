@@ -1,4 +1,4 @@
-import { formatKeys } from "@/components/HotkeyRecorder";
+import { formatKeys } from "@/components/hotkey-recorder/utils";
 import type { ZenModeItem as ZenModeItemType } from "@/data/plugins/command-menu/types";
 import BaseMenuItem, {
   BaseCommandMenuItem,

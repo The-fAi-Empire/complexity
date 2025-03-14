@@ -1,12 +1,14 @@
 import { LuX } from "react-icons/lu";
 
+import { useInsertCss } from "@/hooks/useInsertCss";
+import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
+import normalizeCss from "@/plugins/thread-toc/normalize.css?inline";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { scrollToElement } from "@/utils/utils";
-
 export const PANEL_WIDTH = 230;
 
 type TocItem = {
@@ -16,6 +18,16 @@ type TocItem = {
 };
 
 export default function ThreadTocWrapper() {
+  const threadWrapper = useThreadDomObserverStore(
+    (store) => store.$wrapper?.[0],
+    deepEqual,
+  );
+
+  useInsertCss({
+    css: normalizeCss,
+    id: "thread-toc-normalize",
+  });
+
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -34,7 +46,7 @@ export default function ThreadTocWrapper() {
 
   const shouldShowToc = tocItems.length > 1 && !!position;
 
-  if (!shouldShowToc) return null;
+  if (!shouldShowToc || threadWrapper == null) return null;
 
   return (
     <>
@@ -49,7 +61,7 @@ export default function ThreadTocWrapper() {
           "x:fixed x:top-(--panel-top)",
           "x:w-(--panel-width) x:overflow-y-auto",
           {
-            "x:max-h-[60vh]": isFloating,
+            "x:z-10 x:max-h-[60vh]": isFloating,
             "x:max-h-[80vh]": !isFloating,
           },
           "x:transition-all x:animate-in x:fade-in",
@@ -79,6 +91,15 @@ export default function ThreadTocWrapper() {
                 const $element = $(`#${item.id}`);
                 if ($element.length) scrollToElement($element, 0, 300);
               }}
+              onContextMenu={() => {
+                const $element = $(`#${item.id}`);
+                if ($element.length && $element.height() != null)
+                  scrollToElement(
+                    $element,
+                    $element.height()! - window.innerHeight / 2,
+                    300,
+                  );
+              }}
             />
           ))}
         </div>
@@ -90,9 +111,11 @@ export default function ThreadTocWrapper() {
 const TocItem = memo(function TocItem({
   item,
   onClick,
+  onContextMenu,
 }: {
   item: TocItem;
   onClick: () => void;
+  onContextMenu: () => void;
 }) {
   const title = useMemo(() => {
     return (
@@ -105,6 +128,10 @@ const TocItem = memo(function TocItem({
       className="x:flex x:cursor-pointer x:gap-4"
       title={title}
       onClick={onClick}
+      onContextMenu={(e) => {
+        e.preventDefault();
+        onContextMenu();
+      }}
     >
       <div
         className={cn("x:min-h-5 x:min-w-[2px] x:rounded-full", {

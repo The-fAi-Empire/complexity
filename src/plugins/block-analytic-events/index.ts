@@ -49,7 +49,10 @@ csLoaderRegistry.register({
               break;
             }
             case "network-intercept:beaconEvent": {
-              if (data.payload.url === "https://www.perplexity.ai/rest/event") {
+              if (
+                data.payload.url ===
+                "https://www.perplexity.ai/rest/event/analytics"
+              ) {
                 stopPropagation("");
               }
               break;

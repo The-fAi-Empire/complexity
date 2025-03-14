@@ -57,7 +57,7 @@ export default function CanvasWrapper() {
     <Portal container={threadWrapper}>
       <div
         className={cn(
-          "x:fixed x:right-8 x:my-8 x:h-[calc(100dvh-var(--navbar-height)-11rem)] x:overflow-hidden x:rounded-md x:border x:border-border/50 x:bg-secondary x:text-sm x:transition-all x:animate-in x:fade-in x:slide-in-from-right",
+          "x:fixed x:right-8 x:my-8 x:h-[calc(100dvh-var(--navbar-height)-12rem)] x:overflow-hidden x:rounded-md x:border x:border-border/50 x:bg-secondary x:text-sm x:transition-all x:animate-in x:fade-in x:slide-in-from-right",
           "x:xl:sticky x:xl:top-6 x:xl:my-0 x:xl:mt-6 x:xl:h-[calc(100dvh-var(--navbar-height)-4rem)]",
           {
             "x:w-[75vw] x:xl:w-[200%]": isCanvasOpen,

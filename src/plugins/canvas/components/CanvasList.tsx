@@ -29,7 +29,7 @@ export default function CanvasList() {
               <div
                 key={index}
                 className={cn(
-                  "x:group x:flex x:w-full x:cursor-pointer x:items-center x:divide-x-2 x:divide-border/50 x:overflow-hidden x:rounded-lg x:border x:border-border/50 x:bg-secondary x:transition-all x:select-none x:hover:border-primary",
+                  "x:group x:flex x:w-full x:cursor-pointer x:items-center x:overflow-hidden x:rounded-lg x:border x:border-border/50 x:bg-secondary x:transition-all x:select-none x:hover:border-primary",
                 )}
                 onClick={onClick}
               >
@@ -44,7 +44,7 @@ export default function CanvasList() {
                     <Icon className="x:size-8" />
                   )}
                 </div>
-                <div className="x:flex x:w-full x:flex-col x:border-l x:bg-background x:px-4 x:py-2">
+                <div className="x:flex x:w-full x:flex-col x:bg-background x:px-4 x:py-2">
                   <div className="x:line-clamp-1 x:text-base x:text-foreground x:transition-all x:group-hover:text-primary">
                     {title}
                   </div>

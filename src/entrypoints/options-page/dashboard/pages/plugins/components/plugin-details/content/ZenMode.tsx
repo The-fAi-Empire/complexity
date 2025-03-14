@@ -1,4 +1,4 @@
-import { useHotkeyRecorder } from "@/components/HotkeyRecorder";
+import { useHotkeyRecorder } from "@/components/hotkey-recorder";
 import { Switch } from "@/components/ui/switch";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
 
@@ -6,7 +6,7 @@ export default function ZenModePluginDetails() {
   const { settings, mutation } = useExtensionLocalStorage();
   const defaultKeys = settings?.plugins["zenMode"].hotkey ?? [];
 
-  const { HotkeyRecorderUI } = useHotkeyRecorder({
+  const { HotkeyRecorderUi } = useHotkeyRecorder({
     defaultKeys,
     onSave: (keys) => {
       mutation.mutate((draft) => {
@@ -30,7 +30,7 @@ export default function ZenModePluginDetails() {
         <>
           <div className="x:hidden x:flex-col x:gap-2 x:md:flex">
             <div>Activation hotkey:</div>
-            <HotkeyRecorderUI />
+            <HotkeyRecorderUi />
           </div>
           <Switch
             textLabel="Persistent across reloads"
@@ -49,15 +49,6 @@ export default function ZenModePluginDetails() {
             onCheckedChange={({ checked }) => {
               mutation.mutate((draft) => {
                 draft.plugins["zenMode"].alwaysHideRelatedQuestions = checked;
-              });
-            }}
-          />
-          <Switch
-            textLabel="Always hide visual columns"
-            checked={settings?.plugins["zenMode"].alwaysHideVisualCols ?? false}
-            onCheckedChange={({ checked }) => {
-              mutation.mutate((draft) => {
-                draft.plugins["zenMode"].alwaysHideVisualCols = checked;
               });
             }}
           />

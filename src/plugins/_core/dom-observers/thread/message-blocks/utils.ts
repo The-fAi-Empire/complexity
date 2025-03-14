@@ -7,13 +7,12 @@ export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
 
   if (!$messagesContainer.length) return null;
 
-  const children = Array.from($messagesContainer[0].children).filter(
-    (child) =>
-      child.querySelector(DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL) !== null,
+  const children = $messagesContainer.find(
+    DOM_SELECTORS.THREAD.MESSAGE.WRAPPER,
   );
 
   const messageBlocks = await Promise.all(
-    children.map(async (messageBlock, i) => {
+    children.map(async (i, messageBlock) => {
       if (messageBlock == null) return null;
 
       const $wrapper = $(messageBlock as HTMLElement);
@@ -23,45 +22,22 @@ export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
         .attr("data-index", i);
 
       const parsedBlock = parseMessageBlock($wrapper);
-      const {
-        $query,
-        $queryHoverContainer,
-        $sources,
-        $answerHeading,
-        $answer,
-        $bottomBar,
-      } = parsedBlock;
+      const { $query, $queryHoverContainer, $sources, $answer, $bottomBar } =
+        parsedBlock;
 
-      const $textCol = $wrapper.find(DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL);
-      const $visualCol = $wrapper.find(DOM_SELECTORS.THREAD.MESSAGE.VISUAL_COL);
-
-      $query.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.QUERY,
-      );
+      $query.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY);
       $queryHoverContainer.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.QUERY_HOVER_CONTAINER,
+        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
       );
-      $answer.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.ANSWER,
-      );
-      $answerHeading.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.ANSWER_HEADING,
-      );
+      $answer.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.ANSWER);
       $bottomBar.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.BOTTOM_BAR,
-      );
-      $textCol.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL,
-      );
-      $visualCol.internalComponentAttr(
-        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.VISUAL_COL,
+        INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BOTTOM_BAR,
       );
 
       const nodes: MessageBlock["nodes"] = {
         $wrapper,
         $query,
         $sources,
-        $answerHeading,
         $answer,
         $queryHoverContainer,
         $bottomBar,
@@ -84,19 +60,18 @@ export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
 }
 
 function parseMessageBlock($messageBlock: JQuery<Element>) {
-  const selectors = DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD;
+  const selectors = DOM_SELECTORS.THREAD.MESSAGE;
 
   const $query = $messageBlock.find(selectors.QUERY_WRAPPER);
   const $queryHoverContainer = $query.find(selectors.QUERY_HOVER_CONTAINER);
   const $sources = $messageBlock.find(selectors.SOURCES);
-  const $answerHeading = $messageBlock.find(selectors.ANSWER_HEADING);
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
   if ($bottomBar.length) {
     requestAnimationFrame(() => {
       $(document.body).css({
-        "--message-block-bottom-bar-height": `${$bottomBar[0].offsetHeight - 1}px`,
+        "--message-block-bottom-bar-height": `${$bottomBar[0].offsetHeight}px`,
       });
     });
   }
@@ -106,7 +81,6 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
     $query,
     $queryHoverContainer,
     $sources,
-    $answerHeading,
     $answer,
     $bottomBar,
   };
@@ -125,9 +99,7 @@ function getMessageBlockStates({
 
   const isEditingQuery = $query.find("textarea").length > 0;
   const isQueryHoverContainerPresent =
-    $query.find(
-      DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD.QUERY_HOVER_CONTAINER,
-    ).length > 0;
+    $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY_HOVER_CONTAINER).length > 0;
 
   const existingReadOnlyAttr = $wrapper.attr("data-read-only");
 
@@ -155,9 +127,7 @@ function getMessageBlockContent({
 }): MessageBlock["content"] {
   const { $query } = messageBlockNodes;
 
-  const title = $query
-    .find(DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD.QUERY)
-    .text();
+  const title = $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY).text();
 
   return {
     title,

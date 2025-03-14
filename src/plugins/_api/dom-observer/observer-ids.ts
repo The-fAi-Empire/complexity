@@ -3,6 +3,7 @@ const OBSERVER_IDS = [
   "pplxCookies",
 
   "sidebar:wrapper",
+  "sidebar:wrapper:openState",
 
   "queryBoxes",
   "queryBoxes:home",

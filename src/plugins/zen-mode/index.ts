@@ -1,5 +1,4 @@
 import alwaysHideRelatedQuestionsCss from "@/plugins/zen-mode/always-hide-related-questions.css?inline";
-import alwaysHideVisualColsCss from "@/plugins/zen-mode/always-hide-visual-cols.css?inline";
 import zenModeCss from "@/plugins/zen-mode/zen-mode.css?inline";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 import { PluginsStatesService } from "@/services/plugins-states";
@@ -37,18 +36,6 @@ csLoaderRegistry.register({
 
       $(document.body).attr(
         "data-cplx-zen-mode-always-hide-related-questions",
-        "true",
-      );
-    }
-
-    if (settings?.plugins["zenMode"].alwaysHideVisualCols) {
-      insertCss({
-        css: alwaysHideVisualColsCss,
-        id: "always-hide-visual-cols",
-      });
-
-      $(document.body).attr(
-        "data-cplx-zen-mode-always-hide-visual-cols",
         "true",
       );
     }

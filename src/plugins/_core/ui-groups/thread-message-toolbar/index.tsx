@@ -5,9 +5,9 @@ import { useInsertCss } from "@/hooks/useInsertCss";
 import { useCreatePortalContainers } from "@/plugins/_core/ui-groups/thread-message-toolbar/useCreatePortalContainers";
 import BetterMessageCopyButton from "@/plugins/thread-better-message-copy-buttons";
 import hideNativeButtonsCss from "@/plugins/thread-better-message-copy-buttons/hide-native-buttons.css?inline";
-import EditQueryButton from "@/plugins/thread-better-message-toolbars/edit-query-button";
 import ThreadBetterRewriteDropdown from "@/plugins/thread-better-rewrite-dropdown";
 import hideNativeRewriteDropdownsCss from "@/plugins/thread-better-rewrite-dropdown/hide-native-rewrite-dropdowns.css?inline";
+import MessageMetrics from "@/plugins/thread-message-length/MessageMetrics";
 import ThreadMessageTtsButton from "@/plugins/thread-message-tts";
 import { PluginsStatesService } from "@/services/plugins-states";
 
@@ -46,6 +46,12 @@ const MemoizedWrapper = memo(function MemoizedWrapper({
     <div className="x:flex x:items-center x:gap-1">
       <CsUiPluginsGuard
         requiresLoggedIn
+        dependentPluginIds={["thread:showMessageLength"]}
+      >
+        <MessageMetrics messageBlockIndex={messageBlockIndex} />
+      </CsUiPluginsGuard>
+      <CsUiPluginsGuard
+        requiresLoggedIn
         dependentPluginIds={["thread:messageTts"]}
       >
         <ThreadMessageTtsButton messageBlockIndex={messageBlockIndex} />
@@ -56,14 +62,6 @@ const MemoizedWrapper = memo(function MemoizedWrapper({
         dependentPluginIds={["thread:betterRewriteDropdowns"]}
       >
         <ThreadBetterRewriteDropdown messageBlockIndex={messageBlockIndex} />
-      </CsUiPluginsGuard>
-      <CsUiPluginsGuard
-        dependentPluginIds={["thread:betterMessageToolbars"]}
-        additionalCheck={({ settings }) =>
-          settings.plugins["thread:betterMessageToolbars"].editQueryButton
-        }
-      >
-        <EditQueryButton messageBlockIndex={messageBlockIndex} />
       </CsUiPluginsGuard>
       <CsUiPluginsGuard
         dependentPluginIds={["thread:betterMessageCopyButtons"]}

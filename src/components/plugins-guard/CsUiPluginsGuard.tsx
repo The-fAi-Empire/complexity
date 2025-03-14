@@ -42,11 +42,13 @@ function CsUiPluginsGuardError({
   location,
   errorMessage,
 }: Omit<CsUiPluginsGuardProps, "children"> & { errorMessage?: string }) {
+  const [open, setOpen] = useState(true);
+
   const traces = useErrorTraces({ errorMessage, location, dependentPluginIds });
   const pluginsError = usePluginsError(dependentPluginIds);
 
   return (
-    <Dialog defaultOpen open={true}>
+    <Dialog defaultOpen open={open} onOpenChange={({ open }) => setOpen(open)}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Complexity encountered an error</DialogTitle>

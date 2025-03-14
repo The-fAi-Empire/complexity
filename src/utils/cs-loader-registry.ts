@@ -41,9 +41,6 @@ export const LOADER_IDS = [
   "plugin:thread:canvas:codeBlockPlaceholdersData",
   "plugin:thread:dragAndDropFileToUploadInThread",
   "plugin:thread:rawHeadings",
-  "plugin:thread:collapseEmptyThreadVisualCols",
-  "plugin:thread:betterMessageToolbars:explicitModelName",
-  "plugin:thread:betterMessageToolbars:messageWordsAndCharactersCount",
   "plugin:thread:customThreadContainerWidth",
 
   "plugin:spaceNavigator:networkInterceptMiddleware",
@@ -55,7 +52,6 @@ export const LOADER_IDS = [
   "plugin:queryBox:promptHistory:listeners",
   "plugin:queryBox:noFileCreationOnPaste",
   "plugin:queryBox:submitOnCtrlEnter",
-  "plugin:queryBox:fullWidthFollowUp",
 
   "plugin:home:customSlogan",
   "plugin:home:hideHomepageWidgets",

@@ -22,7 +22,6 @@
   > :last-child
   button:not([aria-label="Submit"]) {
   @apply x:min-h-8 x:min-w-8;
-  aspect-ratio: unset;
 }
 
 [data-cplx-component="query-box-pplx-components-wrapper"] {

@@ -3,6 +3,7 @@ import { LuLoaderCircle } from "react-icons/lu";
 import CopyButton from "@/components/CopyButton";
 import { Separator } from "@/components/ui/separator";
 import { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
+import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
@@ -13,6 +14,8 @@ import { ExtensionLocalStorageService } from "@/services/extension-local-storage
 import { PluginsStatesService } from "@/services/plugins-states";
 
 const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
+  const { isMobile } = useIsMobileStore();
+
   const {
     codeBlock,
     sourceMessageBlockIndex,
@@ -39,6 +42,7 @@ const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
 
   const isSticky =
     fineGrainedSettings?.stickyHeader ?? globalSettings.stickyHeader;
+
   const isBottomBarSticky =
     PluginsStatesService.getEnableStatesCachedSync()[
       "thread:betterMessageToolbars"
@@ -51,10 +55,14 @@ const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
       className={cn(
         "x:flex x:items-center x:justify-between x:rounded-t-md x:border-b x:border-border/50 x:bg-secondary x:p-2 x:px-4 x:pb-2 x:text-muted-foreground",
         {
-          "x:sticky": isSticky,
-          "x:top-0": isSticky && (isMessageBlockInFlight || !isBottomBarSticky),
-          "x:top-[var(--message-block-bottom-bar-height)]":
-            isSticky && !isMessageBlockInFlight && isBottomBarSticky,
+          "x:sticky x:top-0": isSticky,
+          "x:top-(--message-block-sticky-header-height)":
+            isSticky && !isBottomBarSticky,
+          "x:top-(--message-block-bottom-bar-height)":
+            isSticky &&
+            isBottomBarSticky &&
+            !isMessageBlockInFlight &&
+            !isMobile,
         },
       )}
     >

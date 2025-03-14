@@ -17,6 +17,7 @@ export class DomObserver {
 
   private static instances = new Map<ObserverId, DomObserverInstance>();
   private static isLogging = false;
+  private static isPaused = false; // Track the global pause state
 
   private constructor() {
     const isEnergySavingMode =
@@ -230,6 +231,22 @@ export class DomObserver {
     }
   }
 
+  public static initializeKeyboardShortcut(): void {
+    document.addEventListener("keydown", (event) => {
+      if (event.ctrlKey && event.shiftKey && event.key === "Q") {
+        if (this.isPaused) {
+          this.resumeAll();
+          this.isPaused = false;
+          alert("Resumed all observers");
+        } else {
+          this.pauseAll();
+          this.isPaused = true;
+          alert("Paused all observers");
+        }
+      }
+    });
+  }
+
   // Public API
   public static create(
     id: ObserverId,
@@ -259,6 +276,7 @@ export class DomObserver {
 
   public static pauseAll(): void {
     this.instances.forEach((_, id) => this.pause(id));
+    this.isPaused = true;
   }
 
   public static resume(id: ObserverId): Result<void> {
@@ -267,6 +285,7 @@ export class DomObserver {
 
   public static resumeAll(): void {
     this.instances.forEach((_, id) => this.resume(id));
+    this.isPaused = false;
   }
 
   public static enableLogging(): void {

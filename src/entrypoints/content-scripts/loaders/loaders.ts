@@ -31,14 +31,10 @@ import "@/plugins/prompt-history/network-intercept-middlewares";
 import "@/plugins/prompt-history/listeners";
 import "@/plugins/no-file-creation-on-paste";
 import "@/plugins/query-box-submit-on-ctrl-enter";
-import "@/plugins/full-width-follow-up-query-box";
 
 // Thread Plugins
 import "@/plugins/canvas/store";
 import "@/plugins/drag-n-drop-file-to-upload-in-thread";
-import "@/plugins/collapse-empty-thread-visual-cols";
-import "@/plugins/thread-better-message-toolbars/explicit-model-name";
-import "@/plugins/thread-better-message-toolbars/message-words-and-characters-count";
 import "@/plugins/custom-thread-container-width";
 import "@/plugins/thread-raw-headings";
 

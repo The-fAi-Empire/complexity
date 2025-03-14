@@ -44,13 +44,13 @@ export default defineConfig(() => ({
     },
   },
   plugins: [
-    react(),
-    tailwindcss(),
     crx({
       manifest:
         APP_CONFIG.BROWSER === "chrome" ? chromeManifest : firefoxManifest,
       browser: APP_CONFIG.BROWSER,
     }),
+    react(),
+    tailwindcss(),
     Unimport.vite(unimportConfig),
     vitePluginReloadOnDynamicallyInjectedStyleChanges({
       excludeString: ["@/assets/index.css", "@/assets/cs.css"],

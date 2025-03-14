@@ -4,7 +4,10 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
+import {
+  spaRouteChangeCompleteSubscribe,
+  spaRouterStoreSubscribe,
+} from "@/plugins/_api/spa-router/listeners";
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import {
@@ -242,7 +245,7 @@ const handleCanvasBlockClick = (location: CodeBlockLocation) => {
     draft.selectedCodeBlockLocation = location;
     draft.state = "preview";
 
-    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
+    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
     scrollToElement($(selector), -100);
   });
 };
@@ -259,16 +262,20 @@ const emitResizeEvent = () => {
 };
 
 const closeOnRouteChange = () => {
-  spaRouteChangeCompleteSubscribe((url, prevUrl) => {
-    if (
-      prevUrl === url ||
-      parseUrl(prevUrl).queryParams.get("q") != null ||
-      parseUrl(url).queryParams.get("q") != null
-    )
-      return;
+  spaRouterStoreSubscribe(
+    (store) => ({ state: store.state, url: store.url }),
+    ({ state, url }, { url: prevUrl }) => {
+      if (state !== "complete" && url === prevUrl) return;
 
-    canvasStore.getState().close();
-  });
+      if (
+        parseUrl(prevUrl).queryParams.get("q") != null ||
+        parseUrl(url).queryParams.get("q") != null
+      )
+        return;
+
+      canvasStore.getState().close();
+    },
+  );
 };
 
 export const useCanvasStore = canvasStore;

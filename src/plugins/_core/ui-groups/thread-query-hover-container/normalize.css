@@ -1,4 +1,4 @@
-@reference "../../assets/index.css";
+@reference "../../../../assets/index.css";
 
 [data-cplx-component="message-block-query-hover-container"] {
   width: max-content;

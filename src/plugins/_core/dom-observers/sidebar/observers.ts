@@ -1,5 +1,6 @@
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { sidebarDomObserverStore } from "@/plugins/_core/dom-observers/sidebar/store";
 import {
   findLibraryButtonTriggerButtonsWrapper,
   findLibraryButtonWrapper,
@@ -20,7 +21,9 @@ csLoaderRegistry.register({
     )
       return;
 
-    observeSidebar();
+    $(() => {
+      observeSidebar();
+    });
   },
 });
 
@@ -52,4 +55,31 @@ async function observeSidebar() {
         },
       ]),
   });
+
+  sidebarDomObserverStore.subscribe(
+    (store) => store.$wrapper,
+    ($wrapper) => {
+      DomObserver.destroy("sidebar:wrapper:openState");
+
+      if ($wrapper == null) return;
+
+      DomObserver.create("sidebar:wrapper:openState", {
+        target: $wrapper[0],
+        config: {
+          childList: false,
+          subtree: false,
+          attributes: true,
+          attributeFilter: ["data-state"],
+        },
+        onMutation: () => {
+          setTimeout(() => {
+            window.dispatchEvent(new Event("resize"));
+          }, 300);
+        },
+      });
+    },
+    {
+      equalityFn: deepEqual,
+    },
+  );
 }

@@ -24,38 +24,9 @@ body[data-cplx-zen-mode="true"] {
   }
 
   &[location="thread"] {
-    [data-cplx-component="thread-navbar"] {
-      > div > div:last-child {
-        /* Convert to page button */
-        > div:first-child > button {
-          display: none;
-        }
-
-        /* share button */
-        > div:last-child {
-          display: none;
-        }
-      }
-    }
-
     [data-cplx-component="message-block"] {
       /* Related follow-ups section */
-      .pb-32 > :last-child > .mt-xs.pt-lg {
-        display: none;
-      }
-    }
-
-    [data-cplx-component="message-block"]:not(
-        :has(
-          .isolate.col-span-4[data-cplx-component="message-block-visual-col"]
-            svg[data-icon="sources"]
-        )
-      ) {
-      .isolate.col-span-8[data-cplx-component="message-block-text-col"] {
-        grid-column: span 12 / span 12;
-      }
-
-      .isolate.col-span-4[data-cplx-component="message-block-visual-col"] {
+      .pb-32 > :last-child > div > :last-child > [class=""]:last-child {
         display: none;
       }
     }

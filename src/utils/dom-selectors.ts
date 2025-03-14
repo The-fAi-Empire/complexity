@@ -23,49 +23,35 @@ export const DOM_SELECTORS = {
     WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
     /** The container that wraps all messages */
     CONTAINER: {
-      /** Normal thread*/
       NORMAL:
         ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
-      /** Branched thread */
       BRANCHED:
         ".sticky.left-0.right-0 + .scrollable-container > div > div > div.relative > div:last-child > div:first-child",
     },
     MESSAGE: {
-      WRAPPER: ".grid-cols-12",
-      TEXT_COL: ".isolate.col-span-8",
-      /** Columns that contain images, videos, image gen popover */
-      VISUAL_COL: ".isolate.col-span-4",
-      TEXT_COL_CHILD: {
-        /** The query box */
-        QUERY_WRAPPER: `.isolate.col-span-8>div:first-child`,
-        QUERY: ".group\\/query",
-        QUERY_HOVER_CONTAINER:
-          ".absolute.bottom-0.right-0:not(.pointer-events-none)",
-        QUERY_HOVER_CONTAINER_CHILD: {
-          EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
-        },
-        EDIT_TEXT_AREA: "textarea[placeholder]",
-        /** The answer heading */
-        ANSWER_HEADING:
-          ".flex.w-full.items-center.justify-between:has(svg.transform-gpu)",
-        /** The sources heading */
-        SOURCES: ".grid.grid-flow-col.md\\:grid-cols-4",
-        /** The answer wrapper */
-        ANSWER: ".mb-md > .relative.default.font-sans.text-base",
-        /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
-        BOTTOM_BAR: ".mt-sm.flex.items-center.justify-between",
-        BOTTOM_BAR_CHILD: {
-          REWRITE_BUTTON: "button:has(svg.tabler-icon-repeat)",
-          COPY_BUTTON: 'button[aria-label="Copy"]',
-          THUMBS_DOWN_BUTTON: "button:has(svg.tabler-icon-thumb-down)",
-          MISC_BUTTON: "button:has(svg.tabler-icon-dots)",
-        },
+      WRAPPER: ".dark\\:divide-borderMainDark\\/50:has(>.isolate.mx-auto)",
+      QUERY_WRAPPER: ".isolate.mx-auto > .max-w-threadContentWidth:first-child",
+      QUERY: ".group\\/query",
+      QUERY_HOVER_CONTAINER:
+        ".absolute.bottom-0.right-0:not(.pointer-events-none)",
+      QUERY_HOVER_CONTAINER_CHILD: {
+        EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
       },
-      VISUAL_COL_CHILD: {
-        IMAGE_GEN: {
-          OPTIONS_GRID:
-            "div.grid.grid-cols-2.gap-sm.border-borderMain\\/50.ring-borderMain\\/50.divide-borderMain\\/50.dark\\:divide-borderMainDark\\/50.dark\\:ring-borderMainDark\\/50.dark\\:border-borderMainDark\\/50.bg-transparent",
-        },
+      STICKY_HEADER: "div.md\\:sticky > .max-w-threadContentWidth",
+      SOURCES: '[class*="md:grid-cols-"].grid.grid-flow-col',
+      ANSWER: ".gap-y-md.flex.flex-col > .relative.font-sans.text-base",
+      /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
+      BOTTOM_BAR:
+        ".gap-y-md.flex.flex-col > .flex.items-center.justify-between",
+      BOTTOM_BAR_CHILD: {
+        REWRITE_BUTTON: "button:has(svg.tabler-icon-repeat)",
+        COPY_BUTTON: 'button[aria-label="Copy"]',
+        THUMBS_DOWN_BUTTON: "button:has(svg.tabler-icon-thumb-down)",
+        MISC_BUTTON: "button:has(svg.tabler-icon-dots)",
+      },
+      IMAGE_GEN: {
+        OPTIONS_GRID:
+          "div.grid.grid-cols-2.gap-sm.border-borderMain\\/50.ring-borderMain\\/50.divide-borderMain\\/50.dark\\:divide-borderMainDark\\/50.dark\\:ring-borderMainDark\\/50.dark\\:border-borderMainDark\\/50.bg-transparent",
       },
       CODE_BLOCK: {
         /** The outermost container that wraps the pre & code block */
@@ -156,20 +142,12 @@ export const INTERNAL_ATTRIBUTES = {
     },
     MESSAGE: {
       BLOCK: "message-block",
-      TEXT_COL: "message-block-text-col",
-      VISUAL_COL: "message-block-visual-col",
-      TEXT_COL_CHILD: {
-        QUERY: "message-block-query",
-        QUERY_HOVER_CONTAINER: "message-block-query-hover-container",
-        ANSWER: "message-block-answer",
-        ANSWER_HEADING: "message-block-answer-heading",
-        ANSWER_HEADING_MODEL_NAME: "message-block-answer-heading-model-name",
-        ANSWER_HEADING_WORDS_AND_CHARACTERS_COUNT:
-          "message-block-answer-heading-words-and-characters-count",
-        CODE_BLOCK: "message-block-code-block",
-        MIRRORED_CODE_BLOCK: "mirrored-code-block",
-        BOTTOM_BAR: "message-block-bottom-bar",
-      },
+      QUERY: "message-block-query",
+      QUERY_HOVER_CONTAINER: "message-block-query-hover-container",
+      ANSWER: "message-block-answer",
+      CODE_BLOCK: "message-block-code-block",
+      MIRRORED_CODE_BLOCK: "mirrored-code-block",
+      BOTTOM_BAR: "message-block-bottom-bar",
     },
     ATTACHMENT_DROP_ZONE: "drag-n-drop-file-to-upload",
   },

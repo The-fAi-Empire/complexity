@@ -1,4 +1,4 @@
-import { useHotkeyRecorder } from "@/components/HotkeyRecorder";
+import { useHotkeyRecorder } from "@/components/hotkey-recorder";
 import { Image } from "@/components/ui/image";
 import { Switch } from "@/components/ui/switch";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
@@ -7,7 +7,7 @@ export default function CommandMenuPluginDetails() {
   const { settings, mutation } = useExtensionLocalStorage();
   const defaultKeys = settings?.plugins["commandMenu"].hotkey ?? [];
 
-  const { HotkeyRecorderUI } = useHotkeyRecorder({
+  const { HotkeyRecorderUi } = useHotkeyRecorder({
     defaultKeys,
     onSave: (keys) => {
       mutation.mutate((draft) => {
@@ -37,7 +37,7 @@ export default function CommandMenuPluginDetails() {
         <>
           <div className="x:hidden x:flex-col x:gap-2 x:md:flex">
             <div>Activation hotkey:</div>
-            <HotkeyRecorderUI />
+            <HotkeyRecorderUi />
           </div>
           <div className="x:text-sm x:text-muted-foreground">
             Side note: Thread search is subject to rate limiting by Perplexity

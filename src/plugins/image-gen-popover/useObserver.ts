@@ -14,7 +14,7 @@ function findOptionsGridHeader(popper: HTMLElement | null) {
   if (!popper) return null;
 
   const $header = $(popper)
-    .find(DOM_SELECTORS.THREAD.MESSAGE.VISUAL_COL_CHILD.IMAGE_GEN.OPTIONS_GRID)
+    .find(DOM_SELECTORS.THREAD.MESSAGE.IMAGE_GEN.OPTIONS_GRID)
     .prev();
 
   if (!$header.length) return null;

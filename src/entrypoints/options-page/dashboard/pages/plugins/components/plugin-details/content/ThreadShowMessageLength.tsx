@@ -2,9 +2,9 @@ import { Image } from "@/components/ui/image";
 import { Switch } from "@/components/ui/switch";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
 
-export default function FullWidthFollowUpQueryBoxPluginDetails() {
+export default function ThreadShowMessageLengthPluginDetails() {
   const { settings, mutation } = useExtensionLocalStorage();
-  const pluginSettings = settings?.plugins["queryBox:fullWidthFollowUp"];
+  const pluginSettings = settings?.plugins["thread:showMessageLength"];
 
   if (!settings) return null;
 
@@ -15,15 +15,27 @@ export default function FullWidthFollowUpQueryBoxPluginDetails() {
         checked={pluginSettings?.enabled ?? false}
         onCheckedChange={({ checked }) => {
           mutation.mutate((draft) => {
-            draft.plugins["queryBox:fullWidthFollowUp"].enabled = checked;
+            draft.plugins["thread:showMessageLength"].enabled = checked;
           });
         }}
       />
 
+      {settings.plugins["thread:showMessageLength"].enabled && (
+        <Switch
+          textLabel="Show (estimated) tokens"
+          checked={pluginSettings?.showTokens ?? false}
+          onCheckedChange={({ checked }) => {
+            mutation.mutate((draft) => {
+              draft.plugins["thread:showMessageLength"].showTokens = checked;
+            });
+          }}
+        />
+      )}
+
       <div className="x:mx-auto x:w-full x:max-w-[700px]">
         <Image
-          src="https://i.imgur.com/lFqauaw.png"
-          alt="full-width-follow-up-query-box"
+          src="https://i.imgur.com/1aNm9q0.png"
+          alt="thread-show-message-length"
           className="x:w-full"
         />
       </div>

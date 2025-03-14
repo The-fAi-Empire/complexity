@@ -21,10 +21,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
     const $portalContainer = $("<div>").internalComponentAttr(OBSERVER_ID);
 
     messageBlock.nodes.$bottomBar
-      .find(
-        DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD.BOTTOM_BAR_CHILD
-          .COPY_BUTTON,
-      )
+      .find(DOM_SELECTORS.THREAD.MESSAGE.BOTTOM_BAR_CHILD.COPY_BUTTON)
       .before($portalContainer);
 
     return $portalContainer[0];

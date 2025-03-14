@@ -14,7 +14,6 @@ export const PluginsSchema = z.object({
     respectDefaultSpaceModel: z.boolean(),
     changeTimezone: z.boolean(),
   }),
-  "queryBox:fullWidthFollowUp": PluginSettingsSchema,
   "queryBox:slashCommandMenu": PluginSettingsSchema.extend({
     showTriggerButton: z.boolean(),
   }),
@@ -32,15 +31,11 @@ export const PluginsSchema = z.object({
   spaceNavigator: PluginSettingsSchema,
   "sidebar:toggleableRecentThreads": PluginSettingsSchema,
   "thread:toc": PluginSettingsSchema,
-  "thread:rawHeadings": PluginSettingsSchema,
   "thread:betterMessageToolbars": PluginSettingsSchema.extend({
     sticky: z.boolean(),
-    editQueryButton: z.boolean(),
-    explicitModelName: z.boolean(),
     hideUnnecessaryButtons: z.boolean(),
-    wordsAndCharactersCount: z.boolean(),
-    tokensCount: z.boolean(),
   }),
+  "thread:rawHeadings": PluginSettingsSchema,
   "thread:messageTts": PluginSettingsSchema.extend({
     voice: TtsVoiceSchema,
   }),
@@ -51,8 +46,10 @@ export const PluginsSchema = z.object({
   "thread:canvas": PluginSettingsSchema,
   "thread:exportThread": PluginSettingsSchema,
   "thread:betterMessageCopyButtons": PluginSettingsSchema,
+  "thread:showMessageLength": PluginSettingsSchema.extend({
+    showTokens: z.boolean(),
+  }),
   "thread:dragAndDropFileToUploadInThread": PluginSettingsSchema,
-  "thread:collapseEmptyThreadVisualCols": PluginSettingsSchema,
   imageGenModelSelector: PluginSettingsSchema,
   onCloudflareTimeoutAutoReload: PluginSettingsSchema.extend({
     behavior: z.enum(["reload", "warn-only"]),
@@ -70,7 +67,6 @@ export const PluginsSchema = z.object({
     persistent: z.boolean(),
     lastState: z.boolean(),
     alwaysHideRelatedQuestions: z.boolean(),
-    alwaysHideVisualCols: z.boolean(),
     hotkey: z.array(z.string()),
   }),
 });

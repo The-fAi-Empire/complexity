@@ -14,12 +14,7 @@ export function useInsertCss({
   const cleanupRef = useRef<CleanupFunction>(null);
 
   useEffect(() => {
-    const cleanup = () => {
-      cleanupRef.current?.();
-    };
-
     if (!inject) {
-      cleanup();
       return;
     }
 
@@ -27,7 +22,11 @@ export function useInsertCss({
       css,
       id,
     });
-
-    return cleanup;
   }, [css, inject, id]);
+
+  useEffect(() => {
+    return () => {
+      cleanupRef.current?.();
+    };
+  }, []);
 }

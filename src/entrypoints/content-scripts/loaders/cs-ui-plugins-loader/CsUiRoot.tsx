@@ -11,6 +11,9 @@ import { PostUpdateReleaseNotesDialog } from "@/components/PostUpdateReleaseNote
 // import { SponsorHomeLink } from "@/components/SponsorHomeLink";
 import { Toaster } from "@/components/Toaster";
 
+const BetterMessageToolbarsWrapper = lazy(
+  () => import("@/plugins/thread-better-message-toolbars"),
+);
 const BetterCodeBlocksWrapper = lazy(
   () => import("@/plugins/thread-better-code-blocks"),
 );
@@ -19,9 +22,6 @@ const ThreadQueryHoverContainerExtraButtonsWrapper = lazy(
 );
 const ThreadMessageToolbarExtraButtonsWrapper = lazy(
   () => import("@/plugins/_core/ui-groups/thread-message-toolbar"),
-);
-const BetterMessageToolbarsWrapper = lazy(
-  () => import("@/plugins/thread-better-message-toolbars"),
 );
 const CanvasWrapper = lazy(() => import("@/plugins/canvas"));
 const CommandMenuWrapper = lazy(() => import("@/plugins/command-menu"));
@@ -109,12 +109,13 @@ function ThreadComponents() {
       >
         <ImageGenModelSelectorWrapper />
       </CsUiPluginsGuard>
-      <CsUiPluginsGuard desktopOnly dependentPluginIds={["thread:canvas"]}>
-        <CanvasWrapper />
-      </CsUiPluginsGuard>
 
       <CsUiPluginsGuard dependentPluginIds={["thread:betterMessageToolbars"]}>
         <BetterMessageToolbarsWrapper />
+      </CsUiPluginsGuard>
+
+      <CsUiPluginsGuard desktopOnly dependentPluginIds={["thread:canvas"]}>
+        <CanvasWrapper />
       </CsUiPluginsGuard>
 
       <CsUiPluginsGuard dependentPluginIds={["thread:betterCodeBlocks"]}>

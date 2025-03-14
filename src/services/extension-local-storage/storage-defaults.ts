@@ -12,9 +12,6 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       respectDefaultSpaceModel: false,
       changeTimezone: false,
     },
-    "queryBox:fullWidthFollowUp": {
-      enabled: false,
-    },
     "queryBox:slashCommandMenu": {
       enabled: false,
       showTriggerButton: false,
@@ -48,17 +45,13 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
     "thread:toc": {
       enabled: false,
     },
-    "thread:rawHeadings": {
-      enabled: false,
-    },
     "thread:betterMessageToolbars": {
       enabled: false,
       sticky: true,
-      editQueryButton: false,
-      explicitModelName: true,
-      hideUnnecessaryButtons: false,
-      wordsAndCharactersCount: true,
-      tokensCount: false,
+      hideUnnecessaryButtons: true,
+    },
+    "thread:rawHeadings": {
+      enabled: false,
     },
     "thread:messageTts": {
       enabled: false,
@@ -91,10 +84,11 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
     "thread:betterMessageCopyButtons": {
       enabled: false,
     },
-    "thread:dragAndDropFileToUploadInThread": {
+    "thread:showMessageLength": {
       enabled: false,
+      showTokens: false,
     },
-    "thread:collapseEmptyThreadVisualCols": {
+    "thread:dragAndDropFileToUploadInThread": {
       enabled: false,
     },
     "thread:customThreadContainerWidth": {
@@ -123,7 +117,6 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
       persistent: false,
       lastState: false,
       alwaysHideRelatedQuestions: false,
-      alwaysHideVisualCols: false,
       hotkey: [getPlatform() === "mac" ? Key.Meta : Key.Control, Key.Alt, "z"],
     },
     "home:hideHomepageWidgets": {

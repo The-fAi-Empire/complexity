@@ -24,7 +24,7 @@ export function shouldEnableUiGroup({ uiGroup }: { uiGroup: UiGroup }) {
       (dependency) => dependency.startsWith(uiGroup),
     );
 
-    return (
+    return !!(
       isPluginEnabled &&
       (haveUiGroupAsDirectDependency || haveUiGroupAsChildDependency)
     );

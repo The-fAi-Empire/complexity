@@ -2,6 +2,8 @@ body[data-cplx-zen-mode-always-hide-related-questions="true"][location="thread"]
   [data-cplx-component="message-block"]
   .pb-32
   > :last-child
-  > .mt-xs.pt-lg {
+  > div
+  > :last-child
+  > [class=""]:last-child {
   display: none;
 }

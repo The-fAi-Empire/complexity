@@ -15,7 +15,6 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "tailwindCSS.experimental.configFile": "src/assets/index.css",
   "files.exclude": {
     "**/.DS_Store": true,
     "**/.git": true,
@@ -60,6 +59,7 @@
     ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
     ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
   ],
+  "tailwindCSS.experimental.configFile": "src/assets/index.css",
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   // "typescript.tsserver.experimental.enableProjectDiagnostics": true,

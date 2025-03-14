@@ -1,22 +1,22 @@
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { Portal } from "@/components/ui/portal";
+import { useInsertCss } from "@/hooks/useInsertCss";
+import normalizeCss from "@/plugins/_core/ui-groups/thread-query-hover-container/normalize.css?inline";
 import { useCreatePortalContainers } from "@/plugins/_core/ui-groups/thread-query-hover-container/useCreatePortalContainers";
-import QueryWordsAndCharactersCount from "@/plugins/thread-better-message-toolbars/query-words-and-characters-count";
-
+import QueryMetrics from "@/plugins/thread-message-length/QueryMetrics";
 export default function ThreadQueryHoverContainerExtraButtonsWrapper() {
   const portalContainers = useCreatePortalContainers();
 
-  return portalContainers.map((portalContainer, index) => (
-    <Portal key={index} container={portalContainer as HTMLElement}>
+  useInsertCss({
+    css: normalizeCss,
+    id: "thread-query-hover-container-normalize",
+  });
+
+  return portalContainers.map((portalContainer, messageBlockIndex) => (
+    <Portal key={messageBlockIndex} container={portalContainer as HTMLElement}>
       <div className="x:flex x:h-full x:items-center">
-        <CsUiPluginsGuard
-          dependentPluginIds={["thread:betterMessageToolbars"]}
-          additionalCheck={({ settings }) =>
-            settings.plugins["thread:betterMessageToolbars"]
-              .wordsAndCharactersCount
-          }
-        >
-          <QueryWordsAndCharactersCount messageBlockIndex={index} />
+        <CsUiPluginsGuard dependentPluginIds={["thread:showMessageLength"]}>
+          <QueryMetrics messageBlockIndex={messageBlockIndex} />
           <Divider />
         </CsUiPluginsGuard>
       </div>

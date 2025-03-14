@@ -26,23 +26,23 @@ export default function SlashCommandMenuWrapper({
     anchor,
   });
 
-  if (!anchor || !document.contains(anchor) || !isActive) return null;
-
   useEffect(() => {
-    $(anchor)
-      .find(">div>div")
-      .toggleClass(
-        cn({
-          "x:!rounded-t-none":
-            (popover.getContentProps() as any)?.["data-placement"] ===
-            "top-start",
-          "x:!rounded-b-none":
-            (popover.getContentProps() as any)?.["data-placement"] ===
-            "bottom-start",
-        }),
-        isOpen,
-      );
+    if (!anchor) return;
+
+    $(anchor).toggleClass(
+      cn({
+        "x:[&>div>div]:!rounded-t-none":
+          (popover.getContentProps() as any)?.["data-placement"] ===
+          "top-start",
+        "x:[&>div>div]:!rounded-b-none":
+          (popover.getContentProps() as any)?.["data-placement"] ===
+          "bottom-start",
+      }),
+      isOpen,
+    );
   }, [isOpen, anchor, popover]);
+
+  if (!anchor || !document.contains(anchor) || !isActive) return null;
 
   return (
     <PopoverRootProvider value={popover} unmountOnExit={true} lazyMount={true}>

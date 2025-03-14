@@ -46,37 +46,6 @@ export default function BetterThreadMessageToolbarsPluginDetails() {
             className="x:items-start"
             textLabel={
               <div>
-                <div>Edit Query Button</div>
-                <div className="x:text-sm x:text-muted-foreground">
-                  Add a button to edit the query
-                </div>
-              </div>
-            }
-            checked={
-              settings?.plugins["thread:betterMessageToolbars"].editQueryButton
-            }
-            onCheckedChange={handleCheckedChange("editQueryButton")}
-          />
-          <Switch
-            className="x:items-start"
-            textLabel={
-              <div>
-                <div>Explicit Model Name</div>
-                <div className="x:text-sm x:text-muted-foreground">
-                  Show the model name without hovering
-                </div>
-              </div>
-            }
-            checked={
-              settings?.plugins["thread:betterMessageToolbars"]
-                .explicitModelName
-            }
-            onCheckedChange={handleCheckedChange("explicitModelName")}
-          />
-          <Switch
-            className="x:items-start"
-            textLabel={
-              <div>
                 <div>Hide Unnecessary Buttons</div>
                 <div className="x:text-sm x:text-muted-foreground">
                   Hide Thumbs Up/Down buttons
@@ -89,41 +58,6 @@ export default function BetterThreadMessageToolbarsPluginDetails() {
             }
             onCheckedChange={handleCheckedChange("hideUnnecessaryButtons")}
           />
-          <Switch
-            className="x:items-start"
-            textLabel={
-              <div>
-                <div>Word and Character Count</div>
-                <div className="x:text-sm x:text-muted-foreground">
-                  Show words and characters count
-                </div>
-              </div>
-            }
-            checked={
-              settings?.plugins["thread:betterMessageToolbars"]
-                .wordsAndCharactersCount
-            }
-            onCheckedChange={handleCheckedChange("wordsAndCharactersCount")}
-          />
-          {settings.plugins["thread:betterMessageToolbars"]
-            .wordsAndCharactersCount && (
-            <Switch
-              className="x:items-start"
-              textLabel={
-                <div>
-                  <div>Estimated Token Count</div>
-                  <div className="x:text-sm x:text-muted-foreground">
-                    Tokens are calculated by dividing visible characters by 4
-                    and do NOT include web sources/attachments
-                  </div>
-                </div>
-              }
-              checked={
-                settings?.plugins["thread:betterMessageToolbars"].tokensCount
-              }
-              onCheckedChange={handleCheckedChange("tokensCount")}
-            />
-          )}
         </div>
       )}
       <div className="x:mx-auto x:w-full x:max-w-[700px]">

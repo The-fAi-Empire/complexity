@@ -19,5 +19,6 @@ csLoaderRegistry.register({
     if (value < 1100) return;
 
     $(document.body).css("--thread-width", `${value}px`);
+    $(document.body).css("--thread-content-width", `${value}px`);
   },
 });

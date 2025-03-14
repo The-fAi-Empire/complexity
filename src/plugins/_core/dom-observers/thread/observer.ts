@@ -3,10 +3,11 @@ import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_api/spa-router/listeners";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import {
-  findOverflowMenuButtonWrapper,
+  findNavbarOverflowMenuButtonWrapper,
   findNavbar,
   findPopper,
   findWrapper,
+  findMessageStickyHeaderHeight,
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
@@ -58,8 +59,12 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
           callback: findPopper,
         },
         {
-          id: "thread:navbar:bookmarkButton",
-          callback: findOverflowMenuButtonWrapper,
+          id: "thread:navbar:navbarOverflowMenuButton",
+          callback: findNavbarOverflowMenuButtonWrapper,
+        },
+        {
+          id: "thread:messageStickyHeaderHeight",
+          callback: findMessageStickyHeaderHeight,
         },
       ]);
     },

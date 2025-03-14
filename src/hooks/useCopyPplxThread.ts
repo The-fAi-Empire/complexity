@@ -109,7 +109,7 @@ async function copyMessageWithCitations({
     if (!$bottomBar || !$bottomBar.length) return;
 
     const $copyButton = $bottomBar.find(
-      DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD.BOTTOM_BAR_CHILD.COPY_BUTTON,
+      DOM_SELECTORS.THREAD.MESSAGE.BOTTOM_BAR_CHILD.COPY_BUTTON,
     );
 
     if (!$copyButton.length) return;

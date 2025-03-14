@@ -35,14 +35,18 @@ export function usePanelPosition(): UsePanelPosition | null {
     const threadWrapperOffset = $firstChild.offset();
     if (!threadWrapperOffset) return null;
 
-    const stickyHeaderHeight = UiUtils.getStickyNavbar().height();
+    const stickyHeaderHeight = UiUtils.getStickyNavbar()[0].offsetHeight;
     if (stickyHeaderHeight == null) return null;
 
     let threadWrapperWidth = 0;
     let anchorLeft = threadWrapperOffset.left;
 
     $children.each((_, child) => {
-      if (child.classList.contains("fixed")) return;
+      if (
+        child.classList.contains("fixed") ||
+        child.id === "thread-toc-container"
+      )
+        return;
       const offset = $(child).offset();
       if (offset == null) return;
       anchorLeft = offset.left;

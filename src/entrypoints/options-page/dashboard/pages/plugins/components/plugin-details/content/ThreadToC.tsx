@@ -9,7 +9,10 @@ export default function ThreadToCPluginDetails() {
   if (!settings) return null;
 
   return (
-    <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
+    <div className="x:flex x:w-full x:flex-col x:gap-4">
+      <div className="x:w-full x:text-foreground">
+        Note: Right-click on a ToC item to scroll to the bottom of the message.
+      </div>
       <Switch
         textLabel="Enable"
         checked={pluginSettings?.enabled ?? false}
@@ -24,7 +27,7 @@ export default function ThreadToCPluginDetails() {
         <Image
           src="https://i.imgur.com/LpC4yZ8.png"
           alt="thread-toc"
-          className="x:w-full"
+          className="x:mx-auto x:w-full x:max-w-lg"
         />
       </div>
     </div>

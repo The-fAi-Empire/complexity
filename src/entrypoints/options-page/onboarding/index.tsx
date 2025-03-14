@@ -125,12 +125,15 @@ function FirstStep() {
   return (
     <div className="x:my-8 x:flex x:flex-col x:items-center x:justify-center x:space-y-8 x:md:my-16 x:md:space-y-12">
       <H1 className="x:text-center x:text-balance">
-        Make the most of your Perplexity AI
+        Meet the better version of Perplexity AI
       </H1>
       <div className="x:space-y-8 x:text-center x:md:space-y-12">
         <div className="x:relative">
-          <div className="x:group before:x:-translate-x-1/2 after:x:-z-20 x:after:bg-gradient-conic x:relative x:z-0 x:mt-8 x:flex x:flex-col x:place-items-center x:transition-all x:before:absolute x:before:h-[300px] x:before:w-full x:before:rounded-full x:before:bg-gradient-to-br x:before:from-transparent x:before:to-primary x:before:opacity-10 x:before:blur-2xl x:before:duration-1000 x:before:ease-in-out x:before:content-[''] x:before:animate-in x:before:fade-in x:before:zoom-in-0 x:after:absolute x:after:h-[180px] x:after:w-[240px] x:after:translate-x-1/3 x:after:from-primary x:after:via-primary x:after:opacity-40 x:after:blur-2xl x:after:duration-1000 x:after:ease-in-out x:after:content-[''] x:after:animate-in x:after:fade-in x:after:zoom-in-0 x:sm:before:w-[560px] x:md:mt-12 x:md:before:h-[400px] x:md:after:h-[240px] x:md:after:w-[320px] x:lg:mt-0 x:lg:mb-0 x:before:lg:h-[480px]">
-            <Cplx className="x:mx-auto x:size-32 x:fill-foreground x:text-primary x:md:size-48" />
+          <div className="x:group x:relative x:z-0 x:mt-8 x:flex x:flex-col x:place-items-center x:transition-all x:before:absolute x:before:h-[300px] x:before:w-full x:before:-translate-x-1/2 x:before:rounded-full x:before:bg-gradient-to-br x:before:from-transparent x:before:to-primary x:before:opacity-10 x:before:blur-2xl x:before:duration-1000 x:before:ease-in-out x:before:content-[''] x:before:animate-in x:before:fade-in x:before:zoom-in-0 x:after:absolute x:after:-z-20 x:after:h-[180px] x:after:w-[240px] x:after:translate-x-1/3 x:after:bg-conic-180 x:after:from-primary x:after:via-primary x:after:opacity-40 x:after:blur-2xl x:after:duration-1000 x:after:ease-in-out x:after:content-[''] x:after:animate-in x:after:fade-in x:after:zoom-in-0 x:sm:before:w-[560px] x:md:mt-12 x:md:before:h-[400px] x:md:after:h-[240px] x:md:after:w-[320px] x:lg:mt-0 x:lg:mb-0 x:before:lg:h-[480px]">
+            <Cplx
+              className="x:mx-auto x:size-32 x:fill-foreground x:md:size-48"
+              primary="var(--primary)"
+            />
           </div>
         </div>
         <div className="x:relative x:z-10">

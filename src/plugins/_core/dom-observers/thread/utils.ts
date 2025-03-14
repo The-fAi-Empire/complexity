@@ -26,7 +26,7 @@ export function findNavbar() {
   });
 }
 
-export function findOverflowMenuButtonWrapper() {
+export function findNavbarOverflowMenuButtonWrapper() {
   const $navbar = threadDomObserverStore.getState().$navbar;
 
   if (!$navbar || !$navbar.length) return;
@@ -88,5 +88,26 @@ export function findPopper() {
 
   threadDomObserverStore.setState({
     $popper,
+  });
+}
+
+export function findMessageStickyHeaderHeight() {
+  const $messageStickyHeader = $(
+    DOM_SELECTORS.THREAD.MESSAGE.STICKY_HEADER,
+  ).last();
+
+  if (!$messageStickyHeader.length) return;
+
+  const stickyHeaderHeight = $messageStickyHeader[0].offsetHeight;
+
+  $(document.body).css({
+    "--message-block-sticky-header-height":
+      stickyHeaderHeight != null && stickyHeaderHeight > 0
+        ? `${stickyHeaderHeight - 1}px`
+        : "91px",
+  });
+
+  threadDomObserverStore.setState({
+    messageStickyHeaderHeight: stickyHeaderHeight,
   });
 }

@@ -1,9 +1,8 @@
 body#__next {
   &[location="thread"] {
     /* Message Block Dividers */
-    [data-cplx-component="message-block"]
-      [data-cplx-component="message-block-text-col"] {
-      > .border-b {
+    [data-cplx-component="message-block"] {
+      > div > .border-b:last-child {
         border-bottom-color: --alpha(var(--ring) / 30%);
       }
 

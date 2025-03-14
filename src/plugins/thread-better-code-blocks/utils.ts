@@ -13,14 +13,14 @@ export function createMirroredPortalContainer(
   if (
     $existingPortalContainer.length &&
     $existingPortalContainer.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.MIRRORED_CODE_BLOCK
+      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK
   ) {
     return $existingPortalContainer[0];
   }
 
   const $portalContainer = $("<div>")
     .internalComponentAttr(
-      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.MIRRORED_CODE_BLOCK,
+      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK,
     )
     .attr({
       "data-language": codeBlock.content.language,

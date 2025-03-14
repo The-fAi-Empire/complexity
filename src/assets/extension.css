@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
 @import "./vars.css";
 @import "./scrollbar.css";
 @import "./typography.css";
@@ -9,6 +11,13 @@
 
   --primary: oklch(74.37% 0.1304 255.6);
   --ring: oklch(74.37% 0.1304 255.6);
+}
+
+:root {
+  --font-sans: "Geist", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  font-variant-ligatures: none;
 }
 
 @layer base {

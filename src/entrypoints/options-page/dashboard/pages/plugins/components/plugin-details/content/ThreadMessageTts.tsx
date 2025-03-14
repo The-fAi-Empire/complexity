@@ -10,11 +10,7 @@ export default function ThreadMessageTtsPluginDetails() {
 
   return (
     <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
-      <div>
-        <div>
-          Right-click to open voice menu. Only supports English content.
-        </div>
-      </div>
+      <div>Right-click to open voice menu. Only supports English content.</div>
       <Switch
         textLabel="Enable"
         checked={pluginSettings?.enabled ?? false}

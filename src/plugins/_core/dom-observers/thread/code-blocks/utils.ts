@@ -34,9 +34,7 @@ export async function parseCodeBlocks(
         const $codeBlock = $(codeBlock);
 
         $codeBlock
-          .internalComponentAttr(
-            INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.CODE_BLOCK,
-          )
+          .internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK)
           .attr("data-index", j);
 
         const $nativeCopyButton = $codeBlock.find(
@@ -116,7 +114,7 @@ function isCodeBlockInFlight({
   if (!isMessageBlockInFlight) return false;
 
   const codeBlock = document.querySelector(
-    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.CODE_BLOCK}"][data-index="${codeBlockIndex}"]`,
+    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"]`,
   );
 
   let parentElement = codeBlock?.parentElement;
@@ -128,7 +126,7 @@ function isCodeBlockInFlight({
   }
 
   const hasNextCodeBlock = document.querySelector(
-    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.CODE_BLOCK}"][data-index="${codeBlockIndex + 1}"]`,
+    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex + 1}"]`,
   );
 
   if (hasNextCodeBlock) return false;

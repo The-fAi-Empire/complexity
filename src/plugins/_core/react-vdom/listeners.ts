@@ -97,7 +97,7 @@ export function setupReactVdomListeners() {
   });
 
   onMessage("reactVdom:getMessageContent", ({ data: { index } }) => {
-    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${index}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.ANSWER}"] div[dir="auto"]`;
+    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${index}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.ANSWER}"] div[dir="auto"]`;
 
     const $el = $(selector);
 
@@ -149,7 +149,7 @@ export function setupReactVdomListeners() {
   onMessage(
     "reactVdom:getCodeBlockContent",
     ({ data: { messageBlockIndex, codeBlockIndex } }) => {
-      const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.CODE_BLOCK}"][data-index="${codeBlockIndex}"] pre`;
+      const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"] pre`;
 
       const $el = $(selector);
 
@@ -196,7 +196,7 @@ export function setupReactVdomListeners() {
   onMessage(
     "reactVdom:triggerRewriteOption",
     ({ data: { messageBlockIndex, optionIndex } }) => {
-      const selector = `div[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.TEXT_COL_CHILD.BOTTOM_BAR}"] ${DOM_SELECTORS.THREAD.MESSAGE.TEXT_COL_CHILD.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
+      const selector = `div[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BOTTOM_BAR}"] ${DOM_SELECTORS.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
 
       const $rewriteButtonWrapper = $(selector).parent().parent();
 
