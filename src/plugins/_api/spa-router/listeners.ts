@@ -8,6 +8,7 @@ import {
 
 import { RouterEvent } from "@/plugins/_api/spa-router/spa-router.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
+import { whereAmI } from "@/utils/utils";
 
 onlyExtensionGuard();
 
@@ -58,12 +59,12 @@ const spaRouterStore = createWithEqualityFn<SpaRouterStore>()(
 export const spaRouterStoreSubscribe = spaRouterStore.subscribe;
 
 export const spaRouteChangeCompleteSubscribe = (
-  callback: (url: string, prevUrl: string) => void,
+  callback: (url: string) => void,
 ) => {
   return spaRouterStore.subscribe(
-    (state) => ({ state: state.state, url: state.url }),
-    ({ state, url }, { url: prevUrl }) => {
-      if (state === "complete" || url !== prevUrl) callback(url, prevUrl);
+    (store) => ({ state: store.state, url: store.url }),
+    ({ state, url }) => {
+      if (state === "complete") callback(url);
     },
   );
 };

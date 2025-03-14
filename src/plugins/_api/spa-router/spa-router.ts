@@ -7,10 +7,8 @@ import {
 import {
   applyRouteIdAttrs,
   isNextWindowObjectExists,
+  waitForRouteChangeComplete,
 } from "@/plugins/_api/spa-router/utils";
-import { MaybePromise } from "@/types/utils.types";
-import { DOM_SELECTORS } from "@/utils/dom-selectors";
-import { UiUtils } from "@/utils/ui-utils";
 import { whereAmI } from "@/utils/utils";
 
 onlyMainWorldGuard();
@@ -76,73 +74,32 @@ const dispatchRouteChange = async ({
   trigger: RouterEvent;
   newUrl: string;
 }) => {
-  const fullUrl = new URL(newUrl, window.location.origin).href;
+  const url = new URL(newUrl, window.location.href);
+  const fullUrl = url.pathname + url.search + url.hash;
 
   if (fullUrl !== lastDispatchedUrl) {
     lastDispatchedUrl = fullUrl;
 
     sendMessage(
       "spa-router:route-change",
-      { state: "pending", trigger, newUrl },
+      { state: "pending", trigger, newUrl: fullUrl },
       "content-script",
     );
 
-    // hacky solution since router events are no longer available in next app router 🥲 (routeChangeStart, routeChangeComplete)
     await waitForRouteChangeComplete(whereAmI(fullUrl));
+
+    if (fullUrl !== lastDispatchedUrl) {
+      console.warn(
+        "[SPA Router] Stale state detected.",
+        `Attempted to route to ${fullUrl} but the last dispatched url is ${lastDispatchedUrl}`,
+      );
+      return;
+    }
 
     sendMessage(
       "spa-router:route-change",
-      { state: "complete", trigger, newUrl },
+      { state: "complete", trigger, newUrl: fullUrl },
       "content-script",
     );
   }
 };
-
-export async function waitForRouteChangeComplete(
-  location: ReturnType<typeof whereAmI>,
-) {
-  const locationChecks: Partial<
-    Record<ReturnType<typeof whereAmI>, () => MaybePromise<boolean>>
-  > = {
-    thread: checkThreadLoaded,
-    home: checkHomeLoaded,
-  };
-
-  const check = locationChecks[location] ?? UiUtils.waitForSpaIdle;
-
-  await waitForConditionOrTimeout(check);
-
-  applyRouteIdAttrs(location);
-
-  async function checkThreadLoaded() {
-    await UiUtils.waitForSpaIdle();
-    return $(DOM_SELECTORS.THREAD.MESSAGE.WRAPPER).length > 0;
-  }
-
-  function checkHomeLoaded() {
-    return $(DOM_SELECTORS.HOME.SLOGAN).length > 0;
-  }
-
-  async function waitForConditionOrTimeout(
-    condition: () => MaybePromise<boolean>,
-    timeout = 3000,
-    interval = 100,
-  ) {
-    let timeoutReached = false;
-
-    const timeoutPromise = new Promise((resolve) => {
-      setTimeout(() => {
-        timeoutReached = true;
-        resolve(undefined);
-      }, timeout);
-    });
-
-    const checkCondition = async () => {
-      while (!timeoutReached && !(await condition())) {
-        await sleep(interval);
-      }
-    };
-
-    await Promise.race([checkCondition(), timeoutPromise]);
-  }
-}
