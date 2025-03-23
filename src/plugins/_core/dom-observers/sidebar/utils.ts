@@ -9,7 +9,12 @@ export function findSidebarWrapper() {
 
   const isExpanded = $wrapper.hasClass("w-sideBarWidth");
 
-  $wrapper.attr("data-state", isExpanded ? "expanded" : "collapsed");
+  // Only update the attribute if it's different to avoid triggering mutation observer unnecessarily
+  const currentState = $wrapper.attr("data-state");
+  const newState = isExpanded ? "expanded" : "collapsed";
+  if (currentState !== newState) {
+    $wrapper.attr("data-state", newState);
+  }
 
   if ($wrapper.internalComponentAttr() === INTERNAL_ATTRIBUTES.SIDEBAR.WRAPPER)
     return;

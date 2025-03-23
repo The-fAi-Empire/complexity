@@ -1,3 +1,4 @@
+import debounce from "lodash/debounce";
 import { Key } from "ts-key-enum";
 
 import { APP_CONFIG } from "@/app.config";
@@ -488,4 +489,10 @@ export function getTaskScheduler() {
 
 export function keysToString(keys: (Key | string)[]) {
   return keys.map((key) => key.toLowerCase()).join("+");
+}
+
+export function setCssProperty(property: string, value: string) {
+  requestAnimationFrame(() => {
+    $(document.body).css({ [property]: value });
+  });
 }

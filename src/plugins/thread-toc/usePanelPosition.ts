@@ -36,7 +36,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     const navbarHeightStr =
       document.body.style.getPropertyValue("--navbar-height");
-    const navbarHeight = navbarHeightStr ? +navbarHeightStr : 53;
+    const navbarHeight = navbarHeightStr ? parseInt(navbarHeightStr) : 53;
 
     let threadWrapperWidth = 0;
     let anchorLeft = threadWrapperOffset.left;

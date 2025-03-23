@@ -1,6 +1,7 @@
 import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
+import { setCssProperty } from "@/utils/utils";
 
 export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
   const $threadWrapper = threadDomObserverStore.getState().$wrapper;
@@ -68,16 +69,15 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
-  if (
-    document.body.style.getPropertyValue("--message-block-bottom-bar-height") ==
-      null &&
-    $bottomBar.length
-  ) {
-    requestAnimationFrame(() => {
-      $(document.body).css({
-        "--message-block-bottom-bar-height": `${$bottomBar[0].offsetHeight}px`,
-      });
-    });
+  if ($bottomBar.length) {
+    const newHeight = `${$bottomBar[0].offsetHeight}px`;
+    const currentValue = getComputedStyle(document.body).getPropertyValue(
+      "--message-block-bottom-bar-height",
+    );
+
+    if (currentValue !== newHeight) {
+      setCssProperty("--message-block-bottom-bar-height", newHeight);
+    }
   }
 
   return {

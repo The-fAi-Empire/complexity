@@ -93,7 +93,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:toc": {
     id: "thread:toc",
     routeSegment: "thread-toc",
-    title: "Thread ToC",
+    title: "Table of Contents",
     description:
       "Quickly navigate between messages in a thread. Only shows up when there are more than 2 messages",
     categories: ["thread"],

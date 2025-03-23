@@ -20,14 +20,20 @@ csLoaderRegistry.register({
 
     if (value < 740) return;
 
-    spaRouteChangeCompleteSubscribe((url) => {
-      const isInThread = whereAmI(url) === "thread";
+    setThreadWidth(whereAmI(), value);
 
-      $(document.body).css("--thread-width", isInThread ? `${value}px` : "");
-      $(document.body).css(
-        "--thread-content-width",
-        isInThread ? `${value}px` : "",
-      );
+    spaRouteChangeCompleteSubscribe((url) => {
+      setThreadWidth(whereAmI(url), value);
     });
   },
 });
+
+function setThreadWidth(location: ReturnType<typeof whereAmI>, value: number) {
+  const isInThread = location === "thread";
+
+  $(document.body).css("--thread-width", isInThread ? `${value}px` : "");
+  $(document.body).css(
+    "--thread-content-width",
+    isInThread ? `${value}px` : "",
+  );
+}

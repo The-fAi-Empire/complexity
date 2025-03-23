@@ -1,5 +1,6 @@
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
+import { setCssProperty } from "@/utils/utils";
 
 export function findNavbar() {
   const $navbar = $(DOM_SELECTORS.THREAD.NAVBAR);
@@ -12,16 +13,14 @@ export function findNavbar() {
 
   $navbar.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.NAVBAR);
 
-  if (document.body.style.getPropertyValue("--navbar-height") == null) {
+  if (
+    !document.body.style.getPropertyValue("--navbar-height") &&
+    $navbar.length
+  ) {
     const navbarHeight = $navbar[0].offsetHeight;
 
-    if (navbarHeight != null && navbarHeight > 0) {
-      $(document.body).css({
-        "--navbar-height":
-          navbarHeight != null && navbarHeight > 0
-            ? `${navbarHeight - 1}px`
-            : "53px",
-      });
+    if (navbarHeight > 0) {
+      setCssProperty("--navbar-height", `${navbarHeight}px`);
     }
   }
 
@@ -105,19 +104,18 @@ export function findMessageStickyHeaderHeight() {
   if (
     document.body.style.getPropertyValue(
       "--message-block-sticky-header-height",
-    ) == null
+    ) ||
+    !$messageStickyHeader.length
   )
     return;
 
   const stickyHeaderHeight = $messageStickyHeader[0].offsetHeight;
 
-  if (stickyHeaderHeight != null && stickyHeaderHeight > 0) {
-    $(document.body).css({
-      "--message-block-sticky-header-height":
-        stickyHeaderHeight != null && stickyHeaderHeight > 0
-          ? `${stickyHeaderHeight - 1}px`
-          : "91px",
-    });
+  if (stickyHeaderHeight > 0) {
+    setCssProperty(
+      "--message-block-sticky-header-height",
+      `${stickyHeaderHeight}px`,
+    );
   }
 
   threadDomObserverStore.setState({

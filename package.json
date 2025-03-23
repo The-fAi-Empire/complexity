@@ -1,7 +1,7 @@
 {
   "name": "complexity",
   "displayName": "Complexity - Perplexity AI Supercharged",
-  "version": "1.9.4.0",
+  "version": "1.9.5.0",
   "author": "pnd280",
   "description": "Supercharge your Perplexity AI",
   "type": "module",
@@ -81,6 +81,7 @@
     "tailwind-merge": "^3.0.2",
     "ts-key-enum": "2.0.13",
     "use-immer": "^0.11.0",
+    "use-sync-external-store": "^1.4.0",
     "webext-bridge": "file:patch-packages\\webext-bridge-6.0.1.tgz",
     "zod": "^3.24.2",
     "zustand": "^5.0.3"

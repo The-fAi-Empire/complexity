@@ -14,7 +14,7 @@ export function useObserveStuckToolbar() {
 
   const navbarHeightStr =
     document.body.style.getPropertyValue("--navbar-height");
-  const navbarHeight = navbarHeightStr ? +navbarHeightStr : 53;
+  const navbarHeight = navbarHeightStr ? parseInt(navbarHeightStr) : 53;
 
   const toolbars = useThreadMessageBlocksDomObserverStore(
     (store) => store.messageBlocks?.map((block) => block.nodes.$bottomBar[0]),
