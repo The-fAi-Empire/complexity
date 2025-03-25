@@ -15,6 +15,7 @@ export function useInsertCss({
 
   useEffect(() => {
     if (!inject) {
+      cleanupRef.current?.();
       return;
     }
 

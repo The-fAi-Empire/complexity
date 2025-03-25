@@ -53,7 +53,7 @@ const DropdownMenuItem = ({
 }: Menu.ItemProps & { inset?: boolean }) => (
   <Menu.Item
     className={cn(
-      "x:relative x:flex x:cursor-default x:items-center x:rounded-sm x:px-2 x:py-1.5 x:text-sm x:transition-colors x:outline-none x:select-none x:focus:bg-primary-foreground x:focus:text-primary x:data-[disabled]:pointer-events-none x:data-[disabled]:opacity-50 x:data-[highlighted]:bg-primary-foreground",
+      "x:relative x:flex x:cursor-default x:items-center x:rounded-sm x:px-2 x:py-1.5 x:text-sm x:transition-colors x:outline-none x:select-none x:focus:bg-primary-foreground x:focus:text-primary x:data-[disabled]:pointer-events-none x:data-[disabled]:opacity-50 x:data-[highlighted]:bg-secondary",
       inset && "x:pl-8",
       className,
     )}
@@ -115,7 +115,7 @@ const DropdownMenuSubTrigger = ({
 }: Menu.TriggerItemProps) => (
   <Menu.TriggerItem
     className={cn(
-      "x:relative x:flex x:cursor-default x:items-center x:justify-between x:rounded-sm x:px-2 x:py-1.5 x:text-sm x:transition-colors x:outline-none x:select-none x:focus:bg-primary-foreground x:focus:text-primary x:data-[disabled]:pointer-events-none x:data-[disabled]:opacity-50 x:data-[highlighted]:bg-primary-foreground x:data-[highlighted]:text-primary",
+      "x:relative x:flex x:cursor-default x:items-center x:justify-between x:rounded-sm x:px-2 x:py-1.5 x:text-sm x:transition-colors x:outline-none x:select-none x:focus:bg-primary-foreground x:focus:text-primary x:data-[disabled]:pointer-events-none x:data-[disabled]:opacity-50 x:data-[highlighted]:bg-secondary x:data-[highlighted]:text-secondary-foreground",
       className,
     )}
     {...props}

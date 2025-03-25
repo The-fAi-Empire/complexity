@@ -4,6 +4,7 @@ import debounce from "lodash/debounce";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { PANEL_WIDTH } from "@/plugins/thread-toc";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
@@ -11,9 +12,11 @@ import { DOM_SELECTORS } from "@/utils/dom-selectors";
 type UsePanelPosition = {
   position: { top: number; left: number };
   isFloating: boolean;
+  forceRecalculate: () => void;
 };
 
 export function usePanelPosition(): UsePanelPosition | null {
+  const { url } = useSpaRouter();
   const { isMobile } = useIsMobileStore();
   const windowSize = useWindowSize();
   const [panelPosition, setPanelPosition] = useState<UsePanelPosition | null>(
@@ -73,6 +76,7 @@ export function usePanelPosition(): UsePanelPosition | null {
         left: threadWrapperWidth + anchorLeft,
       },
       isFloating: panelRightEdge > window.innerWidth,
+      forceRecalculate: () => setPanelPosition(null),
     };
   }, [threadWrapper]);
 
@@ -102,7 +106,7 @@ export function usePanelPosition(): UsePanelPosition | null {
       debouncedUpdate.cancel();
       DomObserver.destroy("thread:tocSidebarObserver");
     };
-  }, [calculatePosition, isMobile, windowSize]);
+  }, [calculatePosition, isMobile, windowSize, url]);
 
   return panelPosition;
 }

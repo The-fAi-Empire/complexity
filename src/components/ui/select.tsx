@@ -162,7 +162,7 @@ const SelectItem = ({
           className={cn(
             "x:relative x:flex x:cursor-pointer x:items-center x:rounded-sm x:px-2 x:py-1.5 x:text-sm x:outline-none x:select-none",
             "x:data-[disabled]:cursor-not-allowed x:data-[disabled]:opacity-50",
-            "x:transition-all x:data-[highlighted]:bg-primary-foreground",
+            "x:transition-all x:data-[highlighted]:bg-secondary",
             "x:justify-between x:text-muted-foreground x:data-[state=checked]:text-primary",
             {
               "x:flex x:justify-between": multiple,
