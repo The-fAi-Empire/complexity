@@ -5,6 +5,7 @@ import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { useSpaRouter } from "@/plugins/_api/spa-router/listeners";
+import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { PANEL_WIDTH } from "@/plugins/thread-toc";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
@@ -23,12 +24,17 @@ export function usePanelPosition(): UsePanelPosition | null {
     null,
   );
   const threadWrapper = useThreadDomObserverStore(
-    (state) => state.$wrapper?.[0],
+    (store) => store.$wrapper?.[0],
+    deepEqual,
   );
-  const dispatchResizeAttemptRef = useRef(0);
+
+  const threadContentWrapper = useThreadMessageBlocksDomObserverStore(
+    (store) => store.messageBlocks?.[0]?.nodes.$query[0],
+    deepEqual,
+  );
 
   const calculatePosition = useCallback(() => {
-    if (threadWrapper == null) return null;
+    if (threadWrapper == null || threadContentWrapper == null) return null;
 
     const $threadWrapper = $(threadWrapper);
     const $children = $threadWrapper.children();
@@ -41,44 +47,42 @@ export function usePanelPosition(): UsePanelPosition | null {
       document.body.style.getPropertyValue("--navbar-height");
     const navbarHeight = navbarHeightStr ? parseInt(navbarHeightStr) : 53;
 
-    let threadWrapperWidth = 0;
-    let anchorLeft = threadWrapperOffset.left;
+    let threadContentWrapperWidth = threadContentWrapper.offsetWidth ?? 0;
 
-    $children.each((_, child) => {
-      if (
-        child.classList.contains("fixed") ||
-        child.id === "thread-toc-container"
-      )
-        return;
-      const offset = $(child).offset();
-      if (offset == null) return;
-      anchorLeft = offset.left;
-      const width = $(child).width();
-      if (width != null) threadWrapperWidth += width;
+    const validChildren = $children.filter((index, child) => {
+      return index > 0 && !child.classList.contains("fixed");
     });
-    if (threadWrapperWidth === 0) return null;
 
-    if (anchorLeft < 0 && dispatchResizeAttemptRef.current < 3) {
-      dispatchResizeAttemptRef.current++;
-      setTimeout(() => {
-        window.dispatchEvent(new Event("resize"));
-      }, 0);
-      return;
-    }
+    if (validChildren.length > 0) threadContentWrapperWidth += 32;
 
-    dispatchResizeAttemptRef.current = 0;
+    validChildren.each((_, child) => {
+      const width = $(child).width();
+      if (width != null) threadContentWrapperWidth += width;
+    });
 
-    const panelRightEdge = anchorLeft + threadWrapperWidth + PANEL_WIDTH + 32;
+    if (threadContentWrapperWidth === 0) return null;
+
+    const threadContentWrapperOffset =
+      threadContentWrapper.getBoundingClientRect();
+
+    if (threadContentWrapperOffset == null) return null;
+
+    const panelRightEdge =
+      threadContentWrapperOffset.left +
+      threadContentWrapperWidth +
+      PANEL_WIDTH +
+      32 +
+      32;
 
     return {
       position: {
         top: navbarHeight + 40,
-        left: threadWrapperWidth + anchorLeft,
+        left: threadContentWrapperWidth + threadContentWrapperOffset.left + 32,
       },
       isFloating: panelRightEdge > window.innerWidth,
       forceRecalculate: () => setPanelPosition(null),
     };
-  }, [threadWrapper]);
+  }, [threadContentWrapper, threadWrapper]);
 
   useEffect(() => {
     const debouncedUpdate = debounce(() => {

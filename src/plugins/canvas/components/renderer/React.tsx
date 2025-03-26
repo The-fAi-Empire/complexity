@@ -89,13 +89,13 @@ const MemoizedPreviewContainer = memo(function MemoizedPreviewContainer({
             showOpenInCodeSandbox={false}
           />
         </SandpackLayout>
-        <FixErrorButton />
+        <FixErrorButtons />
       </SandpackProvider>
     </div>
   );
 });
 
-function FixErrorButton() {
+function FixErrorButtons() {
   const selectedCodeBlockLocation = useCanvasStore(
     (state) => state.selectedCodeBlockLocation,
   );
@@ -118,24 +118,34 @@ function FixErrorButton() {
   if (!sandpack.error) return null;
 
   return (
-    <Button
-      variant="destructive"
-      className="x:absolute x:bottom-4 x:left-4 x:z-10 x:animate-in x:fade-in-0"
-      onClick={() => {
-        if (!sandpack.error) return;
-
-        const $textarea = UiUtils.getActiveQueryBoxTextarea();
-
-        if (!$textarea.length) return;
-
-        const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
-
-        $textarea.trigger("focus");
-
-        document.execCommand("insertText", false, errorText);
-      }}
-    >
-      Fix Error
-    </Button>
+    <div className="x:absolute x:bottom-4 x:left-4 x:z-10 x:flex x:flex-col x:gap-2 x:font-sans x:animate-in x:fade-in-0">
+      <div>
+        Try to refresh first, if that doesn't work, then use "Fix Error".
+      </div>
+      <div className="x:flex x:items-center x:gap-2">
+        <Button
+          variant="default"
+          onClick={() => {
+            if (!sandpack.error) return;
+            canvasStore.getState().refreshPreview();
+          }}
+        >
+          Refresh
+        </Button>
+        <Button
+          variant="destructive"
+          onClick={() => {
+            if (!sandpack.error) return;
+            const $textarea = UiUtils.getActiveQueryBoxTextarea();
+            if (!$textarea.length) return;
+            const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
+            $textarea.trigger("focus");
+            document.execCommand("insertText", false, errorText);
+          }}
+        >
+          Fix Error
+        </Button>
+      </div>
+    </div>
   );
 }

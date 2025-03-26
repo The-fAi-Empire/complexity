@@ -17,6 +17,10 @@ export default function LanguageModelSelectorPluginDetails() {
           available language models.
         </div>
         <div className="x:flex x:items-center x:gap-2">
+          <LuCheck className="x:text-primary" /> Prevent Perplexity from
+          automatically switching to the "Auto" model.
+        </div>
+        <div className="x:flex x:items-center x:gap-2">
           <LuCheck className="x:text-primary" /> No ambiguity, no confusion,
           change your preferred one anywhere.
         </div>
@@ -82,7 +86,7 @@ export default function LanguageModelSelectorPluginDetails() {
       )}
       <div className="x:mx-auto x:w-full x:max-w-[700px]">
         <Image
-          src="https://i.imgur.com/19WKLlf.png"
+          src="https://i.imgur.com/zQYVag4.png"
           alt="language-model-selector"
           className="x:w-full"
         />

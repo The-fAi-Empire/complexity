@@ -33,7 +33,7 @@ export function useObserveStuckToolbar() {
       },
       {
         threshold: 1.0,
-        rootMargin: `-${navbarHeight + 15}px 0px 0px 0px`,
+        rootMargin: `-${navbarHeight + 20}px 0px 0px 0px`,
       },
     );
 
