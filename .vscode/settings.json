@@ -1,8 +1,4 @@
 {
-  "catppuccin-icons.associations.files": {
-    "tailwind.cs.config.js": "tailwind",
-    "tailwind.extension.config.js": "tailwind"
-  },
   "catppuccin-icons.specificFolders": false,
   "editor.quickSuggestions": {
     "comments": false,

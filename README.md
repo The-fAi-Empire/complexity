@@ -8,25 +8,23 @@
 
 A powerful browser extension that enhances your PerplexityAI experience with advanced UI and UX improvements.
 
-<p align="center">
-  <div>
-    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcdn.cplx.app%2Fversions.json&query=latest&logo=google-chrome&label=chrome" alt="Stable chrome version">
-    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcdn.cplx.app%2Fversions.json&query=latestFirefox&logo=firefox&logoColor=orange&label=firefox" alt="Stable firefox version">
-    <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpnd280%2Fcomplexity%2Fnxt%2Fpackage.json&query=%24.version&logo=test&label=source-code&color=yellow" alt="source-code">
-    <a href="https://discord.cplx.app" target="_blank"><img src="https://img.shields.io/discord/1245377426331144304?logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FfxzqdkwmWx" alt="Discord"></a>
-  </div>
-  <div>
-    <img src="https://img.shields.io/chrome-web-store/rating/ffppmilmeaekegkpckebkeahjgmhggpj?label=CWS%20rating" alt="Chrome Web Store Rating">
-    <img src="https://img.shields.io/chrome-web-store/users/ffppmilmeaekegkpckebkeahjgmhggpj?label=CWS%20users" alt="Chrome Web Store Users">
-    <img src="https://img.shields.io/amo/rating/complexity?label=AMO%20rating" alt="Mozilla Add-on Rating">
-    <img src="https://img.shields.io/amo/users/complexity?label=AMO%20users" alt="Mozilla Add-on Users">
-  </div>
-</p>
+<div>
+  <a href="https://discord.cplx.app" target="_blank"><img src="https://img.shields.io/discord/1245377426331144304?logo=discord&label=discord&link=https%3A%2F%2Fdiscord.gg%2FfxzqdkwmWx" alt="Discord"></a>
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpnd280%2Fcomplexity%2Fnxt%2Fpackage.json&query=%24.version&logo=test&label=source-code&color=yellow" alt="source-code">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcdn.cplx.app%2Fversions.json&query=latest&logo=google-chrome&label=chrome" alt="Stable chrome version">
+  <img src="https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fcdn.cplx.app%2Fversions.json&query=latestFirefox&logo=firefox&logoColor=orange&label=firefox" alt="Stable firefox version">
+</div>
+<div>
+  <img src="https://img.shields.io/chrome-web-store/rating/ffppmilmeaekegkpckebkeahjgmhggpj?label=CWS%20rating" alt="Chrome Web Store Rating">
+  <img src="https://img.shields.io/chrome-web-store/users/ffppmilmeaekegkpckebkeahjgmhggpj?label=CWS%20users" alt="Chrome Web Store Users">
+  <img src="https://img.shields.io/amo/rating/complexity?label=AMO%20rating" alt="Mozilla Add-on Rating">
+  <img src="https://img.shields.io/amo/users/complexity?label=AMO%20users" alt="Mozilla Add-on Users">
+</div>
 
 <div>
   <a href="https://chromewebstore.google.com/detail/complexity/ffppmilmeaekegkpckebkeahjgmhggpj" target="_blank"><img src="https://i.imgur.com/9QWBxZO.png" width="200px" style="border-radius: .5rem"></a>
   <a href="https://addons.mozilla.org/en-US/firefox/addon/complexity/" target="_blank"><img src="https://i.imgur.com/RpP2H81.png" width="200px"></a>
-  <p style="font-style: italic; font-size: .8rem;">Complexity is a third-party extension, it does NOT affiliate with Perplexity.ai.</p>
+  <p style="font-style: italic; font-size: .8rem;">Complexity is a third-party extension, it does NOT affiliate with Perplexity AI</p>
   💖 support the development
 </div>
 
@@ -35,11 +33,18 @@ A powerful browser extension that enhances your PerplexityAI experience with adv
 
 </div>
 
-## Features
+## Capabilities
 
-- A comprehensive set of added features and UI/UX improvements with excellent modularity and customization
-- Multi-language support
-- Compatible with Firefox mobile browsers.
+- Provides a comprehensive set of added features and UI/UX improvements with excellent modularity and customization
+- Supports all available languages (22 languages)
+- Runs flawlessly on Firefox Android
+
+## Documentation
+
+- [Architecture](./docs/architecture.md)
+- [Tech Stack](./docs/tech-stack.md)
+- [DX](./docs/dx.md)
+- [Build your own plugin](./docs/build-your-own-plugin.md)
 
 ## Quick Start
 
