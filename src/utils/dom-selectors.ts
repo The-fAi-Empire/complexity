@@ -77,7 +77,7 @@ export const DOM_SELECTORS = {
       SPACE:
         'body[location="collection"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
       FOLLOW_UP:
-        'body[location="thread"] .pointer-events-none.fixed.bottom-mobileNavHeight textarea[placeholder][autocomplete]',
+        'body[location="thread"] .pointer-events-none.bottom-mobileNavHeight textarea[placeholder][autocomplete]',
       ARBITRARY: "textarea[placeholder][autocomplete]",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
