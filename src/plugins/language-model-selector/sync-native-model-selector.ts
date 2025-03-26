@@ -26,7 +26,7 @@ csLoaderRegistry.register({
       ($pplxComponentsWrapper) => {
         cleanup?.();
 
-        if (!$pplxComponentsWrapper || !$pplxComponentsWrapper.length) return;
+        if (!$pplxComponentsWrapper || !$pplxComponentsWrapper[0]) return;
 
         DomObserver.create(
           "plugin:queryBox:languageModelSelector:syncNativeModelSelector",

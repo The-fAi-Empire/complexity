@@ -48,7 +48,7 @@ csLoaderRegistry.register({
   id: "store:colorScheme",
   loader: () => {
     DomObserver.create("colorScheme", {
-      target: $("html")[0],
+      target: $("html")[0]!,
       config: {
         subtree: false,
         childList: false,

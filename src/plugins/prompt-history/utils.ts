@@ -19,7 +19,7 @@ export const handlePromptSave = async (params?: {
   if (!params?.promptString) {
     const $activeQueryBox = UiUtils.getActiveQueryBoxTextarea();
 
-    if (!$activeQueryBox.length) return;
+    if (!$activeQueryBox[0]) return;
 
     prompt = $activeQueryBox[0].value;
   }

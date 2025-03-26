@@ -2,7 +2,6 @@ import $ from "jquery";
 
 declare global {
   interface JQuery<TElement = HTMLElement> {
-    [0]: TElement;
     internalComponentAttr(value: string | null): JQuery<TElement>;
     internalComponentAttr(): string | undefined;
   }

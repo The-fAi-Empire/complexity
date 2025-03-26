@@ -69,7 +69,7 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
-  if ($bottomBar.length) {
+  if ($bottomBar[0]) {
     const newHeight = `${$bottomBar[0].offsetHeight}px`;
     const currentValue = getComputedStyle(document.body).getPropertyValue(
       "--message-block-bottom-bar-height",

@@ -22,12 +22,12 @@ export function useCreatePortalContainers(): (Element | null)[] {
       `div[data-cplx-component="${OBSERVER_ID}"]`,
     );
 
-    if ($existingPortalContainer.length) return $existingPortalContainer[0];
+    if ($existingPortalContainer[0]) return $existingPortalContainer[0];
 
     const $portalContainer = $("<div>").internalComponentAttr(OBSERVER_ID);
 
     $target.prepend($portalContainer);
 
-    return $portalContainer[0];
+    return $portalContainer[0] ?? null;
   });
 }

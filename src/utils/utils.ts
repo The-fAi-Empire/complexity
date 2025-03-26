@@ -93,11 +93,11 @@ export function scrollToElement(
   offset = 0,
   duration = 300,
 ) {
-  if (!$anchor.length) return;
+  if (!$anchor[0]) return;
 
   const $scrollContainer = $anchor.closest(".overflow-auto, .overflow-y-auto");
 
-  if ($scrollContainer.length) {
+  if ($scrollContainer[0]) {
     const containerRect = $scrollContainer[0].getBoundingClientRect();
     const elementRect = $anchor[0].getBoundingClientRect();
 

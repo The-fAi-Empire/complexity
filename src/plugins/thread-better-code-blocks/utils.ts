@@ -11,7 +11,7 @@ export function createMirroredPortalContainer(
   const $existingPortalContainer = codeBlock.nodes.$wrapper.prev();
 
   if (
-    $existingPortalContainer.length &&
+    $existingPortalContainer[0] &&
     $existingPortalContainer.internalComponentAttr() ===
       INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK
   ) {
@@ -29,7 +29,7 @@ export function createMirroredPortalContainer(
 
   codeBlock.nodes.$wrapper.before($portalContainer);
 
-  return $portalContainer[0];
+  return $portalContainer[0]!;
 }
 
 export function getBetterCodeBlockOptions(

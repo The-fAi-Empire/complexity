@@ -8,10 +8,7 @@ export default function useObserver() {
   );
 
   return useMemo(() => {
-    if (
-      $overflowMenuButtonWrapper == null ||
-      !$overflowMenuButtonWrapper.length
-    ) {
+    if ($overflowMenuButtonWrapper == null || !$overflowMenuButtonWrapper[0]) {
       $(
         `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
       ).remove();

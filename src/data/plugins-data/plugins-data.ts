@@ -86,7 +86,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
     routeSegment: "command-menu",
     title: "Command Menu",
     description: "Quickly navigate around and invoke actions",
-    categories: ["queryBox"],
+    categories: ["misc"],
     tags: ["ui", "ux", "desktopOnly"],
     dependentCorePlugins: ["spaRouter", "webSocket"],
   },

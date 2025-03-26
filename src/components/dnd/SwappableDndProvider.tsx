@@ -18,7 +18,7 @@ import {
   sortableKeyboardCoordinates,
   rectSwappingStrategy,
 } from "@dnd-kit/sortable";
-import { ReactNode, useRef, useState } from "react";
+import { ReactNode } from "react";
 
 type SwappableDndProviderProps = {
   items: string[];

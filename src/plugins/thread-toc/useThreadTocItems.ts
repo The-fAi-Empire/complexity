@@ -209,7 +209,7 @@ const createTocStore = () => {
 
     state.items = messageBlocks.map(
       ({ nodes: { $wrapper }, content: { title } }, idx: number) => {
-        if ($wrapper?.length > 0) {
+        if ($wrapper[0]) {
           observer.observe($wrapper[0]);
           topMostObserver.observe($wrapper[0]);
         }

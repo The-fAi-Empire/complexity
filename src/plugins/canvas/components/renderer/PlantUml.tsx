@@ -20,6 +20,9 @@ import { UiUtils } from "@/utils/ui-utils";
 const SVGContent = memo(function SVGContent({ svg }: { svg: string }) {
   useEffect(() => {
     const $svg = $("#canvas-plantuml-container").find("svg");
+
+    if (!$svg[0]) return;
+
     svgPanZoom($svg[0], {
       center: true,
       fit: true,

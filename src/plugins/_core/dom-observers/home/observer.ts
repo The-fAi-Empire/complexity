@@ -16,6 +16,7 @@ csLoaderRegistry.register({
   dependencies: ["messaging:spaRouter"],
   loader: () => {
     // this observer is always needed for update announcer
+
     // if (
     //   !shouldEnableCoreObserver({
     //     coreObserverId: "coreDomObserver:home",
@@ -54,8 +55,12 @@ function observeHome(location: ReturnType<typeof whereAmI>) {
       ]),
   });
 
+  const $languageSelector = $(DOM_SELECTORS.HOME.LANGUAGE_SELECTOR);
+
+  if (!$languageSelector[0]) return;
+
   DomObserver.create("home:languageSelector", {
-    target: $(DOM_SELECTORS.HOME.LANGUAGE_SELECTOR)[0],
+    target: $languageSelector[0],
     config: { attributes: true, attributeFilter: ["aria-label"] },
     onMutation: () =>
       CallbackQueue.getInstance().enqueue(

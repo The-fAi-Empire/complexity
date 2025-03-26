@@ -42,11 +42,11 @@ export function setupReactVdomListeners() {
 
     const $el = $(selector).prev();
 
-    if (!$el.length) return null;
+    if (!$el[0]) return null;
 
-    const [preferences, error] = errorWrapper(() =>
-      findReactFiberNodeValue({
-        fiberNode: ($el[0] as any)[getReactFiberKey($el[0])],
+    const [preferences, error] = errorWrapper(() => {
+      return findReactFiberNodeValue({
+        fiberNode: ($el[0] as any)[getReactFiberKey($el[0]!)],
         condition: (node) =>
           node.return.memoizedProps.result != null &&
           node.return.memoizedProps.result.mode != null &&
@@ -58,8 +58,8 @@ export function setupReactVdomListeners() {
             is_pro_reasoning_mode: boolean;
             display_model: LanguageModelCode;
           },
-      }),
-    )();
+      });
+    })();
 
     if (error) console.warn("[VDOM Plugin] getMessageModelPreferences", error);
 
@@ -77,11 +77,11 @@ export function setupReactVdomListeners() {
 
     const $el = $(selector).prev();
 
-    if (!$el.length) return null;
+    if (!$el[0]) return null;
 
     const [modelCode, error] = errorWrapper(() =>
       findReactFiberNodeValue({
-        fiberNode: ($el[0] as any)[getReactFiberKey($el[0])],
+        fiberNode: ($el[0] as any)[getReactFiberKey($el[0]!)],
         condition: (node) =>
           node.return.memoizedProps.result.display_model != null,
         select: (node) =>
@@ -101,11 +101,11 @@ export function setupReactVdomListeners() {
 
     const $el = $(selector);
 
-    if (!$el.length) return null;
+    if (!$el[0]) return null;
 
     const [result, error] = errorWrapper(() =>
       findReactFiberNodeValue({
-        fiberNode: ($el[0] as any)[getReactFiberKey($el[0])],
+        fiberNode: ($el[0] as any)[getReactFiberKey($el[0]!)],
         condition: (node) =>
           node.memoizedProps.children[3].props.response != null,
         select: (node) => ({
@@ -127,11 +127,11 @@ export function setupReactVdomListeners() {
 
     const $el = $(selector).prev();
 
-    if (!$el.length) return null;
+    if (!$el[0]) return null;
 
     const [backendUuid, error] = errorWrapper(() =>
       findReactFiberNodeValue({
-        fiberNode: ($el[0] as any)[getReactFiberKey($el[0])],
+        fiberNode: ($el[0] as any)[getReactFiberKey($el[0]!)],
         condition: (node) =>
           node.return.memoizedProps.result.backend_uuid != null,
         select: (node) =>
@@ -153,7 +153,7 @@ export function setupReactVdomListeners() {
 
       const $el = $(selector);
 
-      if (!$el.length) return null;
+      if (!$el[0]) return null;
 
       const fiberNode = ($el[0] as any)[getReactFiberKey($el[0])];
 
@@ -200,7 +200,7 @@ export function setupReactVdomListeners() {
 
       const $rewriteButtonWrapper = $(selector).parent().parent();
 
-      if (!$rewriteButtonWrapper.length) return false;
+      if (!$rewriteButtonWrapper[0]) return false;
 
       const fiberNode = ($rewriteButtonWrapper[0] as any)[
         getReactFiberKey($rewriteButtonWrapper[0])
@@ -237,7 +237,7 @@ export function setupReactVdomListeners() {
 
     const $modelSelector = $(selector);
 
-    if (!$modelSelector.length) return;
+    if (!$modelSelector[0]) return;
 
     const fiberNode = ($modelSelector[0] as any)[
       getReactFiberKey($modelSelector[0])

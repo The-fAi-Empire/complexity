@@ -93,8 +93,12 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     debouncedUpdate();
 
+    const $sidebarWrapper = $(DOM_SELECTORS.SIDEBAR.WRAPPER);
+
+    if (!$sidebarWrapper[0]) return;
+
     DomObserver.create("thread:tocSidebarObserver", {
-      target: $(DOM_SELECTORS.SIDEBAR.WRAPPER)[0],
+      target: $sidebarWrapper[0],
       config: {
         attributes: true,
         attributeFilter: ["class"],

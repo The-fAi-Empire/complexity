@@ -7,7 +7,7 @@ type TextareaSelection = {
 };
 
 export const getActiveTextarea = (): HTMLTextAreaElement | null => {
-  return UiUtils.getActiveQueryBoxTextarea()[0];
+  return UiUtils.getActiveQueryBoxTextarea()[0] ?? null;
 };
 
 export const setTextareaSelection = (

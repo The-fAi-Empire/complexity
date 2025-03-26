@@ -87,6 +87,12 @@ export class MarkmapRenderer {
         if (!document.body.contains(this.currentMarkmapSvgNode)) {
           const $target = $(selector);
 
+          if (!$target[0])
+            return {
+              success: false,
+              error: "No elements found for rendering Markmap canvas",
+            };
+
           this.currentMarkmapSvgNode = $target[0];
 
           const { Markmap } = window.markmapView!;

@@ -13,10 +13,7 @@ export function findNavbar() {
 
   $navbar.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.NAVBAR);
 
-  if (
-    !document.body.style.getPropertyValue("--navbar-height") &&
-    $navbar.length
-  ) {
+  if (!document.body.style.getPropertyValue("--navbar-height") && $navbar[0]) {
     const navbarHeight = $navbar[0].offsetHeight;
 
     if (navbarHeight > 0) {
@@ -32,13 +29,13 @@ export function findNavbar() {
 export function findNavbarOverflowMenuButtonWrapper() {
   const $navbar = threadDomObserverStore.getState().$navbar;
 
-  if (!$navbar || !$navbar.length) return;
+  if (!$navbar || !$navbar[0]) return;
 
   const $overflowMenuButtonWrapper = $navbar.find(
     DOM_SELECTORS.SICKY_NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER,
   );
 
-  if (!$overflowMenuButtonWrapper.length) {
+  if (!$overflowMenuButtonWrapper[0]) {
     threadDomObserverStore.setState({
       $overflowMenuButtonWrapper: null,
     });
@@ -105,7 +102,7 @@ export function findMessageStickyHeaderHeight() {
     document.body.style.getPropertyValue(
       "--message-block-sticky-header-height",
     ) ||
-    !$messageStickyHeader.length
+    !$messageStickyHeader[0]
   )
     return;
 

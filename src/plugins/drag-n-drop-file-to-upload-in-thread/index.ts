@@ -107,10 +107,8 @@ export function setupDragNDropFileToUploadInThread() {
         dragCounter = 0;
 
         const $queryBox = UiUtils.getActiveQueryBox({ type: "follow-up" });
-        if (!$queryBox.length) return;
-
         const $fileInput = $queryBox.find('input[type="file"]');
-        if (!$fileInput.length) return;
+        if (!$fileInput[0]) return;
 
         const dataTransfer = new DataTransfer();
         Array.from(files).forEach((file) => dataTransfer.items.add(file));

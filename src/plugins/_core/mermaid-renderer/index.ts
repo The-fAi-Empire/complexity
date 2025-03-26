@@ -87,6 +87,12 @@ export class MermaidRenderer {
 
       window.mermaid!.initialize(config);
 
+      if (!$target[0])
+        return {
+          success: false,
+          error: "No elements found for rendering Mermaid",
+        };
+
       await window.mermaid!.run({
         nodes: [$target[0]],
       });
@@ -98,6 +104,12 @@ export class MermaidRenderer {
         maxWidth: "100%",
         height: "100%",
       });
+
+      if (!$svg[0])
+        return {
+          success: false,
+          error: "No SVG element found for rendering Mermaid",
+        };
 
       const svgPanZoomInstance = svgPanZoom($svg[0], {
         center: true,

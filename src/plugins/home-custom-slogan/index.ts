@@ -47,7 +47,7 @@ csLoaderRegistry.register({
     homeDomObserverStore.subscribe(
       (store) => store.$slogan,
       ($slogan) => {
-        if (!$slogan || !$slogan.length) return;
+        if (!$slogan || !$slogan[0]) return;
         setupCustomSlogan({ location: whereAmI(), slogan: $slogan[0] });
       },
     );

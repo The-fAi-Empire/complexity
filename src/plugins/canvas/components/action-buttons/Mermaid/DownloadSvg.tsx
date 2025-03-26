@@ -15,7 +15,7 @@ export default function MermaidDownloadSvg() {
 
           const $svg = $(selector);
 
-          if (!$svg.length) {
+          if (!$svg[0]) {
             return toast({
               title: t("plugin-canvas:canvas.error.noSvg"),
             });

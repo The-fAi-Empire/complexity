@@ -101,7 +101,7 @@ export class UiUtils {
       // console.log("waitForSpaIdle: Start waiting for SPA to become idle.");
 
       const $wrapper = $(document.body);
-      if (!$wrapper.length) {
+      if (!$wrapper[0]) {
         // console.log("waitForSpaIdle: No wrapper found, resolving immediately.");
         return resolve(true);
       }

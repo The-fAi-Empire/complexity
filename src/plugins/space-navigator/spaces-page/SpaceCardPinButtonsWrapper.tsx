@@ -14,9 +14,13 @@ export default function SpaceCardsWrapper() {
 
   if (spaceCards == null) return null;
 
-  return spaceCards.map(($spaceCard, index) => (
-    <Portal key={index} container={$spaceCard[0]}>
-      <SpaceCardPinButton htmlNode={$spaceCard[0]} />
-    </Portal>
-  ));
+  return spaceCards.map(($spaceCard, index) => {
+    if (!$spaceCard[0]) return null;
+
+    return (
+      <Portal key={index} container={$spaceCard[0]}>
+        <SpaceCardPinButton htmlNode={$spaceCard[0]} />
+      </Portal>
+    );
+  });
 }

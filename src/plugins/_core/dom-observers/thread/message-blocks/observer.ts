@@ -32,7 +32,7 @@ function observeThreadMessageBlocks() {
     ($threadWrapper) => {
       cleanup();
 
-      if ($threadWrapper == null || !$threadWrapper.length) return;
+      if ($threadWrapper == null || !$threadWrapper[0]) return;
 
       DomObserver.create("thread:messageBlocks", {
         target: $threadWrapper[0],
