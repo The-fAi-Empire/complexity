@@ -1,7 +1,5 @@
 # Architecture
 
-## Overview
-
 Complexity is a browser extension that heavily modifies (monkey-patches) Perplexity AI web pages to enhance functionality. Hence modularity is key to the extension's design, in other words, each feature (plugin) should be able to work with as few dependencies as possible.
 
 ## Core Architecture Components
@@ -23,26 +21,26 @@ Communication between these contexts is facilitated by `webext-bridge` (100% typ
 src/
 ├── assets/         # Static assets
 ├── components/     # Shared UI components
-├── data/           # Data sources and constants
+├── data/           # Shared data sources and constants
 ├── entrypoints/    # Entry points for different contexts
 │   ├── background/       # Background service worker
 │   ├── content-scripts/  # Content scripts
 │   └── options-page/     # Options page UI
-├── hooks/          # React hooks
+├── hooks/          # Shared React hooks
 ├── plugins/        # Modular feature implementations
 │   ├── _api/       # Core Abstractions
 │   ├── _core/      # Core Plugins
 │   └── */          # Individual plugins
 ├── services/       # Shared services
-├── types/          # TypeScript type definitions
-└── utils/          # Utility functions
+├── types/          # Shared TypeScript type definitions
+└── utils/          # Shared utility functions
 ```
 
 ## Plugin System
 
 The architecture uses a modular plugin system to implement features independently:
 
-- Each plugin resides in its own directory under `src/plugins/`
+- Each plugin resides in its own directory under `src/plugins/`.
 - Plugins can be enabled/disabled, all dependencies and side effects should be unloaded when the plugin is disabled
 - Plugins are loaded with dependency management via
   - [`cs-ui-root.tsx`](../src/entrypoints/content-scripts/loaders/cs-ui-plugins-loader/CsUiRoot.tsx), [`ui-groups`](../src/plugins/_core/ui-groups/): for UI plugins
@@ -50,7 +48,7 @@ The architecture uses a modular plugin system to implement features independentl
 
 ### Plugin Structure
 
-Typical plugin structure:
+The folder structure is similar to a typical feature-based structure, where each feature folder contains its own components, hooks, services, types, utils, and data:
 
 ```
 plugins/feature-name/
@@ -58,6 +56,7 @@ plugins/feature-name/
 ├── hooks/        # React hooks
 ├── index.ts      # Entry point
 ├── store.ts      # State management
+├── utils.ts      # Utility functions
 └── types.ts      # Type definitions
 ```
 

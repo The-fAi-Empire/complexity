@@ -21,7 +21,7 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
     },
     {
       from: normalizePath("src/utils/i18next.ts"),
-      imports: ["t"],
+      imports: ["t", "i18n"],
     },
     {
       from: normalizePath("src/utils/deep-equal.ts"),
@@ -33,10 +33,6 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
       name: "default",
       as: "$",
       from: "jquery",
-    },
-    {
-      name: "i18n",
-      from: normalizePath("src/utils/i18next.ts"),
     },
     {
       name: "cn",

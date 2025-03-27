@@ -83,13 +83,10 @@ pnpm dev
 
 [Privacy policy](./PRIVACY.md)
 
-## Made possible with
+## Can I vibe-code a plugin for Complexity?
 
-- Vite (+CRXJS)
-- React
-- JQuery
-- CodeSandbox's Sandpack
-- _No coffee_
+- The project includes [`docs`](./docs/) (for human consumption) and several rules and guidelines [`.cursor/rules/`](./.cursor/rules/) for LLMs to follow
+- However, given the current limitations in visual context and interaction with web page resources (e.g., the DOM, network inspection, React fiber tree, etc.), it's challenging for any LLM workflow to build an entire plugin without human intervention. You'll need a decent knowledge of frontend web development and some reverse engineering skills.
 
 ## 💖 Keep the project alive
 
