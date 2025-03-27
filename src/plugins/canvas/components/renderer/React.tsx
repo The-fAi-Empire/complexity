@@ -2,8 +2,8 @@ import {
   SandpackProvider,
   SandpackLayout,
   SandpackPreview,
-  SandpackPreviewRef,
   useSandpack,
+  useActiveCode,
 } from "@codesandbox/sandpack-react";
 
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ import styles from "@/plugins/canvas/components/renderer/sandpack.css?inline";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
 import { UiUtils } from "@/utils/ui-utils";
 
-export default function ReactRenderer() {
+export default memo(function ReactRenderer() {
   const selectedCodeBlockLocation = useCanvasStore(
     (state) => state.selectedCodeBlockLocation,
   );
@@ -28,39 +28,8 @@ export default function ReactRenderer() {
     codeBlockIndex: selectedCodeBlockLocation?.codeBlockIndex,
   });
 
-  const code = selectedCodeBlock?.content.code;
-  const isInFlight = selectedCodeBlock?.states.isInFlight;
-
-  if (!code) {
-    return null;
-  }
-
-  return (
-    <MemoizedPreviewContainer code={code} isInFlight={isInFlight ?? false} />
-  );
-}
-
-const MemoizedPreviewContainer = memo(function MemoizedPreviewContainer({
-  code,
-  isInFlight,
-}: {
-  code: string;
-  isInFlight: boolean;
-}) {
-  useInsertCss({
-    id: "sandpack",
-    css: styles,
-  });
-
-  const previewRef = useRef<SandpackPreviewRef>(null);
-
-  useEffect(() => {
-    if (previewRef.current) {
-      canvasStore.setState({
-        sandpackPreviewRef: previewRef.current,
-      });
-    }
-  }, []);
+  const code = selectedCodeBlock?.content.code ?? "";
+  const isInFlight = selectedCodeBlock?.states.isInFlight ?? false;
 
   return (
     <div id="sandpack-container" className="x:relative x:size-full">
@@ -82,18 +51,49 @@ const MemoizedPreviewContainer = memo(function MemoizedPreviewContainer({
           ],
         }}
       >
-        <SandpackLayout>
-          <SandpackPreview
-            ref={previewRef}
-            showRefreshButton={false}
-            showOpenInCodeSandbox={false}
-          />
-        </SandpackLayout>
-        <FixErrorButtons />
+        <PreviewContainer code={code} isInFlight={isInFlight} />
       </SandpackProvider>
     </div>
   );
 });
+
+function PreviewContainer({
+  code,
+  isInFlight,
+}: {
+  code: string;
+  isInFlight: boolean;
+}) {
+  const { code: activeCode, updateCode } = useActiveCode();
+
+  useEffect(() => {
+    if (code !== activeCode && !isInFlight) {
+      updateCode(code);
+    }
+  }, [activeCode, code, isInFlight, updateCode]);
+
+  useInsertCss({
+    id: "sandpack",
+    css: styles,
+  });
+
+  return (
+    <>
+      <SandpackLayout>
+        <SandpackPreview
+          ref={(previewRef) => {
+            canvasStore.setState({
+              sandpackPreviewRef: previewRef,
+            });
+          }}
+          showRefreshButton={false}
+          showOpenInCodeSandbox={false}
+        />
+      </SandpackLayout>
+      <FixErrorButtons />
+    </>
+  );
+}
 
 function FixErrorButtons() {
   const selectedCodeBlockLocation = useCanvasStore(
@@ -119,33 +119,19 @@ function FixErrorButtons() {
 
   return (
     <div className="x:absolute x:bottom-4 x:left-4 x:z-10 x:flex x:flex-col x:gap-2 x:font-sans x:animate-in x:fade-in-0">
-      <div>
-        Try to refresh first, if that doesn't work, then use "Fix Error".
-      </div>
-      <div className="x:flex x:items-center x:gap-2">
-        <Button
-          variant="default"
-          onClick={() => {
-            if (!sandpack.error) return;
-            canvasStore.getState().refreshPreview();
-          }}
-        >
-          Refresh
-        </Button>
-        <Button
-          variant="destructive"
-          onClick={() => {
-            if (!sandpack.error) return;
-            const $textarea = UiUtils.getActiveQueryBoxTextarea();
-            if (!$textarea.length) return;
-            const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
-            $textarea.trigger("focus");
-            document.execCommand("insertText", false, errorText);
-          }}
-        >
-          Fix Error
-        </Button>
-      </div>
+      <Button
+        variant="destructive"
+        onClick={() => {
+          if (!sandpack.error) return;
+          const $textarea = UiUtils.getActiveQueryBoxTextarea();
+          if (!$textarea.length) return;
+          const errorText = `${isAutonomousCanvas && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
+          $textarea.trigger("focus");
+          document.execCommand("insertText", false, errorText);
+        }}
+      >
+        Fix Error
+      </Button>
     </div>
   );
 }

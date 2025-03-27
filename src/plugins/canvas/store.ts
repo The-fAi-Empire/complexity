@@ -6,10 +6,7 @@ import { createWithEqualityFn } from "zustand/traditional";
 
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
-import {
-  spaRouteChangeCompleteSubscribe,
-  spaRouterStoreSubscribe,
-} from "@/plugins/_core/spa-router/listeners";
+import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
 import {
   CanvasLanguage,
   CanvasState,
@@ -22,7 +19,7 @@ import { CANVAS_PLACEHOLDERS } from "@/plugins/canvas/canvases";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
-import { parseUrl, scrollToElement, whereAmI } from "@/utils/utils";
+import { scrollToElement, whereAmI } from "@/utils/utils";
 
 type CodeBlockLocation = {
   messageBlockIndex: number;
@@ -122,8 +119,6 @@ csLoaderRegistry.register({
     initializeAutonomousMode();
 
     emitResizeEvent();
-
-    closeOnRouteChange();
   },
 });
 
@@ -259,23 +254,6 @@ const emitResizeEvent = () => {
       setTimeout(() => window.dispatchEvent(new Event("resize")), 300);
     }
   });
-};
-
-const closeOnRouteChange = () => {
-  spaRouterStoreSubscribe(
-    (store) => ({ state: store.state, url: store.url }),
-    ({ state, url }, { url: prevUrl }) => {
-      if (state !== "complete" && url === prevUrl) return;
-
-      if (
-        parseUrl(prevUrl).queryParams.get("q") != null ||
-        parseUrl(url).queryParams.get("q") != null
-      )
-        return;
-
-      canvasStore.getState().close();
-    },
-  );
 };
 
 export const useCanvasStore = canvasStore;

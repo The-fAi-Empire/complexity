@@ -63,7 +63,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "queryBox:noFileCreationOnPaste": {
     id: "queryBox:noFileCreationOnPaste",
     routeSegment: "query-box-no-file-creation-on-paste",
-    title: "Prevent File Creation on Paste",
+    title: "Raw Text Paste",
     description:
       "Prevent automatic file creation when pasting (very) long text into the query box",
     categories: ["queryBox"],
@@ -124,7 +124,7 @@ export const PLUGINS_METADATA: CplxPluginMetadata = {
   "thread:messageTts": {
     id: "thread:messageTts",
     routeSegment: "thread-message-tts",
-    title: "Message TTS",
+    title: "Text-to-Speech",
     description: "Enable text-to-speech for messages in threads",
     categories: ["thread"],
     tags: ["new", "experimental", "ui", "ux"],

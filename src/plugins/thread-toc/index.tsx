@@ -53,7 +53,8 @@ export default function ThreadTocWrapper() {
   useInsertCss({
     css: normalizeCss,
     id: "thread-toc-normalize",
-    inject: APP_CONFIG.BROWSER === "firefox",
+    inject:
+      APP_CONFIG.BROWSER === "firefox" && tocItems.length > 1 && !isFloating,
   });
 
   if (!shouldShowToc || threadWrapper == null) return null;
