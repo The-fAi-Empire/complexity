@@ -2,8 +2,6 @@ import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selec
 
 type LanguageModelSelectorContext = {
   component: "select" | "dropdown";
-  isProSearchEnabled: boolean;
-  setIsProSearchEnabled: (isProSearchEnabled: boolean) => void;
   setHighlightedItem: (item: LanguageModelCode) => void;
 };
 

@@ -1,10 +1,6 @@
 import { produce } from "immer";
 
 import { pluginGuardsStore } from "@/components/plugins-guard/store";
-import {
-  isDeepResearchLanguageModelCode,
-  isReasoningLanguageModelCode,
-} from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
 import {
   encodePerplexityAskEvent,
@@ -62,25 +58,8 @@ csLoaderRegistry.register({
                 : parsedData.params.timezone;
 
             if (!isRetry) {
-              const { isProSearchEnabled, selectedLanguageModel } =
-                sharedQueryBoxStore.getState();
-
-              const isReasoningModel = isReasoningLanguageModelCode(
-                selectedLanguageModel,
-              );
-
-              const isDeepResearchModel = isDeepResearchLanguageModelCode(
-                selectedLanguageModel,
-              );
-
+              const { selectedLanguageModel } = sharedQueryBoxStore.getState();
               draft.model_preference = selectedLanguageModel;
-              draft.mode =
-                (isProSearchEnabled ||
-                  isReasoningModel ||
-                  isDeepResearchModel) &&
-                selectedLanguageModel !== "turbo"
-                  ? "copilot"
-                  : "concise";
             }
           });
 

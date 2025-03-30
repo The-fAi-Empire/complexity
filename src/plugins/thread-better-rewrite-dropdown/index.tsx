@@ -8,9 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  isDeepResearchLanguageModelCode,
   isLanguageModelCode,
-  isReasoningLanguageModelCode,
   LanguageModelCode,
 } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
@@ -27,7 +25,6 @@ export default function ThreadBetterRewriteDropdown({
 }) {
   const { isMobile } = useIsMobileStore();
   const [isOpen, setIsOpen] = useState(false);
-  const [isProSearchEnabled, setIsProSearchEnabled] = useState(false);
   const [highlightedItem, setHighlightedItem] =
     useState<LanguageModelCode | null>("claude2");
   const isReadOnly = useThreadMessageBlocksDomObserverStore(
@@ -61,16 +58,6 @@ export default function ThreadBetterRewriteDropdown({
       onOpenChange={async ({ open }) => {
         if (open) {
           const modelPreferences = await fetchMessageModelPreferences();
-
-          setIsProSearchEnabled(
-            modelPreferences.data?.mode.toLowerCase() === "copilot" ||
-              isReasoningLanguageModelCode(
-                modelPreferences.data?.displayModel ?? "",
-              ) ||
-              isDeepResearchLanguageModelCode(
-                modelPreferences.data?.displayModel ?? "",
-              ),
-          );
           setHighlightedItem(modelPreferences.data?.displayModel ?? null);
         }
 
@@ -85,7 +72,6 @@ export default function ThreadBetterRewriteDropdown({
         handleRewrite({
           selectedModel: value as LanguageModelCode,
           messageBlockIndex,
-          isProSearchEnabled,
         });
       }}
     >
@@ -100,8 +86,6 @@ export default function ThreadBetterRewriteDropdown({
       <LanguageModelSelectorContext
         value={{
           component: "dropdown",
-          isProSearchEnabled,
-          setIsProSearchEnabled,
           setHighlightedItem,
         }}
       >

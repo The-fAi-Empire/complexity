@@ -24,3 +24,13 @@
   [data-cplx-component="query-box-pplx-components-wrapper"] {
   display: none;
 }
+
+[cplx-main-query-box],
+[cplx-follow-up-query-box],
+[cplx-space-query-box] {
+  div:has(> [data-cplx-component="query-box-pplx-components-wrapper"])
+    + div
+    > :first-child {
+    display: none;
+  }
+}

@@ -10,8 +10,6 @@ export function useModelLimits() {
   const getModelLimit = useCallback(
     (model: LanguageModel) => {
       switch (model.code) {
-        case "turbo":
-          return Infinity;
         default: {
           const limitKey = model.limitKey;
           if (!limitKey) return null;

@@ -73,8 +73,6 @@ export const DOM_SELECTORS = {
   QUERY_BOX: {
     TEXTAREA: {
       MAIN: 'body[location="home"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
-      MAIN_MODAL:
-        '[data-testid="quick-search-modal"] textarea[placeholder][autocomplete][style*="height"]',
       SPACE:
         'body[location="collection"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
       FOLLOW_UP:

@@ -18,18 +18,9 @@ export const localLanguageModels = [
   },
   {
     label: "Claude 3.7 Sonnet",
-    shortLabel: "Sonnet",
+    shortLabel: "Sonnet Thinking",
     code: "claude37sonnetthinking",
     provider: "Anthropic",
-    limitKey: "pro_reasoning_limit",
-    type: "reasoning",
-    hideFromList: false,
-  },
-  {
-    label: "DeepSeek R1",
-    shortLabel: "R1",
-    code: "r1",
-    provider: "DeepSeek",
     limitKey: "pro_reasoning_limit",
     type: "reasoning",
     hideFromList: false,
@@ -49,6 +40,15 @@ export const localLanguageModels = [
     code: "o3mini",
     provider: "OpenAI",
     limitKey: "o1_limit",
+    type: "reasoning",
+    hideFromList: false,
+  },
+  {
+    label: "DeepSeek R1 (1776)",
+    shortLabel: "R1",
+    code: "r1",
+    provider: "Perplexity",
+    limitKey: "pro_reasoning_limit",
     type: "reasoning",
     hideFromList: false,
   },
@@ -80,7 +80,7 @@ export const localLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "Standard",
+    label: "Deep Research",
     shortLabel: "Deep Research",
     code: "pplx_alpha",
     provider: "PerplexityDeepResearch",
@@ -95,7 +95,7 @@ export const localLanguageModels = [
     provider: "PerplexityDeepResearch",
     limitKey: "pro_reasoning_limit",
     type: "deepResearch",
-    hideFromList: false,
+    hideFromList: true,
   },
   {
     label: "Sonar",
@@ -109,6 +109,14 @@ export const localLanguageModels = [
   {
     label: "Auto",
     shortLabel: "Auto",
+    code: "pplx_pro",
+    provider: "Perplexity",
+    type: "auto",
+    hideFromList: true,
+  },
+  {
+    label: "Auto (Free)",
+    shortLabel: "Auto (Free)",
     code: "turbo",
     provider: "Perplexity",
     type: "auto",
@@ -128,6 +136,10 @@ export let reasoningLanguageModels: LanguageModel[] = [
 
 export let deepResearchLanguageModels: LanguageModel[] = [
   ...languageModels.filter((model) => model.type === "deepResearch"),
+];
+
+export let autoLanguageModels: LanguageModel[] = [
+  ...languageModels.filter((model) => model.type === "auto"),
 ];
 
 csLoaderRegistry.register({
@@ -159,6 +171,9 @@ csLoaderRegistry.register({
       );
       deepResearchLanguageModels = languageModels.filter(
         (model) => model.type === "deepResearch",
+      );
+      autoLanguageModels = languageModels.filter(
+        (model) => model.type === "auto",
       );
     }
   },

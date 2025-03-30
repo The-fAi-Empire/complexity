@@ -32,8 +32,8 @@ export default function AutoModeOption() {
 
   return (
     <ItemComp
-      value="turbo"
-      item="turbo"
+      value="pplx_pro"
+      item="pplx_pro"
       className={cn("x:w-full x:cursor-pointer x:items-start x:p-2", {
         "x:p-4": isMobile,
       })}
@@ -43,7 +43,7 @@ export default function AutoModeOption() {
         <FaShuffle
           className={cn("x:mt-1 x:size-3.5 x:text-foreground", {
             "x:text-primary":
-              component === "select" && selectedLanguageModel === "turbo",
+              component === "select" && selectedLanguageModel === "pplx_pro",
             "x:size-4": isMobile,
           })}
         />
@@ -51,7 +51,7 @@ export default function AutoModeOption() {
           <div
             className={cn("x:font-medium x:text-foreground", {
               "x:text-primary":
-                component === "select" && selectedLanguageModel === "turbo",
+                component === "select" && selectedLanguageModel === "pplx_pro",
               "x:text-lg": isMobile,
             })}
           >

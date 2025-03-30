@@ -13,7 +13,8 @@ import { LanguageModelProvider } from "@/data/plugins/query-box/language-model-s
 export const languageModelProviderIcons: Record<
   LanguageModelProvider,
   React.ElementType
-> = {
+> &
+  Record<string, React.ElementType> = {
   Anthropic: SiAnthropic,
   OpenAI: SiOpenai,
   xAI: XAiIcon,

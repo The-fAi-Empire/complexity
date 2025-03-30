@@ -7,7 +7,6 @@ import {
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/mobile/LanguageModelGroup";
-import ProSearchSwitch from "@/plugins/language-model-selector/components/mobile/ProSearchSwitch";
 
 export default function MobileContent({ ...props }: DialogProps) {
   return (
@@ -17,10 +16,7 @@ export default function MobileContent({ ...props }: DialogProps) {
         closeButton={false}
         className="x:flex x:flex-col x:gap-2"
       >
-        <ProSearchSwitch />
-        <div className="x:mx-auto x:my-2 x:min-h-px x:w-full x:bg-border/50" />
         <AutoModeOption />
-        <div className="x:mx-auto x:my-2 x:min-h-px x:w-full x:bg-border/50" />
         <LanguageModelGroup
           title="Reasoning"
           models={reasoningLanguageModels}

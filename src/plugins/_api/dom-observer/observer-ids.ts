@@ -9,7 +9,6 @@ const OBSERVER_IDS = [
   "queryBoxes:home",
   "queryBoxes:collection",
   "queryBoxes:followUp",
-  "queryBoxes:modal",
   "queryBoxes:pplxComponentsWrapper",
 
   "home",
@@ -23,8 +22,6 @@ const OBSERVER_IDS = [
   "spacesPage",
 
   "settingsPage:topNavWrapper",
-
-  "plugin:queryBox:languageModelSelector:syncNativeModelSelector",
 ] as const;
 
 export type ObserverId = (typeof OBSERVER_IDS)[number];

@@ -24,22 +24,6 @@ export function findMainQueryBox() {
   });
 }
 
-export function findMainModalQueryBox() {
-  if ($(`[${OBSERVER_ID.MAIN_MODAL_QUERY_BOX}]`).length) return;
-
-  const $mainModalQueryBox = UiUtils.getActiveQueryBox({
-    type: "main-modal",
-  });
-
-  if (!$mainModalQueryBox.length) return;
-
-  $mainModalQueryBox.attr(OBSERVER_ID.MAIN_MODAL_QUERY_BOX, "true");
-
-  queryBoxesDomObserverStore.getState().setMainNodes({
-    $mainModalQueryBox,
-  });
-}
-
 export function findSpaceQueryBox() {
   if ($(`[${OBSERVER_ID.SPACE_QUERY_BOX}]`).length) return;
 

@@ -46,7 +46,12 @@ export default function MobileLanguageModelGroup({
 
   return (
     <GroupComp className="x:m-0 x:p-0">
-      <LabelComp className="x:text-base">{title}</LabelComp>
+      <div className="x:flex x:items-center x:justify-between x:gap-2">
+        <LabelComp className="x:font-mono x:text-base x:whitespace-nowrap x:uppercase">
+          {title}
+        </LabelComp>
+        <div className="x:h-px x:w-full x:bg-border/75" />
+      </div>
       {models.map((model) => {
         if (model.hideFromList) return null;
 

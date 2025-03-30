@@ -1,1 +1,1 @@
-export type QueryBoxType = "main" | "main-modal" | "space" | "follow-up";
+export type QueryBoxType = "main" | "space" | "follow-up";

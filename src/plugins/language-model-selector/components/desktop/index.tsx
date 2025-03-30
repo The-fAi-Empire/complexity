@@ -9,7 +9,6 @@ import {
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/desktop/LanguageModelGroup";
-import ProSearchSwitch from "@/plugins/language-model-selector/components/desktop/ProSearchSwitch";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
@@ -30,8 +29,6 @@ export default function DesktopContent() {
       )}
     >
       <div>
-        <ProSearchSwitch />
-        <div className="x:mx-auto x:my-2 x:h-px x:w-full x:bg-border/50" />
         <div className="x:flex x:items-start x:justify-between x:gap-2">
           <LanguageModelGroup
             title="Standard"

@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {
+  autoLanguageModels,
   deepResearchLanguageModels,
   fastLanguageModels,
   languageModels,
@@ -51,4 +52,10 @@ export function isDeepResearchLanguageModelCode(
   value: string,
 ): value is LanguageModel["code"] {
   return deepResearchLanguageModels.some((model) => model.code === value);
+}
+
+export function isAutoLanguageModelCode(
+  value: string,
+): value is LanguageModel["code"] {
+  return autoLanguageModels.some((model) => model.code === value);
 }

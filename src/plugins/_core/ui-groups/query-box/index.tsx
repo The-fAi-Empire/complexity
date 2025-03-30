@@ -6,7 +6,6 @@ import followUpQueryBoxCss from "@/plugins/_core/ui-groups/query-box/follow-up-q
 import FollowUpQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/FollowUp";
 import MainQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/Main";
 import mainQueryBoxCss from "@/plugins/_core/ui-groups/query-box/main-query-box.css?inline";
-import MainModalQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/MainModal";
 import SpaceQueryBoxWrapper from "@/plugins/_core/ui-groups/query-box/Space";
 import { shouldEnableUiGroup } from "@/plugins/_core/ui-groups/utils";
 import hideNativeModelSelector from "@/plugins/language-model-selector/hide-native-model-selector.css?inline";
@@ -24,7 +23,6 @@ export default function QueryBoxWrapper() {
   return (
     <CsUiPluginsGuard additionalCheck={() => shouldEnableToolbar}>
       <MainQueryBoxWrapper />
-      <MainModalQueryBoxWrapper />
       <SpaceQueryBoxWrapper />
       <FollowUpQueryBoxWrapper />
     </CsUiPluginsGuard>

@@ -4,7 +4,6 @@ import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-
 import {
   findPplxComponentsWrapper,
   findFollowUpQueryBox,
-  findMainModalQueryBox,
   findMainQueryBox,
   findSpaceQueryBox,
 } from "@/plugins/_core/dom-observers/query-boxes/utils";
@@ -17,7 +16,6 @@ const cleanup = () => {
   DomObserver.destroy("queryBoxes:home");
   DomObserver.destroy("queryBoxes:collection");
   DomObserver.destroy("queryBoxes:followUp");
-  DomObserver.destroy("queryBoxes:modal");
   DomObserver.destroy("queryBoxes:pplxComponentsWrapper");
 };
 
@@ -113,18 +111,6 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
         ),
     });
   }
-
-  DomObserver.create("queryBoxes:modal", {
-    target: document.body,
-    config: { childList: true, subtree: true },
-    debounceTime: 500,
-    fireImmediately: true,
-    onMutation: () =>
-      CallbackQueue.getInstance().enqueue(
-        findMainModalQueryBox,
-        "queryBoxes:modal",
-      ),
-  });
 
   DomObserver.create("queryBoxes:pplxComponentsWrapper", {
     target: document.body,

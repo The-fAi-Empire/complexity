@@ -9,7 +9,6 @@ import {
 } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import useBindBetterLanguageModelSelectorHotKeys from "@/plugins/_core/ui-groups/query-box/hooks/useBindHotKeys";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
@@ -22,23 +21,15 @@ const selectItems = getSelectItems();
 
 export default function BetterLanguageModelSelectorWrapper() {
   const { isMobile } = useIsMobileStore();
-  const {
-    selectedLanguageModel,
-    setSelectedLanguageModel,
-    isProSearchEnabled,
-    setIsProSearchEnabled,
-  } = useSharedQueryBoxStore((store) => ({
-    selectedLanguageModel: store.selectedLanguageModel,
-    setSelectedLanguageModel: store.setSelectedLanguageModel,
-    isProSearchEnabled: store.isProSearchEnabled,
-    setIsProSearchEnabled: store.setIsProSearchEnabled,
-  }));
+  const { selectedLanguageModel, setSelectedLanguageModel } =
+    useSharedQueryBoxStore((store) => ({
+      selectedLanguageModel: store.selectedLanguageModel,
+      setSelectedLanguageModel: store.setSelectedLanguageModel,
+    }));
   const [highlightedItem, setHighlightedItem] = useState<LanguageModelCode>(
     selectedLanguageModel,
   );
   const [isOpen, setIsOpen] = useState(false);
-
-  useBindBetterLanguageModelSelectorHotKeys();
 
   return (
     <Select
@@ -80,8 +71,6 @@ export default function BetterLanguageModelSelectorWrapper() {
       <LanguageModelSelectorContext
         value={{
           component: "select",
-          isProSearchEnabled,
-          setIsProSearchEnabled,
           setHighlightedItem,
         }}
       >
@@ -107,7 +96,7 @@ function getSelectItems() {
     ...fastLanguageModels,
     ...reasoningLanguageModels,
     ...deepResearchLanguageModels,
-    localLanguageModels.find((model) => model.code === "turbo")!,
+    localLanguageModels.find((model) => model.code === "pplx_pro")!,
   ].map((model) => ({
     id: model.code,
     label: model.label,

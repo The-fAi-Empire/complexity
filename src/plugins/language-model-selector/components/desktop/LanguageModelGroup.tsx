@@ -59,10 +59,14 @@ export default function LanguageModelGroup({
             placement: "right",
           }}
         >
-          <LabelComp>{title}</LabelComp>
+          <LabelComp className="x:font-mono x:whitespace-nowrap x:uppercase">
+            {title}
+          </LabelComp>
         </Tooltip>
       ) : (
-        <LabelComp>{title}</LabelComp>
+        <LabelComp className="x:font-mono x:whitespace-nowrap x:uppercase">
+          {title}
+        </LabelComp>
       )}
 
       {models.map((model) => {

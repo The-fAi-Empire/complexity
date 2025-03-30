@@ -33,9 +33,6 @@ export class UiUtils {
       case "main":
         selector = DOM_SELECTORS.QUERY_BOX.TEXTAREA.MAIN;
         break;
-      case "main-modal":
-        selector = DOM_SELECTORS.QUERY_BOX.TEXTAREA.MAIN_MODAL;
-        break;
       case "space":
         selector = DOM_SELECTORS.QUERY_BOX.TEXTAREA.SPACE;
         break;

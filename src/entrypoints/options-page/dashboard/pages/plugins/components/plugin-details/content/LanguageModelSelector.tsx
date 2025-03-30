@@ -17,10 +17,6 @@ export default function LanguageModelSelectorPluginDetails() {
           available language models.
         </div>
         <div className="x:flex x:items-center x:gap-2">
-          <LuCheck className="x:text-primary" /> Prevent Perplexity from
-          automatically switching to the "Auto" model.
-        </div>
-        <div className="x:flex x:items-center x:gap-2">
           <LuCheck className="x:text-primary" /> No ambiguity, no confusion,
           change your preferred one anywhere.
         </div>

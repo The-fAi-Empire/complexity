@@ -1,7 +1,6 @@
 import { onMessage } from "webext-bridge/window";
 
 import { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { PplxWebResult } from "@/utils/thread-export";
@@ -33,7 +32,6 @@ export type ReactVdomEvents = {
     messageBlockIndex: number;
     optionIndex?: number;
   }) => boolean;
-  "reactVdom:syncNativeModelSelector": (params: { searchMode: string }) => void;
 };
 
 export function setupReactVdomListeners() {
@@ -231,53 +229,6 @@ export function setupReactVdomListeners() {
       return true;
     },
   );
-
-  onMessage("reactVdom:syncNativeModelSelector", ({ data: { searchMode } }) => {
-    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER}"]:last > :last-child > :first-child`;
-
-    const $modelSelector = $(selector);
-
-    if (!$modelSelector[0]) return;
-
-    const fiberNode = ($modelSelector[0] as any)[
-      getReactFiberKey($modelSelector[0])
-    ];
-
-    if (fiberNode == null) return;
-
-    const isMobile = isMobileStore.getState().isMobile;
-
-    const [items, error] = errorWrapper(() =>
-      findReactFiberNodeValue({
-        fiberNode,
-        condition: (node) => {
-          if (!isMobile) return node.return.return.memoizedProps.items != null;
-
-          return node.return.memoizedProps.items != null;
-        },
-        select: (node) => {
-          if (!isMobile)
-            return node.return.return.memoizedProps.items as {
-              onClick: () => void;
-              value: "default" | "pro" | LanguageModelCode;
-            }[];
-
-          return node.return.memoizedProps.items as {
-            onClick: () => void;
-            value: "default" | "pro" | LanguageModelCode;
-          }[];
-        },
-      }),
-    )();
-
-    if (error || items == null) return;
-
-    const item = items.find((item) => item.value === searchMode);
-
-    if (item == null) return;
-
-    item.onClick();
-  });
 }
 
 function findReactFiberNodeValue<T>({
