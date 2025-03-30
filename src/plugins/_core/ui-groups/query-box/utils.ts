@@ -2,74 +2,117 @@ import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-sel
 import { sharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
-export function createToolbarPortalContainers(queryBox: HTMLElement): {
-  leftContainer: HTMLElement | null;
-  rightContainer: HTMLElement | null;
+export function createToolbarPortalContainers({
+  queryBox,
+}: {
+  queryBox: HTMLElement;
+}): {
+  leftToolbar: {
+    leftContainer: HTMLElement | null;
+    rightContainer: HTMLElement | null;
+  };
+  rightToolbar: {
+    leftContainer: HTMLElement | null;
+    rightContainer: HTMLElement | null;
+  };
 } {
   const $textareaWrapper = $(queryBox).find("textarea").parent();
-
   const $queryBoxComponentsWrapper = $textareaWrapper.parent();
 
   $queryBoxComponentsWrapper.internalComponentAttr(
     INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.COMPONENTS_WRAPPER,
   );
 
-  const $toolbar = $queryBoxComponentsWrapper.find(">div:nth-child(2)");
+  // --- Left Toolbar ---
+  const $pplxLeftToolbarWrapper =
+    $queryBoxComponentsWrapper.find(">div:nth-child(2)"); // Might be brittle
 
-  $toolbar
-    .find(">div.flex:first-child")
-    .internalComponentAttr(
-      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER,
+  if ($pplxLeftToolbarWrapper.length) {
+    $pplxLeftToolbarWrapper
+      .find(">div.flex:first-child")
+      .internalComponentAttr(
+        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+          .PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER,
+      );
+  }
+
+  const $leftToolbarLeftContainer = findOrCreateContainer(
+    $pplxLeftToolbarWrapper,
+    INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+      .CPLX_LEFT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
+    "prepend",
+  );
+
+  const $leftToolbarRightContainer = findOrCreateContainer(
+    $pplxLeftToolbarWrapper,
+    INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+      .CPLX_LEFT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER,
+    "append",
+  );
+
+  // --- Right Toolbar ---
+  let $rightToolbarLeftContainer: JQuery<HTMLElement> | null = null;
+  const $pplxRightToolbarWrapper =
+    $queryBoxComponentsWrapper.find(">div:nth-child(3)");
+
+  if ($pplxRightToolbarWrapper.length) {
+    $pplxRightToolbarWrapper.internalComponentAttr(
+      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
     );
 
-  const $leftContainer = (() => {
-    if (!$toolbar.length) return null;
+    $pplxRightToolbarWrapper
+      .find(">div.flex:first-child")
+      .internalComponentAttr(
+        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+          .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
+      );
 
-    const $existingLeftContainer = $toolbar.find(
-      `[data-cplx-component="${
-        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_LEFT_WRAPPER
-      }"]`,
+    $rightToolbarLeftContainer = findOrCreateContainer(
+      $pplxRightToolbarWrapper,
+      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+        .CPLX_RIGHT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
+      "prepend",
     );
-
-    if ($existingLeftContainer.length) return $existingLeftContainer;
-
-    const $newLeftContainer = $("<x:div>").addClass("x:[&:empty]:hidden");
-
-    $newLeftContainer.internalComponentAttr(
-      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_LEFT_WRAPPER,
-    );
-
-    $toolbar.prepend($newLeftContainer);
-
-    return $newLeftContainer;
-  })();
-
-  const $rightContainer = (() => {
-    if (!$toolbar.length) return null;
-
-    const $existingRightContainer = $toolbar.find(
-      `[data-cplx-component="${
-        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_RIGHT_WRAPPER
-      }"]`,
-    );
-
-    if ($existingRightContainer.length) return $existingRightContainer;
-
-    const $newRightContainer = $("<x:div>").addClass("x:[&:empty]:hidden");
-
-    $newRightContainer.internalComponentAttr(
-      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.CPLX_COMPONENTS_RIGHT_WRAPPER,
-    );
-
-    $toolbar.append($newRightContainer);
-
-    return $newRightContainer;
-  })();
+  }
 
   return {
-    leftContainer: $leftContainer?.[0] ?? null,
-    rightContainer: $rightContainer?.[0] ?? null,
+    leftToolbar: {
+      leftContainer: $leftToolbarLeftContainer?.[0] ?? null,
+      rightContainer: $leftToolbarRightContainer?.[0] ?? null,
+    },
+    rightToolbar: {
+      leftContainer: $rightToolbarLeftContainer?.[0] ?? null,
+      rightContainer: null,
+    },
   };
+}
+
+function findOrCreateContainer(
+  $parentElement: JQuery<HTMLElement>,
+  internalAttribute: string,
+  position: "prepend" | "append",
+): JQuery<HTMLElement> | null {
+  if (!$parentElement?.length) {
+    return null;
+  }
+
+  const selector = `[data-cplx-component="${internalAttribute}"]`;
+  const $existingContainer = $parentElement.find(selector);
+
+  if ($existingContainer.length) {
+    return $existingContainer;
+  }
+
+  const $newContainer = $("<div>").addClass("x:[&:empty]:hidden");
+  $newContainer.internalComponentAttr(internalAttribute);
+
+  if (position === "prepend") {
+    $parentElement.prepend($newContainer);
+  } else {
+    $parentElement.append($newContainer);
+  }
+
+  return $newContainer;
 }
 
 export function populateDefaults() {

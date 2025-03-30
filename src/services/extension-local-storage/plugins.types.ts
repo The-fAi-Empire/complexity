@@ -28,6 +28,7 @@ export const PluginsSchema = z.object({
     hotkey: z.array(z.string()),
   }),
   "queryBox:submitOnCtrlEnter": PluginSettingsSchema,
+  "queryBox:spacesThreadsForceWritingMode": PluginSettingsSchema,
   spaceNavigator: PluginSettingsSchema,
   "sidebar:toggleableRecentThreads": PluginSettingsSchema,
   "thread:toc": PluginSettingsSchema,

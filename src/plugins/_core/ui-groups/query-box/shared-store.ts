@@ -7,6 +7,8 @@ import { populateDefaults } from "@/plugins/_core/ui-groups/query-box/utils";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 
 type SharedQueryBoxStore = {
+  spacesThreadsForceWritingMode: boolean;
+  setSpacesThreadsForceWritingMode: (enable: boolean) => void;
   selectedLanguageModel: LanguageModel["code"];
   setSelectedLanguageModel: (
     selectedLanguageModel: LanguageModel["code"],
@@ -18,9 +20,13 @@ const useSharedQueryBoxStore = createWithEqualityFn<SharedQueryBoxStore>()(
     immer(
       (set): SharedQueryBoxStore => ({
         selectedLanguageModel: "pplx_pro",
+        spacesThreadsForceWritingMode: false,
         setSelectedLanguageModel: async (selectedLanguageModel) => {
           localStorage.setItem("cplx.selected-model", selectedLanguageModel);
           set({ selectedLanguageModel });
+        },
+        setSpacesThreadsForceWritingMode: (forceWritingMode) => {
+          set({ spacesThreadsForceWritingMode: forceWritingMode });
         },
       }),
     ),

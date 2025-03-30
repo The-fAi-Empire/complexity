@@ -3,6 +3,7 @@ import { Portal } from "@/components/ui/portal";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { ScopedQueryBoxContextProvider } from "@/plugins/_core/ui-groups/query-box/context/context";
 import { createToolbarPortalContainers } from "@/plugins/_core/ui-groups/query-box/utils";
+import ForceWritingModeToggle from "@/plugins/force-writing-mode";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector";
 import SlashCommandMenuWrapper from "@/plugins/slash-command-menu";
 import SlashCommandMenuTriggerButton from "@/plugins/slash-command-menu/TriggerButton";
@@ -16,12 +17,13 @@ export default function SpaceQueryBoxWrapper() {
 
   if (!spaceQueryBox) return null;
 
-  const { leftContainer, rightContainer } =
-    createToolbarPortalContainers(spaceQueryBox);
+  const { leftToolbar, rightToolbar } = createToolbarPortalContainers({
+    queryBox: spaceQueryBox,
+  });
 
   return (
     <ScopedQueryBoxContextProvider storeValue={{ type: "space" }}>
-      <Portal container={leftContainer}>
+      <Portal container={leftToolbar.leftContainer}>
         <CsUiPluginsGuard
           allowedAccountTypes={[["pro"], ["pro", "enterprise"]]}
           dependentPluginIds={["queryBox:languageModelSelector"]}
@@ -29,7 +31,7 @@ export default function SpaceQueryBoxWrapper() {
           <BetterLanguageModelSelectorWrapper />
         </CsUiPluginsGuard>
       </Portal>
-      <Portal container={rightContainer}>
+      <Portal container={leftToolbar.rightContainer}>
         <div className="x:flex x:flex-wrap x:items-center x:gap-2">
           <CsUiPluginsGuard
             desktopOnly
@@ -53,6 +55,13 @@ export default function SpaceQueryBoxWrapper() {
           dependentPluginIds={["queryBox:slashCommandMenu"]}
         >
           <SlashCommandMenuWrapper anchor={spaceQueryBox} />
+        </CsUiPluginsGuard>
+      </Portal>
+      <Portal container={rightToolbar.leftContainer}>
+        <CsUiPluginsGuard
+          dependentPluginIds={["queryBox:spacesThreadsForceWritingMode"]}
+        >
+          <ForceWritingModeToggle />
         </CsUiPluginsGuard>
       </Portal>
     </ScopedQueryBoxContextProvider>

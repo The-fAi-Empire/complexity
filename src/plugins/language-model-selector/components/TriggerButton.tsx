@@ -6,12 +6,17 @@ import Tooltip from "@/components/Tooltip";
 import { languageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
 import { isDeepResearchLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { useScopedQueryBoxContext } from "@/plugins/_core/ui-groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui-groups/query-box/shared-store";
 
 export default function BetterLanguageModelSelectorTriggerButton() {
   const selectedLanguageModel = useSharedQueryBoxStore(
     (state) => state.selectedLanguageModel,
   );
+
+  const {
+    store: { type },
+  } = useScopedQueryBoxContext();
 
   const isDeepResearchModel = useMemo(
     () => isDeepResearchLanguageModelCode(selectedLanguageModel),
@@ -48,7 +53,13 @@ export default function BetterLanguageModelSelectorTriggerButton() {
         )}
       >
         <Icon className="x:size-4 x:shrink-0" />
-        <span className="x:truncate">{modelInfo?.shortLabel}</span>
+        <span
+          className={cn("x:truncate", {
+            "x:hidden x:md:block": type === "space",
+          })}
+        >
+          {modelInfo?.shortLabel}
+        </span>
       </div>
     </Tooltip>
   );

@@ -153,9 +153,18 @@ export const INTERNAL_ATTRIBUTES = {
   },
   QUERY_BOX_CHILD: {
     COMPONENTS_WRAPPER: "query-box-components-wrapper",
-    PPLX_COMPONENTS_WRAPPER: "query-box-pplx-components-wrapper",
-    CPLX_COMPONENTS_LEFT_WRAPPER: "query-box-cplx-components-left-wrapper",
-    CPLX_COMPONENTS_RIGHT_WRAPPER: "query-box-cplx-components-right-wrapper",
+    PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER:
+      "query-box-pplx-left-toolbar-components-wrapper",
+    CPLX_LEFT_TOOLBAR_COMPONENTS_LEFT_WRAPPER:
+      "query-box-cplx-left-toolbar-components-left-wrapper",
+    CPLX_LEFT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER:
+      "query-box-cplx-left-toolbar-components-right-wrapper",
+    PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER:
+      "query-box-pplx-right-toolbar-components-wrapper",
+    CPLX_RIGHT_TOOLBAR_COMPONENTS_LEFT_WRAPPER:
+      "query-box-cplx-right-toolbar-components-left-wrapper",
+    CPLX_RIGHT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER:
+      "query-box-cplx-right-toolbar-components-right-wrapper",
   },
   SPACES_PAGE: {
     SPACE_CARD: "space-card",

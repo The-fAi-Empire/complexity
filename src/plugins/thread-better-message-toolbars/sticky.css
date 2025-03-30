@@ -12,7 +12,7 @@
     @apply x:mb-2 x:border-b x:border-dashed x:border-border/50 x:py-2;
 
     &.stuck {
-      @apply x:z-10 x:mb-0 x:border-solid x:bg-background;
+      @apply x:z-10 x:border-solid x:bg-background;
       box-shadow: 0 16px 16px -16px rgba(0, 0, 0, 0.3);
     }
   }

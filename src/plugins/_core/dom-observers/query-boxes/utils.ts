@@ -68,7 +68,7 @@ export async function findFollowUpQueryBox() {
 
 export function findPplxComponentsWrapper() {
   const $target = UiUtils.getActiveQueryBox().find(
-    `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_COMPONENTS_WRAPPER}"]`,
+    `[data-cplx-component="${INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER}"]`,
   );
 
   queryBoxesDomObserverStore.setState({

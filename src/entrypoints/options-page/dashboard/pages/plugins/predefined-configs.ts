@@ -40,15 +40,13 @@ export const ALL_PLUGINS: ExtensionLocalStorage["plugins"] = produce(
     Object.keys(draft).forEach((key) => {
       const pluginIdKey = key as keyof typeof draft;
 
-      if (
-        (
-          [
-            "queryBox:submitOnCtrlEnter",
-            "thread:customThreadContainerWidth",
-          ] as PluginId[]
-        ).includes(pluginIdKey)
-      )
-        return;
+      const excludedPlugins: PluginId[] = [
+        "queryBox:submitOnCtrlEnter",
+        "thread:customThreadContainerWidth",
+        "queryBox:spacesThreadsForceWritingMode",
+      ];
+
+      if (excludedPlugins.includes(pluginIdKey)) return;
 
       draft[pluginIdKey].enabled = true;
     });

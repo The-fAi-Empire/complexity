@@ -30,6 +30,7 @@ import "@/plugins/prompt-history/network-intercept-middlewares";
 import "@/plugins/prompt-history/listeners";
 import "@/plugins/no-file-creation-on-paste";
 import "@/plugins/query-box-submit-on-ctrl-enter";
+import "@/plugins/force-writing-mode/network-intercept-middlewares";
 
 // Thread Plugins
 import "@/plugins/canvas/store";

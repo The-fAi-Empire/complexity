@@ -29,6 +29,9 @@ export const DEFAULT_STORAGE: ExtensionLocalStorage = {
     "queryBox:submitOnCtrlEnter": {
       enabled: false,
     },
+    "queryBox:spacesThreadsForceWritingMode": {
+      enabled: false,
+    },
     spaceNavigator: {
       enabled: false,
     },

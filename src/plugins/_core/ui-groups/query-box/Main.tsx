@@ -16,12 +16,13 @@ export default function MainQueryBoxWrapper() {
 
   if (!mainQueryBox) return null;
 
-  const { leftContainer, rightContainer } =
-    createToolbarPortalContainers(mainQueryBox);
+  const { leftToolbar } = createToolbarPortalContainers({
+    queryBox: mainQueryBox,
+  });
 
   return (
     <ScopedQueryBoxContextProvider storeValue={{ type: "main" }}>
-      <Portal container={leftContainer}>
+      <Portal container={leftToolbar.leftContainer}>
         <CsUiPluginsGuard
           allowedAccountTypes={[["pro"], ["pro", "enterprise"]]}
           dependentPluginIds={["queryBox:languageModelSelector"]}
@@ -29,7 +30,7 @@ export default function MainQueryBoxWrapper() {
           <BetterLanguageModelSelectorWrapper />
         </CsUiPluginsGuard>
       </Portal>
-      <Portal container={rightContainer}>
+      <Portal container={leftToolbar.rightContainer}>
         <div className="x:flex x:flex-wrap x:items-center">
           <CsUiPluginsGuard
             desktopOnly

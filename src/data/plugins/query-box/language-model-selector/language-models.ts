@@ -47,7 +47,7 @@ export const localLanguageModels = [
     label: "DeepSeek R1 (1776)",
     shortLabel: "R1",
     code: "r1",
-    provider: "Perplexity",
+    provider: "DeepSeek",
     limitKey: "pro_reasoning_limit",
     type: "reasoning",
     hideFromList: false,

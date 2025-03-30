@@ -24,7 +24,7 @@
   @apply x:min-h-8 x:min-w-8;
 }
 
-[data-cplx-component="query-box-pplx-components-wrapper"] {
+[data-cplx-component="query-box-pplx-left-toolbar-components-wrapper"] {
   .-ml-2 {
     margin-left: unset;
   }

@@ -16,6 +16,7 @@ import RawHeadingsPluginDetails from "@/entrypoints/options-page/dashboard/pages
 import SidebarToggleableRecentThreadsPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SidebarToggleableRecentThreads";
 import SlashCommandMenuPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SlashCommandMenu";
 import SpaceNavigatorPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SpaceNavigator";
+import SpacesThreadsForceWritingModePluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SpacesThreadsForceWritingMode";
 import SubmitOnCtrlEnterPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/SubmitOnCtrlEnterPluginDetails";
 import ThreadMessageTtsPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/ThreadMessageTts";
 import ThreadShowMessageLengthPluginDetails from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-details/content/ThreadShowMessageLength";
@@ -31,6 +32,9 @@ export const PLUGIN_DETAILS: PluginPluginDetails = {
   "queryBox:slashCommandMenu:promptHistory": <PromptHistoryPluginDetails />,
   "queryBox:noFileCreationOnPaste": <NoFileCreationOnPastePluginDetails />,
   "queryBox:submitOnCtrlEnter": <SubmitOnCtrlEnterPluginDetails />,
+  "queryBox:spacesThreadsForceWritingMode": (
+    <SpacesThreadsForceWritingModePluginDetails />
+  ),
   "sidebar:toggleableRecentThreads": (
     <SidebarToggleableRecentThreadsPluginDetails />
   ),

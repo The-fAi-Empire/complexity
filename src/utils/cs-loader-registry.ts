@@ -51,6 +51,7 @@ export const LOADER_IDS = [
   "plugin:queryBox:promptHistory:listeners",
   "plugin:queryBox:noFileCreationOnPaste",
   "plugin:queryBox:submitOnCtrlEnter",
+  "plugin:queryBox:spacesThreadsForceWritingMode",
 
   "plugin:home:customSlogan",
   "plugin:home:hideHomepageWidgets",

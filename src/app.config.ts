@@ -28,6 +28,8 @@ const APP_CONFIG = {
       "https://stripe.perplexity.ai/*",
       "https://*.perplexity.ai/p/api/*",
       "https://*.perplexity.ai/hub/*",
+      "https://*.perplexity.ai/rest/*",
+      "https://*.perplexity.ai/api/*",
       "https://*.labs.perplexity.ai/*",
       "https://*.docs.perplexity.ai/*",
     ],

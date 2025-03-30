@@ -15,12 +15,13 @@ export default function FollowUpQueryBoxWrapper() {
 
   if (!followUpQueryBox) return null;
 
-  const { leftContainer, rightContainer } =
-    createToolbarPortalContainers(followUpQueryBox);
+  const { leftToolbar } = createToolbarPortalContainers({
+    queryBox: followUpQueryBox,
+  });
 
   return (
     <ScopedQueryBoxContextProvider storeValue={{ type: "follow-up" }}>
-      <Portal container={leftContainer}>
+      <Portal container={leftToolbar.leftContainer}>
         <CsUiPluginsGuard
           allowedAccountTypes={[["pro"], ["pro", "enterprise"]]}
           dependentPluginIds={["queryBox:languageModelSelector"]}
@@ -28,7 +29,7 @@ export default function FollowUpQueryBoxWrapper() {
           <BetterLanguageModelSelectorWrapper />
         </CsUiPluginsGuard>
       </Portal>
-      <Portal container={rightContainer}>
+      <Portal container={leftToolbar.rightContainer}>
         <div className="x:flex x:flex-wrap x:items-center x:gap-2">
           <CsUiPluginsGuard
             desktopOnly
