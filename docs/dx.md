@@ -24,7 +24,9 @@
    pnpm dev
    ```
 
+   - At the current size of the project, dev server might take up to 30 seconds to finish transpiling the necessary code for the extension to work.
    - HMR not working? Refer to [HMR Support](./hmr.md).
+
 4. Enable "Developer mode" in your browser
 5. Load the extension from the `dist` folder
 

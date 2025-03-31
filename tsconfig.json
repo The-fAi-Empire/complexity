@@ -23,5 +23,11 @@
     "useDefineForClassFields": true
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*", "tests/**/*", "e2e/**/*", "vite-plugins/**/*"]
+  "include": [
+    "src/**/*",
+    "tests/**/*",
+    "e2e/**/*",
+    "vite-plugins/**/*",
+    "vite.config.ts"
+  ]
 }

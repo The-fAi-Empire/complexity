@@ -1,11 +1,11 @@
+// --- [DO NOT REMOVE] ---
 // must keep this for tailwind to generate and hmr arbitrary classes in dev mode (this will be removed in prod)
 import "@/assets/index.css";
 import "@/assets/cs.css";
+// --- [DO NOT REMOVE] ---
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
-import csCss from "@/assets/cs.css?inline";
-import indexCss from "@/assets/index.css?inline";
 import ExtensionContextInvalidationWatchdog from "@/components/ExtensionContextInvalidationWatchdog";
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
 import { PostUpdateReleaseNotesDialog } from "@/components/PostUpdateReleaseNotesDialog";
@@ -160,4 +160,6 @@ function SidebarComponents() {
   );
 }
 
-export const csUiRootCss = indexCss + csCss;
+export const csUiRootCss =
+  (await import("@/assets/index.css?inline")).default +
+  (await import("@/assets/cs.css?inline")).default;

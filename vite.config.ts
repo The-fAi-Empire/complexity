@@ -1,3 +1,4 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 /// <reference types="vitest" />
 
 import * as path from "path";
@@ -5,7 +6,6 @@ import { defineConfig } from "vite";
 import { crx } from "@crxjs/vite-plugin";
 import react from "@vitejs/plugin-react";
 import Unimport from "unimport/unplugin";
-import chalk from "chalk";
 
 import chromeManifest from "./src/manifest.chrome";
 import firefoxManifest from "./src/manifest.firefox";
@@ -16,11 +16,8 @@ import tailwindcss from "@tailwindcss/vite";
 import vitePluginForceRestartOnChanges from "./vite-plugins/vite-plugin-force-restart-on-changes";
 import vitePluginReloadOnDynamicallyInjectedStyleChanges from "./vite-plugins/vite-plugin-reload-on-dynamically-injected-style-changes";
 import viteTouchGlobalCss from "./vite-plugins/vite-plugin-touch-global-css";
-
-console.log(
-  "\n",
-  chalk.bold.underline.yellow("TARGET BROWSER:", APP_CONFIG.BROWSER),
-);
+import viteMoveHtmlPlugin from "./vite-plugins/vite-plugin-move-html";
+import viteRemoveStaticCssFromManifest from "./vite-plugins/vite-plugin-remove-static-css-from-manifest";
 
 export default defineConfig(() => ({
   base: "./",
@@ -30,16 +27,9 @@ export default defineConfig(() => ({
     reportCompressedSize: false,
     rollupOptions: {
       output: {
-        chunkFileNames: "assets/cplx-[hash].js",
-        assetFileNames: "assets/cplx-[hash][extname]",
-        entryFileNames: "assets/cplx-[hash].js",
-      },
-    },
-  },
-  css: {
-    preprocessorOptions: {
-      scss: {
-        api: "modern-compiler",
+        chunkFileNames: "assets/cplx-chunk-[hash].js",
+        assetFileNames: "assets/cplx-assets-[hash][extname]",
+        entryFileNames: "assets/cplx-entry-[name]-[hash].js",
       },
     },
   },
@@ -52,12 +42,8 @@ export default defineConfig(() => ({
     react(),
     tailwindcss(),
     Unimport.vite(unimportConfig),
-    vitePluginReloadOnDynamicallyInjectedStyleChanges({
-      excludeString: ["@/assets/index.css", "@/assets/cs.css"],
-    }),
-    vitePluginForceRestartOnChanges({
-      folders: ["public"],
-    }),
+
+    // dev
     viteTouchGlobalCss({
       cssFilePath: path.resolve(__dirname, "src/assets/index.css"),
       watchFiles: [
@@ -65,6 +51,21 @@ export default defineConfig(() => ({
         path.resolve(__dirname, "public/"),
       ],
     }),
+    vitePluginReloadOnDynamicallyInjectedStyleChanges({
+      excludeString: ["@/assets/index.css", "@/assets/cs.css"],
+    }),
+    vitePluginForceRestartOnChanges({
+      folders: ["public"],
+    }),
+
+    // build
+    viteMoveHtmlPlugin([
+      {
+        src: "src/entrypoints/options.html",
+        dest: "options.html",
+      },
+    ]),
+    viteRemoveStaticCssFromManifest(),
   ],
   resolve: {
     alias: {
@@ -73,14 +74,23 @@ export default defineConfig(() => ({
     },
   },
   server: {
-    port: 5173,
+    port: 8811,
     hmr: {
       host: "localhost",
       protocol: "ws",
+    },
+    warmup: {
+      clientFiles: [
+        "src/entrypoints/content-scripts/index.ts",
+        "src/entrypoints/options.html",
+      ],
     },
   },
   test: {
     exclude: ["node_modules", "e2e/**"],
     setupFiles: ["./tests/vitest.setup.ts"],
+  },
+  legacy: {
+    skipWebSocketTokenCheck: true,
   },
 }));

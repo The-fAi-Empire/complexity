@@ -1,7 +1,9 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 import * as fs from "fs";
 
-import chalk from "chalk";
 import { Plugin } from "vite";
+
+import { createLogger } from "./logger";
 
 function touchFile(filePath: string): void {
   const time = new Date();
@@ -19,19 +21,19 @@ export default function touchGlobalCSSPlugin({
   watchFiles,
   verbose = false,
 }: TouchGlobalCSSPluginOptions): Plugin {
+  const logger = createLogger("touch-global-css", verbose);
+
   return {
     name: "touch-global-css",
     configureServer(server) {
+      logger.verbose(`Plugin initialized, watching ${watchFiles.length} files`);
+
       server.watcher.on("change", (file) => {
         if (watchFiles.some((watchFile) => file.includes(watchFile))) {
           if (file.includes(cssFilePath)) return;
 
           touchFile(cssFilePath);
-
-          if (verbose)
-            console.log(
-              `${chalk.blue(`\n[touch-global-css]`)} ${chalk.green(`Touched ${chalk.yellow(cssFilePath)} due to change in ${chalk.yellow(file)}`)}`,
-            );
+          logger.info(`Touched ${cssFilePath} due to change in ${file}`);
         }
       });
     },

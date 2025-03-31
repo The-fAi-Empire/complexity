@@ -1,6 +1,9 @@
+/* eslint-disable @limegrass/import-alias/import-alias */
 import * as path from "path";
 
 import type { Plugin } from "vite";
+
+import { createLogger } from "./logger";
 
 // Create a global state to track which files have triggered a reload
 const reloadedFiles = new Set<string>();
@@ -21,10 +24,14 @@ export function hasFileBeenReloaded(file: string) {
 
 export default function vitePluginReloadOnDynamicallyInjectedStyleChanges(options?: {
   excludeString?: string[];
+  verbose?: boolean;
 }): Plugin {
   const dynamicStyleImports = new Set<string>();
   let root: string;
   const excludePatterns = options?.excludeString || [];
+  const isVerbose = options?.verbose || false;
+
+  const logger = createLogger("reload-on-style-changes", isVerbose);
 
   return {
     name: "reload-on-style-changes",
@@ -32,6 +39,7 @@ export default function vitePluginReloadOnDynamicallyInjectedStyleChanges(option
 
     configResolved(config) {
       root = config.root;
+      logger.verbose(`Plugin initialized with root: ${root}`);
     },
 
     transform(code, id) {
@@ -64,6 +72,7 @@ export default function vitePluginReloadOnDynamicallyInjectedStyleChanges(option
           }
 
           dynamicStyleImports.add(absolutePath);
+          logger.verbose(`Tracking style import: ${importPath}`);
         });
       }
       return null;
@@ -74,6 +83,7 @@ export default function vitePluginReloadOnDynamicallyInjectedStyleChanges(option
 
       // Skip if already handled by force-restart plugin
       if (hasFileBeenReloaded(normalizedChangedFile)) {
+        logger.verbose(`File ${file} already handled, skipping`);
         return;
       }
 
@@ -83,7 +93,7 @@ export default function vitePluginReloadOnDynamicallyInjectedStyleChanges(option
       });
 
       if (isWatched) {
-        console.log("[reload-on-style-changes] Triggering reload for:", file);
+        logger.info(`Triggering reload for: ${file}`);
         markFileAsReloaded(normalizedChangedFile);
         server.ws.send({ type: "full-reload" });
         clearReloadedFile(normalizedChangedFile);

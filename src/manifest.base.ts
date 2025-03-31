@@ -38,7 +38,10 @@ export const baseManifest: ExtendedManifestV3Export = {
   permissions: ["storage", "unlimitedStorage", "contextMenus"],
   optional_permissions: [],
 
-  host_permissions: [...APP_CONFIG["perplexity-ai"].globalMatches],
+  host_permissions: [
+    ...APP_CONFIG["perplexity-ai"].globalMatches,
+    ...(APP_CONFIG.IS_DEV ? ["http://localhost:8811/*"] : []),
+  ],
   optional_host_permissions: [],
 
   content_scripts: [

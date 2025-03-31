@@ -4,6 +4,7 @@ import * as path from "path";
 import { minimatch } from "minimatch";
 import { Plugin, ViteDevServer } from "vite";
 
+import { createLogger } from "./logger";
 import {
   markFileAsReloaded,
   clearReloadedFile,
@@ -12,6 +13,7 @@ import {
 interface WatchConfig {
   folders?: string[];
   patterns?: string[];
+  verbose?: boolean;
 }
 
 export default function vitePluginForceRestartOnChanges(
@@ -26,6 +28,9 @@ export default function vitePluginForceRestartOnChanges(
   // Handle legacy array input for backward compatibility
   const watchFolders = Array.isArray(config) ? config : (config.folders ?? []);
   const watchPatterns = Array.isArray(config) ? [] : (config.patterns ?? []);
+  const isVerbose = Array.isArray(config) ? false : (config.verbose ?? false);
+
+  const logger = createLogger("force-restart-on-changes", isVerbose);
 
   const debouncedRestart = () => {
     if (isRestarting) {
@@ -39,7 +44,7 @@ export default function vitePluginForceRestartOnChanges(
     restartTimeout = setTimeout(() => {
       if (!isRestarting) {
         isRestarting = true;
-        console.log("Restarting Vite server...");
+        logger.info("Restarting Vite server...");
 
         // Notify clients that a restart is happening
         viteServer.ws.send({ type: "custom", event: "server-restart-started" });
@@ -50,6 +55,7 @@ export default function vitePluginForceRestartOnChanges(
             viteServer.ws.send({ type: "full-reload" });
             isRestarting = false;
             restartTimeout = null;
+            logger.success("Server restart complete");
           }, RELOAD_DELAY);
         });
       }
@@ -61,6 +67,7 @@ export default function vitePluginForceRestartOnChanges(
     enforce: "pre",
     configureServer(server) {
       viteServer = server;
+      logger.verbose("Plugin initialized with server instance");
     },
     handleHotUpdate({ file }) {
       const normalizedFile = path.normalize(file);
@@ -79,7 +86,7 @@ export default function vitePluginForceRestartOnChanges(
       });
 
       if (folderMatch || patternMatch) {
-        console.log(
+        logger.info(
           `File changed in watched path: ${file}. Scheduling server restart...`,
         );
         markFileAsReloaded(normalizedFile);
