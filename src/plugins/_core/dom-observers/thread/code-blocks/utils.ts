@@ -1,6 +1,5 @@
 import { sendMessage } from "webext-bridge/content-script";
 
-import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
@@ -11,20 +10,6 @@ export async function parseCodeBlocks(
   const codeBlocksChunksPromises = messageBlocks.map(
     async (messageBlock, i) => {
       if (messageBlock == null) return [];
-
-      const messageBlocksCount = messageBlocks.length;
-      const codeBlocksCount =
-        threadCodeBlocksDomObserverStore
-          .getState()
-          .codeBlocksChunks?.reduce((acc, codeBlocks) => {
-            return acc + codeBlocks.length;
-          }, 0) ?? 0;
-
-      if (
-        (messageBlocksCount > 15 || codeBlocksCount > 40) &&
-        messageBlock.states.isInFlight
-      )
-        return [];
 
       const codeBlocksChunks = $(messageBlock.nodes.$answer)
         .find(DOM_SELECTORS.THREAD.MESSAGE.CODE_BLOCK.WRAPPER)
