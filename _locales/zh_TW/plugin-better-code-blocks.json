@@ -1,0 +1,12 @@
+{
+  "headerButtons": {
+    "wrap": {
+      "wrap": "換行",
+      "unwrap": "不換行"
+    },
+    "expand": {
+      "expand": "展開",
+      "collapse": "收起"
+    }
+  }
+}

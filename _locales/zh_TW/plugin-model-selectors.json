@@ -1,0 +1,31 @@
+{
+  "languageModelSelector": {
+    "tooltip": "選擇語言模型",
+    "proSearch": {
+      "tooltip": "更多資源，Python 程式碼解釋器"
+    },
+    "reasoningModels": {
+      "tooltip": {
+        "description": "回答生成時間較長，但傾向於更詳細和準確。",
+        "proSearchNote": "選擇推理模型時，<emphasis>Pro</emphasis> 功能始終啟用。"
+      }
+    },
+    "deepResearch": {
+      "tooltip": {
+        "description": "回答生成時間顯著較長，但傾向於最詳細和準確。",
+        "proSearchNote": "選擇深度研究模型時，<emphasis>Pro</emphasis> 功能始終啟用。"
+      }
+    },
+    "autoMode": {
+      "title": "自動",
+      "description": "適應您的查詢"
+    },
+    "usesLeft": {
+      "unlimited": "無限使用",
+      "limited": "剩餘 {{count}} 次使用"
+    }
+  },
+  "imageGenModelSelector": {
+    "tooltip": "選擇圖像模型"
+  }
+}

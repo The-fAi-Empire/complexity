@@ -4,13 +4,14 @@
     "supporterMessage": "Please consider becoming a <emphasis>Supporter</emphasis> to keep the project alive!"
   },
   "sponsorDialog": {
-    "title": "Complexity Needs Your Help!",
-    "description": "This polished and feature-rich extension is the result of countless hours of dedicated development and refinement. If you appreciate the attention to detail and ongoing improvements, please consider supporting the development",
+    "title": "Help keep Complexity awesome!",
+    "description": "We've poured countless hours into making Complexity a powerful and polished tool for you. Your support directly fuels ongoing development, new features, and keeping everything running smoothly.",
+    "descriptionLine2": "If Complexity adds value to your workflow, please consider contributing to its future!",
     "donation": {
-      "title": "💖 Make a donation"
+      "title": "💖 Support future development"
     },
     "sponsorship": {
-      "title": "🌟 Have an offer for a long term sponsorship?",
+      "title": "🌟 Interested in Long-Term Sponsorship?",
       "contactEmail": "Contact via Email"
     }
   },

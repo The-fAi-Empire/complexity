@@ -23,9 +23,14 @@ export default function SponsorDialogWrapper({
         <div className="x:absolute x:inset-0 x:-z-10 x:bg-gradient-to-b x:from-primary/20 x:to-transparent" />
 
         <DialogHeader>
-          <DialogTitle>{t("common:sponsorDialog.title")}</DialogTitle>
+          <DialogTitle className="x:text-2xl">
+            {t("common:sponsorDialog.title")}
+          </DialogTitle>
           <DialogDescription className="x:text-foreground">
-            {t("common:sponsorDialog.description")}
+            <div className="x:flex x:flex-col x:gap-2">
+              <div>{t("common:sponsorDialog.description")}</div>
+              <div>{t("common:sponsorDialog.descriptionLine2")}</div>
+            </div>
           </DialogDescription>
         </DialogHeader>
 

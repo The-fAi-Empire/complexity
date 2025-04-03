@@ -1,0 +1,47 @@
+{
+  "canvas": {
+    "placeholder": {
+      "markdown": {
+        "description": "點擊查看內容"
+      },
+      "mermaid": {
+        "description": "點擊查看圖表"
+      },
+      "html": {
+        "description": "點擊查看網頁"
+      },
+      "react": {
+        "description": "點擊查看網頁"
+      },
+      "markmap": {
+        "description": "點擊查看思維導圖"
+      }
+    },
+    "version": "版本 {{number}}",
+    "toggle": {
+      "preview": "預覽",
+      "markdown": {
+        "raw": "原始文字"
+      },
+      "code": "程式碼"
+    },
+    "list": {
+      "title": "此對話中的 Canvas 塊",
+      "generating": "生成中...",
+      "versions": "{{count}} 個版本"
+    },
+    "tooltip": {
+      "refresh": "重新整理",
+      "openList": "開啟 Canvas 列表",
+      "openInCodeSandbox": "在 CodeSandbox 中開啟",
+      "openInMermaid": "在 Mermaid Live Editor 中開啟",
+      "downloadSvg": "下載 SVG",
+      "downloadAsInteractiveHtml": "下載為互動式 HTML",
+      "viewAsInteractiveHtml": "查看為互動式 HTML"
+    },
+    "error": {
+      "noSvg": "未找到 SVG",
+      "previewUrl": "無法生成預覽 URL"
+    }
+  }
+}

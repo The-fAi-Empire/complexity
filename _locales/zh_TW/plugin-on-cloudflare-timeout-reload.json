@@ -1,0 +1,10 @@
+{
+  "dialog": {
+    "header": "會話超時",
+    "description": "您的會話已超時（很可能是由於 Cloudflare）。",
+    "buttons": {
+      "reload": "重新載入",
+      "dismiss": "關閉"
+    }
+  }
+}

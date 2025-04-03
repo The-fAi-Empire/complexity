@@ -1,0 +1,21 @@
+{
+  "exportButton": {
+    "action": "匯出",
+    "copied": "已複製",
+    "format": {
+      "label": "選擇格式",
+      "placeholder": "選擇一種格式"
+    },
+    "includeCitations": "包含引用",
+    "actions": {
+      "download": "下載",
+      "copy": "複製"
+    },
+    "errors": {
+      "downloadFailed": {
+        "title": "❌ 下載失敗",
+        "unknownError": "發生未知錯誤"
+      }
+    }
+  }
+}

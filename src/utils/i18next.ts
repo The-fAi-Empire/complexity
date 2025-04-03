@@ -12,6 +12,7 @@ export const supportedLangs = [
   "ja-JP",
   "ko-KR",
   "zh-CN",
+  "zh-TW",
   "es-ES",
   "hi-IN",
   "it-IT",
@@ -22,7 +23,6 @@ export const supportedLangs = [
   "pl-PL",
   "pt-PT",
   "sk-SK",
-  "mk-MK",
   "sr-Cyrl-ME",
   "nl-NL",
   "el-GR",
@@ -30,13 +30,14 @@ export const supportedLangs = [
   "id-ID",
 ] as const;
 
-export const webStoreLangsMap = {
+export const webStoreLangsMap: Record<SupportedLangs, string> = {
   "en-US": "en",
   "fr-FR": "fr",
   "de-DE": "de",
   "ja-JP": "ja",
   "ko-KR": "ko",
   "zh-CN": "zh_CN",
+  "zh-TW": "zh_TW",
   "es-ES": "es",
   "hi-IN": "hi",
   "it-IT": "it",
@@ -47,7 +48,6 @@ export const webStoreLangsMap = {
   "pl-PL": "pl",
   "pt-PT": "pt_PT",
   "sk-SK": "sk",
-  "mk-MK": "mk",
   "sr-Cyrl-ME": "sr",
   "nl-NL": "nl",
   "el-GR": "el",

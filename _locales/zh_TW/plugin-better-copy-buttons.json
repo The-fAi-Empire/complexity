@@ -1,0 +1,9 @@
+{
+  "copyButton": {
+    "tooltip": "複製訊息",
+    "options": {
+      "default": "預設",
+      "withoutCitations": "不含引用"
+    }
+  }
+}
