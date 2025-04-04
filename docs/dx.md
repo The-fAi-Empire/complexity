@@ -56,9 +56,9 @@ pnpm zip:both
 
 ### Development Commands
 
-- `pnpm esl`: Run ESLint
-- `pnpm eslq`: Run ESLint but only show errors
-- `pnpm eslf`: Run ESLint with auto-fix
+- `pnpm lint`: Run ESLint
+- `pnpm lintq`: Run ESLint but only show errors
+- `pnpm lintf`: Run ESLint with auto-fix
 - `pnpm fmt`: Format all code with Prettier
 - `pnpm clean`: Delete `node_modules` and `dist` directories
 - Unit tests with Vitest

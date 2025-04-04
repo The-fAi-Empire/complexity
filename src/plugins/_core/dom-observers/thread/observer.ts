@@ -1,5 +1,9 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import {
   findNavbarOverflowMenuButtonWrapper,
@@ -34,41 +38,41 @@ csLoaderRegistry.register({
 });
 
 function cleanup() {
-  DomObserver.destroy("thread");
+  DomObserver.destroy(createDomObserverId("thread"));
   threadDomObserverStore.getState().resetStore();
 }
 
 function observeThread(location: ReturnType<typeof whereAmI>) {
   if (location !== "thread") return cleanup();
 
-  DomObserver.create("thread", {
+  DomObserver.create(createDomObserverId("thread"), {
     target: document.body,
     config: { childList: true, subtree: true },
     fireImmediately: true,
     onMutation: () => {
       CallbackQueue.getInstance().enqueueArray([
         {
-          id: "thread:pageWrapper",
+          id: createTaskId("thread", "pageWrapper"),
           callback: findPageWrapper,
         },
         {
-          id: "thread:wrapper",
+          id: createTaskId("thread", "wrapper"),
           callback: findWrapper,
         },
         {
-          id: "thread:navbar",
+          id: createTaskId("thread", "navbar"),
           callback: findNavbar,
         },
         {
-          id: "thread:popper",
+          id: createTaskId("thread", "popper"),
           callback: findPopper,
         },
         {
-          id: "thread:navbar:navbarOverflowMenuButton",
+          id: createTaskId("thread", "navbarOverflowMenuButton"),
           callback: findNavbarOverflowMenuButtonWrapper,
         },
         {
-          id: "thread:messageStickyHeaderHeight",
+          id: createTaskId("thread", "messageStickyHeaderHeight"),
           callback: findMessageStickyHeaderHeight,
         },
       ]);

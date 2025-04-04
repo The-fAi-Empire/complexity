@@ -1,4 +1,22 @@
-import { ObserverId } from "@/plugins/_api/dom-observer/observer-ids";
+type DomObserverPrefix =
+  | "home"
+  | "queryBoxes"
+  | "thread"
+  | "sidebar"
+  | "spacesPage"
+  | "settingsPage"
+  | "misc";
+
+export type DomObserverId = `${DomObserverPrefix}:${string}` & {
+  readonly __brand: unique symbol;
+};
+
+export function createDomObserverId(
+  prefix: DomObserverPrefix,
+  id?: string,
+): DomObserverId {
+  return `${prefix}:${id ?? "default"}` as DomObserverId;
+}
 
 export type MutationCallback = () => void | Promise<void>;
 
@@ -38,6 +56,6 @@ export type ObserverOperation = {
     | "pause"
     | "resume"
     | "forceTrigger";
-  readonly id: ObserverId;
+  readonly id: DomObserverId;
   readonly config?: Partial<DomObserverConfig>;
 };

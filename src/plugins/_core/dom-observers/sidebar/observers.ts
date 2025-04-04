@@ -1,5 +1,9 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import {
   findLibraryButtonTriggerButtonsWrapper,
   findLibraryButtonWrapper,
@@ -25,30 +29,30 @@ csLoaderRegistry.register({
 });
 
 async function observeSidebar() {
-  DomObserver.create("sidebar:wrapper", {
+  DomObserver.create(createDomObserverId("sidebar", "wrapper"), {
     target: document.body,
     config: { childList: true, subtree: true },
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
         {
           callback: findSidebarWrapper,
-          id: "sidebar:wrapper",
+          id: createTaskId("sidebar", "wrapper"),
         },
         {
           callback: findSpaceButtonWrapper,
-          id: "sidebar:spaceButtonWrapper",
+          id: createTaskId("sidebar", "spaceButtonWrapper"),
         },
         {
           callback: findSpaceButtonTriggerButtonsWrapper,
-          id: "sidebar:spaceButtonTriggerButtonsWrapper",
+          id: createTaskId("sidebar", "spaceButtonTriggerButtonsWrapper"),
         },
         {
           callback: findLibraryButtonWrapper,
-          id: "sidebar:libraryButtonWrapper",
+          id: createTaskId("sidebar", "libraryButtonWrapper"),
         },
         {
           callback: findLibraryButtonTriggerButtonsWrapper,
-          id: "sidebar:libraryButtonTriggerButtonsWrapper",
+          id: createTaskId("sidebar", "libraryButtonTriggerButtonsWrapper"),
         },
       ]),
   });

@@ -7,7 +7,7 @@ import {
   ObserverOperation,
   Result,
 } from "@/plugins/_api/dom-observer/dom-observer.types";
-import { ObserverId } from "@/plugins/_api/dom-observer/observer-ids";
+import { DomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
 export class DomObserver {
@@ -15,7 +15,7 @@ export class DomObserver {
   private DEFAULT_DEBOUNCE_TIME: number;
   private debounceConfig: { leading: boolean; trailing: boolean };
 
-  private static instances = new Map<ObserverId, DomObserverInstance>();
+  private static instances = new Map<DomObserverId, DomObserverInstance>();
   private static isLogging = false;
   private static isPaused = false; // Track the global pause state
 
@@ -57,7 +57,7 @@ export class DomObserver {
 
   private static validateTarget(
     target: Element | null,
-    id: ObserverId,
+    id: DomObserverId,
   ): Result<void> {
     if (!target) {
       return this.createError(
@@ -99,7 +99,7 @@ export class DomObserver {
   }
 
   private static handleCreate(
-    id: ObserverId,
+    id: DomObserverId,
     config: DomObserverConfig,
   ): Result<void> {
     if (this.instances.has(id)) {
@@ -125,7 +125,7 @@ export class DomObserver {
   }
 
   private static handleUpdate(
-    id: ObserverId,
+    id: DomObserverId,
     newConfig?: Partial<DomObserverConfig>,
   ): Result<void> {
     const instance = this.instances.get(id);
@@ -151,7 +151,7 @@ export class DomObserver {
     return this.createSuccess();
   }
 
-  private static handleDestroy(id: ObserverId): Result<void> {
+  private static handleDestroy(id: DomObserverId): Result<void> {
     const instance = this.instances.get(id);
     if (!instance) {
       return this.createError(
@@ -166,7 +166,7 @@ export class DomObserver {
     return this.createSuccess();
   }
 
-  private static handlePause(id: ObserverId): Result<void> {
+  private static handlePause(id: DomObserverId): Result<void> {
     const instance = this.instances.get(id);
     if (!instance) {
       return this.createError(
@@ -181,7 +181,7 @@ export class DomObserver {
     return this.createSuccess();
   }
 
-  private static handleResume(id: ObserverId): Result<void> {
+  private static handleResume(id: DomObserverId): Result<void> {
     const instance = this.instances.get(id);
     if (!instance) {
       return this.createError(
@@ -203,7 +203,7 @@ export class DomObserver {
     return this.createSuccess();
   }
 
-  private static handleForceTrigger(id: ObserverId): Result<void> {
+  private static handleForceTrigger(id: DomObserverId): Result<void> {
     const instance = this.instances.get(id);
     if (!instance) {
       return this.createError(
@@ -220,7 +220,7 @@ export class DomObserver {
     return this.createSuccess();
   }
 
-  private static observe(id: ObserverId): void {
+  private static observe(id: DomObserverId): void {
     const instance = this.instances.get(id);
     if (instance?.config.target) {
       instance.observer.observe(instance.config.target, instance.config.config);
@@ -228,7 +228,7 @@ export class DomObserver {
   }
 
   private static createMutationHandler(
-    id: ObserverId,
+    id: DomObserverId,
     config: DomObserverConfig,
   ): MutationCallback {
     const instance = DomObserver.getInstance();
@@ -268,20 +268,20 @@ export class DomObserver {
 
   // Public API
   public static create(
-    id: ObserverId,
+    id: DomObserverId,
     config: DomObserverConfig,
   ): Result<void> {
     return this.handleOperation({ type: "create", id, config });
   }
 
   public static update(
-    id: ObserverId,
+    id: DomObserverId,
     config: Partial<DomObserverConfig>,
   ): Result<void> {
     return this.handleOperation({ type: "update", id, config });
   }
 
-  public static destroy(id: ObserverId): Result<void> {
+  public static destroy(id: DomObserverId): Result<void> {
     return this.handleOperation({ type: "destroy", id });
   }
 
@@ -289,7 +289,7 @@ export class DomObserver {
     this.instances.forEach((_, id) => this.destroy(id));
   }
 
-  public static pause(id: ObserverId): Result<void> {
+  public static pause(id: DomObserverId): Result<void> {
     return this.handleOperation({ type: "pause", id });
   }
 
@@ -298,7 +298,7 @@ export class DomObserver {
     this.isPaused = true;
   }
 
-  public static resume(id: ObserverId): Result<void> {
+  public static resume(id: DomObserverId): Result<void> {
     return this.handleOperation({ type: "resume", id });
   }
 
@@ -307,7 +307,7 @@ export class DomObserver {
     this.isPaused = false;
   }
 
-  public static forceTrigger(id: ObserverId): Result<void> {
+  public static forceTrigger(id: DomObserverId): Result<void> {
     return this.handleOperation({ type: "forceTrigger", id });
   }
 

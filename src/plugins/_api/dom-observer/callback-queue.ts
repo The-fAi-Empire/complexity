@@ -1,4 +1,3 @@
-import { CallbackQueueTaskId } from "@/plugins/_api/dom-observer/callback-queue-task-ids";
 import { MaybePromise } from "@/types/utils.types";
 
 const FRAME_BUDGET_MS = 16; // ~60fps
@@ -6,10 +5,27 @@ const MAX_CHUNK_SIZE = 20;
 const INITIAL_CHUNK_SIZE = 5;
 const RESET_TIMEOUT = 1000;
 
-export type Callback = () => MaybePromise<void>;
+type CallbackQueueTaskPrefix =
+  | "home"
+  | "queryBoxes"
+  | "thread"
+  | "sidebar"
+  | "spacesPage"
+  | "settingsPage";
+
+export type CallbackQueueTaskId = `${CallbackQueueTaskPrefix}:${string}` & {
+  readonly __brand: unique symbol;
+};
+
+export function createTaskId(
+  prefix: CallbackQueueTaskPrefix,
+  id?: string,
+): CallbackQueueTaskId {
+  return `${prefix}:${id ?? "default"}` as CallbackQueueTaskId;
+}
 
 export type CallbackWithId = {
-  callback: Callback;
+  callback: () => MaybePromise<void>;
   id: CallbackQueueTaskId;
 };
 
@@ -79,7 +95,10 @@ export class CallbackQueue {
     this.scheduleProcessing();
   }
 
-  public enqueue(callback: Callback, id: CallbackQueueTaskId): void {
+  public enqueue(
+    callback: () => MaybePromise<void>,
+    id: CallbackQueueTaskId,
+  ): void {
     this.queue.enqueue({ callback, id });
     this.scheduleProcessing();
   }

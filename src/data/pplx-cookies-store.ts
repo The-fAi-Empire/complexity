@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 
 type Cookie = {
@@ -31,7 +32,7 @@ csLoaderRegistry.register({
   loader: () => {
     parseCookies();
 
-    DomObserver.create("pplxCookies", {
+    DomObserver.create(createDomObserverId("misc", "pplxCookies"), {
       target: document.body,
       config: { childList: true, subtree: true },
       onMutation: parseCookies,

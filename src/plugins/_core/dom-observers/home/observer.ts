@@ -1,5 +1,9 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import {
   findBottomBar,
   findSlogan,
@@ -33,8 +37,8 @@ csLoaderRegistry.register({
 });
 
 const cleanup = () => {
-  DomObserver.destroy("home");
-  DomObserver.destroy("home:languageSelector");
+  DomObserver.destroy(createDomObserverId("home"));
+  DomObserver.destroy(createDomObserverId("home", "languageSelector"));
 };
 
 function observeHome(location: ReturnType<typeof whereAmI>) {
@@ -42,15 +46,15 @@ function observeHome(location: ReturnType<typeof whereAmI>) {
 
   if (location !== "home") return;
 
-  DomObserver.create("home", {
+  DomObserver.create(createDomObserverId("home"), {
     target: document.body,
     config: { childList: true, subtree: true },
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
-        { callback: findSlogan, id: "home:slogan" },
+        { callback: findSlogan, id: createTaskId("home", "slogan") },
         {
           callback: findBottomBar,
-          id: "home:bottomBar",
+          id: createTaskId("home", "bottomBar"),
         },
       ]),
   });
@@ -59,13 +63,13 @@ function observeHome(location: ReturnType<typeof whereAmI>) {
 
   if (!$languageSelector[0]) return;
 
-  DomObserver.create("home:languageSelector", {
+  DomObserver.create(createDomObserverId("home", "languageSelector"), {
     target: $languageSelector[0],
     config: { attributes: true, attributeFilter: ["aria-label"] },
     onMutation: () =>
       CallbackQueue.getInstance().enqueue(
         observeLanguageSelector,
-        "home:languageSelector",
+        createTaskId("home", "languageSelector"),
       ),
   });
 }

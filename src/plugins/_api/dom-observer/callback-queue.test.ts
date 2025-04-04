@@ -3,9 +3,9 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   CallbackQueue,
   type CallbackWithId,
-  type Callback,
 } from "@/plugins/_api/dom-observer/callback-queue";
-import { CallbackQueueTaskId } from "@/plugins/_api/dom-observer/callback-queue-task-ids";
+import { CallbackQueueTaskId } from "@/plugins/_api/dom-observer/callback-queue";
+import { MaybePromise } from "@/types/utils.types";
 
 describe("CallbackQueue", () => {
   let queue: CallbackQueue;
@@ -185,7 +185,7 @@ describe("CallbackQueue", () => {
   it("should handle asynchronous callbacks correctly", async () => {
     const executionResults: number[] = [];
     const createDelayedOperation =
-      (value: number, delay: number): Callback =>
+      (value: number, delay: number): (() => MaybePromise<void>) =>
       async () => {
         await new Promise<void>((resolve) => {
           setTimeout(() => {
@@ -217,7 +217,9 @@ describe("CallbackQueue", () => {
 
     vi.mocked(performance.now).mockImplementation(() => currentTime);
 
-    const createTimedOperation = (duration: number): Callback => {
+    const createTimedOperation = (
+      duration: number,
+    ): (() => MaybePromise<void>) => {
       return () => {
         currentTime += duration;
         executionTimes.push(duration);
@@ -231,7 +233,7 @@ describe("CallbackQueue", () => {
       { duration: 5, id: "fast-3" },
       { duration: 5, id: "fast-4" },
     ].map(({ duration, id }) => ({
-      callback: createTimedOperation(duration) as Callback,
+      callback: createTimedOperation(duration) as () => MaybePromise<void>,
       id: id as CallbackQueueTaskId,
     }));
 

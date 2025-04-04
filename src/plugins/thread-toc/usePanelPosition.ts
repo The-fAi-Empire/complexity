@@ -1,8 +1,12 @@
 import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import debounce from "lodash/debounce";
 
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { useSpaRouter } from "@/plugins/_core/spa-router/listeners";
@@ -93,7 +97,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     if (!$sidebarWrapper[0]) return;
 
-    DomObserver.create("thread:tocSidebarObserver", {
+    DomObserver.create(createDomObserverId("thread", "tocSidebarObserver"), {
       target: $sidebarWrapper[0],
       config: {
         attributes: true,
@@ -102,13 +106,13 @@ export function usePanelPosition(): UsePanelPosition | null {
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           debouncedUpdate,
-          "thread:tocSidebarObserver",
+          createTaskId("thread", "tocSidebarObserver"),
         ),
     });
 
     return () => {
       debouncedUpdate.cancel();
-      DomObserver.destroy("thread:tocSidebarObserver");
+      DomObserver.destroy(createDomObserverId("thread", "tocSidebarObserver"));
     };
   }, [calculatePosition, windowSize, url]);
 

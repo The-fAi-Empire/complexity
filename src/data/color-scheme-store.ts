@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { setCookie, whereAmI } from "@/utils/utils";
 
@@ -47,7 +48,7 @@ export const colorSchemeStore = createWithEqualityFn<ColorSchemeStoreType>()(
 csLoaderRegistry.register({
   id: "store:colorScheme",
   loader: () => {
-    DomObserver.create("colorScheme", {
+    DomObserver.create(createDomObserverId("misc", "colorScheme"), {
       target: $("html")[0]!,
       config: {
         subtree: false,

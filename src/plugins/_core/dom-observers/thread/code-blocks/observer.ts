@@ -1,4 +1,7 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import { findCodeBlocks } from "@/plugins/_core/dom-observers/thread/code-blocks/utils";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
@@ -31,7 +34,7 @@ function observeThreadCodeBlocks() {
 
       CallbackQueue.getInstance().enqueueArray([
         {
-          id: "thread:codeBlocks",
+          id: createTaskId("thread", "codeBlocks"),
           callback: async () => {
             threadCodeBlocksDomObserverStore.setState({
               codeBlocksChunks: await findCodeBlocks(messageBlocks),

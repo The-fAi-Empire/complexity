@@ -1,4 +1,7 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
@@ -52,7 +55,7 @@ export async function findFollowUpQueryBox() {
     await sleep(200);
     CallbackQueue.getInstance().enqueue(
       findFollowUpQueryBox,
-      "queryBoxes:followUp",
+      createTaskId("queryBoxes", "followUp"),
     );
     return;
   }

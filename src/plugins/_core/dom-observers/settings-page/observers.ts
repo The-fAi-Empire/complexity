@@ -1,5 +1,9 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { settingsPageDomObserverStore } from "@/plugins/_core/dom-observers/settings-page/store";
 import { findSidebar } from "@/plugins/_core/dom-observers/settings-page/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/spa-router/listeners";
@@ -7,7 +11,7 @@ import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { whereAmI } from "@/utils/utils";
 
 const cleanup = () => {
-  DomObserver.destroy("settingsPage:topNavWrapper");
+  DomObserver.destroy(createDomObserverId("settingsPage", "topNavWrapper"));
   settingsPageDomObserverStore.getState().resetStore();
 };
 
@@ -25,14 +29,14 @@ csLoaderRegistry.register({
 async function observeSettingsPage(location: ReturnType<typeof whereAmI>) {
   if (location !== "settings") return cleanup();
 
-  DomObserver.create("settingsPage:topNavWrapper", {
+  DomObserver.create(createDomObserverId("settingsPage", "topNavWrapper"), {
     target: document.body,
     config: { childList: true, subtree: true },
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
         {
           callback: findSidebar,
-          id: "settingsPage:topNavWrapper",
+          id: createTaskId("settingsPage", "topNavWrapper"),
         },
       ]),
   });

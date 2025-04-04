@@ -1,5 +1,9 @@
-import { CallbackQueue } from "@/plugins/_api/dom-observer/callback-queue";
+import {
+  CallbackQueue,
+  createTaskId,
+} from "@/plugins/_api/dom-observer/callback-queue";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
+import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import {
   findPplxComponentsWrapper,
@@ -13,10 +17,12 @@ import { csLoaderRegistry } from "@/utils/cs-loader-registry";
 import { whereAmI } from "@/utils/utils";
 
 const cleanup = () => {
-  DomObserver.destroy("queryBoxes:home");
-  DomObserver.destroy("queryBoxes:collection");
-  DomObserver.destroy("queryBoxes:followUp");
-  DomObserver.destroy("queryBoxes:pplxComponentsWrapper");
+  DomObserver.destroy(createDomObserverId("queryBoxes", "home"));
+  DomObserver.destroy(createDomObserverId("queryBoxes", "collection"));
+  DomObserver.destroy(createDomObserverId("queryBoxes", "followUp"));
+  DomObserver.destroy(
+    createDomObserverId("queryBoxes", "pplxComponentsWrapper"),
+  );
 };
 
 csLoaderRegistry.register({
@@ -58,14 +64,14 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       },
     });
 
-    DomObserver.create("queryBoxes:home", {
+    DomObserver.create(createDomObserverId("queryBoxes", "home"), {
       target: document.body,
       config: { childList: true, subtree: true },
       fireImmediately: true,
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findMainQueryBox,
-          "queryBoxes:home",
+          createTaskId("queryBoxes", "home"),
         ),
     });
   }
@@ -81,14 +87,14 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       },
     });
 
-    DomObserver.create("queryBoxes:collection", {
+    DomObserver.create(createDomObserverId("queryBoxes", "collection"), {
       target: document.body,
       config: { childList: true, subtree: true },
       fireImmediately: true,
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findSpaceQueryBox,
-          "queryBoxes:collection",
+          createTaskId("queryBoxes", "collection"),
         ),
     });
   }
@@ -99,7 +105,7 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       $spaceQueryBox: null,
     });
 
-    DomObserver.create("queryBoxes:followUp", {
+    DomObserver.create(createDomObserverId("queryBoxes", "followUp"), {
       target: document.body,
       config: { childList: true, subtree: true },
       debounceTime: 500,
@@ -107,18 +113,21 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findFollowUpQueryBox,
-          "queryBoxes:followUp",
+          createTaskId("queryBoxes", "followUp"),
         ),
     });
   }
 
-  DomObserver.create("queryBoxes:pplxComponentsWrapper", {
-    target: document.body,
-    config: { childList: true, subtree: true },
-    onMutation: () =>
-      CallbackQueue.getInstance().enqueue(
-        findPplxComponentsWrapper,
-        "queryBoxes:pplxComponentsWrapper",
-      ),
-  });
+  DomObserver.create(
+    createDomObserverId("queryBoxes", "pplxComponentsWrapper"),
+    {
+      target: document.body,
+      config: { childList: true, subtree: true },
+      onMutation: () =>
+        CallbackQueue.getInstance().enqueue(
+          findPplxComponentsWrapper,
+          createTaskId("queryBoxes", "pplxComponentsWrapper"),
+        ),
+    },
+  );
 }
