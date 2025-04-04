@@ -6,7 +6,7 @@ import { Portal } from "@/components/ui/portal";
 import { useSettingsPageDomObserverStore } from "@/plugins/_core/dom-observers/settings-page/store";
 import { DOM_SELECTORS, INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
-export default function SettingsDashboardLink() {
+export function SettingsDashboardLink() {
   const $sidebarWrapper = useSettingsPageDomObserverStore(
     (store) => store.$sidebarWrapper,
   );

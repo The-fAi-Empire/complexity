@@ -7,7 +7,7 @@ import MobileSidebarWrapper from "@/entrypoints/options-page/components/sidebar/
 import Sidebar from "@/entrypoints/options-page/components/sidebar/Sidebar";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 
-export default function Dashboard() {
+export function Dashboard() {
   const { isMobile } = useIsMobileStore();
   const SidebarWrapper = isMobile
     ? MobileSidebarWrapper

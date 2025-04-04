@@ -4,7 +4,8 @@ import { useInsertCss } from "@/hooks/useInsertCss";
 import normalizeCss from "@/plugins/_core/ui-groups/thread-query-hover-container/normalize.css?inline";
 import { useCreatePortalContainers } from "@/plugins/_core/ui-groups/thread-query-hover-container/useCreatePortalContainers";
 import QueryMetrics from "@/plugins/thread-message-length/QueryMetrics";
-export default function ThreadQueryHoverContainerExtraButtonsWrapper() {
+
+export function ThreadQueryHoverContainerExtraButtonsWrapper() {
   const portalContainers = useCreatePortalContainers();
 
   useInsertCss({

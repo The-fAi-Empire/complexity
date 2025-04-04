@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { ThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeForm";
 import { useThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/pages/create-theme/hooks/useThemeForm";
 
-export default function CreateThemePage() {
+export function CreateThemePage() {
   const { form, onSubmit, isPending } = useThemeForm();
 
   return (

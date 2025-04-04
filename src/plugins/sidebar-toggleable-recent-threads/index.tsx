@@ -5,7 +5,7 @@ import styles from "@/plugins/sidebar-toggleable-recent-threads/styles.css?inlin
 import SidebarToggleableRecentThreadsToggleButton from "@/plugins/sidebar-toggleable-recent-threads/ToggleButton";
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
-export default function SidebarToggleableRecentThreadsWrapper() {
+export function SidebarToggleableRecentThreadsWrapper() {
   useInsertCss({
     css: styles,
     id: "sidebar-toggleable-recent-threads",

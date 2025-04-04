@@ -75,3 +75,10 @@ pnpm zip:both
 - You might want to adjust `typescript.tsserver.maxTsServerMemory` to match your system's specs
 - TailwindCSS (v4) IntelliSense support for jQuery's methods
 - i18n-ally (`lokalise.i18n-ally`) pre-configured
+
+## Misc
+
+- You will see that the project uses `lazily` from `react-lazily` to lazy load React components. So why not `React.lazy`?
+  - `react-lazily` supports named exports with shorter syntax
+  - `React.lazy` doesn't play well with VSCode's Typescript references, which means it always show `0 references` for the lazy loaded components
+  - See https://github.com/microsoft/TypeScript/issues/50957#issuecomment-2562425998

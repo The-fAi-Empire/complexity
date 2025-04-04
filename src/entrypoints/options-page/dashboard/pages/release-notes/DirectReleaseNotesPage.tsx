@@ -6,7 +6,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import { H1, H2 } from "@/components/ui/typography";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 
-export default function DirectReleaseNotesPage() {
+export function DirectReleaseNotesPage() {
   const { version } = useLoaderData() as { version: string };
 
   const {

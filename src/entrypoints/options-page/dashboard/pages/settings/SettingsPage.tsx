@@ -20,7 +20,7 @@ import SettingsItem from "@/entrypoints/options-page/dashboard/pages/settings/Se
 import SettingsSection from "@/entrypoints/options-page/dashboard/pages/settings/SettingsSection";
 import useExtensionLocalStorage from "@/services/extension-local-storage/useExtensionLocalStorage";
 
-export default function SettingsPage() {
+export function SettingsPage() {
   const navigate = useNavigate();
   const { settings, mutation } = useExtensionLocalStorage();
 

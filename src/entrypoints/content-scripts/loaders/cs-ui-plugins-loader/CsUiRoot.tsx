@@ -5,6 +5,7 @@ import "@/assets/cs.css";
 // --- [DO NOT REMOVE] ---
 
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { lazily } from "react-lazily";
 
 import ExtensionContextInvalidationWatchdog from "@/components/ExtensionContextInvalidationWatchdog";
 import CsUiPluginsGuard from "@/components/plugins-guard/CsUiPluginsGuard";
@@ -12,44 +13,44 @@ import { PostUpdateReleaseNotesDialog } from "@/components/PostUpdateReleaseNote
 // import { SponsorHomeLink } from "@/components/SponsorHomeLink";
 import { Toaster } from "@/components/Toaster";
 
-const BetterMessageToolbarsWrapper = lazy(
+const { BetterMessageToolbarsWrapper } = lazily(
   () => import("@/plugins/thread-better-message-toolbars"),
 );
-const BetterCodeBlocksWrapper = lazy(
+const { BetterCodeBlocksWrapper } = lazily(
   () => import("@/plugins/thread-better-code-blocks"),
 );
-const ThreadQueryHoverContainerExtraButtonsWrapper = lazy(
+const { ThreadQueryHoverContainerExtraButtonsWrapper } = lazily(
   () => import("@/plugins/_core/ui-groups/thread-query-hover-container"),
 );
-const ThreadMessageToolbarExtraButtonsWrapper = lazy(
+const { ThreadMessageToolbarExtraButtonsWrapper } = lazily(
   () => import("@/plugins/_core/ui-groups/thread-message-toolbar"),
 );
-const CanvasWrapper = lazy(() => import("@/plugins/canvas"));
-const CommandMenuWrapper = lazy(() => import("@/plugins/command-menu"));
-const ExportThreadWrapper = lazy(() => import("@/plugins/export-thread"));
-const HomepageUpdateAnnouncer = lazy(
+const { CanvasWrapper } = lazily(() => import("@/plugins/canvas"));
+const { CommandMenuWrapper } = lazily(() => import("@/plugins/command-menu"));
+const { ExportThreadWrapper } = lazily(() => import("@/plugins/export-thread"));
+const { HomepageUpdateAnnouncer } = lazily(
   () => import("@/components/HomepageUpdateAnnouncer"),
 );
-const ImageGenModelSelectorWrapper = lazy(
+const { ImageGenModelSelectorWrapper } = lazily(
   () => import("@/plugins/image-gen-popover"),
 );
-const OnCloudflareTimeout = lazy(
+const { OnCloudflareTimeout } = lazily(
   () => import("@/plugins/on-cf-timeout-auto-reload"),
 );
-const QueryBoxWrapper = lazy(
+const { QueryBoxWrapper } = lazily(
   () => import("@/plugins/_core/ui-groups/query-box"),
 );
-const SettingsDashboardLink = lazy(
+const { SettingsDashboardLink } = lazily(
   () => import("@/components/SettingsDashboardLink"),
 );
-const SpaceCardsWrapper = lazy(
+const { SpaceCardsWrapper } = lazily(
   () => import("@/plugins/space-navigator/spaces-page"),
 );
-const SpaceNavigatorWrapper = lazy(
+const { SpaceNavigatorWrapper } = lazily(
   () => import("@/plugins/space-navigator/sidebar-content"),
 );
-const ThreadTocWrapper = lazy(() => import("@/plugins/thread-toc"));
-const SidebarToggleableRecentThreadsWrapper = lazy(
+const { ThreadTocWrapper } = lazily(() => import("@/plugins/thread-toc"));
+const { SidebarToggleableRecentThreadsWrapper } = lazily(
   () => import("@/plugins/sidebar-toggleable-recent-threads"),
 );
 

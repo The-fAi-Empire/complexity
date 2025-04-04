@@ -11,7 +11,7 @@ import { useCanvasStore } from "@/plugins/canvas/store";
 import useHandleAutonomousCanvasState from "@/plugins/canvas/useHandleAutonomousCanvasState";
 import { useHandleCanvasState } from "@/plugins/canvas/useHandleCanvasState";
 
-export default function CanvasWrapper() {
+export function CanvasWrapper() {
   const threadWrapper = useThreadDomObserverStore(
     (state) => state.$wrapper?.[0],
     deepEqual,

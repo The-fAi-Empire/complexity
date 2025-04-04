@@ -11,7 +11,7 @@ import {
 import useCloudflareTimeout from "@/plugins/on-cf-timeout-auto-reload/useCloudflareTimeout";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
-export default function OnCloudflareTimeout() {
+export function OnCloudflareTimeout() {
   const settings = ExtensionLocalStorageService.getCachedSync();
   const { isSessionTimeout, handleReload } = useCloudflareTimeout();
   const [countdown, setCountdown] = useState(5);

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useVersionPagination } from "@/entrypoints/options-page/dashboard/pages/release-notes/hooks/useVersionPagination";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 
-export default function ReleaseNotesPage() {
+export function ReleaseNotesPage() {
   const { data: versions } = useQuery({
     ...cplxApiQueries.versions,
   });

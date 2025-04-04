@@ -4,7 +4,7 @@ import ExportButton from "@/plugins/export-thread/ExportButton";
 import hideOpenInAppBtnCss from "@/plugins/export-thread/hide-open-in-app-btn.css?inline";
 import useCreatePortalContainer from "@/plugins/export-thread/useCreatePortalContainer";
 
-export default function ExportThreadWrapper() {
+export function ExportThreadWrapper() {
   const portalContainer = useCreatePortalContainer();
 
   useInsertCss({

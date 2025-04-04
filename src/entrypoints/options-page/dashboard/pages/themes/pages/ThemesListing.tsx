@@ -8,7 +8,7 @@ import PreloadThemeSwitch from "@/entrypoints/options-page/dashboard/pages/theme
 import { ThemeSections } from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeSections";
 import { useLocalThemes } from "@/services/indexed-db/themes/useLocalThemes";
 
-export default function ThemesListing() {
+export function ThemesListing() {
   const navigate = useNavigate();
 
   const builtInThemes = useMemo(() => BUILTIN_THEME_REGISTRY, []);

@@ -11,7 +11,7 @@ import MessageMetrics from "@/plugins/thread-message-length/MessageMetrics";
 import ThreadMessageTtsButton from "@/plugins/thread-message-tts";
 import { PluginsStatesService } from "@/services/plugins-states";
 
-export default function ThreadMessageToolbarExtraButtonsWrapper() {
+export function ThreadMessageToolbarExtraButtonsWrapper() {
   const portalContainers = useCreatePortalContainers();
   const pluginsEnableStates = PluginsStatesService.getEnableStatesCachedSync();
 

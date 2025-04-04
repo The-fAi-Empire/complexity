@@ -7,7 +7,7 @@ import SidebarPinnedSpaces from "@/plugins/space-navigator/sidebar-content/Pinne
 import SpaceNavigator from "@/plugins/space-navigator/sidebar-content/SpaceNavigator";
 import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
-export default function SpaceNavigatorWrapper() {
+export function SpaceNavigatorWrapper() {
   useInsertCss({
     css: hideNativeHistoryCss,
     id: "space-navigator-hide-native-history",

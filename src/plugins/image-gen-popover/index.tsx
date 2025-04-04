@@ -2,7 +2,7 @@ import { Portal } from "@/components/ui/portal";
 import ImageGenModelSelector from "@/plugins/image-gen-popover/ImageGenModelSelector";
 import useObserver from "@/plugins/image-gen-popover/useObserver";
 
-export default function ImageGenModelSelectorWrapper() {
+export function ImageGenModelSelectorWrapper() {
   const portalContainer = useObserver();
 
   return (

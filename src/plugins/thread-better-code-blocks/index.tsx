@@ -13,7 +13,7 @@ import {
 } from "@/plugins/thread-better-code-blocks/utils";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
-export default function BetterCodeBlocksWrapper() {
+export function BetterCodeBlocksWrapper() {
   const codeBlocksChunks = useThreadCodeBlocksDomObserverStore(
     (store) => store.codeBlocksChunks,
     deepEqual,

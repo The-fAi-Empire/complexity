@@ -5,7 +5,7 @@ import stickyCss from "@/plugins/thread-better-message-toolbars/sticky.css?inlin
 import { useObserveStuckToolbar } from "@/plugins/thread-better-message-toolbars/useObserveStuckToolbar";
 import { ExtensionLocalStorageService } from "@/services/extension-local-storage";
 
-export default function BetterMessageToolbarsWrapper() {
+export function BetterMessageToolbarsWrapper() {
   const settings = ExtensionLocalStorageService.getCachedSync();
 
   useObserveStuckToolbar();

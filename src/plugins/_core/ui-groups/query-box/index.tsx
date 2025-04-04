@@ -17,7 +17,7 @@ const shouldEnableToolbar = shouldEnableUiGroup({
   uiGroup: "queryBoxes:toolbar",
 });
 
-export default function QueryBoxWrapper() {
+export function QueryBoxWrapper() {
   useInsertToolbarCss();
 
   return (

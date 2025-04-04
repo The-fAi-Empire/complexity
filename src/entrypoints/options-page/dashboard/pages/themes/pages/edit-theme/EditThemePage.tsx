@@ -6,7 +6,7 @@ import { ThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/com
 import { DeleteButton } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/components/DeleteButton";
 import { useThemeForm } from "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/hooks/useThemeForm";
 
-export default function EditThemePage() {
+export function EditThemePage() {
   const theme = useLoaderData() as Theme;
   const { form, isPending, onSubmit, deleteTheme, isDeleting } =
     useThemeForm(theme);

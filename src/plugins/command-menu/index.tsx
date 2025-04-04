@@ -5,7 +5,7 @@ import { CommandSearchInput } from "@/plugins/command-menu/components/CommandSea
 import useBindCommandMenuHotkeys from "@/plugins/command-menu/hooks/useBindCommandMenuHotkeys";
 import { useSearchFilter } from "@/plugins/command-menu/hooks/useSearchFilter";
 
-export default function CommandMenuWrapper() {
+export function CommandMenuWrapper() {
   const { open, setOpen, selectedValue, setSelectedValue } =
     useCommandMenuStore();
 

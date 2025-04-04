@@ -14,7 +14,7 @@ import { scrollToElement } from "@/utils/utils";
 
 export const PANEL_WIDTH = 230;
 
-export default function ThreadTocWrapper() {
+export function ThreadTocWrapper() {
   const tocItems = useThreadTocItems();
 
   const threadWrapper = useThreadDomObserverStore(

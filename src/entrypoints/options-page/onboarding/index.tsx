@@ -59,7 +59,7 @@ const steps = [
   },
 ];
 
-export default function Onboarding() {
+export function Onboarding() {
   const navigate = useNavigate();
 
   return (

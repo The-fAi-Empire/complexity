@@ -1,24 +1,25 @@
+import { lazily } from "react-lazily";
 import { LoaderFunctionArgs, RouteObject, redirect } from "react-router-dom";
 
 import { BUILTIN_THEME_REGISTRY } from "@/data/plugins/themes/theme-registry";
 import Page from "@/entrypoints/options-page/components/Page";
 import { getLocalThemesService } from "@/services/indexed-db/themes";
 
-const CreateThemePage = lazy(
+const { CreateThemePage } = lazily(
   () =>
     import(
       "@/entrypoints/options-page/dashboard/pages/themes/pages/create-theme/CreateThemePage"
     ),
 );
 
-const EditThemePage = lazy(
+const { EditThemePage } = lazily(
   () =>
     import(
       "@/entrypoints/options-page/dashboard/pages/themes/pages/edit-theme/EditThemePage"
     ),
 );
 
-const ThemesListing = lazy(
+const { ThemesListing } = lazily(
   () =>
     import(
       "@/entrypoints/options-page/dashboard/pages/themes/pages/ThemesListing"

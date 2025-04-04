@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { lazily } from "react-lazily";
 import { createHashRouter, redirect } from "react-router-dom";
 
 import { APP_CONFIG } from "@/app.config";
@@ -9,34 +10,36 @@ import NotFoundPage from "@/entrypoints/options-page/dashboard/pages/NotFoundPag
 import PluginsPage from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsPage";
 import { ThemesPageRoutes } from "@/entrypoints/options-page/dashboard/pages/themes/routes";
 
-const Playground = lazy(
+const { Playground } = lazily(
   () => import("@/entrypoints/options-page/playground/Playground"),
 );
 
-const Dashboard = lazy(
+const { Dashboard } = lazily(
   () => import("@/entrypoints/options-page/dashboard/Dashboard"),
 );
 
-const ReleaseNotesPage = lazy(
+const { ReleaseNotesPage } = lazily(
   () =>
     import(
       "@/entrypoints/options-page/dashboard/pages/release-notes/ReleaseNotesPage"
     ),
 );
 
-const DirectReleaseNotesPage = lazy(
+const { DirectReleaseNotesPage } = lazily(
   () =>
     import(
       "@/entrypoints/options-page/dashboard/pages/release-notes/DirectReleaseNotesPage"
     ),
 );
 
-const SettingsPage = lazy(
+const { SettingsPage } = lazily(
   () =>
     import("@/entrypoints/options-page/dashboard/pages/settings/SettingsPage"),
 );
 
-const Onboarding = lazy(() => import("@/entrypoints/options-page/onboarding"));
+const { Onboarding } = lazily(
+  () => import("@/entrypoints/options-page/onboarding"),
+);
 
 export const router: ReturnType<typeof createHashRouter> = createHashRouter([
   {
