@@ -4,18 +4,6 @@
     "proSearch": {
       "tooltip": "Više izvora, Python interpreter koda"
     },
-    "reasoningModels": {
-      "tooltip": {
-        "description": "Generiranje odgovora trajat će duže, ali odgovori su obično detaljniji i precizniji.",
-        "proSearchNote": "<emphasis>Pro</emphasis> je uvijek aktivan pri odabiru modela zaključivanja."
-      }
-    },
-    "deepResearch": {
-      "tooltip": {
-        "description": "Generiranje odgovora trajat će znatno duže, ali odgovori su obično najdetaljniji i najprecizniji.",
-        "proSearchNote": "<emphasis>Pro</emphasis> je uvijek aktivan pri odabiru modela dubinskog istraživanja."
-      }
-    },
     "autoMode": {
       "title": "Auto",
       "description": "Prilagođava se vašem upitu"

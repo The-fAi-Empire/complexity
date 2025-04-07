@@ -4,18 +4,6 @@
     "proSearch": {
       "tooltip": "Více zdrojů, interpret kódu Python"
     },
-    "reasoningModels": {
-      "tooltip": {
-        "description": "Generování odpovědí bude trvat déle, ale odpovědi bývají podrobnější a přesnější.",
-        "proSearchNote": "Při výběru modelu uvažování je <emphasis>Pro</emphasis> vždy aktivní."
-      }
-    },
-    "deepResearch": {
-      "tooltip": {
-        "description": "Generování odpovědí bude trvat výrazně déle, ale odpovědi bývají nejpodrobnější a nejpřesnější.",
-        "proSearchNote": "Při výběru modelu hlubokého výzkumu je <emphasis>Pro</emphasis> vždy aktivní."
-      }
-    },
     "autoMode": {
       "title": "Auto",
       "description": "Přizpůsobí se vašemu dotazu"

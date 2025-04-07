@@ -4,18 +4,6 @@
     "proSearch": {
       "tooltip": "More sources, python code interpreter"
     },
-    "reasoningModels": {
-      "tooltip": {
-        "description": "Answers will take longer to generate, but tend to be more detailed and accurate.",
-        "proSearchNote": "<emphasis>Pro</emphasis> is always enabled when choosing a reasoning model."
-      }
-    },
-    "deepResearch": {
-      "tooltip": {
-        "description": "Answers will take significantly longer to generate, but tend to be the most detailed and accurate.",
-        "proSearchNote": "<emphasis>Pro</emphasis> is always enabled when choosing a deep research model."
-      }
-    },
     "autoMode": {
       "title": "Auto",
       "description": "Adapts to your query"

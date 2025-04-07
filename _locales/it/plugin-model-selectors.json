@@ -4,18 +4,6 @@
     "proSearch": {
       "tooltip": "Più fonti, interprete di codice Python"
     },
-    "reasoningModels": {
-      "tooltip": {
-        "description": "Le risposte impiegheranno più tempo per essere generate, ma tendono ad essere più dettagliate e accurate.",
-        "proSearchNote": "<emphasis>Pro</emphasis> è sempre attivo quando si sceglie un modello di ragionamento."
-      }
-    },
-    "deepResearch": {
-      "tooltip": {
-        "description": "Le risposte impiegheranno significativamente più tempo per essere generate, ma tendono ad essere le più dettagliate e accurate.",
-        "proSearchNote": "<emphasis>Pro</emphasis> è sempre attivo quando si sceglie un modello di ricerca approfondita."
-      }
-    },
     "autoMode": {
       "title": "Auto",
       "description": "Si adatta alla tua richiesta"

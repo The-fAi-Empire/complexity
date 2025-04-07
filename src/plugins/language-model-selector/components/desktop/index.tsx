@@ -1,5 +1,3 @@
-import { Trans } from "react-i18next";
-
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { SelectContent } from "@/components/ui/select";
 import {
@@ -40,41 +38,11 @@ export default function DesktopContent() {
               title="Reasoning"
               models={reasoningLanguageModels}
               tooltipPlacement="right"
-              titleTooltip={
-                <div className="x:max-w-[250px]">
-                  <div>
-                    {t(
-                      "plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.description",
-                    )}
-                  </div>
-                  <Trans
-                    i18nKey="plugin-model-selectors:languageModelSelector.reasoningModels.tooltip.proSearchNote"
-                    components={{
-                      emphasis: <span className="x:text-primary" />,
-                    }}
-                  />
-                </div>
-              }
             />
             <LanguageModelGroup
               title="Deep Research"
               models={deepResearchLanguageModels}
               tooltipPlacement="right"
-              titleTooltip={
-                <div className="x:max-w-[250px]">
-                  <div>
-                    {t(
-                      "plugin-model-selectors:languageModelSelector.deepResearch.tooltip.description",
-                    )}
-                  </div>
-                  <Trans
-                    i18nKey="plugin-model-selectors:languageModelSelector.deepResearch.tooltip.proSearchNote"
-                    components={{
-                      emphasis: <span className="x:text-primary" />,
-                    }}
-                  />
-                </div>
-              }
             />
           </div>
         </div>

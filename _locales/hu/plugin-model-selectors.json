@@ -4,18 +4,6 @@
     "proSearch": {
       "tooltip": "Több forrás, Python kód értelmező"
     },
-    "reasoningModels": {
-      "tooltip": {
-        "description": "A válaszok generálása tovább tart, de általában részletesebbek és pontosabbak.",
-        "proSearchNote": "A következtető modell választásakor a <emphasis>Pro</emphasis> mindig aktív."
-      }
-    },
-    "deepResearch": {
-      "tooltip": {
-        "description": "A válaszok generálása jelentősen tovább tart, de általában a legrészletesebbek és legpontosabbak.",
-        "proSearchNote": "A mélyreható kutatási modell választásakor a <emphasis>Pro</emphasis> mindig aktív."
-      }
-    },
     "autoMode": {
       "title": "Auto",
       "description": "Alkalmazkodik a lekérdezéshez"
