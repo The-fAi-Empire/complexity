@@ -53,7 +53,7 @@ async function main() {
     {
       type: "confirm",
       name: "createRelease",
-      message: `Create a new GitHub release for version ${extVersion}?`,
+      message: `Create a new GitHub release for version ${extVersion}? Remember to commit and push your changes (including the newly created changelog file) before proceeding.`,
       default: false,
     },
   ]);

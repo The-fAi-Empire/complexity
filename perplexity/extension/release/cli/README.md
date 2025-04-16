@@ -23,6 +23,7 @@ Publication of the extension on web stores is done manually via scripts because 
 - A release note will be generated in the [`../changelog`](../changelog) directory, with the version number automatically extracted from the [`package.json`](../../package.json) file
 - The script will prompt you to confirm the creation of a GitHub release
 - Open the generated file and add a description of the changes
+- Commit and push your changes (including the newly created changelog file) before proceeding
 - Complete the process by confirming the creation of the release on GitHub
 
 ## Misc
