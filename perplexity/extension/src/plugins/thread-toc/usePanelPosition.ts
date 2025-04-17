@@ -12,6 +12,7 @@ import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { PANEL_WIDTH } from "@/plugins/thread-toc/ThreadToc";
 import { DOM_SELECTORS } from "@/utils/dom-selectors";
+import { whereAmI } from "@/utils/utils";
 
 type UsePanelPosition = {
   position: { top: number; left: number };
@@ -85,6 +86,11 @@ export function usePanelPosition(): UsePanelPosition | null {
   }, [threadContentWrapper, threadWrapper]);
 
   useEffect(() => {
+    if (whereAmI(url) !== "thread") {
+      setPanelPosition(null);
+      return;
+    }
+
     const debouncedUpdate = debounce(() => {
       const newPanelPosition = calculatePosition();
       if (newPanelPosition == null) return;
