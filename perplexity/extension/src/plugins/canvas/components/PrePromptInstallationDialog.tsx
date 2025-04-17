@@ -23,7 +23,7 @@ import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { PplxApiService } from "@/services/pplx-api";
 import { unixTimestampToDate } from "@/utils/dayjs";
-import { fetchResource, setCookie } from "@/utils/utils";
+import { fetchTextResource, setCookie } from "@/utils/utils";
 
 function CanvasPrePromptInstallationDialog() {
   const navigate = useNavigate();
@@ -35,12 +35,13 @@ function CanvasPrePromptInstallationDialog() {
   } = useQuery({
     queryKey: ["canvas", "instructions"],
     queryFn: () => {
-      return fetchResource(
+      return fetchTextResource(
         `https://cdn.cplx.app/prompts/canvas-instruction-claude.md?t=${Date.now()}`,
       );
     },
   });
 
+  // TODO: add an option to disable Space's internet source by default
   const { mutateAsync: createSpace } = useMutation({
     mutationKey: ["createSpace"],
     mutationFn: PplxApiService.createSpace,

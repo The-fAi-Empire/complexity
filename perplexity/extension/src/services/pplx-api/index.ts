@@ -26,15 +26,15 @@ import {
   saveSettingViaFetch,
   saveSettingViaWebSocket,
 } from "@/services/pplx-api/utils";
-import { fetchResource, jsonUtils } from "@/utils/utils";
+import { fetchTextResource, jsonUtils } from "@/utils/utils";
 
 export class PplxApiService {
   static async fetchMaintenanceStatus() {
-    return fetchResource(ENDPOINTS.MAINTENANCE_STATUS);
+    return fetchTextResource(ENDPOINTS.MAINTENANCE_STATUS);
   }
 
   static async fetchAuthSession() {
-    const resp = await fetchResource(ENDPOINTS.AUTH_SESSION);
+    const resp = await fetchTextResource(ENDPOINTS.AUTH_SESSION);
 
     const data = jsonUtils.safeParse(resp);
 
@@ -60,7 +60,7 @@ export class PplxApiService {
   }
 
   static async fetchOrgSettings() {
-    const resp = await fetchResource(ENDPOINTS.ORG_SETTINGS);
+    const resp = await fetchTextResource(ENDPOINTS.ORG_SETTINGS);
 
     const data = PplxOrgSettingsApiResponseSchema.parse(
       jsonUtils.safeParse(resp),
@@ -97,7 +97,7 @@ export class PplxApiService {
 
     const url = `https://www.perplexity.ai/p/api/v1/thread/${threadSlug}?with_parent_info=true&source=web&limit=9999`;
 
-    const resp = await fetchResource(url);
+    const resp = await fetchTextResource(url);
 
     const data = jsonUtils.safeParse(resp);
 
@@ -119,7 +119,7 @@ export class PplxApiService {
     offset?: number;
   } = {}): Promise<ThreadsSearchApiResponse> {
     const parseRawHtml = async () => {
-      const rawHtml = await fetchResource(ENDPOINTS.RAW_LIBRARY);
+      const rawHtml = await fetchTextResource(ENDPOINTS.RAW_LIBRARY);
 
       if (rawHtml == null) return;
 
@@ -167,7 +167,7 @@ export class PplxApiService {
 
   static async fetchSpaces(): Promise<Space[]> {
     return SpacesApiResponseSchema.parse(
-      JSON.parse(await fetchResource(ENDPOINTS.FETCH_SPACES)),
+      JSON.parse(await fetchTextResource(ENDPOINTS.FETCH_SPACES)),
     );
   }
 
@@ -239,7 +239,9 @@ export class PplxApiService {
     spaceSlug: string,
   ): Promise<SpaceThreadsApiResponse> {
     return SpaceThreadsApiResponseSchema.parse(
-      JSON.parse(await fetchResource(ENDPOINTS.FETCH_SPACE_THREADS(spaceSlug))),
+      JSON.parse(
+        await fetchTextResource(ENDPOINTS.FETCH_SPACE_THREADS(spaceSlug)),
+      ),
     );
   }
 

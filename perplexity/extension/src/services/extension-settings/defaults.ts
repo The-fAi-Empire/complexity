@@ -6,7 +6,6 @@ export const DEFAULT_EXTENSION_SETTINGS: ExtensionSettings = {
   theme: "complexity",
   energySavingMode: false,
   extensionIconAction: "perplexity",
-  cdnLastUpdated: 0,
   devMode: false,
   showPostUpdateReleaseNotesPopup: false,
   isPostUpdateReleaseNotesPopupDismissed: false,

@@ -3,20 +3,21 @@ import { PluginRegistry } from "@/data/plugin-registry";
 import { localLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import type {
-  CplxVersions,
+  CplxVersionsApiResponse,
   FeatureCompatibility,
 } from "@/services/cplx-api/cplx-api.types";
 
 export class CplxApiOfflineService {
-  static async fetchVersions(): Promise<CplxVersions> {
+  async fetchVersions(): Promise<CplxVersionsApiResponse> {
     return {
       changelogEntries: [],
       latest: APP_CONFIG.VERSION,
+      latestFirefox: APP_CONFIG.VERSION,
       canvasInstructionLastUpdated: Date.now(),
     };
   }
 
-  static async fetchFeatureCompat(): Promise<FeatureCompatibility> {
+  async fetchFeatureCompat(): Promise<FeatureCompatibility> {
     return Object.fromEntries(
       Object.keys(PluginRegistry.manifests).map((key) => [
         key,
@@ -25,11 +26,11 @@ export class CplxApiOfflineService {
     );
   }
 
-  static async fetchLanguageModels(): Promise<LanguageModel[]> {
+  async fetchLanguageModels(): Promise<LanguageModel[]> {
     return localLanguageModels as unknown as LanguageModel[];
   }
 
-  static async fetchChangelog({ version }: { version?: string } = {}) {
+  async fetchChangelog({ version }: { version?: string } = {}) {
     return "";
   }
 }

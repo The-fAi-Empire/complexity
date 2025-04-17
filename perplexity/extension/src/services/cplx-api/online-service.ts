@@ -12,50 +12,40 @@ import { CplxVersionsApiResponseSchema } from "@/services/cplx-api/cplx-api.type
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { getTParam } from "@/services/cplx-api/utils";
 import { queryClient } from "@/utils/ts-query-client";
-import { fetchResource, jsonUtils } from "@/utils/utils";
+import { fetchTextResource, jsonUtils } from "@/utils/utils";
 
 export class CplxApiService {
-  static async fetchVersions(): Promise<CplxVersions> {
-    const parsedData = CplxVersionsApiResponseSchema.parse(
+  async fetchVersions(): Promise<CplxVersionsApiResponse> {
+    return CplxVersionsApiResponseSchema.parse(
       JSON.parse(
-        await fetchResource(
+        await fetchTextResource(
           `${APP_CONFIG.CPLX_CDN_URL}/versions.json?t=${getTParam()}`,
         ),
       ),
     );
-
-    const latest = (
-      APP_CONFIG.BROWSER === "chrome" ? "latest" : "latestFirefox"
-    ) satisfies keyof CplxVersionsApiResponse;
-
-    return {
-      latest: parsedData[latest],
-      changelogEntries: parsedData.changelogEntries,
-      canvasInstructionLastUpdated: parsedData.canvasInstructionLastUpdated,
-    };
   }
 
-  static async fetchFeatureCompat(): Promise<FeatureCompatibility> {
+  async fetchFeatureCompat(): Promise<FeatureCompatibility> {
     return JSON.parse(
-      await fetchResource(
+      await fetchTextResource(
         `${APP_CONFIG.CPLX_CDN_URL}/feature-compat.json?t=${getTParam()}`,
       ),
     );
   }
 
-  static async fetchLanguageModels(): Promise<LanguageModel[]> {
+  async fetchLanguageModels(): Promise<LanguageModel[]> {
     return z
       .array(LanguageModelSchema)
       .parse(
         jsonUtils.safeParse(
-          await fetchResource(
+          await fetchTextResource(
             `${APP_CONFIG.CPLX_CDN_URL}/language-models.json?t=${getTParam()}`,
           ),
         ),
       );
   }
 
-  static async fetchChangelog({ version }: { version?: string } = {}) {
+  async fetchChangelog({ version }: { version?: string } = {}) {
     const targetVersion = version ?? APP_CONFIG.VERSION;
 
     const versions =

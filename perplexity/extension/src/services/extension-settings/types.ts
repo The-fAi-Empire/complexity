@@ -13,7 +13,6 @@ export const ExtensionSettingsSchema = z.object({
   extensionIconAction: z.enum(EXTENSION_ICON_ACTIONS),
   showPostUpdateReleaseNotesPopup: z.boolean(),
   isPostUpdateReleaseNotesPopupDismissed: z.boolean(),
-  cdnLastUpdated: z.number(),
   devMode: z.boolean(),
 });
 

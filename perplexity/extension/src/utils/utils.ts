@@ -122,7 +122,7 @@ export async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export async function fetchResource(url: string) {
+export async function fetchTextResource(url: string) {
   const response = await fetch(url);
   return response.text();
 }
