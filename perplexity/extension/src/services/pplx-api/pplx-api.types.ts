@@ -28,7 +28,7 @@ export const ThreadMessageApiResponseSchema = z.object({
   author_image: z.string().nullable(),
   author_username: z.string().nullable(),
   thread_url_slug: z.string(),
-  display_model: z.string().transform((val) => val as LanguageModel["code"]),
+  display_model: z.string() as z.ZodType<LanguageModel["code"]>,
 });
 
 export type ThreadMessageApiResponse = z.infer<
@@ -84,10 +84,7 @@ export const SpaceSchema = z.object({
     })
     .nullable(),
   access: z.number(),
-  model_selection: z
-    .string()
-    .transform((val) => val as LanguageModel["code"])
-    .nullable(),
+  model_selection: (z.string() as z.ZodType<LanguageModel["code"]>).nullable(),
 });
 
 export const SpacesApiResponseSchema = z.array(SpaceSchema);

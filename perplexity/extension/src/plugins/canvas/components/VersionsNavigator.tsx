@@ -1,10 +1,10 @@
 import { LuArrowLeft, LuArrowRight } from "react-icons/lu";
 
 import { Button } from "@/components/ui/button";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { getCanvasTitle } from "@/plugins/canvas/canvas.types";
 import { canvasStore, useCanvasStore } from "@/plugins/canvas/store";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { scrollToElement } from "@/utils/utils";
 
 export default function AutonomousCanvasVersionsNavigator() {
@@ -62,7 +62,7 @@ export default function AutonomousCanvasVersionsNavigator() {
             canvasStore.getState().selectedCodeBlockLocation;
           if (!selectedCodeBlockLocation) return;
 
-          const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${selectedCodeBlockLocation.messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${selectedCodeBlockLocation.codeBlockIndex}"]`;
+          const selector = `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${selectedCodeBlockLocation.messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${selectedCodeBlockLocation.codeBlockIndex}"]`;
 
           scrollToElement($(selector), -100);
         }}

@@ -6,13 +6,9 @@ const { SpaceCardsWrapper } = lazily(
   () => import("@/plugins/space-navigator/spaces-page"),
 );
 
-export default function SpacePageComponents() {
+export default function SpacesPageComponents() {
   return (
-    <CsUiPluginsGuard
-      desktopOnly
-      requiresLoggedIn
-      location={["collections_page"]}
-    >
+    <CsUiPluginsGuard requiresLoggedIn location={["collections_page"]}>
       <SpaceCardsWrapper />
     </CsUiPluginsGuard>
   );

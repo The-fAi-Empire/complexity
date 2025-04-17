@@ -1,16 +1,12 @@
 import { createListCollection } from "@ark-ui/react";
 
 import { Select, SelectContext, SelectTrigger } from "@/components/ui/select";
-import { localLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
-import {
-  deepResearchLanguageModels,
-  fastLanguageModels,
-  reasoningLanguageModels,
-} from "@/plugins/_core/misc/remote-language-models.loader";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
@@ -18,7 +14,6 @@ import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import hideNativeModelSelector from "@/plugins/language-model-selector/hide-native-model-selector.css?inline";
-import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 
 export function LanguageModelSelector() {
@@ -52,7 +47,9 @@ export function LanguageModelSelector() {
         itemToString: (item) => item.label,
         itemToValue: (item) => item.id,
       })}
-      data-testid={TEST_ID_SELECTORS.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}
+      data-testid={
+        DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR
+      }
       open={isOpen}
       value={[selectedLanguageModel]}
       highlightedValue={highlightedItem}
@@ -122,10 +119,10 @@ function useRegisterGlobalCss() {
 
 function getSelectItems() {
   const modelItems = [
-    ...fastLanguageModels,
-    ...reasoningLanguageModels,
-    ...deepResearchLanguageModels,
-    localLanguageModels.find((model) => model.code === "pplx_pro")!,
+    ...PplxLanguageModel.fastModels,
+    ...PplxLanguageModel.reasoningModels,
+    ...PplxLanguageModel.deepResearchModels,
+    PplxLanguageModel.localModels.find((model) => model.code === "pplx_pro")!,
   ].map((model) => ({
     id: model.code,
     label: model.label,

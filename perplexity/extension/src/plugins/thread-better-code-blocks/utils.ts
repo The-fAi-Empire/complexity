@@ -1,7 +1,7 @@
 import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { queryClient } from "@/utils/ts-query-client";
 
 export function createMirroredPortalContainer(
@@ -15,14 +15,15 @@ export function createMirroredPortalContainer(
   if (
     $existingPortalContainer[0] &&
     $existingPortalContainer.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK
+      DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK
   ) {
     return $existingPortalContainer[0];
   }
 
   const $portalContainer = $("<div>")
     .internalComponentAttr(
-      INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK,
+      DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE
+        .MIRRORED_CODE_BLOCK,
     )
     .attr({
       "data-language": codeBlock.content.language,

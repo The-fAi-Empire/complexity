@@ -1,36 +1,9 @@
 import { APP_CONFIG } from "@/app.config";
 import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { localLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
-import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { queryClient } from "@/utils/ts-query-client";
-
-export let languageModels: LanguageModel[] = [...localLanguageModels];
-
-export let fastLanguageModels: LanguageModel[] = [
-  ...languageModels.filter(
-    (model) => !model.hideFromList && model.type === "fast",
-  ),
-];
-
-export let reasoningLanguageModels: LanguageModel[] = [
-  ...languageModels.filter(
-    (model) => !model.hideFromList && model.type === "reasoning",
-  ),
-];
-
-export let deepResearchLanguageModels: LanguageModel[] = [
-  ...languageModels.filter(
-    (model) => !model.hideFromList && model.type === "deepResearch",
-  ),
-];
-
-export let autoLanguageModels: LanguageModel[] = [
-  ...languageModels.filter(
-    (model) => !model.hideFromList && model.type === "auto",
-  ),
-];
 
 declare module "@/data/async-dep-registry" {
   interface AsyncLoadersRegistry {
@@ -55,17 +28,17 @@ export default function loader() {
       )();
 
       if (!error && data) {
-        languageModels = data;
-        fastLanguageModels = languageModels.filter(
+        PplxLanguageModel.allModels = data;
+        PplxLanguageModel.fastModels = data.filter(
           (model) => model.type === "fast",
         );
-        reasoningLanguageModels = languageModels.filter(
+        PplxLanguageModel.reasoningModels = data.filter(
           (model) => model.type === "reasoning",
         );
-        deepResearchLanguageModels = languageModels.filter(
+        PplxLanguageModel.deepResearchModels = data.filter(
           (model) => model.type === "deepResearch",
         );
-        autoLanguageModels = languageModels.filter(
+        PplxLanguageModel.autoModels = data.filter(
           (model) => model.type === "auto",
         );
       }

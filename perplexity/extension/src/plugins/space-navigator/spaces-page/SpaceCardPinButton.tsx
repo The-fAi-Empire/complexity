@@ -5,7 +5,7 @@ import Tooltip from "@/components/Tooltip";
 import {
   usePinSpaceMutation,
   useUnpinSpaceMutation,
-} from "@/plugins/space-navigator/sidebar-content/use-pinned-spaces-mutations";
+} from "@/plugins/space-navigator/popover/use-pinned-spaces-mutations";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 

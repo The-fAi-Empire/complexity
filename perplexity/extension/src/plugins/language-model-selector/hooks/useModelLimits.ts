@@ -1,8 +1,8 @@
 import { useImmer } from "use-immer";
 
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import usePplxUserSettings from "@/hooks/usePplxUserSettings";
-import { languageModels } from "@/plugins/_core/misc/remote-language-models.loader";
 
 export function useModelLimits() {
   const { data } = usePplxUserSettings();
@@ -22,7 +22,7 @@ export function useModelLimits() {
 
   useEffect(() => {
     setModelsLimits((draft) => {
-      languageModels.forEach((model) => {
+      PplxLanguageModel.allModels.forEach((model) => {
         draft[model.code] = getModelLimit(model);
       });
     });

@@ -1,5 +1,5 @@
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { findReactFiberNodeValue } from "@/plugins/_core/main-world/react-vdom/utils";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { getReactFiberKey } from "@/utils/utils";
 
@@ -11,7 +11,7 @@ export function getCodeBlockContent(params: {
   language: string;
 } | null {
   const { messageBlockIndex, codeBlockIndex } = params;
-  const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"] pre`;
+  const selector = `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"] pre`;
 
   const $el = $(selector);
 

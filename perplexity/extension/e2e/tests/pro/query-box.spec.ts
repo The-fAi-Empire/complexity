@@ -1,7 +1,7 @@
 import { expect } from "@playwright/test";
 
-import { languageModels } from "@/plugins/_core/misc/remote-language-models.loader";
-import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { sleep } from "@/utils/utils";
 import { HomePage } from "~/e2e/pages/home.page";
 import { test } from "~/e2e/tests/pro/context.fixtures";
@@ -13,7 +13,7 @@ test.describe("Query box", () => {
       await homePage.load();
 
       const languageModelSelector = page.locator(
-        `[data-testid="${TEST_ID_SELECTORS.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
+        `[data-testid="${DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
       );
 
       await expect(languageModelSelector).toBeVisible();
@@ -24,7 +24,7 @@ test.describe("Query box", () => {
       await homePage.load();
 
       const languageModelSelector = page.locator(
-        `[data-testid="${TEST_ID_SELECTORS.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
+        `[data-testid="${DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
       );
 
       await languageModelSelector.click();
@@ -38,13 +38,13 @@ test.describe("Query box", () => {
       await homePage.load();
 
       const languageModelSelector = page.locator(
-        `[data-testid="${TEST_ID_SELECTORS.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
+        `[data-testid="${DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}"]`,
       );
 
       await languageModelSelector.click();
 
       const claudeOption = page
-        .locator(`text=${languageModels?.[1]?.label}`)
+        .locator(`text=${PplxLanguageModel.allModels?.[1]?.label}`)
         .first();
       await claudeOption.click();
 
@@ -53,7 +53,7 @@ test.describe("Query box", () => {
       await languageModelSelector.click();
 
       const gpt4oOption = page
-        .locator(`text=${languageModels?.[0]?.label}`)
+        .locator(`text=${PplxLanguageModel.allModels?.[0]?.label}`)
         .first();
       await gpt4oOption.click();
     });

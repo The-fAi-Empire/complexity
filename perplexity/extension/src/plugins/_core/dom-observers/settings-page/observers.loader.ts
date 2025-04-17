@@ -30,7 +30,7 @@ declare module "@/data/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "coreDomObserver:settingsPage",
-    dependencies: ["cache:pluginsStates"],
+    dependencies: ["cache:pluginsStates", "cache:domSelectors"],
     loader: () => {
       observeSettingsPage(whereAmI());
 
@@ -42,11 +42,14 @@ export default function loader() {
 }
 
 async function observeSettingsPage(location: ReturnType<typeof whereAmI>) {
-  if (location !== "settings") return cleanup();
+  cleanup();
+
+  if (location !== "settings") return;
 
   DomObserver.create(createDomObserverId("settingsPage", "topNavWrapper"), {
     target: document.body,
     config: { childList: true, subtree: true },
+    fireImmediately: true,
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
         {

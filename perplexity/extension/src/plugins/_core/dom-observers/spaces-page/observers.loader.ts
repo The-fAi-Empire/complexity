@@ -31,7 +31,11 @@ declare module "@/data/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "coreDomObserver:spacesPage",
-    dependencies: ["messaging:spaRouter", "cache:pluginsStates"],
+    dependencies: [
+      "messaging:spaRouter",
+      "cache:pluginsStates",
+      "cache:domSelectors",
+    ],
     loader: () => {
       observeSpacesPage(whereAmI());
 

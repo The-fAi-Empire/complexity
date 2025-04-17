@@ -3,30 +3,36 @@ import { sendMessage } from "webext-bridge/content-script";
 import Cplx from "@/components/icons/Cplx";
 import FaArrowUpRight from "@/components/icons/FaArrowUpRight";
 import { Portal } from "@/components/ui/portal";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useSettingsPageDomObserverStore } from "@/plugins/_core/dom-observers/settings-page/store";
-import { DOM_SELECTORS, INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export function SettingsDashboardLink() {
+  const isMobile = useIsMobileStore((store) => store.isMobile);
+
   const $sidebarWrapper = useSettingsPageDomObserverStore(
     (store) => store.$sidebarWrapper,
+    isMobile ? undefined : deepEqual,
   );
 
   const portalContainer = useMemo(() => {
     if ($sidebarWrapper == null || !$sidebarWrapper.length) return null;
 
     const $existingContainer = $sidebarWrapper.find(
-      `[data-cplx-component="${INTERNAL_ATTRIBUTES.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
+      `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
     );
 
     if ($existingContainer[0]) return $existingContainer[0];
 
     const $portalContainer = $("<div>")
       .internalComponentAttr(
-        INTERNAL_ATTRIBUTES.SETTINGS_PAGE.CPLX_DASHBOARD_LINK,
+        DomSelectorsRegistry.internalAttributes.SETTINGS_PAGE
+          .CPLX_DASHBOARD_LINK,
       )
       .insertAfter(
         $sidebarWrapper.find(
-          DOM_SELECTORS.SETTINGS_PAGE.SIDEBAR_CHILD.BACK_BUTTON,
+          DomSelectorsRegistry.cachedSync.SETTINGS_PAGE.SIDEBAR_CHILD
+            .BACK_BUTTON,
         ),
       );
 

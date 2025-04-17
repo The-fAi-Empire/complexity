@@ -8,7 +8,7 @@ import SwappableDndProvider from "@/components/dnd/SwappableDndProvider";
 import SwappableSortableItem from "@/components/dnd/SwappableSortableItem";
 import Tooltip from "@/components/Tooltip";
 import type { PinnedSpace } from "@/data/plugins/space-navigator/pinned-space.types";
-import { useUnpinSpaceMutation } from "@/plugins/space-navigator/sidebar-content/use-pinned-spaces-mutations";
+import { useUnpinSpaceMutation } from "@/plugins/space-navigator/popover/use-pinned-spaces-mutations";
 import { getPinnedSpacesService } from "@/services/indexed-db/pinned-spaces";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import type { Space } from "@/services/pplx-api/pplx-api.types";

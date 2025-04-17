@@ -12,11 +12,25 @@ export default function SpaceNavigatorMobileContentWrapper({
   const [open, setOpen] = useState(false);
 
   return (
-    <Sheet lazyMount open={open} onOpenChange={({ open }) => setOpen(open)}>
+    <Sheet
+      lazyMount
+      modal={false}
+      open={open}
+      onOpenChange={({ open }) => setOpen(open)}
+    >
       <Tooltip
         content={t("plugin-space-navigator:spaceNavigator.button.label")}
       >
-        <SheetTrigger asChild>{children}</SheetTrigger>
+        <SheetTrigger
+          asChild
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setOpen((prev) => !prev);
+          }}
+        >
+          {children}
+        </SheetTrigger>
       </Tooltip>
       <SheetContent side="bottom" className="x:p-0">
         <SpaceNavigatorContent setOpen={setOpen} />

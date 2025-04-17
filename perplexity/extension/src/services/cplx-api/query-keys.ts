@@ -1,7 +1,7 @@
 import { createQueryKeys } from "@lukemorales/query-key-factory";
 
 import { APP_CONFIG } from "@/app.config";
-import { CplxApiService } from "@/services/cplx-api";
+import { cplxApiService } from "@/services/cplx-api";
 import type { CplxVersions } from "@/services/cplx-api/cplx-api.types";
 import { queryClient } from "@/utils/ts-query-client";
 
@@ -9,7 +9,7 @@ export const cplxApiQueries = createQueryKeys("cplxApi", {
   versions: {
     queryKey: null,
     queryFn: async (): Promise<CplxVersions> => {
-      const parsedData = await CplxApiService.fetchVersions();
+      const parsedData = await cplxApiService.fetchVersions();
 
       const latest =
         APP_CONFIG.BROWSER === "chrome" ? "latest" : "latestFirefox";
@@ -23,16 +23,32 @@ export const cplxApiQueries = createQueryKeys("cplxApi", {
   },
   featureCompat: {
     queryKey: null,
-    queryFn: CplxApiService.fetchFeatureCompat,
+    queryFn: () => cplxApiService.fetchFeatureCompat(),
   },
   remoteLanguageModels: {
     queryKey: null,
-    queryFn: CplxApiService.fetchLanguageModels,
+    queryFn: () => cplxApiService.fetchLanguageModels(),
   },
   changelog: ({ version }: { version?: string } = {}) => ({
     queryKey: [{ version }],
-    queryFn: () => CplxApiService.fetchChangelog({ version }),
+    queryFn: () => cplxApiService.fetchChangelog({ version }),
   }),
+  domSelectors: {
+    queryKey: null,
+    queryFn: () => cplxApiService.fetchDomSelectors(),
+  },
+  messageBlocksReactFiberNodePath: {
+    queryKey: null,
+    queryFn: async () => {
+      const resource =
+        await cplxApiService.fetchMessageBlocksReactFiberNodePath();
+
+      if (resource.startsWith("<"))
+        throw new Error("Failed to fetch remote fiber node path");
+
+      return resource.split(".");
+    },
+  },
 });
 
 queryClient.setQueryDefaults(cplxApiQueries.versions.queryKey, {

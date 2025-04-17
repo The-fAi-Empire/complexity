@@ -1,6 +1,6 @@
 @reference "../../assets/index.css";
 
-.mb-lg.md\:text-center.pb-xs.md\:text-center {
+.mb-lg.md\:absolute.text-center {
   text-align: center;
   text-wrap: balance;
 

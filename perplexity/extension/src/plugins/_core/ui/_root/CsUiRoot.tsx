@@ -14,7 +14,7 @@ import { QueryBoxComponents } from "@/plugins/_core/ui/groups/query-box/Wrapper"
 import SidebarComponents from "@/plugins/_core/ui/groups/Sidebar";
 import HomepageComponents from "@/plugins/_core/ui/route-groups/Home";
 import SettingsComponents from "@/plugins/_core/ui/route-groups/Settings";
-import SpacePageComponents from "@/plugins/_core/ui/route-groups/SpacePage";
+import SpacesPageComponents from "@/plugins/_core/ui/route-groups/SpacesPage";
 import ThreadComponents from "@/plugins/_core/ui/route-groups/Thread";
 import CommandMenuWrapper from "@/plugins/command-menu/Wrapper";
 import OnCloudflareTimeoutWrapper from "@/plugins/on-cf-timeout-auto-reload/Wrapper";
@@ -35,7 +35,7 @@ export default function CsUiRoot() {
 
       <SidebarComponents />
 
-      <SpacePageComponents />
+      <SpacesPageComponents />
 
       <SettingsComponents />
 

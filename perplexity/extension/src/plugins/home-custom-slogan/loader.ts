@@ -1,8 +1,8 @@
 import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { homeDomObserverStore } from "@/plugins/_core/dom-observers/home/store";
 import styles from "@/plugins/home-custom-slogan/styles.css?inline";
 import { ExtensionSettingsService } from "@/services/extension-settings";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { insertCss, whereAmI } from "@/utils/utils";
 
 let removeCss: (() => void) | null = null;
@@ -30,9 +30,9 @@ function setupCustomSlogan({
 
   if (!$slogan.length) return;
 
-  $slogan.attr(INTERNAL_ATTRIBUTES.HOME.SLOGAN, "true");
+  $slogan.attr(DomSelectorsRegistry.internalAttributes.HOME.SLOGAN, "true");
 
-  $slogan.find("span").text(sloganText);
+  $slogan.find("span:first").text(sloganText);
 }
 
 declare module "@/data/async-dep-registry" {

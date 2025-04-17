@@ -1,7 +1,7 @@
 import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import styles from "@/plugins/drag-n-drop-file-to-upload-in-thread/styles.css?inline";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 import { insertCss } from "@/utils/utils";
 
@@ -31,7 +31,9 @@ export default function loader() {
         removeCss?.();
 
         if ($wrapper)
-          $wrapper.removeAttr(INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE);
+          $wrapper.removeAttr(
+            DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
+          );
       };
 
       threadDomObserverStore.subscribe(
@@ -44,12 +46,13 @@ export default function loader() {
           if (
             !$wrapper.length ||
             $wrapper.internalComponentAttr() ===
-              INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE
+              DomSelectorsRegistry.internalAttributes.THREAD
+                .ATTACHMENT_DROP_ZONE
           )
             return;
 
           $wrapper.internalComponentAttr(
-            INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE,
+            DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
           );
 
           removeCss = insertCss({
@@ -58,7 +61,7 @@ export default function loader() {
           });
 
           $overlay = $(`
-        <div data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.ATTACHMENT_DROP_ZONE}" class="cplx-file-upload-overlay">
+        <div data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE}" class="cplx-file-upload-overlay">
           <div class="cplx-file-upload-overlay__content">
             <div>${t("plugin-drag-n-drop-file-to-upload-in-thread:dropZone.message")}</div>
           </div>

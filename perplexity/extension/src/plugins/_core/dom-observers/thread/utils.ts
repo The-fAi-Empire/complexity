@@ -1,17 +1,21 @@
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
-import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
 import { setCssProperty } from "@/utils/utils";
 
 export function findNavbar() {
-  const $navbar = $(DOM_SELECTORS.THREAD.NAVBAR);
+  const $navbar = $(DomSelectorsRegistry.cachedSync.THREAD.NAVBAR);
 
   if (
-    !$navbar.length ||
-    $navbar.internalComponentAttr() === INTERNAL_ATTRIBUTES.THREAD.NAVBAR
+    threadDomObserverStore.getState().$navbar != null &&
+    (!$navbar.length ||
+      $navbar.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR)
   )
     return;
 
-  $navbar.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.NAVBAR);
+  $navbar.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR,
+  );
 
   if (!document.body.style.getPropertyValue("--navbar-height") && $navbar[0]) {
     const navbarHeight = $navbar[0].offsetHeight;
@@ -32,7 +36,8 @@ export function findNavbarOverflowMenuButtonWrapper() {
   if (!$navbar || !$navbar[0]) return;
 
   const $overflowMenuButtonWrapper = $navbar.find(
-    DOM_SELECTORS.SICKY_NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER,
+    DomSelectorsRegistry.cachedSync.SICKY_NAVBAR_CHILD
+      .OVERFLOW_MENU_BUTTON_WRAPPER,
   );
 
   if (!$overflowMenuButtonWrapper[0]) {
@@ -44,13 +49,16 @@ export function findNavbarOverflowMenuButtonWrapper() {
   }
 
   if (
+    threadDomObserverStore.getState().$overflowMenuButtonWrapper != null &&
     $overflowMenuButtonWrapper.internalComponentAttr() ===
-    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER
+      DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR_CHILD
+        .OVERFLOW_MENU_BUTTON_WRAPPER
   )
     return;
 
   $overflowMenuButtonWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.THREAD.NAVBAR_CHILD.OVERFLOW_MENU_BUTTON_WRAPPER,
+    DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR_CHILD
+      .OVERFLOW_MENU_BUTTON_WRAPPER,
   );
 
   threadDomObserverStore.setState({
@@ -59,15 +67,19 @@ export function findNavbarOverflowMenuButtonWrapper() {
 }
 
 export function findWrapper() {
-  const $wrapper = $(DOM_SELECTORS.THREAD.WRAPPER);
+  const $wrapper = $(DomSelectorsRegistry.cachedSync.THREAD.WRAPPER);
 
   if (
-    !$wrapper.length ||
-    $wrapper.internalComponentAttr() === INTERNAL_ATTRIBUTES.THREAD.WRAPPER
+    threadDomObserverStore.getState().$wrapper != null &&
+    (!$wrapper.length ||
+      $wrapper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.THREAD.WRAPPER)
   )
     return;
 
-  $wrapper.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.WRAPPER);
+  $wrapper.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.WRAPPER,
+  );
 
   threadDomObserverStore.setState({
     $wrapper,
@@ -75,16 +87,19 @@ export function findWrapper() {
 }
 
 export function findPageWrapper() {
-  const $pageWrapper = $(DOM_SELECTORS.THREAD.PAGE_WRAPPER);
+  const $pageWrapper = $(DomSelectorsRegistry.cachedSync.THREAD.PAGE_WRAPPER);
 
   if (
-    !$pageWrapper.length ||
-    $pageWrapper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.THREAD.PAGE_WRAPPER
+    threadDomObserverStore.getState().$pageWrapper != null &&
+    (!$pageWrapper.length ||
+      $pageWrapper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.THREAD.PAGE_WRAPPER)
   )
     return;
 
-  $pageWrapper.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.PAGE_WRAPPER);
+  $pageWrapper.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.PAGE_WRAPPER,
+  );
 
   threadDomObserverStore.setState({
     $pageWrapper,
@@ -92,16 +107,19 @@ export function findPageWrapper() {
 }
 
 export function findPopper() {
-  const $popper = $(DOM_SELECTORS.THREAD.POPPER.DESKTOP);
+  const $popper = $(DomSelectorsRegistry.cachedSync.THREAD.POPPER.DESKTOP);
 
   if (
-    !$popper.length ||
-    $popper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.THREAD.POPPER.DESKTOP
+    threadDomObserverStore.getState().$popper != null &&
+    (!$popper.length ||
+      $popper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.THREAD.POPPER.DESKTOP)
   )
     return;
 
-  $popper.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.POPPER.DESKTOP);
+  $popper.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.POPPER.DESKTOP,
+  );
 
   threadDomObserverStore.setState({
     $popper,
@@ -110,12 +128,11 @@ export function findPopper() {
 
 export function findMessageStickyHeaderHeight() {
   const $messageStickyHeader = $(
-    DOM_SELECTORS.THREAD.MESSAGE.STICKY_HEADER,
+    DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.STICKY_HEADER,
   ).last();
 
-  if (!$messageStickyHeader.length) return;
-
   if (
+    !$messageStickyHeader.length ||
     document.body.style.getPropertyValue(
       "--message-block-sticky-header-height",
     ) ||

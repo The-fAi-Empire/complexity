@@ -1,10 +1,7 @@
 import { useHotkeys } from "react-hotkeys-hook";
 
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import {
-  fastLanguageModels,
-  reasoningLanguageModels,
-} from "@/plugins/_core/misc/remote-language-models.loader";
 
 export type ColumnType = "fast" | "reasoning";
 
@@ -18,7 +15,7 @@ export function useColumnNavigation({
   enabled: boolean;
 }) {
   const [currentColumn, setCurrentColumn] = useState<ColumnType>(() =>
-    fastLanguageModels.some((model) => model.code === highlightedItem)
+    PplxLanguageModel.fastModels.some((model) => model.code === highlightedItem)
       ? "fast"
       : "reasoning",
   );
@@ -29,10 +26,10 @@ export function useColumnNavigation({
   });
 
   useEffect(() => {
-    const fastIndex = fastLanguageModels.findIndex(
+    const fastIndex = PplxLanguageModel.fastModels.findIndex(
       (model) => model.code === highlightedItem,
     );
-    const reasoningIndex = reasoningLanguageModels.findIndex(
+    const reasoningIndex = PplxLanguageModel.reasoningModels.findIndex(
       (model) => model.code === highlightedItem,
     );
 
@@ -48,7 +45,9 @@ export function useColumnNavigation({
   const handleColumnNavigation = useCallback(() => {
     const newColumn = currentColumn === "fast" ? "reasoning" : "fast";
     const models =
-      newColumn === "fast" ? fastLanguageModels : reasoningLanguageModels;
+      newColumn === "fast"
+        ? PplxLanguageModel.fastModels
+        : PplxLanguageModel.reasoningModels;
     const currentIndex = columnIndices[newColumn];
 
     const safeIndex = Math.min(currentIndex, models.length - 1);

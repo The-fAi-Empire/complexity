@@ -1,8 +1,8 @@
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { spacesPageDomObserverStore } from "@/plugins/_core/dom-observers/spaces-page/store";
-import { DOM_SELECTORS, INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export function observeSpaceCard() {
-  const $spaceCard = $(DOM_SELECTORS.SPACES_PAGE.SPACE_CARD);
+  const $spaceCard = $(DomSelectorsRegistry.cachedSync.SPACES_PAGE.SPACE_CARD);
 
   if (!$spaceCard.length) return;
 
@@ -12,13 +12,14 @@ export function observeSpaceCard() {
     const $spaceCard = $(spaceCard);
 
     if (
+      spacesPageDomObserverStore.getState().spaceCards != null &&
       $spaceCard.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.SPACES_PAGE.SPACE_CARD
+        DomSelectorsRegistry.internalAttributes.SPACES_PAGE.SPACE_CARD
     )
       return;
 
     $spaceCard.internalComponentAttr(
-      INTERNAL_ATTRIBUTES.SPACES_PAGE.SPACE_CARD,
+      DomSelectorsRegistry.internalAttributes.SPACES_PAGE.SPACE_CARD,
     );
   });
 

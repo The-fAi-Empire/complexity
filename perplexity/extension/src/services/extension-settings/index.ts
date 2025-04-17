@@ -7,6 +7,7 @@ import {
   ExtensionSettingsSchema,
   type ExtensionSettings,
 } from "@/services/extension-settings/types";
+import { safeMerge } from "@/utils/safe-merge";
 import { invariant, isInContentScript } from "@/utils/utils";
 
 export class ExtensionSettingsService {
@@ -35,18 +36,19 @@ export class ExtensionSettingsService {
     const validationResult = ExtensionSettingsSchema.safeParse(value);
 
     if (!validationResult.success) {
-      // MABYE: keep valid fields
-
       console.error(validationResult.error.format());
 
-      ExtensionSettingsService.cachedValue =
-        ExtensionSettingsService.instance.fallback;
-
-      await ExtensionSettingsService.instance.setValue(
+      const merged = safeMerge(
+        ExtensionSettingsSchema,
+        value,
         ExtensionSettingsService.instance.fallback,
       );
 
-      return ExtensionSettingsService.instance.fallback;
+      ExtensionSettingsService.cachedValue = merged;
+
+      await ExtensionSettingsService.instance.setValue(merged);
+
+      return merged;
     }
 
     ExtensionSettingsService.cachedValue = value;

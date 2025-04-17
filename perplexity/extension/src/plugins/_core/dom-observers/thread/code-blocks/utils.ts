@@ -3,9 +3,9 @@ import remarkParse from "remark-parse";
 import { unified } from "unified";
 import { sendMessage } from "webext-bridge/content-script";
 
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import type { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
-import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
 
 export async function findCodeBlocks(
   messageBlocks: MessageBlock[],
@@ -29,7 +29,7 @@ async function processCodeBlocksForMessageBlock(
   }
 
   const $codeBlockElements = $(messageBlock.nodes.$answer)
-    .find(DOM_SELECTORS.THREAD.MESSAGE.CODE_BLOCK.WRAPPER)
+    .find(DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.CODE_BLOCK.WRAPPER)
     .toArray();
 
   const codeBlocksPromises = $codeBlockElements.map(
@@ -37,11 +37,14 @@ async function processCodeBlocksForMessageBlock(
       const $codeBlock = $(codeBlockElement);
 
       $codeBlock
-        .internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK)
+        .internalComponentAttr(
+          DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
+        )
         .attr("data-index", codeBlockIndex);
 
       const $nativeCopyButton = $codeBlock.find(
-        DOM_SELECTORS.THREAD.MESSAGE.CODE_BLOCK.NATIVE_COPY_BUTTON,
+        DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.CODE_BLOCK
+          .NATIVE_COPY_BUTTON,
       );
 
       const content = await getCodeBlockContent({
@@ -146,7 +149,7 @@ function isCodeBlockInFlight({
   if (!isMessageBlockInFlight) return false;
 
   const codeBlock = document.querySelector(
-    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"]`,
+    `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"]`,
   );
 
   const parentElement = codeBlock?.parentElement;
@@ -158,7 +161,7 @@ function isCodeBlockInFlight({
   }
 
   const hasNextCodeBlock = document.querySelector(
-    `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex + 1}"]`,
+    `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex + 1}"]`,
   );
 
   if (hasNextCodeBlock) return false;

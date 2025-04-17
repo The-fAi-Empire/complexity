@@ -7,7 +7,9 @@ import { triggerRewriteOption } from "@/plugins/_core/main-world/react-vdom/acti
 
 declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
-    "reactVdom:getMessages": () => MessageBlockFiberData[] | null;
+    "reactVdom:getMessages": (params: {
+      remoteFiberNodePath?: string[];
+    }) => MessageBlockFiberData[] | null;
     "reactVdom:getCodeBlockContent": (params: {
       messageBlockIndex: number;
       codeBlockIndex: number;
@@ -23,7 +25,7 @@ declare module "@/types/webext-bridge-overrides" {
 }
 
 export function setupReactVdomListeners() {
-  onMessage("reactVdom:getMessages", () => getMessages());
+  onMessage("reactVdom:getMessages", ({ data }) => getMessages(data));
 
   onMessage("reactVdom:getCodeBlockContent", ({ data }) =>
     getCodeBlockContent(data),

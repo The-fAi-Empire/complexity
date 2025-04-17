@@ -1,4 +1,4 @@
-import { languageModels } from "@/plugins/_core/misc/remote-language-models.loader";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { ThreadMessageApiResponse } from "@/services/pplx-api/pplx-api.types";
 import { jsonUtils } from "@/utils/utils";
 
@@ -49,8 +49,8 @@ export class ThreadExport {
 
   private static getModelName(displayModel: string): string {
     return (
-      languageModels.find((model) => model.code === displayModel)?.label ||
-      displayModel
+      PplxLanguageModel.allModels.find((model) => model.code === displayModel)
+        ?.label || displayModel
     );
   }
 

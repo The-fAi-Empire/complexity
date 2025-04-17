@@ -1,9 +1,9 @@
 import { Portal } from "@/components/ui/portal";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useSidebarDomObserverStore } from "@/plugins/_core/dom-observers/sidebar/store";
 import styles from "@/plugins/sidebar-toggleable-recent-threads/styles.css?inline";
 import SidebarToggleableRecentThreadsToggleButton from "@/plugins/sidebar-toggleable-recent-threads/ToggleButton";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export function SidebarToggleableRecentThreads() {
   useInsertCss({
@@ -30,7 +30,7 @@ export function SidebarToggleableRecentThreads() {
       return null;
 
     const $existingPortalContainer = $(libraryButtonWrapper).find(
-      `[data-cplx-component="${INTERNAL_ATTRIBUTES.SIDEBAR.LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER}-cplx"]`,
+      `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.SIDEBAR.LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER}-cplx"]`,
     );
 
     if ($existingPortalContainer.length) {
@@ -41,7 +41,7 @@ export function SidebarToggleableRecentThreads() {
       .addClass("x:mr-1")
       .internalComponentAttr(
         `${
-          INTERNAL_ATTRIBUTES.SIDEBAR
+          DomSelectorsRegistry.internalAttributes.SIDEBAR
             .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER
         }-cplx`,
       );

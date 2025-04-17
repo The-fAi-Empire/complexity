@@ -29,7 +29,7 @@ declare module "@/data/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "coreDomObserver:sidebar",
-    dependencies: ["cache:pluginsStates"],
+    dependencies: ["cache:pluginsStates", "cache:domSelectors"],
     loader: () => {
       if (
         !shouldEnableCoreObserver({

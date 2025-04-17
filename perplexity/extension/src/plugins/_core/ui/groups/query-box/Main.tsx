@@ -5,7 +5,7 @@ import { createToolbarPortalContainers } from "@/plugins/_core/ui/groups/query-b
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
 import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
-import SpaceNavigatorWrapper from "@/plugins/space-navigator/query-box/Wrapper";
+import SpaceNavigatorWrapper from "@/plugins/space-navigator/sheet/Wrapper";
 
 export default function MainQueryBoxWrapper() {
   const mainQueryBox = queryBoxesDomObserverStore(

@@ -20,6 +20,7 @@ import viteRemoveStaticCssFromManifest from "./vite-plugins/vite-plugin-remove-s
 
 export default defineConfig(() => ({
   base: "./",
+
   build: {
     target: ["chrome89", "edge89", "firefox109"],
     emptyOutDir: true,
@@ -33,6 +34,7 @@ export default defineConfig(() => ({
       },
     },
   },
+
   plugins: [
     crx({
       manifest:
@@ -67,12 +69,14 @@ export default defineConfig(() => ({
     ]),
     viteRemoveStaticCssFromManifest(),
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
       "~": path.resolve(__dirname, "./"),
     },
   },
+
   server: {
     port: 8811,
     hmr: {
@@ -86,10 +90,12 @@ export default defineConfig(() => ({
       ],
     },
   },
+
   test: {
     exclude: ["node_modules", "e2e/**"],
     setupFiles: ["./tests/vitest.setup.ts"],
   },
+
   legacy: {
     skipWebSocketTokenCheck: true,
   },

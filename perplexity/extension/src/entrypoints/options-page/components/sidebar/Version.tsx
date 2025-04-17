@@ -41,7 +41,7 @@ export default function Version() {
 
   return (
     <div
-      className="x:mx-auto x:mb-4 x:w-fit x:text-xs x:text-muted-foreground"
+      className="x:mx-auto x:mb-4 x:w-fit x:font-mono x:text-xs x:text-muted-foreground"
       onClick={handleClick}
     >
       v{APP_CONFIG.VERSION}

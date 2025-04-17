@@ -30,3 +30,5 @@ unimport.d.ts
 /release/*.xpi
 /release/*.crx
 /release/*-firefox
+
+dom-selectors.json

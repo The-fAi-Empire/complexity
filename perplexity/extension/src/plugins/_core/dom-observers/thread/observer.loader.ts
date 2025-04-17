@@ -33,7 +33,11 @@ declare module "@/data/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "coreDomObserver:thread",
-    dependencies: ["messaging:spaRouter", "cache:pluginsStates"],
+    dependencies: [
+      "messaging:spaRouter",
+      "cache:pluginsStates",
+      "cache:domSelectors",
+    ],
     loader: () => {
       if (
         !shouldEnableCoreObserver({
@@ -57,7 +61,9 @@ function cleanup() {
 }
 
 function observeThread(location: ReturnType<typeof whereAmI>) {
-  if (location !== "thread") return cleanup();
+  cleanup();
+
+  if (location !== "thread") return;
 
   DomObserver.create(createDomObserverId("thread"), {
     target: document.body,

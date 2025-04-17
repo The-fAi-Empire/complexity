@@ -9,8 +9,8 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import SpaceItem from "@/plugins/space-navigator/query-box/SpaceItem";
-import SpaceItemPreview from "@/plugins/space-navigator/sidebar-content/SpaceItemPreview";
+import SpaceItemPreview from "@/plugins/space-navigator/popover/SpaceItemPreview";
+import SpaceItem from "@/plugins/space-navigator/sheet/SpaceItem";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { UiUtils } from "@/utils/ui-utils";

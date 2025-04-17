@@ -11,7 +11,7 @@ const Command = ({
 }: React.ComponentProps<typeof CommandPrimitive>) => (
   <CommandPrimitive
     className={cn(
-      "x:flex x:h-full x:w-full x:flex-col x:overflow-hidden x:rounded-md x:bg-popover x:text-popover-foreground",
+      "x:flex x:h-full x:w-full x:flex-col x:overflow-hidden x:rounded-lg x:bg-popover x:text-popover-foreground",
       className,
     )}
     {...props}
@@ -70,7 +70,7 @@ const CommandInput = ({
     )}
     <CommandPrimitive.Input
       className={cn(
-        "x:flex x:h-11 x:w-full x:rounded-md x:bg-transparent x:py-3 x:text-sm x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
+        "x:flex x:h-11 x:w-full x:rounded-lg x:bg-transparent x:py-3 x:text-sm x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
         inputClassName,
       )}
       {...props}
@@ -139,7 +139,7 @@ const CommandItem = ({
 }: React.ComponentProps<typeof CommandPrimitive.Item>) => (
   <CommandPrimitive.Item
     className={cn(
-      "x:relative x:flex x:cursor-pointer x:items-center x:rounded-md x:px-2 x:py-1.5 x:text-xs x:text-muted-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-primary x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
+      "x:relative x:flex x:cursor-pointer x:items-center x:rounded-lg x:px-2 x:py-1.5 x:text-xs x:text-muted-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-primary x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
       className,
     )}
     {...props}

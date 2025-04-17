@@ -54,10 +54,7 @@ export const webStoreLangsMap: Record<SupportedLangs, string> = {
   "id-ID": "id",
 };
 
-const enModules = import.meta.glob("~/_locales/en/*.json", { eager: true });
-const namespaces = Object.keys(enModules)
-  .map((path) => path.split("/").pop()?.replace(".json", ""))
-  .filter(Boolean) as string[];
+const enModules = import.meta.glob("~/_locales/en/*.json");
 
 type PluginResources = Record<string, any>;
 
@@ -134,6 +131,10 @@ export const t = i18n.t;
 export { i18n };
 
 export async function initializeI18next() {
+  const namespaces = Object.keys(enModules)
+    .map((path) => path.split("/").pop()?.replace(".json", ""))
+    .filter(Boolean) as string[];
+
   const language = await getLanguage();
 
   const resources: Resources = {

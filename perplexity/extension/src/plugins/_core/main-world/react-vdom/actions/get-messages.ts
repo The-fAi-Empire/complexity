@@ -15,7 +15,19 @@ export type MessageBlockFiberData = {
   authorUuid: string | null;
 };
 
-export function getMessages(): MessageBlockFiberData[] | null {
+export const localFiberNodePath = [
+  "return",
+  "memoizedState",
+  "next",
+  "next",
+  "memoizedState",
+  "current",
+  "results",
+];
+
+export function getMessages({
+  remoteFiberNodePath,
+}: { remoteFiberNodePath?: string[] } = {}): MessageBlockFiberData[] | null {
   const $messagesContainer = UiUtils.getMessagesContainer();
 
   if (!$messagesContainer[0]) return null;
@@ -31,14 +43,15 @@ export function getMessages(): MessageBlockFiberData[] | null {
       fiberNode,
       condition: (node) => {
         return (
-          node.return.memoizedState.next.next.memoizedState.current.results !=
-          null
+          walkFiberNode(node, remoteFiberNodePath ?? localFiberNodePath) != null
         );
       },
       select: (node): MessageBlockFiberData[] => {
         return (
-          node.return.memoizedState.next.next.memoizedState.current
-            .results as any[]
+          walkFiberNode(
+            node,
+            remoteFiberNodePath ?? localFiberNodePath,
+          ) as any[]
         ).map((entry) => ({
           title: entry.query_str,
           backendUuid: entry.backend_uuid,
@@ -78,4 +91,8 @@ export function getMessages(): MessageBlockFiberData[] | null {
   }
 
   return messages;
+}
+
+function walkFiberNode(fiberNode: any, path: string[]) {
+  return path.reduce((acc, key) => acc[key], fiberNode);
 }

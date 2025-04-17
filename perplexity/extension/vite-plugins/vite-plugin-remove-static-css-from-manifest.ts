@@ -32,7 +32,7 @@ export default function viteRemoveStaticCssFromManifest(): Plugin {
         try {
           const manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
 
-          // Remove CSS entries from content scripts
+          // Remove static CSS entries from content scripts
           if (manifest.content_scripts != null) {
             manifest.content_scripts = manifest.content_scripts.map(
               (script: any) => {

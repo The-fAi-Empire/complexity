@@ -13,6 +13,7 @@ const SidebarToggleableRecentThreadsWrapper = withPluginsGuard(
   SidebarToggleableRecentThreads,
   {
     dependentPluginIds: ["sidebar:toggleableRecentThreads"],
+    desktopOnly: true,
   },
 );
 

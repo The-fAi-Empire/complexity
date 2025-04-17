@@ -1,7 +1,10 @@
 /**
- * Mixes of both native css and jquery selectors
+ * Mixes of both native css and jquery selectors, so always use jQuery instead of document.querySelector
  */
-export const DOM_SELECTORS = {
+
+import type { DomSelectors } from "@/data/dom-selectors-registry/types";
+
+export const DOM_SELECTORS: DomSelectors = {
   SIDEBAR: {
     WRAPPER: ".group\\/bar",
     SPACE_BUTTON: "a[role='button'][aria-label][href='/spaces']",
@@ -46,7 +49,7 @@ export const DOM_SELECTORS = {
       },
       STICKY_HEADER: "div.md\\:sticky > .max-w-threadContentWidth",
       SOURCES: '[class*="md:grid-cols-"].grid.grid-flow-col',
-      ANSWER: ".gap-y-md.flex.flex-col > .relative.font-sans.text-base",
+      ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
       BOTTOM_BAR:
         ".gap-y-md.flex.flex-col > .flex.items-center.justify-between",
@@ -72,7 +75,7 @@ export const DOM_SELECTORS = {
     },
   },
   HOME: {
-    SLOGAN: ".mb-lg.md\\:text-center.pb-xs.md\\:text-center",
+    SLOGAN: ".mb-lg.md\\:absolute.text-center",
     BOTTOM_BAR: ".hidden.pb-md.md\\:block>div",
     LANGUAGE_SELECTOR: "select#interface-language-select",
   },
@@ -99,7 +102,7 @@ export const DOM_SELECTORS = {
     SPACE_CARD: `.contents a[data-testid="collection-preview"]`,
   },
   SETTINGS_PAGE: {
-    SIDEBAR_WRAPPER: ".w-sideBarWidth",
+    SIDEBAR_WRAPPER: ".w-sideBarWidth, .scrollable-container",
     SIDEBAR_CHILD: {
       BACK_BUTTON: ".mb-3.ml-2.flex.items-center.gap-2",
     },
@@ -181,7 +184,7 @@ export const INTERNAL_ATTRIBUTES = {
   },
 } as const;
 
-export const TEST_ID_SELECTORS = {
+export const TEST_ID = {
   QUERY_BOX: {
     FOCUS_SELECTOR: "cplx-focus-selector",
     LANGUAGE_MODEL_SELECTOR: "cplx-language-model-selector",

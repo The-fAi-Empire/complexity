@@ -39,7 +39,11 @@ declare module "@/data/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "coreDomObserver:queryBoxes",
-    dependencies: ["cache:pluginsStates", "messaging:spaRouter"],
+    dependencies: [
+      "cache:pluginsStates",
+      "messaging:spaRouter",
+      "cache:domSelectors",
+    ],
     loader: () => {
       if (
         !shouldEnableCoreObserver({

@@ -6,7 +6,7 @@ import ForceWritingModeToggle from "@/plugins/force-writing-mode/Wrapper";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
 import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
-import SpaceNavigatorWrapper from "@/plugins/space-navigator/query-box/Wrapper";
+import SpaceNavigatorWrapper from "@/plugins/space-navigator/sheet/Wrapper";
 
 export default function SpaceQueryBoxWrapper() {
   const spaceQueryBox = queryBoxesDomObserverStore(

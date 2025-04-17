@@ -1,7 +1,10 @@
 import { APP_CONFIG } from "@/app.config";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import type { DomSelectors } from "@/data/dom-selectors-registry/types";
 import { PluginRegistry } from "@/data/plugin-registry";
-import { localLanguageModels } from "@/data/plugins/query-box/language-model-selector/language-models";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { localFiberNodePath } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
 import type {
   CplxVersionsApiResponse,
   FeatureCompatibility,
@@ -27,10 +30,18 @@ export class CplxApiOfflineService {
   }
 
   async fetchLanguageModels(): Promise<LanguageModel[]> {
-    return localLanguageModels as unknown as LanguageModel[];
+    return PplxLanguageModel.localModels as unknown as LanguageModel[];
   }
 
-  async fetchChangelog({ version }: { version?: string } = {}) {
+  async fetchChangelog({ version: _ }: { version?: string } = {}) {
     return "";
+  }
+
+  async fetchDomSelectors(): Promise<DomSelectors> {
+    return DomSelectorsRegistry.local;
+  }
+
+  async fetchMessageBlocksReactFiberNodePath() {
+    return localFiberNodePath.join(".");
   }
 }

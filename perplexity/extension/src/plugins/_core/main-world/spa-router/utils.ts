@@ -1,5 +1,5 @@
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { MaybePromise } from "@/types/utils.types";
-import { DOM_SELECTORS } from "@/utils/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 import type { whereAmI } from "@/utils/utils";
 
@@ -41,11 +41,13 @@ export async function waitForRouteChangeComplete(
 
   async function checkThreadLoaded() {
     await UiUtils.waitForSpaIdle();
-    return $(DOM_SELECTORS.THREAD.MESSAGE.INNER_WRAPPER).length > 0;
+    return (
+      $(DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.INNER_WRAPPER).length > 0
+    );
   }
 
   function checkHomeLoaded() {
-    return $(DOM_SELECTORS.HOME.SLOGAN).length > 0;
+    return $(DomSelectorsRegistry.cachedSync.HOME.SLOGAN).length > 0;
   }
 
   async function waitForConditionOrTimeout(

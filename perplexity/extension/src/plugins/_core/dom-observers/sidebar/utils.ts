@@ -1,25 +1,30 @@
-import { isMobileStore } from "@/hooks/use-is-mobile-store";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { sidebarDomObserverStore } from "@/plugins/_core/dom-observers/sidebar/store";
-import { DOM_SELECTORS, INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export function findSidebarWrapper() {
-  const $wrapper = $(DOM_SELECTORS.SIDEBAR.WRAPPER);
+  const $wrapper = $(DomSelectorsRegistry.cachedSync.SIDEBAR.WRAPPER);
 
   if (!$wrapper.length) return;
 
   const isExpanded = $wrapper.hasClass("w-sideBarWidth");
 
-  // Only update the attribute if it's different to avoid triggering mutation observer unnecessarily
+  // ⚠️ Only update the attribute if it's different to avoid triggering mutation observer unnecessarily
   const currentState = $wrapper.attr("data-state");
   const newState = isExpanded ? "expanded" : "collapsed";
   if (currentState !== newState) {
     $wrapper.attr("data-state", newState);
   }
 
-  if ($wrapper.internalComponentAttr() === INTERNAL_ATTRIBUTES.SIDEBAR.WRAPPER)
+  if (
+    sidebarDomObserverStore.getState().$wrapper != null &&
+    $wrapper.internalComponentAttr() ===
+      DomSelectorsRegistry.internalAttributes.SIDEBAR.WRAPPER
+  )
     return;
 
-  $wrapper.internalComponentAttr(INTERNAL_ATTRIBUTES.SIDEBAR.WRAPPER);
+  $wrapper.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.SIDEBAR.WRAPPER,
+  );
 
   sidebarDomObserverStore.setState({
     $wrapper,
@@ -32,13 +37,12 @@ export function findSpaceButtonWrapper() {
   if ($wrapper == null) return;
 
   const $spaceButtonWrapper = $wrapper.find(
-    DOM_SELECTORS.SIDEBAR.SPACE_BUTTON_WRAPPER,
+    DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER,
   );
 
-  const isMobile = isMobileStore.getState().isMobile;
   const isExpanded = $wrapper.attr("data-state") === "expanded";
 
-  if ((isMobile || !isExpanded) && $spaceButtonWrapper.length) {
+  if (!isExpanded && $spaceButtonWrapper.length) {
     sidebarDomObserverStore.setState({
       $spaceButtonWrapper: null,
     });
@@ -47,18 +51,19 @@ export function findSpaceButtonWrapper() {
   }
 
   $spaceButtonWrapper
-    .find(DOM_SELECTORS.SIDEBAR.SPACE_BUTTON)
+    .find(DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON)
     .addClass("x:group");
 
   if (
-    !$spaceButtonWrapper.length ||
-    $spaceButtonWrapper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.SIDEBAR.SPACE_BUTTON_WRAPPER
+    sidebarDomObserverStore.getState().$spaceButtonWrapper != null &&
+    (!$spaceButtonWrapper.length ||
+      $spaceButtonWrapper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER)
   )
     return;
 
   $spaceButtonWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.SIDEBAR.SPACE_BUTTON_WRAPPER,
+    DomSelectorsRegistry.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER,
   );
 
   sidebarDomObserverStore.setState({
@@ -73,19 +78,21 @@ export function findSpaceButtonTriggerButtonsWrapper() {
   if ($spaceButtonWrapper == null) return;
 
   const $spaceButtonTriggerButtonsWrapper = $spaceButtonWrapper.find(
-    DOM_SELECTORS.SIDEBAR.SPACE_BUTTON_WRAPPER_CHILD
+    DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER_CHILD
       .TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
   if (
     !$spaceButtonTriggerButtonsWrapper.length ||
     $spaceButtonTriggerButtonsWrapper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.SIDEBAR.SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER
+      DomSelectorsRegistry.internalAttributes.SIDEBAR
+        .SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER
   )
     return;
 
   $spaceButtonTriggerButtonsWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.SIDEBAR.SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
+    DomSelectorsRegistry.internalAttributes.SIDEBAR
+      .SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
   sidebarDomObserverStore.setState({
@@ -99,13 +106,12 @@ export function findLibraryButtonWrapper() {
   if ($wrapper == null) return;
 
   const $libraryButtonWrapper = $wrapper.find(
-    DOM_SELECTORS.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
+    DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
   );
 
-  const isMobile = isMobileStore.getState().isMobile;
   const isExpanded = $wrapper.attr("data-state") === "expanded";
 
-  if ((isMobile || !isExpanded) && $libraryButtonWrapper.length) {
+  if (!isExpanded && $libraryButtonWrapper.length) {
     sidebarDomObserverStore.setState({
       $libraryButtonWrapper: null,
     });
@@ -114,18 +120,19 @@ export function findLibraryButtonWrapper() {
   }
 
   $libraryButtonWrapper
-    .find(DOM_SELECTORS.SIDEBAR.LIBRARY_BUTTON)
+    .find(DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON)
     .addClass("x:group");
 
   if (
-    !$libraryButtonWrapper.length ||
-    $libraryButtonWrapper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.SIDEBAR.LIBRARY_BUTTON_WRAPPER
+    sidebarDomObserverStore.getState().$libraryButtonWrapper != null &&
+    (!$libraryButtonWrapper.length ||
+      $libraryButtonWrapper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER)
   )
     return;
 
   $libraryButtonWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
+    DomSelectorsRegistry.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
   );
 
   sidebarDomObserverStore.setState({
@@ -140,20 +147,23 @@ export function findLibraryButtonTriggerButtonsWrapper() {
   if ($libraryButtonWrapper == null) return;
 
   const $libraryButtonTriggerButtonsWrapper = $libraryButtonWrapper.find(
-    DOM_SELECTORS.SIDEBAR.LIBRARY_BUTTON_WRAPPER_CHILD
+    DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER_CHILD
       .TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
   if (
-    !$libraryButtonTriggerButtonsWrapper.length ||
-    $libraryButtonTriggerButtonsWrapper.internalComponentAttr() ===
-      INTERNAL_ATTRIBUTES.SIDEBAR
-        .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER
+    sidebarDomObserverStore.getState().$libraryButtonTriggerButtonsWrapper !=
+      null &&
+    (!$libraryButtonTriggerButtonsWrapper.length ||
+      $libraryButtonTriggerButtonsWrapper.internalComponentAttr() ===
+        DomSelectorsRegistry.internalAttributes.SIDEBAR
+          .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER)
   )
     return;
 
   $libraryButtonTriggerButtonsWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.SIDEBAR.LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
+    DomSelectorsRegistry.internalAttributes.SIDEBAR
+      .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
   sidebarDomObserverStore.setState({

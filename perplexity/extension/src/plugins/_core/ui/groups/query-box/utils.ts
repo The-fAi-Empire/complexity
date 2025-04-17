@@ -1,6 +1,6 @@
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 
 export function createToolbarPortalContainers({
   queryBox,
@@ -20,7 +20,7 @@ export function createToolbarPortalContainers({
   const $queryBoxComponentsWrapper = $textareaWrapper.parent();
 
   $queryBoxComponentsWrapper.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.COMPONENTS_WRAPPER,
+    DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD.COMPONENTS_WRAPPER,
   );
 
   // --- Left Toolbar ---
@@ -31,21 +31,21 @@ export function createToolbarPortalContainers({
     $pplxLeftToolbarWrapper
       .find(">div.flex:first-child")
       .internalComponentAttr(
-        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+        DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
           .PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER,
       );
   }
 
   const $leftToolbarLeftContainer = findOrCreateContainer(
     $pplxLeftToolbarWrapper,
-    INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+    DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
       .CPLX_LEFT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
     "prepend",
   );
 
   const $leftToolbarRightContainer = findOrCreateContainer(
     $pplxLeftToolbarWrapper,
-    INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+    DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
       .CPLX_LEFT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER,
     "append",
   );
@@ -57,19 +57,20 @@ export function createToolbarPortalContainers({
 
   if ($pplxRightToolbarWrapper.length) {
     $pplxRightToolbarWrapper.internalComponentAttr(
-      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD.PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
+      DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
+        .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
     );
 
     $pplxRightToolbarWrapper
       .find(">div.flex:first-child")
       .internalComponentAttr(
-        INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+        DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
           .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
       );
 
     $rightToolbarLeftContainer = findOrCreateContainer(
       $pplxRightToolbarWrapper,
-      INTERNAL_ATTRIBUTES.QUERY_BOX_CHILD
+      DomSelectorsRegistry.internalAttributes.QUERY_BOX_CHILD
         .CPLX_RIGHT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
       "prepend",
     );

@@ -1,13 +1,19 @@
+import { LuSearch } from "react-icons/lu";
+
 import { Portal } from "@/components/ui/portal";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useSidebarDomObserverStore } from "@/plugins/_core/dom-observers/sidebar/store";
-import hideNativeHistoryCss from "@/plugins/space-navigator/sidebar-content/hide-native-history.css?inline";
-import SidebarPinnedSpacesVisToggle from "@/plugins/space-navigator/sidebar-content/PinnedItemsVisToggle";
-import SidebarPinnedSpaces from "@/plugins/space-navigator/sidebar-content/PinnedSpaces";
-import SpaceNavigator from "@/plugins/space-navigator/sidebar-content/SpaceNavigator";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
+import hideNativeHistoryCss from "@/plugins/space-navigator/popover/hide-native-history.css?inline";
+import SidebarPinnedSpacesVisToggle from "@/plugins/space-navigator/popover/PinnedItemsVisToggle";
+import SidebarPinnedSpaces from "@/plugins/space-navigator/popover/PinnedSpaces";
+import { default as SpaceNavigatorDesktop } from "@/plugins/space-navigator/popover/SpaceNavigator";
+import { SpaceNavigator as SpaceNavigatorMobile } from "@/plugins/space-navigator/sheet/SpaceNavigator";
 
 export function SpaceNavigatorWrapper() {
+  const isMobile = useIsMobileStore((store) => store.isMobile);
+
   useInsertCss({
     css: hideNativeHistoryCss,
     id: "space-navigator-hide-native-history",
@@ -31,7 +37,7 @@ export function SpaceNavigatorWrapper() {
     const $existingPinnedSpacesPortalContainer = $spaceButtonWrapper
       .parent()
       .find(
-        `[data-cplx-component="${INTERNAL_ATTRIBUTES.SIDEBAR.PINNED_SPACES_PORTAL_CONTAINER}"]`,
+        `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.SIDEBAR.PINNED_SPACES_PORTAL_CONTAINER}"]`,
       );
 
     if ($existingPinnedSpacesPortalContainer.length) {
@@ -40,7 +46,8 @@ export function SpaceNavigatorWrapper() {
 
     const $portalContainer = $("<div>")
       .internalComponentAttr(
-        INTERNAL_ATTRIBUTES.SIDEBAR.PINNED_SPACES_PORTAL_CONTAINER,
+        DomSelectorsRegistry.internalAttributes.SIDEBAR
+          .PINNED_SPACES_PORTAL_CONTAINER,
       )
       .appendTo($spaceButtonWrapper);
 
@@ -52,8 +59,14 @@ export function SpaceNavigatorWrapper() {
       {triggerButtonsPortalContainer != null && (
         <Portal container={triggerButtonsPortalContainer}>
           <div className="x:-mr-2 x:flex x:w-full x:flex-1 x:items-center x:justify-end x:gap-1">
-            <SidebarPinnedSpacesVisToggle />
-            <SpaceNavigator />
+            <div className="x:hidden x:md:block">
+              <SidebarPinnedSpacesVisToggle />
+            </div>
+            {isMobile ? (
+              <SpaceNavigatorMobile Icon={LuSearch} />
+            ) : (
+              <SpaceNavigatorDesktop />
+            )}
           </div>
         </Portal>
       )}

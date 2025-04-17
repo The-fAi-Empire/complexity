@@ -7,7 +7,7 @@ import AtomicSimple from "@/components/icons/AtomicSimple";
 import KeyCombo from "@/components/KeyCombo";
 import { CommandItem } from "@/components/ui/command";
 import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
-import { languageModels } from "@/plugins/_core/misc/remote-language-models.loader";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { AdditionalInfos } from "@/plugins/command-menu/components/space-search-items/AdditionalInfos";
 import type { Space } from "@/services/pplx-api/pplx-api.types";
 import { emojiCodeToString } from "@/utils/utils";
@@ -36,7 +36,9 @@ export function SpaceItem({ space }: SpaceItemProps) {
   }, [space]);
 
   const modelSelection = useMemo(() => {
-    return languageModels.find((model) => model.code === space.model_selection);
+    return PplxLanguageModel.allModels.find(
+      (model) => model.code === space.model_selection,
+    );
   }, [space]);
 
   return (
@@ -89,7 +91,7 @@ export function SpaceItem({ space }: SpaceItemProps) {
                 <AtomicSimple className="x:!size-3" />
                 <span>
                   {
-                    languageModels.find(
+                    PplxLanguageModel.allModels.find(
                       (model) => model.code === space.model_selection,
                     )?.label
                   }

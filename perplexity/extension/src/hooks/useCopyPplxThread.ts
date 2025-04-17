@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
 import { toast } from "@/components/ui/use-toast";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import type { ThreadMessageApiResponse } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { DOM_SELECTORS } from "@/utils/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { ThreadExport } from "@/utils/thread-export";
 import { parseUrl } from "@/utils/utils";
@@ -105,7 +105,8 @@ async function copyMessageWithCitations({
     if (!$bottomBar || !$bottomBar.length) return;
 
     const $copyButton = $bottomBar.find(
-      DOM_SELECTORS.THREAD.MESSAGE.BOTTOM_BAR_CHILD.COPY_BUTTON,
+      DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD
+        .COPY_BUTTON,
     );
 
     if (!$copyButton.length) return;

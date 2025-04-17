@@ -10,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { ImageGenModel } from "@/data/plugins/image-gen-model-selector/image-gen-model-seletor.types";
 import { imageGenModels } from "@/data/plugins/image-gen-model-selector/image-gen-models";
 import { imageGenModelIcons } from "@/data/plugins/image-gen-model-selector/image-gen-models-icons";
@@ -17,7 +18,6 @@ import usePplxUserSettings from "@/hooks/usePplxUserSettings";
 import { useImageGenModelSelectorStore } from "@/plugins/image-gen-popover/store";
 import useObserver from "@/plugins/image-gen-popover/useObserver";
 import { isReactNode } from "@/types/utils.types";
-import { TEST_ID_SELECTORS } from "@/utils/dom-selectors";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export function ImageGenModelSelector() {
@@ -42,7 +42,9 @@ export function ImageGenModelSelector() {
   return (
     <Portal container={portalContainer}>
       <Select
-        data-testid={TEST_ID_SELECTORS.QUERY_BOX.IMAGE_GEN_MODEL_SELECTOR}
+        data-testid={
+          DomSelectorsRegistry.testIds.QUERY_BOX.IMAGE_GEN_MODEL_SELECTOR
+        }
         collection={createListCollection({
           items: imageGenModels.map((model) => model.code),
         })}

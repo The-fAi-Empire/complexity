@@ -3,9 +3,9 @@ import { LuCpu } from "react-icons/lu";
 
 import FaAtom from "@/components/icons/FaAtom";
 import Tooltip from "@/components/Tooltip";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
 import { isDeepResearchLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { languageModels } from "@/plugins/_core/misc/remote-language-models.loader";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 
@@ -24,7 +24,8 @@ export default function BetterLanguageModelSelectorTriggerButton() {
   );
 
   const modelInfo = useMemo(
-    () => languageModels.find((m) => m.code === selectedLanguageModel),
+    () =>
+      PplxLanguageModel.allModels.find((m) => m.code === selectedLanguageModel),
     [selectedLanguageModel],
   );
 

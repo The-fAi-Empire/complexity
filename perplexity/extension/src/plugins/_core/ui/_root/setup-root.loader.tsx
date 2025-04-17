@@ -23,6 +23,7 @@ export default function loader() {
       "cache:pluginsStates",
       "cache:languageModels",
       "cache:betterCodeBlocksFineGrainedOptions",
+      "cache:domSelectors",
     ],
     loader: () => {
       const $root = $("<div>")

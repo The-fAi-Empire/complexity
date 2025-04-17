@@ -1,10 +1,6 @@
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { SelectContent } from "@/components/ui/select";
-import {
-  deepResearchLanguageModels,
-  fastLanguageModels,
-  reasoningLanguageModels,
-} from "@/plugins/_core/misc/remote-language-models.loader";
+import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/desktop/LanguageModelGroup";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
@@ -30,18 +26,18 @@ export default function DesktopContent() {
         <div className="x:flex x:items-start x:justify-between x:gap-2">
           <LanguageModelGroup
             title="Standard"
-            models={fastLanguageModels}
+            models={PplxLanguageModel.fastModels}
             tooltipPlacement="left"
           />
           <div className="x:flex x:flex-col x:gap-1">
             <LanguageModelGroup
               title="Reasoning"
-              models={reasoningLanguageModels}
+              models={PplxLanguageModel.reasoningModels}
               tooltipPlacement="right"
             />
             <LanguageModelGroup
               title="Research"
-              models={deepResearchLanguageModels}
+              models={PplxLanguageModel.deepResearchModels}
               tooltipPlacement="right"
             />
           </div>

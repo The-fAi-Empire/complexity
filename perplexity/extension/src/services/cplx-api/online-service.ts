@@ -1,6 +1,11 @@
 import { z } from "zod";
 
 import { APP_CONFIG } from "@/app.config";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import {
+  DomSelectorsSchema,
+  type DomSelectors,
+} from "@/data/dom-selectors-registry/types";
 import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { LanguageModelSchema } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import type {
@@ -11,8 +16,9 @@ import type {
 import { CplxVersionsApiResponseSchema } from "@/services/cplx-api/cplx-api.types";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { getTParam } from "@/services/cplx-api/utils";
+import { safeMerge } from "@/utils/safe-merge";
 import { queryClient } from "@/utils/ts-query-client";
-import { fetchTextResource, jsonUtils } from "@/utils/utils";
+import { fetchTextResource } from "@/utils/utils";
 
 export class CplxApiService {
   async fetchVersions(): Promise<CplxVersionsApiResponse> {
@@ -37,7 +43,7 @@ export class CplxApiService {
     return z
       .array(LanguageModelSchema)
       .parse(
-        jsonUtils.safeParse(
+        JSON.parse(
           await fetchTextResource(
             `${APP_CONFIG.CPLX_CDN_URL}/language-models.json?t=${getTParam()}`,
           ),
@@ -60,7 +66,7 @@ export class CplxApiService {
         : versions?.latest);
 
     const resp = await fetch(
-      `${APP_CONFIG.CPLX_CDN_URL}/changelogs/${versionUrl}.md?t=${getTParam()}`,
+      `https://raw.githubusercontent.com/pnd280/complexity/refs/heads/nxt/perplexity/extension/release/changelog/${versionUrl}.md`,
     );
 
     if (resp.status === 404) {
@@ -68,5 +74,23 @@ export class CplxApiService {
     }
 
     return resp.text();
+  }
+
+  async fetchDomSelectors(): Promise<DomSelectors> {
+    return safeMerge(
+      DomSelectorsSchema,
+      JSON.parse(
+        await fetchTextResource(
+          `${APP_CONFIG.CPLX_CDN_URL}/dom-selectors.json?t=${getTParam()}`,
+        ),
+      ),
+      DomSelectorsRegistry.local,
+    );
+  }
+
+  async fetchMessageBlocksReactFiberNodePath() {
+    return await fetchTextResource(
+      `${APP_CONFIG.CPLX_CDN_URL}/message-blocks-react-fiber-node-path?t=${getTParam()}`,
+    );
   }
 }

@@ -1,24 +1,37 @@
 import { sendMessage } from "webext-bridge/content-script";
 
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-blocks/types";
 import type { MessageBlockFiberData } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
-import { INTERNAL_ATTRIBUTES, DOM_SELECTORS } from "@/utils/dom-selectors";
-import { withTimeout } from "@/utils/hof";
+import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { errorWrapper } from "@/utils/error-wrapper";
+import { queryClient } from "@/utils/ts-query-client";
 import { UiUtils } from "@/utils/ui-utils";
 import { setCssProperty } from "@/utils/utils";
 
+const [remoteFiberNodePath] = await errorWrapper(async () => {
+  return queryClient.fetchQuery({
+    ...cplxApiQueries.messageBlocksReactFiberNodePath,
+    gcTime: Infinity,
+  });
+})();
+
 export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
   const $threadMessagesContainer = UiUtils.getMessagesContainer();
+
   if (!$threadMessagesContainer[0]) return null;
 
   const $messageBlockElements = $threadMessagesContainer.find(
-    `>${DOM_SELECTORS.THREAD.MESSAGE.OUTER_WRAPPER}`,
+    `>${DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.OUTER_WRAPPER}`,
   );
 
-  const messageBlocksFiberData = await withTimeout(
-    () => sendMessage("reactVdom:getMessages", undefined, "window"),
-    1000,
-  )();
+  const messageBlocksFiberData = await sendMessage(
+    "reactVdom:getMessages",
+    {
+      remoteFiberNodePath: remoteFiberNodePath ?? undefined,
+    },
+    "window",
+  );
 
   const messageBlocksPromises = $messageBlockElements
     .toArray()
@@ -41,7 +54,9 @@ async function processMessageBlock(
   index: number,
 ): Promise<MessageBlock | null> {
   $wrapper
-    .internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK)
+    .internalComponentAttr(
+      DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK,
+    )
     .attr("data-index", index);
 
   const parsedBlock = parseMessageBlock($wrapper);
@@ -60,7 +75,7 @@ async function processMessageBlock(
   const content: MessageBlock["content"] = {
     title:
       messageBlockFiber?.title ??
-      $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY).text(),
+      $query.find(DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.QUERY).text(),
     answer: messageBlockFiber?.answer ?? "",
     webResults: messageBlockFiber?.webResults ?? [],
     displayModel: messageBlockFiber?.displayModel ?? "",
@@ -81,7 +96,7 @@ async function processMessageBlock(
 }
 
 function parseMessageBlock($messageBlock: JQuery<Element>) {
-  const selectors = DOM_SELECTORS.THREAD.MESSAGE;
+  const selectors = DomSelectorsRegistry.cachedSync.THREAD.MESSAGE;
 
   const $query = $messageBlock.find(selectors.QUERY_WRAPPER);
   const $queryHoverContainer = $query.find(selectors.QUERY_HOVER_CONTAINER);
@@ -89,13 +104,18 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   const $answer = $messageBlock.find(selectors.ANSWER);
   const $bottomBar = $messageBlock.find(selectors.BOTTOM_BAR);
 
-  $query.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY);
-  $queryHoverContainer.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+  $query.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.QUERY,
   );
-  $answer.internalComponentAttr(INTERNAL_ATTRIBUTES.THREAD.MESSAGE.ANSWER);
+  $queryHoverContainer.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE
+      .QUERY_HOVER_CONTAINER,
+  );
+  $answer.internalComponentAttr(
+    DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.ANSWER,
+  );
   $bottomBar.internalComponentAttr(
-    INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BOTTOM_BAR,
+    DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR,
   );
 
   if ($bottomBar[0]) {
@@ -129,7 +149,9 @@ function getMessageBlockStates({
   const { $wrapper, $query, $bottomBar } = messageBlockNodes;
 
   const isVirtualized =
-    $wrapper.find(DOM_SELECTORS.THREAD.MESSAGE.INNER_WRAPPER)[0] == null;
+    $wrapper.find(
+      DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.INNER_WRAPPER,
+    )[0] == null;
 
   const isInFlight = isVirtualized
     ? false
@@ -146,8 +168,9 @@ function getMessageBlockStates({
       return false;
 
     const isQueryHoverContainerPresent =
-      $query.find(DOM_SELECTORS.THREAD.MESSAGE.QUERY_HOVER_CONTAINER).length >
-      0;
+      $query.find(
+        DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+      ).length > 0;
 
     $wrapper.attr(
       "data-read-only",

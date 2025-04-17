@@ -18,7 +18,7 @@ export default definePlugin({
     settingsUiRouteSegment: "sidebar-toggleable-recent-threads",
     title: "Hide Recent Threads",
     categories: ["sidebar"],
-    tags: ["ui"],
+    tags: ["ui", "desktopOnly"],
     description: "Hide recent threads on the sidebar",
     dependentDomObservers: ["sidebar"],
     dependentMainWorldCorePlugins: ["spaRouter"],

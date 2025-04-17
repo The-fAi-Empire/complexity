@@ -4,11 +4,11 @@ import { LuLink, LuPin, LuPinOff } from "react-icons/lu";
 
 import MarkdownRenderer from "@/components/MarkdownRenderer";
 import Tooltip from "@/components/Tooltip";
-import SpaceItemFile from "@/plugins/space-navigator/sidebar-content/SpaceItemFile";
+import SpaceItemFile from "@/plugins/space-navigator/popover/SpaceItemFile";
 import {
   usePinSpaceMutation,
   useUnpinSpaceMutation,
-} from "@/plugins/space-navigator/sidebar-content/use-pinned-spaces-mutations";
+} from "@/plugins/space-navigator/popover/use-pinned-spaces-mutations";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import type { Space } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";

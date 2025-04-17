@@ -1,4 +1,5 @@
 import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import {
@@ -18,7 +19,6 @@ import {
   type CanvasBlock,
   type CodeBlockLocation,
 } from "@/plugins/canvas/store";
-import { INTERNAL_ATTRIBUTES } from "@/utils/dom-selectors";
 import { parseUrl, scrollToElement, whereAmI } from "@/utils/utils";
 
 declare module "@/data/async-dep-registry" {
@@ -170,7 +170,7 @@ const handleCanvasBlockClick = (location: CodeBlockLocation) => {
     draft.selectedCodeBlockLocation = location;
     draft.state = "preview";
 
-    const selector = `[data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${INTERNAL_ATTRIBUTES.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
+    const selector = `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
     scrollToElement($(selector), -100);
   });
 };
