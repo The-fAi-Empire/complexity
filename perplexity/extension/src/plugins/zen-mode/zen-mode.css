@@ -1,14 +1,10 @@
 @reference "../../assets/index.css";
 
 body[data-cplx-zen-mode="true"] {
-  .min-h-\[100dvh\] {
-    /* Sidebar */
-    > div:first-child {
-      display: none;
-    }
-
-    /* Padding compensation */
-    > div:last-child {
+  /* Sidebar */
+  .h-\[100dvh\] > div[data-testid="sidebar"] {
+    display: none;
+    & + div {
       @apply x:pl-2;
     }
   }

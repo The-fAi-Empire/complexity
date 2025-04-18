@@ -60,4 +60,4 @@ This polished and feature-rich extension is the result of countless hours of ded
 
 This project uses a custom license allowing personal use and modifications, while prohibiting commercial use, unauthorized distribution, and feature bypassing without permission.
 
-- [Full license terms](./LICENSE)
+- [Full license terms](../../LICENSE)
