@@ -11,7 +11,7 @@ export default function NoPluginsFound() {
         <div className="x:text-balance">
           Try adjusting your search term/filters or{" "}
           <a
-            href="#"
+            href="https://discord.cplx.app/"
             className="x:underline x:transition-colors x:hover:text-foreground"
             target="_blank"
             rel="noreferrer"

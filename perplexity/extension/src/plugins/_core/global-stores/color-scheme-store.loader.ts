@@ -1,9 +1,9 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { colorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "store:colorScheme": void;
   }

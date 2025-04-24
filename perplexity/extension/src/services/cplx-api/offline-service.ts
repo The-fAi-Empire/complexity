@@ -1,47 +1,27 @@
-import { APP_CONFIG } from "@/app.config";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
-import type { DomSelectors } from "@/data/dom-selectors-registry/types";
-import { PluginRegistry } from "@/data/plugin-registry";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
-import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { localFiberNodePath } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
-import type {
-  CplxVersionsApiResponse,
-  FeatureCompatibility,
-} from "@/services/cplx-api/cplx-api.types";
+import type { ZodSchema } from "zod";
 
 export class CplxApiOfflineService {
-  async fetchVersions(): Promise<CplxVersionsApiResponse> {
-    return {
-      changelogEntries: [],
-      latest: APP_CONFIG.VERSION,
-      latestFirefox: APP_CONFIG.VERSION,
-      canvasInstructionLastUpdated: Date.now(),
-    };
+  static fetchChangelog({
+    version: _,
+  }: { version?: string } = {}): Promise<string> {
+    return Promise.resolve("");
   }
 
-  async fetchFeatureCompat(): Promise<FeatureCompatibility> {
-    return Object.fromEntries(
-      Object.keys(PluginRegistry.manifests).map((key) => [
-        key,
-        APP_CONFIG.VERSION,
-      ]),
-    );
+  static async fetchRemoteResource<T>(_params: {
+    resourcePath: string;
+    zodSchema: ZodSchema<T>;
+  }): Promise<T> {
+    throw new Error("Not available in offline mode");
   }
 
-  async fetchLanguageModels(): Promise<LanguageModel[]> {
-    return PplxLanguageModel.localModels as unknown as LanguageModel[];
+  static async fetchVersionedRemoteResource<T>(_params: {
+    resourcePath: string;
+    zodSchema: ZodSchema<T>;
+  }): Promise<T> {
+    throw new Error("Not available in offline mode");
   }
 
-  async fetchChangelog({ version: _ }: { version?: string } = {}) {
-    return "";
-  }
-
-  async fetchDomSelectors(): Promise<DomSelectors> {
-    return DomSelectorsRegistry.local;
-  }
-
-  async fetchMessageBlocksReactFiberNodePath() {
-    return localFiberNodePath.join(".");
+  static async fetchSoftCacheBuster(): Promise<string> {
+    throw new Error("Not available in offline mode");
   }
 }

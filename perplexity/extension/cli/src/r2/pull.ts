@@ -13,6 +13,7 @@ import {
   getBucketObjects,
   ensureDirectoryExists,
   removePrefixes,
+  getLegacyResourceKeys,
 } from "@/r2/utils";
 import { getRootPath } from "@/utils";
 
@@ -48,7 +49,7 @@ export async function pullBucket({
     );
 
     if (ignore.length > 0) {
-      logger.info(`Ignoring prefixes: ${chalk.yellow(ignore.join(", "))}`);
+      logger.verbose(`Ignoring prefixes: ${chalk.yellow(ignore.join(", "))}`);
     }
 
     const bucketObjects = await getBucketObjects({
@@ -140,7 +141,7 @@ if (require.main === module) {
     bucketName: BUCKET_NAME,
     pullDir: path.resolve(getRootPath(), "cdn"),
     logger,
-    ignore: ["changelogs/"],
+    ignore: ["changelogs/", ...getLegacyResourceKeys()],
   }).catch((error: Error) => {
     logger.error(`Unhandled error: ${chalk.red(error.message)}`);
     process.exit(1);

@@ -5,7 +5,7 @@ import type {
   RouterEvent,
 } from "@/plugins/_core/main-world/spa-router/spa-router.types";
 import {
-  applyRouteIdAttrs,
+  applyRouteIdAttribute,
   isNextWindowObjectExists,
   waitForRouteChangeComplete,
 } from "@/plugins/_core/main-world/spa-router/utils";
@@ -33,7 +33,7 @@ export function proxyNextRouter() {
     }),
   );
 
-  applyRouteIdAttrs(whereAmI());
+  applyRouteIdAttribute(whereAmI());
 }
 
 function createProxiedPush(

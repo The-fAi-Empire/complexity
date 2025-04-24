@@ -19,7 +19,7 @@ export default tseslint.config({
   },
   rules: {
     "import/no-unresolved": "error",
-    // "import/no-cycle": "error", // TODO: this rule doesnt work anymore, need to investigate
+    // "import/no-cycle": ["error", { maxDepth: 10, ignoreExternal: true }],
     "import/no-self-import": "error",
     "import/order": [
       "warn",

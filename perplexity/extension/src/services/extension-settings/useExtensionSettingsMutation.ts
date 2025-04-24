@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
 
+import { queryClient } from "@/data/query-client";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { extensionSettingsQueries } from "@/services/extension-settings/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 import { isInContentScript } from "@/utils/utils";
 
 export function useExtensionSettingsMutation() {
@@ -16,7 +16,7 @@ export function useExtensionSettingsMutation() {
     mutationFn: ExtensionSettingsService.set,
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: extensionSettingsQueries.data.queryKey,
+        queryKey: extensionSettingsQueries.all(),
         exact: true,
       });
     },

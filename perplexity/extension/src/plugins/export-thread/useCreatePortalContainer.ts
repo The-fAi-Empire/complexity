@@ -1,5 +1,5 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export default function useObserver() {
   const $overflowMenuButtonWrapper = useThreadDomObserverStore(
@@ -10,7 +10,7 @@ export default function useObserver() {
   return useMemo(() => {
     if ($overflowMenuButtonWrapper == null || !$overflowMenuButtonWrapper[0]) {
       $(
-        `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
+        `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
       ).remove();
 
       return null;
@@ -19,13 +19,13 @@ export default function useObserver() {
     const $wrapper = $($overflowMenuButtonWrapper[0]).parent();
 
     const $existingPortalContainer = $wrapper.find(
-      `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
+      `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
     );
 
     if ($existingPortalContainer.length) return $existingPortalContainer[0];
 
     const $portalContainer = $("<div>").internalComponentAttr(
-      DomSelectorsRegistry.internalAttributes.THREAD.NAVBAR_CHILD
+      DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD
         .EXPORT_THREAD_BUTTON,
     );
 

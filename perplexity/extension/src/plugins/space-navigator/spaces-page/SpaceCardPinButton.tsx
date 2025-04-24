@@ -18,9 +18,9 @@ export default function SpaceCardPinButton({
     return $(htmlNode).attr("href")?.split("/").pop();
   }, [htmlNode]);
 
-  const { data: spaces } = useQuery(pplxApiQueries.spaces);
+  const { data: spaces } = useQuery(pplxApiQueries.spaces.detail());
 
-  const { data: pinnedSpaces } = useQuery(pinnedSpacesQueries.list);
+  const { data: pinnedSpaces } = useQuery(pinnedSpacesQueries.list.detail());
 
   const space = spaces?.find((space) => space.slug === slug);
 

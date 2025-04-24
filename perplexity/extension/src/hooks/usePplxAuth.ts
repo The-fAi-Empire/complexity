@@ -4,24 +4,22 @@ import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 
 export default function usePplxAuth() {
   const query = useQuery({
-    ...pplxApiQueries.auth,
+    ...pplxApiQueries.auth.detail(),
     staleTime: 60 * 1000,
     gcTime: Infinity,
     refetchOnMount: false,
   });
   const isLoggedIn = query.data != null && Object.keys(query.data).length > 0;
   const orgStatusQuery = useQuery({
-    ...pplxApiQueries.auth._ctx.orgStatus,
+    ...pplxApiQueries.auth.orgStatus.detail(),
     enabled: isLoggedIn,
     refetchOnMount: false,
     gcTime: Infinity,
-    staleTime: Infinity,
+    staleTime: 60 * 1000,
   });
   const isOrgMember = orgStatusQuery.data?.is_in_organization ?? false;
 
   return {
-    ...query,
-    orgStatusQuery,
     isLoggedIn,
     isOrgMember,
   };

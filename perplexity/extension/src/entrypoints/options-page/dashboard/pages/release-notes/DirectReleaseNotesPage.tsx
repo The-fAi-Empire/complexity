@@ -14,7 +14,7 @@ export function DirectReleaseNotesPage() {
     isLoading,
     isError,
   } = useQuery({
-    ...cplxApiQueries.changelog({
+    ...cplxApiQueries.changelog.detail({
       version: version,
     }),
   });

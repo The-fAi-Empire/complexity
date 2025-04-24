@@ -1,8 +1,8 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "cache:extensionSettings": ExtensionSettings;
   }

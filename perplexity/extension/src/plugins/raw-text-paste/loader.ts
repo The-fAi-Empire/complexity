@@ -1,6 +1,6 @@
 import { isHotkeyPressed } from "react-hotkeys-hook";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type { QueryBoxesDomObserverStoreType } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { ExtensionSettingsService } from "@/services/extension-settings";
@@ -38,7 +38,7 @@ function noFileCreationOnPaste(
   });
 }
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:noFileCreationOnPaste": void;
   }

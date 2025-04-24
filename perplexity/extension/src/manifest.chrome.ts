@@ -9,6 +9,5 @@ export default defineManifest(
       service_worker: "src/entrypoints/background/index.ts",
       type: "module",
     };
-    draft.content_scripts![0]!.run_at = "document_start";
   }),
 );

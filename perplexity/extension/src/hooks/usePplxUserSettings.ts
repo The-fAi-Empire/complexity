@@ -6,17 +6,19 @@ import type { PplxUserSettingsApiResponse } from "@/services/pplx-api/pplx-api.t
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import type { ControlledQueryOptions } from "@/types/tanstack-query.types";
 
+const _queryKey = pplxApiQueries.userSettings.all();
+
 export default function usePplxUserSettings({
   ...props
 }: ControlledQueryOptions<
   PplxUserSettingsApiResponse,
-  typeof pplxApiQueries.userSettings.queryKey,
+  typeof _queryKey,
   "enabled"
 > = {}): UseQueryResult<PplxUserSettingsApiResponse> {
   const { isLoggedIn } = usePplxAuth();
 
   const query = useQuery({
-    ...pplxApiQueries.userSettings,
+    ...pplxApiQueries.userSettings.detail(),
     enabled: isLoggedIn,
     staleTime: 5000,
     gcTime: Infinity,

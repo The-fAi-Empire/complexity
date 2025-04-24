@@ -1,8 +1,9 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import hideGetMobileAppCtaBtnCss from "@/plugins/hide-get-mobile-app-cta-btn/styles.css?inline";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { hideGetMobileAppCtaBtnCssResourceConfig } from "@/plugins/hide-get-mobile-app-cta-btn/index.remote-resources";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { insertCss } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:hideGetMobileAppCtaBtn": void;
   }
@@ -12,11 +13,13 @@ export default function loader() {
   asyncLoaderRegistry.register({
     id: "plugin:hideGetMobileAppCtaBtn",
     dependencies: ["cache:pluginsStates"],
-    loader: ({ "cache:pluginsStates": pluginsStates }) => {
+    loader: async ({ "cache:pluginsStates": pluginsStates }) => {
       if (!pluginsStates["hide-get-mobile-app-cta-btn"]) return;
 
       insertCss({
-        css: hideGetMobileAppCtaBtnCss,
+        css: await getVersionedRemoteResource(
+          hideGetMobileAppCtaBtnCssResourceConfig,
+        ),
         id: "hide-get-mobile-app-cta-btn",
       });
     },

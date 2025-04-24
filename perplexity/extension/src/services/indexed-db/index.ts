@@ -5,8 +5,10 @@ import type { ExtensionData } from "@/data/dashboard/extension-data.types";
 import type { PromptHistory } from "@/data/plugins/prompt-history/prompt-history.type";
 import type { PinnedSpace } from "@/data/plugins/space-navigator/pinned-space.types";
 import type { Theme } from "@/data/plugins/themes/theme-registry.types";
+import type { QueryCacheEntry } from "@/data/query-client/utils";
 
 export class IndexedDbService extends Dexie {
+  queryCache!: Dexie.Table<QueryCacheEntry, string>;
   themes!: Dexie.Table<Theme, string>;
   betterCodeBlocks!: Dexie.Table<BetterCodeBlockFineGrainedOptions, string>;
   promptHistory!: Dexie.Table<PromptHistory, string>;
@@ -51,6 +53,10 @@ export class IndexedDbService extends Dexie {
         });
       }
     });
+
+    this.version(6).stores({
+      queryCache: "&key, timestamp",
+    });
   }
 
   async exportAll(): Promise<ExtensionData["db"]> {
@@ -81,6 +87,7 @@ export class IndexedDbService extends Dexie {
     await this.betterCodeBlocks.clear();
     await this.promptHistory.clear();
     await this.pinnedSpaces.clear();
+    await this.queryCache.clear();
   }
 }
 

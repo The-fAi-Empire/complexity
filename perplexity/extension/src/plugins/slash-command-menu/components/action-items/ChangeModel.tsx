@@ -1,8 +1,8 @@
 import { LuCpu } from "react-icons/lu";
 
 import { CommandItem } from "@/components/ui/command";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export default function ChangeModelActionItem() {
   const label = t(
@@ -19,7 +19,7 @@ export default function ChangeModelActionItem() {
         slashCommandMenuStore.getState().actions.setIsOpen(false);
         setTimeout(() => {
           $(
-            `[data-testid=${DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}] button:last`,
+            `[data-testid=${DomSelectorsService.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR}] button:last`,
           ).trigger("click");
         }, 0);
       }}

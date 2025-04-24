@@ -1,7 +1,7 @@
 import { onMessage } from "webext-bridge/content-script";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type {
   BeaconEventData,
   FetchEventData,
@@ -91,7 +91,7 @@ function setupInterceptorsListeners() {
   );
 }
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "messaging:networkIntercept": void;
   }

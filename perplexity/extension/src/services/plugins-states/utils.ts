@@ -2,7 +2,7 @@ import semver from "semver";
 
 import { PluginRegistry } from "@/data/plugin-registry/index";
 import type { PluginId } from "@/data/plugin-registry/types";
-import type { FeatureCompatibility } from "@/services/cplx-api/cplx-api.types";
+import type { FeatureCompatibility } from "@/services/cplx-api/types";
 import type { ExtensionSettings } from "@/services/extension-settings/types";
 
 export type PluginState = {
@@ -30,10 +30,7 @@ export const isPluginOutdated = (
   requiredVersion: string | undefined,
 ): boolean => {
   if (!requiredVersion) return true;
-  return semver.lt(
-    semver.coerce(currentVersion)!,
-    semver.coerce(requiredVersion)!,
-  );
+  return semver.lt(currentVersion, requiredVersion);
 };
 
 export const isUpdateAvail = (
@@ -41,10 +38,7 @@ export const isUpdateAvail = (
   latestAvailableVersion: string | undefined,
 ): boolean => {
   if (!requiredVersion || !latestAvailableVersion) return false;
-  return semver.gt(
-    semver.coerce(latestAvailableVersion)!,
-    semver.coerce(requiredVersion)!,
-  );
+  return semver.gt(latestAvailableVersion, requiredVersion);
 };
 
 export const updatePluginStatesWithFeatureCompat = (

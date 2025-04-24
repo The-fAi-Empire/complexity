@@ -1,11 +1,12 @@
 import { FaFile } from "react-icons/fa";
 
+import Tooltip from "@/components/Tooltip";
+import { queryClient } from "@/data/query-client";
 import type {
   Space,
   SpaceFilesApiResponse,
 } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export default function SpaceItemFiles({
   file,
@@ -14,25 +15,32 @@ export default function SpaceItemFiles({
   file: SpaceFilesApiResponse["files"][number];
   spaceUuid: Space["uuid"];
 }) {
-  return (
-    <div className="x:flex x:items-center x:space-x-2">
-      <FaFile className="x:inline-block x:size-4" />
-      <span
-        className="x:line-clamp-1 x:cursor-pointer x:hover:underline"
-        onClick={async () => {
-          const fileDownloadUrl = await queryClient.fetchQuery(
-            pplxApiQueries.spaces._ctx
-              .files(spaceUuid)
-              ._ctx.downloadUrl(file.file_uuid),
-          );
+  const displayTitle = useMemo(() => {
+    if (file.file_title) return `${file.file_title} (${file.filename})`;
+    if (!file.file_title) return file.filename;
+  }, [file.file_title, file.filename]);
 
-          if (fileDownloadUrl?.file_url) {
-            window.open(fileDownloadUrl.file_url, "_blank");
-          }
-        }}
-      >
-        {file.filename}
-      </span>
-    </div>
+  return (
+    <Tooltip content={file.file_description}>
+      <div className="x:flex x:items-center x:space-x-2">
+        <FaFile className="x:inline-block x:size-4" />
+        <span
+          className="x:line-clamp-1 x:cursor-pointer x:hover:underline"
+          onClick={async () => {
+            const fileDownloadUrl = await queryClient.fetchQuery(
+              pplxApiQueries.spaces.files.downloadUrl.detail(
+                spaceUuid,
+                file.file_uuid,
+              ),
+            );
+            if (fileDownloadUrl?.file_url) {
+              window.open(fileDownloadUrl.file_url, "_blank");
+            }
+          }}
+        >
+          {displayTitle}
+        </span>
+      </div>
+    </Tooltip>
   );
 }

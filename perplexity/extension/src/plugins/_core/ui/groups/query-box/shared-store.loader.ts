@@ -1,7 +1,7 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { populateDefaults } from "@/plugins/_core/ui/groups/query-box/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:initSharedStore": void;
   }

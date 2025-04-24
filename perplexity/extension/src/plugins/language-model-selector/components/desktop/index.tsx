@@ -1,9 +1,9 @@
 import { DropdownMenuContent } from "@/components/ui/dropdown-menu";
 import { SelectContent } from "@/components/ui/select";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/desktop/LanguageModelGroup";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export default function DesktopContent() {
@@ -26,18 +26,18 @@ export default function DesktopContent() {
         <div className="x:flex x:items-start x:justify-between x:gap-2">
           <LanguageModelGroup
             title="Standard"
-            models={PplxLanguageModel.fastModels}
+            models={PplxLanguageModelsService.fastModels}
             tooltipPlacement="left"
           />
           <div className="x:flex x:flex-col x:gap-1">
             <LanguageModelGroup
               title="Reasoning"
-              models={PplxLanguageModel.reasoningModels}
+              models={PplxLanguageModelsService.reasoningModels}
               tooltipPlacement="right"
             />
             <LanguageModelGroup
               title="Research"
-              models={PplxLanguageModel.deepResearchModels}
+              models={PplxLanguageModelsService.deepResearchModels}
               tooltipPlacement="right"
             />
           </div>

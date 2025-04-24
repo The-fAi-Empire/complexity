@@ -10,7 +10,7 @@ type AdditionalInfosProps = {
 
 export function AdditionalInfos({ space }: AdditionalInfosProps) {
   const { data: files } = useQuery({
-    ...pplxApiQueries.spaces._ctx.files(space.uuid),
+    ...pplxApiQueries.spaces.files.detail(space.uuid),
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });

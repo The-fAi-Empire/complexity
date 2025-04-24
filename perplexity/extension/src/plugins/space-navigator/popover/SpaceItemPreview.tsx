@@ -25,7 +25,7 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
   );
 
   const { data: files } = useQuery({
-    ...pplxApiQueries.spaces._ctx.files(space?.uuid ?? ""),
+    ...pplxApiQueries.spaces.files.detail(space?.uuid ?? ""),
     enabled: space != null && isHighlighted,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
@@ -123,7 +123,7 @@ export default function SpaceItemPreview({ spaces }: { spaces: Space[] }) {
 }
 
 function PinSpaceButton({ space }: { space: Space }) {
-  const { data: pinnedSpaces } = useQuery(pinnedSpacesQueries.list);
+  const { data: pinnedSpaces } = useQuery(pinnedSpacesQueries.list.detail());
 
   const isPinned = pinnedSpaces?.some(
     (pinnedSpace) => pinnedSpace.uuid === space.uuid,

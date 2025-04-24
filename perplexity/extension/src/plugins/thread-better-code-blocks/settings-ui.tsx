@@ -18,7 +18,7 @@ export default function BetterCodeBlocksPluginSettingsUi() {
   const activeTab = searchParams.get("tab") || "global";
 
   const { data: fineGrainedOptions } = useQuery(
-    betterCodeBlocksFineGrainedOptionsQueries.list,
+    betterCodeBlocksFineGrainedOptionsQueries.list.detail(),
   );
 
   const isFromPluginList = useLocation().state?.fromPluginList;

@@ -1,4 +1,4 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type { QueryBoxesDomObserverStoreType } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 
@@ -25,7 +25,7 @@ function submitOnCtrlEnter(queryBoxes: QueryBoxesDomObserverStoreType["main"]) {
   });
 }
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:submitOnCtrlEnter": void;
   }

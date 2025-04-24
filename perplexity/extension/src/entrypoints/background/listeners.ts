@@ -1,6 +1,6 @@
-import semver from "semver";
 import { onMessage } from "webext-bridge/background";
 
+import { APP_CONFIG } from "@/app.config";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { getOptionsPageUrl } from "@/utils/utils";
 
@@ -33,7 +33,9 @@ function createDashboardShortcut() {
 
   chrome.contextMenus.onClicked.addListener((info) => {
     if (info.menuItemId === "openOptionsPage") {
-      chrome.tabs.create({ url: getOptionsPageUrl() });
+      chrome.tabs.create({
+        url: getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV }),
+      });
     }
   });
 }
@@ -42,15 +44,7 @@ function onboardingFlowTrigger() {
   chrome.runtime.onInstalled.addListener(({ reason, previousVersion }) => {
     if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
       chrome.tabs.create({
-        url: `${getOptionsPageUrl()}#/onboarding`,
-      });
-    } else if (
-      reason === chrome.runtime.OnInstalledReason.UPDATE &&
-      previousVersion &&
-      semver.lt(semver.coerce(previousVersion)!, "1.0.0")
-    ) {
-      chrome.tabs.create({
-        url: `${getOptionsPageUrl()}#/onboarding?fromAlpha=true`,
+        url: `${getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV })}#/onboarding`,
       });
     }
   });
@@ -64,7 +58,7 @@ function contentScriptListeners() {
   });
 
   onMessage("bg:openDirectReleaseNotes", ({ data: { version } }) => {
-    const optionsPageUrl = getOptionsPageUrl();
+    const optionsPageUrl = getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV });
 
     chrome.tabs.create({
       url: `${optionsPageUrl}#/direct-release-notes?version=${version}`,

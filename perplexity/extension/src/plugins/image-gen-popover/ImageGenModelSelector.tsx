@@ -10,13 +10,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
-import type { ImageGenModel } from "@/data/plugins/image-gen-model-selector/image-gen-model-seletor.types";
-import { imageGenModels } from "@/data/plugins/image-gen-model-selector/image-gen-models";
-import { imageGenModelIcons } from "@/data/plugins/image-gen-model-selector/image-gen-models-icons";
 import usePplxUserSettings from "@/hooks/usePplxUserSettings";
 import { useImageGenModelSelectorStore } from "@/plugins/image-gen-popover/store";
 import useObserver from "@/plugins/image-gen-popover/useObserver";
+import { PplxImageModelsService } from "@/services/cplx-api/remote-resources/pplx-image-models";
+import type { ImageModel } from "@/services/cplx-api/remote-resources/pplx-image-models/types";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { isReactNode } from "@/types/utils.types";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
@@ -36,17 +35,17 @@ export function ImageGenModelSelector() {
     );
 
   const handleValueChange = (details: { value: string[] }) => {
-    setValue(details.value[0] as ImageGenModel["code"]);
+    setValue(details.value[0] as ImageModel["code"]);
   };
 
   return (
     <Portal container={portalContainer}>
       <Select
         data-testid={
-          DomSelectorsRegistry.testIds.QUERY_BOX.IMAGE_GEN_MODEL_SELECTOR
+          DomSelectorsService.testIds.QUERY_BOX.IMAGE_GEN_MODEL_SELECTOR
         }
         collection={createListCollection({
-          items: imageGenModels.map((model) => model.code),
+          items: PplxImageModelsService.allModels.map((model) => model.code),
         })}
         className="x:mb-4 x:ml-auto x:w-fit"
         value={[value]}
@@ -63,8 +62,9 @@ export function ImageGenModelSelector() {
               <Image className="x:size-4" />
               <SelectValue className="x:font-medium">
                 {
-                  imageGenModels.find((model) => model.code === value)
-                    ?.shortLabel
+                  PplxImageModelsService.allModels.find(
+                    (model) => model.code === value,
+                  )?.shortLabel
                 }
               </SelectValue>
               <span className="x:self-start x:text-[.5rem] x:text-primary">
@@ -79,8 +79,11 @@ export function ImageGenModelSelector() {
             "x:max-h-[500px] x:max-w-[200px] x:overflow-auto x:font-sans",
           )}
         >
-          {imageGenModels.map((model) => {
-            const Icon = imageGenModelIcons[model.code];
+          {PplxImageModelsService.allModels.map((model) => {
+            const Icon = PplxImageModelsService.icons[model.code];
+
+            if (Icon == null) return null;
+
             return (
               <Tooltip
                 key={model.code}

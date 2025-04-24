@@ -14,7 +14,7 @@ export default function SpaceSearchItems() {
     isLoading: isLoadingSpaces,
     isError: isErrorSpaces,
   } = useQuery({
-    ...pplxApiQueries.spaces,
+    ...pplxApiQueries.spaces.detail(),
     enabled: filter === "spaces",
     placeholderData: keepPreviousData,
   });

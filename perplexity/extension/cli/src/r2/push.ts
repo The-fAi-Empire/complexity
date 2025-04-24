@@ -12,6 +12,7 @@ import {
   getAllFiles,
   getBucketObjects,
   getContentType,
+  getLegacyResourceKeys,
   removePrefixes,
   type FileInfo,
 } from "@/r2/utils";
@@ -107,7 +108,7 @@ export async function syncWithBucket({
     );
 
     if (ignore.length > 0) {
-      logger.info(`Ignoring prefixes: ${chalk.yellow(ignore.join(", "))}`);
+      logger.verbose(`Ignoring prefixes: ${chalk.yellow(ignore.join(", "))}`);
     }
 
     const allLocalFiles = getAllFiles({ dir: localDir });
@@ -230,7 +231,7 @@ if (require.main === module) {
     bucketName: BUCKET_NAME,
     localDir: path.resolve(getRootPath(), "cdn"),
     logger,
-    ignore: ["changelogs/"],
+    ignore: ["changelogs/", ...getLegacyResourceKeys()],
   }).catch((error: Error) => {
     logger.error(`Unhandled error: ${error.message}`);
     process.exit(1);

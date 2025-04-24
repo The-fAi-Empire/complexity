@@ -1,8 +1,8 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { parseWebSocketData } from "@/plugins/_core/main-world/network-intercept/web-socket-message-parser";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:blockAnalyticEvents": void;
   }

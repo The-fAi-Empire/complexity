@@ -1,5 +1,5 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export default function useObserver() {
   const popper = useThreadDomObserverStore(
@@ -14,7 +14,7 @@ function findOptionsGridHeader(popper: HTMLElement | null) {
   if (!popper) return null;
 
   const $header = $(popper)
-    .find(DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.IMAGE_GEN.OPTIONS_GRID)
+    .find(DomSelectorsService.cachedSync.THREAD.MESSAGE.IMAGE_GEN.OPTIONS_GRID)
     .prev();
 
   if (!$header.length) return null;

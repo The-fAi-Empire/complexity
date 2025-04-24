@@ -1,11 +1,14 @@
-import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { queryOptions } from "@tanstack/react-query";
 
-export const extensionPermissionsQueries = createQueryKeys(
-  "extensionPermissions",
-  {
-    permissions: {
-      queryKey: null,
-      queryFn: () => chrome.permissions.getAll(),
-    },
+export const extensionPermissionsQueries = {
+  all: () => ["extensionPermissions"] as const,
+
+  permissions: {
+    all: () => [...extensionPermissionsQueries.all(), "permissions"] as const,
+    detail: () =>
+      queryOptions({
+        queryKey: [...extensionPermissionsQueries.permissions.all()] as const,
+        queryFn: () => chrome.permissions.getAll(),
+      }),
   },
-);
+};

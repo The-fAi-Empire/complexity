@@ -2,14 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import semver from "semver";
 
 import { APP_CONFIG } from "@/app.config";
-import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 
 export default function useExtensionUpdate() {
-  const { data: versions, isLoading } = useQuery({
-    ...cplxApiQueries.versions,
-    staleTime: 1000,
-    retryOnMount: false, // important, without this the query will be refetching indefinitely if queryFn throws error
-  });
+  const { data: versions, isLoading } = useQuery(CplxVersionsService.query);
 
   const isUpdateAvailable = useMemo(() => {
     if (!versions) return false;
@@ -17,10 +13,7 @@ export default function useExtensionUpdate() {
     const currentVersion = APP_CONFIG.VERSION;
     const latestVersion = versions.latest;
 
-    return semver.gt(
-      semver.coerce(latestVersion)!,
-      semver.coerce(currentVersion)!,
-    );
+    return semver.gt(latestVersion, currentVersion);
   }, [versions]);
 
   return {

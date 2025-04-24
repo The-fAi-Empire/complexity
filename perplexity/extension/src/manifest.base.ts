@@ -48,6 +48,7 @@ export const baseManifest: ExtendedManifestV3Export = {
       matches: APP_CONFIG["perplexity-ai"].globalMatches,
       exclude_matches: APP_CONFIG["perplexity-ai"].globalExcludeMatches,
       js: ["src/entrypoints/content-scripts/index.ts"],
+      run_at: "document_end",
     },
   ],
 

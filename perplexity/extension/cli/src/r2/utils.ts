@@ -160,3 +160,13 @@ export function removePrefixes({
   }
   return result;
 }
+
+export function getLegacyResourceKeys(): string[] {
+  return [
+    "dom-selectors",
+    "feature-compat.json",
+    "language-models.json",
+    "message-blocks-react-fiber-node-path",
+    "versions.json",
+  ];
+}

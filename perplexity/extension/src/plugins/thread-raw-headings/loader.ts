@@ -1,9 +1,10 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import styles from "@/plugins/thread-raw-headings/styles.css?inline";
+import { threadRawHeadingsCssResourceConfig } from "@/plugins/thread-raw-headings/index.remote-resources";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { insertCss, whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:thread:rawHeadings": void;
   }
@@ -27,13 +28,13 @@ export default function loader() {
   });
 }
 
-function rawHeadings(location: ReturnType<typeof whereAmI>) {
+async function rawHeadings(location: ReturnType<typeof whereAmI>) {
   cleanup?.();
 
   if (location !== "thread") return;
 
   const removeCss = insertCss({
-    css: styles,
+    css: await getVersionedRemoteResource(threadRawHeadingsCssResourceConfig),
     id: "raw-headings",
   });
 

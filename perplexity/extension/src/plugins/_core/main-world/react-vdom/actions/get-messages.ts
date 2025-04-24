@@ -1,5 +1,5 @@
-import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { findReactFiberNodeValue } from "@/plugins/_core/main-world/react-vdom/utils";
+import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 import { errorWrapper } from "@/utils/error-wrapper";
 import type { PplxWebResult } from "@/utils/thread-export";
 import { UiUtils } from "@/utils/ui-utils";

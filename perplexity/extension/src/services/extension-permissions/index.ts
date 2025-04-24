@@ -1,17 +1,17 @@
+import { queryClient } from "@/data/query-client";
 import { extensionPermissionsQueries } from "@/services/extension-permissions/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export class ExtensionPermissionsService {
   static setupReactiveListeners() {
-    chrome.permissions.onAdded.addListener((permission) => {
+    chrome.permissions.onAdded.addListener((_permission) => {
       queryClient.invalidateQueries({
-        queryKey: extensionPermissionsQueries.permissions.queryKey,
+        queryKey: extensionPermissionsQueries.permissions.all(),
       });
     });
 
-    chrome.permissions.onRemoved.addListener((permission) => {
+    chrome.permissions.onRemoved.addListener((_permission) => {
       queryClient.invalidateQueries({
-        queryKey: extensionPermissionsQueries.permissions.queryKey,
+        queryKey: extensionPermissionsQueries.permissions.all(),
       });
     });
   }

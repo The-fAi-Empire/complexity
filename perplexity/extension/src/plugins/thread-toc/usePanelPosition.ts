@@ -1,7 +1,6 @@
 import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import debounce from "lodash/debounce";
 
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import {
   CallbackQueue,
   createTaskId,
@@ -12,6 +11,7 @@ import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-obse
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { PANEL_WIDTH } from "@/plugins/thread-toc/ThreadToc";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { whereAmI } from "@/utils/utils";
 
 type UsePanelPosition = {
@@ -99,7 +99,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     debouncedUpdate();
 
-    const $sidebarWrapper = $(DomSelectorsRegistry.cachedSync.SIDEBAR.WRAPPER);
+    const $sidebarWrapper = $(DomSelectorsService.cachedSync.SIDEBAR.WRAPPER);
 
     if (!$sidebarWrapper[0]) return;
 

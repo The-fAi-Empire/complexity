@@ -1,13 +1,13 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import { queryClient } from "@/data/query-client";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
+import { isLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
 import type { Space } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 import { parseUrl, whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:languageModelSelector:respectSpaceModel": void;
   }
@@ -47,8 +47,8 @@ async function handler(url: string) {
   if (spaceSlug == null) return;
 
   const spacesData =
-    queryClient.getQueryData<Space[]>(pplxApiQueries.spaces.queryKey) ??
-    (await queryClient.fetchQuery(pplxApiQueries.spaces));
+    queryClient.getQueryData<Space[]>(pplxApiQueries.spaces.all()) ??
+    (await queryClient.fetchQuery(pplxApiQueries.spaces.detail()));
 
   if (spacesData == null) return;
 

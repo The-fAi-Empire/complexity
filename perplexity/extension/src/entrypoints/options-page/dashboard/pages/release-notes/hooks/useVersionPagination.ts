@@ -3,16 +3,17 @@ import semver from "semver";
 
 import { APP_CONFIG } from "@/app.config";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 
 export function useVersionPagination() {
   const { data: versions } = useQuery({
-    ...cplxApiQueries.versions,
+    ...CplxVersionsService.query,
   });
 
   const availableVersions = useMemo(() => {
     if (!versions?.changelogEntries) return [];
     return versions.changelogEntries.filter((version) =>
-      semver.lte(semver.coerce(version)!, semver.coerce(APP_CONFIG.VERSION)!),
+      semver.lte(version, APP_CONFIG.VERSION),
     );
   }, [versions?.changelogEntries]);
 
@@ -39,8 +40,8 @@ export function useVersionPagination() {
 
   const changelogQueries = useQueries({
     queries: loadedVersions.map((version) => ({
-      ...cplxApiQueries.changelog({ version }),
-      staleTime: Infinity,
+      ...cplxApiQueries.changelog.detail({ version }),
+      staleTime: 1000 * 60 * 60,
     })),
   });
 

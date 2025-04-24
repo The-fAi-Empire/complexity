@@ -78,6 +78,7 @@
     "**/src/manifest.firefox.ts": "Extension Manifest (Firefox)",
     "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
     "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
-    "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"
+    "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}",
+    "**/src/**/*.remote-resources.ts": "Remote Resources - ${dirname}"
   }
 }

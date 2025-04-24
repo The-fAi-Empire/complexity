@@ -1,8 +1,8 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { initializeDayjsLocale } from "@/utils/dayjs";
-import { initializeI18next } from "@/utils/i18next";
+import { initializeDayjsLocale } from "@/data/dayjs";
+import { initializeI18next } from "@/data/i18next";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "lib:i18next": void;
     "lib:dayjs": void;

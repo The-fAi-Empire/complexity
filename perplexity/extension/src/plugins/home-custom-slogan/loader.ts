@@ -1,13 +1,14 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { homeDomObserverStore } from "@/plugins/_core/dom-observers/home/store";
-import styles from "@/plugins/home-custom-slogan/styles.css?inline";
+import { homeCustomSloganCssResourceConfig } from "@/plugins/home-custom-slogan/index.remote-resources";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { insertCss, whereAmI } from "@/utils/utils";
 
 let removeCss: (() => void) | null = null;
 
-function setupCustomSlogan({
+async function setupCustomSlogan({
   location,
   slogan,
 }: {
@@ -22,7 +23,7 @@ function setupCustomSlogan({
   if (location !== "home" || slogan == null) return removeCss?.();
 
   removeCss = insertCss({
-    css: styles,
+    css: await getVersionedRemoteResource(homeCustomSloganCssResourceConfig),
     id: "custom-slogan",
   });
 
@@ -30,12 +31,12 @@ function setupCustomSlogan({
 
   if (!$slogan.length) return;
 
-  $slogan.attr(DomSelectorsRegistry.internalAttributes.HOME.SLOGAN, "true");
+  $slogan.attr(DomSelectorsService.internalAttributes.HOME.SLOGAN, "true");
 
   $slogan.find("span:first").text(sloganText);
 }
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:home:customSlogan": void;
   }

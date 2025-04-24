@@ -14,7 +14,7 @@ export default function SidebarPinnedSpacesVisToggle() {
   );
 
   const { data: pinnedSpaces } = useQuery({
-    ...pinnedSpacesQueries.list,
+    ...pinnedSpacesQueries.list.detail(),
     enabled: !isCollapsed,
   });
 
@@ -51,11 +51,11 @@ export default function SidebarPinnedSpacesVisToggle() {
 
 function useCleanUpNonExistingPinnedSpaces() {
   const { data: spaces, isSuccess: isSpacesFetchSuccess } = useQuery(
-    pplxApiQueries.spaces,
+    pplxApiQueries.spaces.detail(),
   );
 
   const { data: pinnedSpaces, isSuccess: isPinnedSpacesFetchSuccess } =
-    useQuery(pinnedSpacesQueries.list);
+    useQuery(pinnedSpacesQueries.list.detail());
 
   useEffect(() => {
     if (!isSpacesFetchSuccess || !isPinnedSpacesFetchSuccess) return;

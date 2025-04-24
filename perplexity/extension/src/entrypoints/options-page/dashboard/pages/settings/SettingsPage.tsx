@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import ClearAllDataButton from "@/entrypoints/options-page/dashboard/pages/settings/components/ClearAllDataButton";
+import ClearRemoteResourcesCache from "@/entrypoints/options-page/dashboard/pages/settings/components/ClearRemoteResourcesCache";
 import ExportDataButtons from "@/entrypoints/options-page/dashboard/pages/settings/components/ExportDataButtons";
 import ExtensionIconActionSelect from "@/entrypoints/options-page/dashboard/pages/settings/components/ExtensionIconActionSelect";
 import ImportDataButtons from "@/entrypoints/options-page/dashboard/pages/settings/components/ImportDataButtons";
@@ -39,9 +40,9 @@ export function SettingsPage() {
           <Switch
             checked={settings?.showPostUpdateReleaseNotesPopup}
             onCheckedChange={({ checked }) =>
-              mutation.mutate(
-                (state) => (state.showPostUpdateReleaseNotesPopup = checked),
-              )
+              mutation.mutate((store) => {
+                store.showPostUpdateReleaseNotesPopup = checked;
+              })
             }
           />
         </SettingsItem>
@@ -67,7 +68,9 @@ export function SettingsPage() {
           <Switch
             checked={settings?.energySavingMode}
             onCheckedChange={({ checked }) =>
-              mutation.mutate((state) => (state.energySavingMode = checked))
+              mutation.mutate((draft) => {
+                draft.energySavingMode = checked;
+              })
             }
           />
         </SettingsItem>
@@ -78,7 +81,6 @@ export function SettingsPage() {
           <Button onClick={() => navigate("/onboarding")}>🚀 Onboarding</Button>
         </SettingsItem>
       </SettingsSection>
-
       <SettingsSection title="Data">
         <SettingsItem title="Import" description="Load saved extension's data">
           <ImportDataButtons />
@@ -90,7 +92,6 @@ export function SettingsPage() {
           <ExportDataButtons />
         </SettingsItem>
       </SettingsSection>
-
       <SettingsSection title="Support">
         <SettingsItem
           title="Need assistance?"
@@ -140,8 +141,10 @@ export function SettingsPage() {
           </div>
         </SettingsItem>
       </SettingsSection>
-
       <SettingsSection title="Troubleshooting">
+        <SettingsItem title="Clear cache">
+          <ClearRemoteResourcesCache />
+        </SettingsItem>
         <SettingsItem title="Reset the extension">
           <ClearAllDataButton />
         </SettingsItem>

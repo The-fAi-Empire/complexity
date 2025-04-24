@@ -1,7 +1,7 @@
 import { produce } from "immer";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import {
   encodePerplexityAskEvent,
   parsePerplexityAskEvent,
@@ -10,7 +10,7 @@ import { pluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "networkIntercept:languageModelSelector": void;
   }

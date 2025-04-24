@@ -1,4 +1,3 @@
-import { LuLoaderCircle } from "react-icons/lu";
 import { useRoutes } from "react-router-dom";
 
 import { Input } from "@/components/ui/input";
@@ -7,11 +6,9 @@ import { PluginSections } from "@/entrypoints/options-page/dashboard/pages/plugi
 import { TagsFilter } from "@/entrypoints/options-page/dashboard/pages/plugins/components/TagsFilter";
 import { useFilteredPlugins } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/useFilteredPlugins";
 import { usePluginCategories } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginCategories";
-import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
 import { usePluginFiltersStore } from "@/entrypoints/options-page/dashboard/pages/plugins/store";
 
 function PluginsListing() {
-  const { isLoading: isFetchingPLuginsStates } = usePluginsStates();
   const filters = usePluginFiltersStore((state) => state.filters);
   const setFilters = usePluginFiltersStore((state) => state.setFilters);
 
@@ -55,14 +52,7 @@ function PluginsListing() {
           settings.
         </div>
 
-        {isFetchingPLuginsStates ? (
-          <div className="x:m-auto x:flex x:size-max x:items-center x:gap-2">
-            <LuLoaderCircle className="x:animate-spin" />
-            Fetching plugins...
-          </div>
-        ) : (
-          <PluginSections pluginsByCategory={pluginsByCategory} />
-        )}
+        <PluginSections pluginsByCategory={pluginsByCategory} />
       </div>
     </div>
   );

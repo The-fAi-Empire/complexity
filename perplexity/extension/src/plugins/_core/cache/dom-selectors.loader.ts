@@ -1,14 +1,14 @@
 import { onMessage } from "webext-bridge/content-script";
 
-import { APP_CONFIG } from "@/app.config";
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
-import type { DomSelectors } from "@/data/dom-selectors-registry/types";
-import { cplxApiQueries } from "@/services/cplx-api/query-keys";
-import { errorWrapper } from "@/utils/error-wrapper";
-import { queryClient } from "@/utils/ts-query-client";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { applyRouteIdAttribute } from "@/plugins/_core/main-world/spa-router/utils";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { domSelectorsResourceConfig } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/index.remote-resources";
+import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/types";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
+import { whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "cache:domSelectors": DomSelectors;
   }
@@ -25,21 +25,17 @@ export default async function loader() {
     id: "cache:domSelectors",
     dependencies: [],
     loader: async () => {
-      if (APP_CONFIG.IS_DEV) return DomSelectorsRegistry.local;
+      applyRouteIdAttribute(whereAmI());
 
-      const [data, error] = await errorWrapper(() =>
-        queryClient.fetchQuery(cplxApiQueries.domSelectors),
-      )();
+      const data = await getVersionedRemoteResource(domSelectorsResourceConfig);
 
-      if (error) return DomSelectorsRegistry.local;
-
-      DomSelectorsRegistry.remote = data;
+      DomSelectorsService.remote = data;
 
       return data;
     },
   });
 
   onMessage("cache:domSelectors", () => {
-    return DomSelectorsRegistry.remote ?? DomSelectorsRegistry.local;
+    return DomSelectorsService.remote ?? DomSelectorsService.local;
   });
 }

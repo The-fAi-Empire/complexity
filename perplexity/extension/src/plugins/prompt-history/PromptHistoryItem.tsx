@@ -2,8 +2,8 @@ import { LuTrash } from "react-icons/lu";
 
 import CopyButton from "@/components/CopyButton";
 import { CommandItem } from "@/components/ui/command";
+import { formatHowLongAgo } from "@/data/dayjs";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/store";
-import { formatHowLongAgo } from "@/utils/dayjs";
 
 type PromptHistoryItem = {
   id: string;

@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
 import type { PinnedSpace } from "@/data/plugins/space-navigator/pinned-space.types";
+import { queryClient } from "@/data/query-client";
 import { getPinnedSpacesService } from "@/services/indexed-db/pinned-spaces";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export function usePinSpaceMutation() {
   return useMutation({
@@ -15,7 +15,7 @@ export function usePinSpaceMutation() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: pinnedSpacesQueries.list.queryKey,
+        queryKey: pinnedSpacesQueries.list.all(),
         exact: true,
       });
     },
@@ -30,7 +30,7 @@ export function useUnpinSpaceMutation() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: pinnedSpacesQueries.list.queryKey,
+        queryKey: pinnedSpacesQueries.list.all(),
         exact: true,
       });
     },

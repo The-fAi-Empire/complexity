@@ -1,12 +1,12 @@
 import { produce } from "immer";
 import { sendMessage } from "webext-bridge/content-script";
 
-import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
 import {
   encodePerplexityAskEvent,
   parsePerplexityAskEvent,
 } from "@/plugins/_core/main-world/network-intercept/utils/parse-perplexity-ask-event";
+import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 export const handleRewrite = ({
   selectedModel,

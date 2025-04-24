@@ -2,9 +2,9 @@ import { isHotkeyPressed } from "react-hotkeys-hook";
 import { sendMessage } from "webext-bridge/content-script";
 
 import { CommandItem } from "@/components/ui/command";
+import { formatHowLongAgo } from "@/data/dayjs";
 import { useCommandMenuStore } from "@/data/plugins/command-menu/store";
 import type { ThreadSearchApi } from "@/services/pplx-api/pplx-api.types";
-import { formatHowLongAgo } from "@/utils/dayjs";
 
 type SpaceThreadItemProps = {
   thread: ThreadSearchApi;

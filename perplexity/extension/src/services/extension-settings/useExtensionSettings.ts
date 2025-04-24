@@ -10,7 +10,7 @@ export default function useExtensionSettings() {
       "Extension settings can not be reactive in content scripts! Use static methods from `ExtensionSettingsService` instead.",
     );
 
-  const data = useQuery(extensionSettingsQueries.data);
+  const data = useQuery(extensionSettingsQueries.detail());
   const mutation = useExtensionSettingsMutation();
 
   return { settings: data.data, mutation };

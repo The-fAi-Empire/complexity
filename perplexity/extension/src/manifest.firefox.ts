@@ -32,6 +32,5 @@ export default defineMozManifest(
       scripts: ["src/entrypoints/background/index.ts"],
       type: "module",
     };
-    draft.content_scripts![0]!.run_at = "document_idle";
   }),
 );

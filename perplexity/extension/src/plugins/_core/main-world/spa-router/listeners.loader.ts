@@ -6,7 +6,7 @@ import {
   useStoreWithEqualityFn,
 } from "zustand/traditional";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type { RouterEvent } from "@/plugins/_core/main-world/spa-router/spa-router.types";
 import { isInContentScript } from "@/utils/utils";
 
@@ -35,7 +35,7 @@ function setupSpaRouterDispatchListeners() {
   );
 }
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "messaging:spaRouter": void;
   }

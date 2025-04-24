@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { ENDPOINTS } from "@/services/pplx-api/endpoints";
 import { E2E_CONFIG } from "~/e2e/config";
 import { BasePage } from "~/e2e/pages/base.page";
@@ -13,7 +13,7 @@ export class HomePage extends BasePage implements Extracted {
 
   async verifyKeyElements(): Promise<void> {
     const heading = this.page.locator(
-      DomSelectorsRegistry.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
+      DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
     );
     await expect(heading).toBeVisible({
       timeout: E2E_CONFIG.TIMEOUTS.HEADING_VISIBLE,

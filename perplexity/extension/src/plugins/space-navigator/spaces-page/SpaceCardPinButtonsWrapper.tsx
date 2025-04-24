@@ -1,14 +1,19 @@
 import { Portal } from "@/components/ui/portal";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useSpacesPageDomObserverStore } from "@/plugins/_core/dom-observers/spaces-page/store";
-import relativePositionedCard from "@/plugins/space-navigator/spaces-page/space-cards.css?inline";
+import { relativePositionedCardCssResourceConfig } from "@/plugins/space-navigator/index.remote-resources";
 import SpaceCardPinButton from "@/plugins/space-navigator/spaces-page/SpaceCardPinButton";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
+
+const relativePositionedCardCss = await getVersionedRemoteResource(
+  relativePositionedCardCssResourceConfig,
+);
 
 export default function SpaceCardsWrapper() {
   const spaceCards = useSpacesPageDomObserverStore((state) => state.spaceCards);
 
   useInsertCss({
-    css: relativePositionedCard,
+    css: relativePositionedCardCss,
     id: "space-cards",
   });
 

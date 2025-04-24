@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import type { ImageGenModel } from "@/data/plugins/image-gen-model-selector/image-gen-model-seletor.types";
 import { internalWebSocketStore } from "@/plugins/_core/global-stores/web-socket";
+import type { ImageModel } from "@/services/cplx-api/remote-resources/pplx-image-models/types";
 import { ENDPOINTS } from "@/services/pplx-api/endpoints";
 import type {
   Space,
@@ -81,7 +81,7 @@ export class PplxApiService {
   }
 
   static async setDefaultImageGenModel(
-    selectedImageGenModel: ImageGenModel["code"],
+    selectedImageGenModel: ImageModel["code"],
     method: "websocket" | "fetch" = "fetch",
   ) {
     return this.saveSetting(
@@ -265,5 +265,27 @@ export class PplxApiService {
       });
 
     return SpaceSchema.parse(resp);
+  }
+
+  static async updateSpace(
+    spaceUuid: Space["uuid"],
+    space: Partial<Space>,
+  ): Promise<boolean> {
+    const resp = await fetch(
+      `https://www.perplexity.ai/rest/collections/edit_collection/${spaceUuid}?version=2.18&source=default`,
+      {
+        method: "POST",
+        body: JSON.stringify(space),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    if (resp.status !== 200) {
+      throw new Error("Failed to update space");
+    }
+
+    return true;
   }
 }

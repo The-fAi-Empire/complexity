@@ -11,7 +11,7 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
       imports: ["lazy", "use", "createContext", "useDeferredValue", "memo"],
     },
     {
-      from: normalizePath("src/utils/js-context.ts"),
+      from: normalizePath("src/utils/js-context-guards.ts"),
       imports: ["onlyMainWorldGuard", "onlyExtensionGuard"],
     },
     {
@@ -19,7 +19,7 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
       imports: ["sleep", "isMainWorldContext", "isExtensionContext"],
     },
     {
-      from: normalizePath("src/utils/i18next.ts"),
+      from: normalizePath("src/data/i18next.ts"),
       imports: ["t", "i18n"],
     },
     {

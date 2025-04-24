@@ -3,18 +3,18 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import type { ImageGenModel } from "@/data/plugins/image-gen-model-selector/image-gen-model-seletor.types";
-import { isImageGenModelCode } from "@/data/plugins/image-gen-model-selector/image-gen-model-seletor.types";
+import { queryClient } from "@/data/query-client";
+import {
+  isImageModelCode,
+  type ImageModel,
+} from "@/services/cplx-api/remote-resources/pplx-image-models/types";
 import { PplxApiService } from "@/services/pplx-api";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { extensionExec } from "@/utils/hof";
-import { queryClient } from "@/utils/ts-query-client";
 
 type ImageGenModelSelectorStore = {
-  selectedImageGenModel: ImageGenModel["code"];
-  setSelectedImageGenModel: (
-    selectedImageGenModel: ImageGenModel["code"],
-  ) => void;
+  selectedImageGenModel: ImageModel["code"];
+  setSelectedImageGenModel: (selectedImageGenModel: ImageModel["code"]) => void;
 };
 
 const useImageGenModelSelectorStore =
@@ -27,7 +27,7 @@ const useImageGenModelSelectorStore =
             set({ selectedImageGenModel });
             await PplxApiService.setDefaultImageGenModel(selectedImageGenModel);
             queryClient.invalidateQueries({
-              queryKey: pplxApiQueries.userSettings.queryKey,
+              queryKey: pplxApiQueries.userSettings.all(),
             });
           },
         }),
@@ -40,21 +40,22 @@ const imageGenModelSelectorStore = useImageGenModelSelectorStore;
 async function initImageGenModelSelectorStore() {
   let firstTime = true;
 
-  new QueryObserver(queryClient, pplxApiQueries.userSettings).subscribe(
-    (data) => {
-      if (data.data && firstTime) {
-        imageGenModelSelectorStore.setState((state) => {
-          state.selectedImageGenModel = isImageGenModelCode(
-            data.data.default_image_generation_model,
-          )
-            ? data.data.default_image_generation_model
-            : "default";
-        });
+  new QueryObserver(
+    queryClient,
+    pplxApiQueries.userSettings.detail(),
+  ).subscribe((data) => {
+    if (data.data && firstTime) {
+      imageGenModelSelectorStore.setState((state) => {
+        state.selectedImageGenModel = isImageModelCode(
+          data.data.default_image_generation_model,
+        )
+          ? data.data.default_image_generation_model
+          : "default";
+      });
 
-        firstTime = false;
-      }
-    },
-  );
+      firstTime = false;
+    }
+  });
 }
 
 extensionExec(() => initImageGenModelSelectorStore())();

@@ -1,9 +1,6 @@
 import { createListCollection } from "@ark-ui/react";
 
 import { Select, SelectContext, SelectTrigger } from "@/components/ui/select";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
-import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useRegisterGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
@@ -13,8 +10,16 @@ import DesktopContent from "@/plugins/language-model-selector/components/desktop
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import hideNativeModelSelector from "@/plugins/language-model-selector/hide-native-model-selector.css?inline";
+import { hideNativeModelSelectorCssResourceConfig } from "@/plugins/language-model-selector/index.remote-resources";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { UiUtils } from "@/utils/ui-utils";
+
+const hideNativeModelSelector = await getVersionedRemoteResource(
+  hideNativeModelSelectorCssResourceConfig,
+);
 
 export function LanguageModelSelector() {
   const { isMobile } = useIsMobileStore();
@@ -48,7 +53,7 @@ export function LanguageModelSelector() {
         itemToValue: (item) => item.id,
       })}
       data-testid={
-        DomSelectorsRegistry.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR
+        DomSelectorsService.testIds.QUERY_BOX.LANGUAGE_MODEL_SELECTOR
       }
       open={isOpen}
       value={[selectedLanguageModel]}
@@ -119,10 +124,12 @@ function useRegisterGlobalCss() {
 
 function getSelectItems() {
   const modelItems = [
-    ...PplxLanguageModel.fastModels,
-    ...PplxLanguageModel.reasoningModels,
-    ...PplxLanguageModel.deepResearchModels,
-    PplxLanguageModel.localModels.find((model) => model.code === "pplx_pro")!,
+    ...PplxLanguageModelsService.fastModels,
+    ...PplxLanguageModelsService.reasoningModels,
+    ...PplxLanguageModelsService.deepResearchModels,
+    PplxLanguageModelsService.localModels.find(
+      (model) => model.code === "pplx_pro",
+    )!,
   ].map((model) => ({
     id: model.code,
     label: model.label,

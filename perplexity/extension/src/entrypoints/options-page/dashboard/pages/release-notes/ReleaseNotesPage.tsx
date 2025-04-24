@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import { LuLoaderCircle } from "react-icons/lu";
-import semver from "semver";
 
 import ChangelogRenderer from "@/components/changelog/ChangelogRenderer";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useVersionPagination } from "@/entrypoints/options-page/dashboard/pages/release-notes/hooks/useVersionPagination";
 import { cn } from "@/utils/cn";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
@@ -59,15 +59,29 @@ export function ReleaseNotesPage() {
             >
               <div className="x:relative x:flex x:items-start x:md:justify-end">
                 <div className="x:sticky x:mb-2 x:w-max x:rounded-lg x:border x:border-border/50 x:bg-secondary x:px-2 x:py-1 x:text-left x:font-mono x:text-lg x:md:top-4">
-                  {semver.coerce(version)!.toString()}
+                  {version}
                 </div>
               </div>
 
               <div className="x:flex x:flex-col x:gap-4">
                 {isLoading && (
-                  <div className="x:flex x:items-center x:gap-2">
-                    <LuLoaderCircle className="x:size-4 x:animate-spin" />
-                    <span>Loading...</span>
+                  <div className="x:flex x:flex-col x:gap-8">
+                    <div className="x:flex x:flex-col x:gap-2">
+                      <Skeleton className="x:mb-2 x:h-6 x:w-32" />
+                      <div className="x:flex x:flex-col x:gap-2 x:pl-4">
+                        <Skeleton className="x:h-4 x:w-full" />
+                        <Skeleton className="x:h-4 x:w-5/6" />
+                        <Skeleton className="x:h-4 x:w-3/4" />
+                      </div>
+                    </div>
+                    <div className="x:flex x:flex-col x:gap-2">
+                      <Skeleton className="x:mb-2 x:h-6 x:w-32" />
+                      <div className="x:flex x:flex-col x:gap-2 x:pl-4">
+                        <Skeleton className="x:h-4 x:w-full" />
+                        <Skeleton className="x:h-4 x:w-5/6" />
+                        <Skeleton className="x:h-4 x:w-7/8" />
+                      </div>
+                    </div>
                   </div>
                 )}
                 {changelog && <ChangelogRenderer changelog={changelog} />}

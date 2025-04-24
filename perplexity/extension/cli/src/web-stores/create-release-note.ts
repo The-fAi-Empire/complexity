@@ -1,8 +1,6 @@
-import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import process from "process";
-import { promisify } from "util";
 
 import packageJson from "#/package.json" assert { type: "json" };
 import { Logger } from "@complexity/cli-logger";
@@ -10,7 +8,7 @@ import chalk from "chalk";
 import { Command } from "commander";
 import inquirer from "inquirer";
 
-import { getRootPath } from "@/utils";
+import { execAsync, getRootPath } from "@/utils";
 import {
   getExtensionVersion,
   md5sum,
@@ -118,8 +116,6 @@ async function main(): Promise<void> {
       if (xpiExists) {
         command += ` "${xpiPath}"`;
       }
-
-      const execAsync = promisify(exec);
 
       try {
         const { stdout } = await execAsync(command);

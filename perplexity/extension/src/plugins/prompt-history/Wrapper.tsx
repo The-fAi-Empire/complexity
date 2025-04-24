@@ -2,13 +2,13 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { LuHistory } from "react-icons/lu";
 
 import { CommandGroup } from "@/components/ui/command";
+import { queryClient } from "@/data/query-client";
 import ClearAllButton from "@/plugins/prompt-history/ClearAllButton";
 import PromptHistoryItem from "@/plugins/prompt-history/PromptHistoryItem";
 import { usePromptHistory } from "@/plugins/prompt-history/usePromptHistory";
 import { useSlashCommandMenuStore } from "@/plugins/slash-command-menu/store";
 import { getPromptHistoryService } from "@/services/indexed-db/prompt-history";
 import { promptHistoryQueries } from "@/services/indexed-db/prompt-history/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export default function PromptHistorySlashMenuItemsWrapper() {
   const loadMoreRef = useRef<HTMLDivElement>(null);
@@ -18,7 +18,10 @@ export default function PromptHistorySlashMenuItemsWrapper() {
     200,
   );
 
-  const { items, isFetching, hasNextPage, fetchNextPage } = usePromptHistory({
+  const {
+    items,
+    query: { isFetching, hasNextPage, fetchNextPage },
+  } = usePromptHistory({
     searchValue,
     enabled: isOpen,
   });
@@ -29,7 +32,7 @@ export default function PromptHistorySlashMenuItemsWrapper() {
     getPromptHistoryService().delete(id);
 
     queryClient.invalidateQueries({
-      queryKey: promptHistoryQueries.infinite._def,
+      queryKey: promptHistoryQueries.infinite.all(),
     });
   }, []);
 

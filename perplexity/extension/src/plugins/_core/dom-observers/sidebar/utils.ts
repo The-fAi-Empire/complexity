@@ -1,8 +1,8 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { sidebarDomObserverStore } from "@/plugins/_core/dom-observers/sidebar/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export function findSidebarWrapper() {
-  const $wrapper = $(DomSelectorsRegistry.cachedSync.SIDEBAR.WRAPPER);
+  const $wrapper = $(DomSelectorsService.cachedSync.SIDEBAR.WRAPPER);
 
   if (!$wrapper.length) return;
 
@@ -18,12 +18,12 @@ export function findSidebarWrapper() {
   if (
     sidebarDomObserverStore.getState().$wrapper != null &&
     $wrapper.internalComponentAttr() ===
-      DomSelectorsRegistry.internalAttributes.SIDEBAR.WRAPPER
+      DomSelectorsService.internalAttributes.SIDEBAR.WRAPPER
   )
     return;
 
   $wrapper.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.SIDEBAR.WRAPPER,
+    DomSelectorsService.internalAttributes.SIDEBAR.WRAPPER,
   );
 
   sidebarDomObserverStore.setState({
@@ -37,7 +37,7 @@ export function findSpaceButtonWrapper() {
   if ($wrapper == null) return;
 
   const $spaceButtonWrapper = $wrapper.find(
-    DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER,
+    DomSelectorsService.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER,
   );
 
   const isExpanded = $wrapper.attr("data-state") === "expanded";
@@ -51,19 +51,19 @@ export function findSpaceButtonWrapper() {
   }
 
   $spaceButtonWrapper
-    .find(DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON)
+    .find(DomSelectorsService.cachedSync.SIDEBAR.SPACE_BUTTON)
     .addClass("x:group");
 
   if (
     sidebarDomObserverStore.getState().$spaceButtonWrapper != null &&
     (!$spaceButtonWrapper.length ||
       $spaceButtonWrapper.internalComponentAttr() ===
-        DomSelectorsRegistry.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER)
+        DomSelectorsService.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER)
   )
     return;
 
   $spaceButtonWrapper.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER,
+    DomSelectorsService.internalAttributes.SIDEBAR.SPACE_BUTTON_WRAPPER,
   );
 
   sidebarDomObserverStore.setState({
@@ -78,20 +78,20 @@ export function findSpaceButtonTriggerButtonsWrapper() {
   if ($spaceButtonWrapper == null) return;
 
   const $spaceButtonTriggerButtonsWrapper = $spaceButtonWrapper.find(
-    DomSelectorsRegistry.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER_CHILD
+    DomSelectorsService.cachedSync.SIDEBAR.SPACE_BUTTON_WRAPPER_CHILD
       .TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
   if (
     !$spaceButtonTriggerButtonsWrapper.length ||
     $spaceButtonTriggerButtonsWrapper.internalComponentAttr() ===
-      DomSelectorsRegistry.internalAttributes.SIDEBAR
+      DomSelectorsService.internalAttributes.SIDEBAR
         .SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER
   )
     return;
 
   $spaceButtonTriggerButtonsWrapper.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.SIDEBAR
+    DomSelectorsService.internalAttributes.SIDEBAR
       .SPACE_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
@@ -106,7 +106,7 @@ export function findLibraryButtonWrapper() {
   if ($wrapper == null) return;
 
   const $libraryButtonWrapper = $wrapper.find(
-    DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
+    DomSelectorsService.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
   );
 
   const isExpanded = $wrapper.attr("data-state") === "expanded";
@@ -120,19 +120,19 @@ export function findLibraryButtonWrapper() {
   }
 
   $libraryButtonWrapper
-    .find(DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON)
+    .find(DomSelectorsService.cachedSync.SIDEBAR.LIBRARY_BUTTON)
     .addClass("x:group");
 
   if (
     sidebarDomObserverStore.getState().$libraryButtonWrapper != null &&
     (!$libraryButtonWrapper.length ||
       $libraryButtonWrapper.internalComponentAttr() ===
-        DomSelectorsRegistry.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER)
+        DomSelectorsService.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER)
   )
     return;
 
   $libraryButtonWrapper.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
+    DomSelectorsService.internalAttributes.SIDEBAR.LIBRARY_BUTTON_WRAPPER,
   );
 
   sidebarDomObserverStore.setState({
@@ -147,7 +147,7 @@ export function findLibraryButtonTriggerButtonsWrapper() {
   if ($libraryButtonWrapper == null) return;
 
   const $libraryButtonTriggerButtonsWrapper = $libraryButtonWrapper.find(
-    DomSelectorsRegistry.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER_CHILD
+    DomSelectorsService.cachedSync.SIDEBAR.LIBRARY_BUTTON_WRAPPER_CHILD
       .TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 
@@ -156,13 +156,13 @@ export function findLibraryButtonTriggerButtonsWrapper() {
       null &&
     (!$libraryButtonTriggerButtonsWrapper.length ||
       $libraryButtonTriggerButtonsWrapper.internalComponentAttr() ===
-        DomSelectorsRegistry.internalAttributes.SIDEBAR
+        DomSelectorsService.internalAttributes.SIDEBAR
           .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER)
   )
     return;
 
   $libraryButtonTriggerButtonsWrapper.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.SIDEBAR
+    DomSelectorsService.internalAttributes.SIDEBAR
       .LIBRARY_BUTTON_TRIGGER_BUTTONS_PORTAL_CONTAINER,
   );
 

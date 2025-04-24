@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { queryClient } from "@/data/query-client";
 import { extensionPermissionsQueries } from "@/services/extension-permissions/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export function useExtensionPermissions() {
-  const query = useQuery(extensionPermissionsQueries.permissions);
+  const query = useQuery(extensionPermissionsQueries.permissions.detail());
 
   const handleGrantPermission = ({
     permissions,
@@ -19,7 +19,9 @@ export function useExtensionPermissions() {
         origins: hostPermissions,
       })
       .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["permissions"] });
+        queryClient.invalidateQueries({
+          queryKey: extensionPermissionsQueries.permissions.all(),
+        });
       })
       .catch((error) => {
         alert(`Error granting permissions: ${error}`);
@@ -36,7 +38,9 @@ export function useExtensionPermissions() {
     chrome.permissions
       .remove({ permissions, origins: hostPermissions })
       .then(() => {
-        queryClient.invalidateQueries({ queryKey: ["permissions"] });
+        queryClient.invalidateQueries({
+          queryKey: extensionPermissionsQueries.permissions.all(),
+        });
       })
       .catch((error) => {
         alert(`Error revoking permissions: ${error}`);

@@ -23,7 +23,7 @@ export function PostUpdateReleaseNotesDialog() {
     isLoading,
     isError,
   } = useQuery(
-    cplxApiQueries.changelog({
+    cplxApiQueries.changelog.detail({
       version: APP_CONFIG.VERSION,
     }),
   );

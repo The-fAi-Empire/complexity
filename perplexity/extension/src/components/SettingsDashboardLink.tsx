@@ -3,9 +3,9 @@ import { sendMessage } from "webext-bridge/content-script";
 import Cplx from "@/components/icons/Cplx";
 import FaArrowUpRight from "@/components/icons/FaArrowUpRight";
 import { Portal } from "@/components/ui/portal";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import { useSettingsPageDomObserverStore } from "@/plugins/_core/dom-observers/settings-page/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export function SettingsDashboardLink() {
   const isMobile = useIsMobileStore((store) => store.isMobile);
@@ -19,19 +19,19 @@ export function SettingsDashboardLink() {
     if ($sidebarWrapper == null || !$sidebarWrapper.length) return null;
 
     const $existingContainer = $sidebarWrapper.find(
-      `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
+      `[data-cplx-component="${DomSelectorsService.internalAttributes.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
     );
 
     if ($existingContainer[0]) return $existingContainer[0];
 
     const $portalContainer = $("<div>")
       .internalComponentAttr(
-        DomSelectorsRegistry.internalAttributes.SETTINGS_PAGE
+        DomSelectorsService.internalAttributes.SETTINGS_PAGE
           .CPLX_DASHBOARD_LINK,
       )
       .insertAfter(
         $sidebarWrapper.find(
-          DomSelectorsRegistry.cachedSync.SETTINGS_PAGE.SIDEBAR_CHILD
+          DomSelectorsService.cachedSync.SETTINGS_PAGE.SIDEBAR_CHILD
             .BACK_BUTTON,
         ),
       );
@@ -44,7 +44,7 @@ export function SettingsDashboardLink() {
   return (
     <Portal container={portalContainer}>
       <div
-        className="x:mx-1 x:flex x:cursor-pointer x:items-center x:justify-start x:gap-1 x:rounded-lg x:px-3 x:py-2 x:text-sm x:font-medium x:text-foreground x:transition-all x:hover:bg-primary-foreground"
+        className="x:mx-3 x:flex x:cursor-pointer x:items-center x:justify-start x:gap-1 x:rounded-lg x:px-3 x:py-2 x:text-sm x:font-medium x:text-foreground x:transition-all x:hover:bg-primary-foreground"
         onClick={() => {
           sendMessage("bg:openOptionsPage", undefined, "background");
         }}

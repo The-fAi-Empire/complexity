@@ -5,7 +5,7 @@ import { LuCodeXml } from "react-icons/lu";
 import { PiArticleDuotone } from "react-icons/pi";
 import { RiMindMap } from "react-icons/ri";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type {
   CanvasLanguage,
   CanvasState,
@@ -78,7 +78,7 @@ type CanvasPlaceholders = Record<
 
 export let CANVAS_PLACEHOLDERS: CanvasPlaceholders = {} as CanvasPlaceholders;
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:thread:canvas:codeBlockPlaceholdersData": void;
   }

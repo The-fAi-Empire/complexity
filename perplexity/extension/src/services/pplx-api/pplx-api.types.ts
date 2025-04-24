@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
+import type { LanguageModel } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 export const PplxUserSettingsApiResponseSchema = z.object({
   default_image_generation_model: z.string(),
@@ -85,6 +85,7 @@ export const SpaceSchema = z.object({
     .nullable(),
   access: z.number(),
   model_selection: (z.string() as z.ZodType<LanguageModel["code"]>).nullable(),
+  enable_web_by_default: z.boolean().nullable(),
 });
 
 export const SpacesApiResponseSchema = z.array(SpaceSchema);
@@ -95,8 +96,10 @@ export const SpaceFilesApiResponseSchema = z.object({
   files: z.array(
     z.object({
       filename: z.string(),
+      file_title: z.string().nullable().optional(),
+      file_description: z.string().nullable().optional(),
       file_uuid: z.string(),
-      file_s3_url: z.string(),
+      file_s3_url: z.string().nullable(),
       uploaded_by: z.string(),
       file_size: z.number(),
       time_created: z.string(),

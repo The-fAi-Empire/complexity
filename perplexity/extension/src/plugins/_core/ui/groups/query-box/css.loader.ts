@@ -1,6 +1,7 @@
 import { globalCssStore } from "@/plugins/_core/global-stores/global-css-store";
-import followUpQueryBoxCss from "@/plugins/_core/ui/groups/query-box/follow-up-query-box.css?inline";
-import mainQueryBoxCss from "@/plugins/_core/ui/groups/query-box/main-query-box.css?inline";
+import { queryBoxFollowUpQueryBoxNormalizeCssResourceConfig } from "@/plugins/_core/ui/index.remote-resources";
+import { queryBoxMainQueryBoxNormalizeCssResourceConfig } from "@/plugins/_core/ui/index.remote-resources";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 
 declare module "@/plugins/_core/global-stores/global-css-store" {
   interface GlobalCssStoreRegistry {
@@ -8,6 +9,13 @@ declare module "@/plugins/_core/global-stores/global-css-store" {
     "normalize-follow-up-query-box": void;
   }
 }
+
+const [mainQueryBoxCss, followUpQueryBoxCss] = await Promise.all([
+  getVersionedRemoteResource(queryBoxMainQueryBoxNormalizeCssResourceConfig),
+  getVersionedRemoteResource(
+    queryBoxFollowUpQueryBoxNormalizeCssResourceConfig,
+  ),
+]);
 
 export default function loader() {
   globalCssStore.getState().registerCssEntry({

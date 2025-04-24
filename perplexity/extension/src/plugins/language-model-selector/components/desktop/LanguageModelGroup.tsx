@@ -8,14 +8,13 @@ import {
   DropdownMenuLabel,
 } from "@/components/ui/dropdown-menu";
 import { SelectItem, SelectGroup, SelectLabel } from "@/components/ui/select";
-import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
+import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
+import { useModelLimits } from "@/plugins/language-model-selector/hooks/useModelLimits";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import type {
   LanguageModelCode,
   LanguageModelProvider,
-} from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { useModelLimits } from "@/plugins/language-model-selector/hooks/useModelLimits";
-import { t } from "@/utils/i18next";
+} from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 type LanguageModel = {
   code: LanguageModelCode;
@@ -75,8 +74,8 @@ export default function LanguageModelGroup({
         if (model.hideFromList) return null;
 
         const Icon =
-          languageModelProviderIcons[
-            model.provider as keyof typeof languageModelProviderIcons
+          PplxLanguageModelsService.icons[
+            model.provider as keyof typeof PplxLanguageModelsService.icons
           ] ?? LuCpu;
 
         const modelLimit =

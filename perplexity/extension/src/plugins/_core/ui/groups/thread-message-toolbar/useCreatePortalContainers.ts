@@ -1,5 +1,5 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 const OBSERVER_ID = "cplx-thread-message-toolbar-extra-buttons-wrapper";
 
@@ -22,7 +22,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
 
     messageBlock.nodes.$bottomBar
       .find(
-        DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD
+        DomSelectorsService.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD
           .COPY_BUTTON,
       )
       .before($portalContainer);

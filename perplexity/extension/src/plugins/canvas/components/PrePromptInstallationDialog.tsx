@@ -18,11 +18,12 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { toast } from "@/components/ui/use-toast";
+import { unixTimestampToDate } from "@/data/dayjs";
 import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
-import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 import { PluginsStatesService } from "@/services/plugins-states";
 import { PplxApiService } from "@/services/pplx-api";
-import { unixTimestampToDate } from "@/utils/dayjs";
+import { errorWrapper } from "@/utils/error-wrapper";
 import { fetchTextResource, setCookie } from "@/utils/utils";
 
 function CanvasPrePromptInstallationDialog() {
@@ -41,11 +42,10 @@ function CanvasPrePromptInstallationDialog() {
     },
   });
 
-  // TODO: add an option to disable Space's internet source by default
   const { mutateAsync: createSpace } = useMutation({
     mutationKey: ["createSpace"],
     mutationFn: PplxApiService.createSpace,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       toast({
         title: `✅ "CPLX Canvas" Space installed`,
         description: "The Canvas Pre-Prompt has been installed as a Space.",
@@ -56,6 +56,12 @@ function CanvasPrePromptInstallationDialog() {
         JSON.stringify([]),
         365,
       );
+
+      await errorWrapper(() =>
+        PplxApiService.updateSpace(data.uuid, {
+          enable_web_by_default: false,
+        }),
+      )();
 
       sendMessage(
         "spa-router:push",
@@ -75,7 +81,7 @@ function CanvasPrePromptInstallationDialog() {
     },
   });
 
-  const { data: versions } = useQuery(cplxApiQueries.versions);
+  const { data: versions } = useQuery(CplxVersionsService.query);
 
   return (
     <Dialog

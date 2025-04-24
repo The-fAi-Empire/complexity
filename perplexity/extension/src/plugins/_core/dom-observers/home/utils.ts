@@ -1,19 +1,19 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { homeDomObserverStore } from "@/plugins/_core/dom-observers/home/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export function findSlogan() {
-  const $slogan = $(DomSelectorsRegistry.cachedSync.HOME.SLOGAN);
+  const $slogan = $(DomSelectorsService.cachedSync.HOME.SLOGAN);
 
   if (
     homeDomObserverStore.getState().$slogan != null &&
     (!$slogan.length ||
       $slogan.internalComponentAttr() ===
-        DomSelectorsRegistry.internalAttributes.HOME.SLOGAN)
+        DomSelectorsService.internalAttributes.HOME.SLOGAN)
   )
     return;
 
   $slogan.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.HOME.SLOGAN,
+    DomSelectorsService.internalAttributes.HOME.SLOGAN,
   );
 
   homeDomObserverStore.setState({
@@ -22,18 +22,18 @@ export function findSlogan() {
 }
 
 export function findBottomBar() {
-  const $bottomBar = $(DomSelectorsRegistry.cachedSync.HOME.BOTTOM_BAR);
+  const $bottomBar = $(DomSelectorsService.cachedSync.HOME.BOTTOM_BAR);
 
   if (
     homeDomObserverStore.getState().$bottomBar != null &&
     (!$bottomBar.length ||
       $bottomBar.internalComponentAttr() ===
-        DomSelectorsRegistry.internalAttributes.HOME.BOTTOM_BAR)
+        DomSelectorsService.internalAttributes.HOME.BOTTOM_BAR)
   )
     return;
 
   $bottomBar.internalComponentAttr(
-    DomSelectorsRegistry.internalAttributes.HOME.BOTTOM_BAR,
+    DomSelectorsService.internalAttributes.HOME.BOTTOM_BAR,
   );
 
   homeDomObserverStore.setState({
@@ -45,7 +45,7 @@ let previousLanguage = "";
 
 export function observeLanguageSelector() {
   const ariaLabel =
-    $(DomSelectorsRegistry.cachedSync.HOME.LANGUAGE_SELECTOR).attr(
+    $(DomSelectorsService.cachedSync.HOME.LANGUAGE_SELECTOR).attr(
       "aria-label",
     ) ?? "";
 

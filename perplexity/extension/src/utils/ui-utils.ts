@@ -1,6 +1,6 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import type { QueryBoxType } from "@/data/plugins/query-box/types";
 import { isMobileStore } from "@/hooks/use-is-mobile-store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export class UiUtils {
   static isDarkTheme() {
@@ -12,15 +12,15 @@ export class UiUtils {
 
     let $messagesContainer = $(
       isMobile
-        ? DomSelectorsRegistry.cachedSync.THREAD.CONTAINER.MOBILE.NORMAL
-        : DomSelectorsRegistry.cachedSync.THREAD.CONTAINER.DESKTOP.NORMAL,
+        ? DomSelectorsService.cachedSync.THREAD.CONTAINER.MOBILE.NORMAL
+        : DomSelectorsService.cachedSync.THREAD.CONTAINER.DESKTOP.NORMAL,
     );
 
     if (!$messagesContainer.length) {
       $messagesContainer = $(
         isMobile
-          ? DomSelectorsRegistry.cachedSync.THREAD.CONTAINER.MOBILE.BRANCHED
-          : DomSelectorsRegistry.cachedSync.THREAD.CONTAINER.DESKTOP.BRANCHED,
+          ? DomSelectorsService.cachedSync.THREAD.CONTAINER.MOBILE.BRANCHED
+          : DomSelectorsService.cachedSync.THREAD.CONTAINER.DESKTOP.BRANCHED,
       );
     }
 
@@ -34,13 +34,13 @@ export class UiUtils {
   } = {}): JQuery<HTMLTextAreaElement> {
     if (!type)
       return $(
-        `${DomSelectorsRegistry.cachedSync.QUERY_BOX.TEXTAREA.ARBITRARY}:last`,
+        `${DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.ARBITRARY}:last`,
       );
 
     const selectorMap: Record<QueryBoxType, string> = {
-      main: DomSelectorsRegistry.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
-      space: DomSelectorsRegistry.cachedSync.QUERY_BOX.TEXTAREA.SPACE,
-      "follow-up": DomSelectorsRegistry.cachedSync.QUERY_BOX.TEXTAREA.FOLLOW_UP,
+      main: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
+      space: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.SPACE,
+      "follow-up": DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.FOLLOW_UP,
     };
 
     return $(selectorMap[type]);
@@ -50,12 +50,12 @@ export class UiUtils {
     return UiUtils.getActiveQueryBoxTextarea({
       type,
     })
-      .parents(DomSelectorsRegistry.cachedSync.QUERY_BOX.WRAPPER)
+      .parents(DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER)
       .first();
   }
 
   static getStickyNavbar() {
-    return $(DomSelectorsRegistry.cachedSync.STICKY_NAVBAR);
+    return $(DomSelectorsService.cachedSync.STICKY_NAVBAR);
   }
 
   static getWordOnCaret(element: HTMLTextAreaElement) {

@@ -1,10 +1,10 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { queryClient } from "@/data/query-client";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { parseWebSocketData } from "@/plugins/_core/main-world/network-intercept/web-socket-message-parser";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:spaceNavigator:networkInterceptMiddleware": void;
   }
@@ -46,7 +46,7 @@ export default function loader() {
             if (isSpaceMutationPayload) {
               setTimeout(() => {
                 queryClient.invalidateQueries({
-                  queryKey: pplxApiQueries.spaces.queryKey,
+                  queryKey: pplxApiQueries.spaces.all(),
                   exact: true,
                 });
               }, 3000);
@@ -61,7 +61,7 @@ export default function loader() {
             ) {
               setTimeout(() => {
                 queryClient.invalidateQueries({
-                  queryKey: pplxApiQueries.spaces.queryKey,
+                  queryKey: pplxApiQueries.spaces.all(),
                   exact: true,
                 });
               }, 3000);

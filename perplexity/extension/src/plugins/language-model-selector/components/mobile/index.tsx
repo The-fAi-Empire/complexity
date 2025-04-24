@@ -1,8 +1,8 @@
 import type { DialogProps } from "@/components/ui/dialog";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
 import AutoModeOption from "@/plugins/language-model-selector/components/AutoModeOption";
 import LanguageModelGroup from "@/plugins/language-model-selector/components/mobile/LanguageModelGroup";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 
 export default function MobileContent({ ...props }: DialogProps) {
   return (
@@ -15,15 +15,15 @@ export default function MobileContent({ ...props }: DialogProps) {
         <AutoModeOption />
         <LanguageModelGroup
           title="Standard"
-          models={PplxLanguageModel.fastModels}
+          models={PplxLanguageModelsService.fastModels}
         />
         <LanguageModelGroup
           title="Reasoning"
-          models={PplxLanguageModel.reasoningModels}
+          models={PplxLanguageModelsService.reasoningModels}
         />
         <LanguageModelGroup
           title="Research"
-          models={PplxLanguageModel.deepResearchModels}
+          models={PplxLanguageModelsService.deepResearchModels}
         />
       </SheetContent>
     </Sheet>

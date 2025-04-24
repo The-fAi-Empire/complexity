@@ -4,8 +4,6 @@ import {
   DropdownMenu,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import type { LanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { isLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import {
   threadMessageBlocksDomObserverStore,
@@ -17,6 +15,8 @@ import DesktopContent from "@/plugins/language-model-selector/components/desktop
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
 import { handleRewrite } from "@/plugins/thread-better-rewrite-dropdown/handle-rewrite";
+import { isLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
+import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 export function ThreadBetterRewriteDropdown() {
   const { messageBlockIndex } = useThreadMessageContext();

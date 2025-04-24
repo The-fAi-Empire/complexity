@@ -1,14 +1,14 @@
 import { produce } from "immer";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import {
   encodePerplexityAskEvent,
   parsePerplexityAskEvent,
 } from "@/plugins/_core/main-world/network-intercept/utils/parse-perplexity-ask-event";
 import { sharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:spacesThreadsForceWritingMode": void;
   }

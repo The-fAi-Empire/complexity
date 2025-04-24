@@ -1,7 +1,7 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import styles from "@/plugins/drag-n-drop-file-to-upload-in-thread/styles.css?inline";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { UiUtils } from "@/utils/ui-utils";
 import { insertCss } from "@/utils/utils";
 
@@ -13,7 +13,7 @@ const DRAGENTER_EVENT = "dragenter.cplx-file-upload";
 let removeCss: (() => void) | null = null;
 let $overlay: JQuery<HTMLElement> | null = null;
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:thread:dragAndDropFileToUploadInThread": void;
   }
@@ -32,7 +32,7 @@ export default function loader() {
 
         if ($wrapper)
           $wrapper.removeAttr(
-            DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
+            DomSelectorsService.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
           );
       };
 
@@ -46,13 +46,12 @@ export default function loader() {
           if (
             !$wrapper.length ||
             $wrapper.internalComponentAttr() ===
-              DomSelectorsRegistry.internalAttributes.THREAD
-                .ATTACHMENT_DROP_ZONE
+              DomSelectorsService.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE
           )
             return;
 
           $wrapper.internalComponentAttr(
-            DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
+            DomSelectorsService.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE,
           );
 
           removeCss = insertCss({
@@ -61,7 +60,7 @@ export default function loader() {
           });
 
           $overlay = $(`
-        <div data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE}" class="cplx-file-upload-overlay">
+        <div data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE}" class="cplx-file-upload-overlay">
           <div class="cplx-file-upload-overlay__content">
             <div>${t("plugin-drag-n-drop-file-to-upload-in-thread:dropZone.message")}</div>
           </div>

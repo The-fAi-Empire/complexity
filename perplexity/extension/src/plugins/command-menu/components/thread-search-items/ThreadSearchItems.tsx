@@ -18,7 +18,7 @@ export default function ThreadSearchItems() {
     isLoading: isLoadingThreads,
     isError,
   } = useQuery({
-    ...pplxApiQueries.threadsSearch({
+    ...pplxApiQueries.threadsSearch.detail({
       searchValue: debouncedSearchValue,
       limit: debouncedSearchValue.length > 0 ? 20 : undefined,
     }),

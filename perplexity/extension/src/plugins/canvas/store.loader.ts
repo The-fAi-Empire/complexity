@@ -1,5 +1,4 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { threadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
 import type { CodeBlock } from "@/plugins/_core/dom-observers/thread/code-blocks/types";
 import {
@@ -19,9 +18,10 @@ import {
   type CanvasBlock,
   type CodeBlockLocation,
 } from "@/plugins/canvas/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { parseUrl, scrollToElement, whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:thread:canvas:resetOpenStateOnRouteChange": void;
   }
@@ -170,7 +170,7 @@ const handleCanvasBlockClick = (location: CodeBlockLocation) => {
     draft.selectedCodeBlockLocation = location;
     draft.state = "preview";
 
-    const selector = `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
+    const selector = `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
     scrollToElement($(selector), -100);
   });
 };

@@ -1,9 +1,9 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouterStoreSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { handlePromptSave } from "@/plugins/prompt-history/utils";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/store";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:queryBox:promptHistory:listeners": void;
   }

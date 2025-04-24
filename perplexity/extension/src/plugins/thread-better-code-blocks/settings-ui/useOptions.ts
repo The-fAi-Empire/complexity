@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { toast } from "@/components/ui/use-toast";
+import { queryClient } from "@/data/query-client";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 import { getBetterCodeBlocksFineGrainedOptionsService } from "@/services/indexed-db/better-code-blocks";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 type UseOptionsProps = {
   language?: string;
@@ -15,7 +15,7 @@ export default function useOptions({ language }: UseOptionsProps = {}) {
     useExtensionSettings();
 
   const { data: fineGrainedSettings } = useQuery({
-    ...betterCodeBlocksFineGrainedOptionsQueries.get(language ?? ""),
+    ...betterCodeBlocksFineGrainedOptionsQueries.get.detail(language ?? ""),
     enabled: !!language,
   });
 
@@ -30,8 +30,9 @@ export default function useOptions({ language }: UseOptionsProps = {}) {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: betterCodeBlocksFineGrainedOptionsQueries.get(language ?? "")
-          .queryKey,
+        queryKey: betterCodeBlocksFineGrainedOptionsQueries.get.detail(
+          language ?? "",
+        ).queryKey,
       });
     },
   });
@@ -50,7 +51,7 @@ export default function useOptions({ language }: UseOptionsProps = {}) {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: betterCodeBlocksFineGrainedOptionsQueries.list.queryKey,
+        queryKey: betterCodeBlocksFineGrainedOptionsQueries.list.all(),
         exact: true,
       });
     },

@@ -1,12 +1,11 @@
-import { exec } from "child_process";
 import fs from "fs";
 import path from "path";
 import process from "process";
-import { promisify } from "util";
 
 import packageJson from "#/package.json" assert { type: "json" };
 import { Logger } from "@complexity/cli-logger";
 
+import { execAsync } from "@/utils";
 import {
   getExtensionVersion,
   validateZipFile,
@@ -22,8 +21,6 @@ const logger = new Logger({
 const extVersion = getExtensionVersion({ defaultVersion: packageJson });
 const zipPath = validateZipFile(extVersion, "firefox");
 const extractDir = path.join(ARTIFACTS_DIR, `${extVersion}-firefox`);
-
-const execAsync = promisify(exec);
 
 async function main(): Promise<void> {
   verifyEnvVariables();

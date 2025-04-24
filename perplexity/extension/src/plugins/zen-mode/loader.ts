@@ -1,24 +1,27 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import alwaysHideRelatedQuestionsCss from "@/plugins/zen-mode/always-hide-related-questions.css?inline";
-import zenModeCss from "@/plugins/zen-mode/zen-mode.css?inline";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import {
+  alwaysHideRelatedQuestionsCssResourceConfig,
+  zenModeCssResourceConfig,
+} from "@/plugins/zen-mode/index.remote-resources";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { insertCss } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:zenMode": void;
   }
 }
 
-export default function loader() {
+export default async function loader() {
   asyncLoaderRegistry.register({
     id: "plugin:zenMode",
     dependencies: ["cache:pluginsStates", "cache:extensionSettings"],
-    loader: ({ "cache:pluginsStates": pluginsStates }) => {
+    loader: async ({ "cache:pluginsStates": pluginsStates }) => {
       if (!pluginsStates["zenMode"]) return;
 
       insertCss({
-        css: zenModeCss,
+        css: await getVersionedRemoteResource(zenModeCssResourceConfig),
         id: "zen-mode",
       });
 
@@ -33,7 +36,9 @@ export default function loader() {
 
       if (settings?.plugins["zenMode"].alwaysHideRelatedQuestions) {
         insertCss({
-          css: alwaysHideRelatedQuestionsCss,
+          css: await getVersionedRemoteResource(
+            alwaysHideRelatedQuestionsCssResourceConfig,
+          ),
           id: "always-hide-related-questions",
         });
 

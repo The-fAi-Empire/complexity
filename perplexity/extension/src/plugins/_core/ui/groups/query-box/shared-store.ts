@@ -2,9 +2,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import type { LanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models.types";
-import { populateDefaults } from "@/plugins/_core/ui/groups/query-box/utils";
+import type { LanguageModel } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
 type SharedQueryBoxStore = {
   spacesThreadsForceWritingMode: boolean;
@@ -34,19 +32,5 @@ const useSharedQueryBoxStore = createWithEqualityFn<SharedQueryBoxStore>()(
 );
 
 const sharedQueryBoxStore = useSharedQueryBoxStore;
-
-declare module "@/data/async-dep-registry" {
-  interface AsyncLoadersRegistry {
-    "plugin:queryBox:initSharedStore": void;
-  }
-}
-
-asyncLoaderRegistry.register({
-  id: "plugin:queryBox:initSharedStore",
-  dependencies: ["cache:languageModels"],
-  loader: () => {
-    populateDefaults();
-  },
-});
 
 export { sharedQueryBoxStore, useSharedQueryBoxStore };

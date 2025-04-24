@@ -8,13 +8,13 @@ import SwappableDndProvider from "@/components/dnd/SwappableDndProvider";
 import SwappableSortableItem from "@/components/dnd/SwappableSortableItem";
 import Tooltip from "@/components/Tooltip";
 import type { PinnedSpace } from "@/data/plugins/space-navigator/pinned-space.types";
+import { queryClient } from "@/data/query-client";
 import { useUnpinSpaceMutation } from "@/plugins/space-navigator/popover/use-pinned-spaces-mutations";
 import { getPinnedSpacesService } from "@/services/indexed-db/pinned-spaces";
 import { pinnedSpacesQueries } from "@/services/indexed-db/pinned-spaces/query-keys";
 import type { Space } from "@/services/pplx-api/pplx-api.types";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
-import { queryClient } from "@/utils/ts-query-client";
 import { emojiCodeToString } from "@/utils/utils";
 
 type PinnedSpaceContentProps = {
@@ -94,11 +94,11 @@ export default function SidebarPinnedSpaces() {
   const [localPinnedSpaces, setLocalPinnedSpaces] = useState<PinnedSpace[]>([]);
 
   const { data: spaces, isLoading: isSpacesLoading } = useQuery(
-    pplxApiQueries.spaces,
+    pplxApiQueries.spaces.detail(),
   );
 
   const { data: pinnedSpaces = [] } = useQuery({
-    ...pinnedSpacesQueries.list,
+    ...pinnedSpacesQueries.list.detail(),
     enabled: !isCollapsed,
   });
 
@@ -116,7 +116,7 @@ export default function SidebarPinnedSpaces() {
     }) => getPinnedSpacesService().swap({ from, to }),
     onMutate: async ({ from, to }) => {
       await queryClient.cancelQueries({
-        queryKey: pinnedSpacesQueries.list.queryKey,
+        queryKey: pinnedSpacesQueries.list.all(),
       });
 
       const fromIndex = localPinnedSpaces.findIndex(
@@ -136,20 +136,20 @@ export default function SidebarPinnedSpaces() {
       ];
 
       setLocalPinnedSpaces(newOrder);
-      queryClient.setQueryData(pinnedSpacesQueries.list.queryKey, newOrder);
+      queryClient.setQueryData(pinnedSpacesQueries.list.all(), newOrder);
 
       return { previousSpaces: localPinnedSpaces };
     },
     onError: (err, newSpaces, context) => {
       setLocalPinnedSpaces(context?.previousSpaces ?? pinnedSpaces);
       queryClient.setQueryData(
-        pinnedSpacesQueries.list.queryKey,
+        pinnedSpacesQueries.list.all(),
         context?.previousSpaces ?? pinnedSpaces,
       );
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: pinnedSpacesQueries.list.queryKey,
+        queryKey: pinnedSpacesQueries.list.all(),
       });
     },
   });

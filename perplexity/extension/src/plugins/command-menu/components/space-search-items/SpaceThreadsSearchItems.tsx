@@ -15,7 +15,7 @@ export default function SpaceThreadsSearchItems() {
     isLoading,
     isError,
   } = useQuery({
-    ...pplxApiQueries.spaces._ctx.threads(spacethreadFilterSlug ?? ""),
+    ...pplxApiQueries.spaces.threads.detail(spacethreadFilterSlug ?? ""),
     enabled: filter === "spaces-threads" && !!spacethreadFilterSlug,
   });
 

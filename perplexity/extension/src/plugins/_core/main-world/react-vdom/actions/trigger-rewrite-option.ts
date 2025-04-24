@@ -1,5 +1,5 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { findReactFiberNodeValue } from "@/plugins/_core/main-world/react-vdom/utils";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { getReactFiberKey } from "@/utils/utils";
 
@@ -8,7 +8,7 @@ export function triggerRewriteOption(params: {
   optionIndex?: number;
 }): boolean {
   const { messageBlockIndex, optionIndex } = params;
-  const selector = `div[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR}"] ${DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
+  const selector = `div[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR}"] ${DomSelectorsService.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
 
   const $rewriteButtonWrapper = $(selector).parent().parent();
 

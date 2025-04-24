@@ -1,11 +1,11 @@
 import debounce from "lodash/debounce";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { queryClient } from "@/data/query-client";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "networkIntercept:pplxApi": void;
   }
@@ -52,7 +52,7 @@ export default function loader() {
 const invalidateSettings = debounce(() => {
   setTimeout(() => {
     queryClient.invalidateQueries({
-      queryKey: pplxApiQueries.userSettings.queryKey,
+      queryKey: pplxApiQueries.userSettings.all(),
     });
   }, 3000);
 }, 2000);

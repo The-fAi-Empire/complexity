@@ -8,9 +8,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { queryClient } from "@/data/query-client";
 import { getPromptHistoryService } from "@/services/indexed-db/prompt-history";
 import { promptHistoryQueries } from "@/services/indexed-db/prompt-history/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export default function ClearAllButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +18,7 @@ export default function ClearAllButton() {
   const handleClearAll = () => {
     getPromptHistoryService().deleteAll();
     queryClient.invalidateQueries({
-      queryKey: promptHistoryQueries.infinite._def,
+      queryKey: promptHistoryQueries.infinite.all(),
     });
     setIsOpen(false);
   };

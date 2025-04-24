@@ -2,14 +2,17 @@ import { Portal } from "@/components/ui/portal";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
-import styles from "@/plugins/canvas/canvas.css?inline";
 import CanvasContent from "@/plugins/canvas/components/CanvasContent";
 import CanvasFooter from "@/plugins/canvas/components/CanvasFooter";
 import CanvasHeader from "@/plugins/canvas/components/CanvasHeader";
 import CanvasList from "@/plugins/canvas/components/CanvasList";
+import { canvasCssResourceConfig } from "@/plugins/canvas/index.remote-resources";
 import { useCanvasStore } from "@/plugins/canvas/store";
 import useHandleAutonomousCanvasState from "@/plugins/canvas/useHandleAutonomousCanvasState";
 import { useHandleCanvasState } from "@/plugins/canvas/useHandleCanvasState";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
+
+const canvasCss = await getVersionedRemoteResource(canvasCssResourceConfig);
 
 export function Canvas() {
   const threadWrapper = useThreadDomObserverStore(
@@ -33,7 +36,7 @@ export function Canvas() {
 
   useInsertCss({
     id: "canvas",
-    css: styles,
+    css: canvasCss,
     inject: isCanvasOpen || isCanvasListOpen,
   });
 

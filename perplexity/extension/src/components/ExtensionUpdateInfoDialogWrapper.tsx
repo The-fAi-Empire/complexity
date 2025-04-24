@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Image } from "@/components/ui/image";
 import { toast } from "@/components/ui/use-toast";
-import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 
 export default function ExtensionUpdateInfoDialogWrapper({
   children,
@@ -21,7 +21,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
   children: React.ReactNode;
 }) {
   const { data: versions } = useQuery({
-    ...cplxApiQueries.versions,
+    ...CplxVersionsService.query,
   });
 
   if (!versions) return null;
@@ -29,7 +29,7 @@ export default function ExtensionUpdateInfoDialogWrapper({
   const latestVersion = versions.latest;
   const latestVersionWithChangelog =
     versions.changelogEntries.find((entry) =>
-      semver.lte(semver.coerce(entry)!, semver.coerce(latestVersion)!),
+      semver.lte(entry, latestVersion),
     ) ?? versions.changelogEntries[0]!;
 
   return (

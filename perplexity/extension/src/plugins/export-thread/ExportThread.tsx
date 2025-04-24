@@ -1,8 +1,13 @@
 import { Portal } from "@/components/ui/portal";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import ExportButton from "@/plugins/export-thread/ExportButton";
-import hideOpenInAppBtnCss from "@/plugins/export-thread/hide-open-in-app-btn.css?inline";
+import { hideOpenInAppBtnCssResourceConfig } from "@/plugins/export-thread/index.remote-resources";
 import useCreatePortalContainer from "@/plugins/export-thread/useCreatePortalContainer";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
+
+const hideOpenInAppBtnCss = await getVersionedRemoteResource(
+  hideOpenInAppBtnCssResourceConfig,
+);
 
 export function ExportThread() {
   const portalContainer = useCreatePortalContainer();

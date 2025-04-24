@@ -1,10 +1,12 @@
-import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { queryOptions } from "@tanstack/react-query";
 
 import { ExtensionSettingsService } from "@/services/extension-settings";
 
-export const extensionSettingsQueries = createQueryKeys("extensionSettings", {
-  data: {
-    queryKey: null,
-    queryFn: () => ExtensionSettingsService.get(),
-  },
-});
+export const extensionSettingsQueries = {
+  all: () => ["extensionSettings"] as const,
+  detail: () =>
+    queryOptions({
+      queryKey: [...extensionSettingsQueries.all()] as const,
+      queryFn: () => ExtensionSettingsService.get(),
+    }),
+};

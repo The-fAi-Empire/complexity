@@ -26,7 +26,10 @@ if (require.main === module) {
     process.exit(1);
   });
 
-  const versionsFile = path.resolve(getRootPath(), "cdn/versions.json");
+  const versionsFile = path.resolve(
+    getRootPath(),
+    "cdn/resources/versions.json",
+  );
 
   if (!fs.existsSync(versionsFile)) {
     logger.warn(`File ${versionsFile} does not exist, skipping listing update`);

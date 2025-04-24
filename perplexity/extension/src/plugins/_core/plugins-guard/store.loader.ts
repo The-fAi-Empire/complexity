@@ -1,14 +1,14 @@
 import { QueryObserver } from "@tanstack/react-query";
 
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { queryClient } from "@/data/query-client";
 import { isMobileStore } from "@/hooks/use-is-mobile-store";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { pluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
 import { pplxApiQueries } from "@/services/pplx-api/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 import { whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "store:pluginGuards": void;
   }
@@ -43,7 +43,7 @@ export default function loader() {
 
       const pplxAuthQueryObserver = new QueryObserver(
         queryClient,
-        pplxApiQueries.auth,
+        pplxApiQueries.auth.detail(),
       );
 
       pplxAuthQueryObserver.subscribe((data) => {
@@ -57,7 +57,7 @@ export default function loader() {
 
       const pplxAuthOrgStatusQueryObserver = new QueryObserver(
         queryClient,
-        pplxApiQueries.auth._ctx.orgStatus,
+        pplxApiQueries.auth.orgStatus.detail(),
       );
 
       pplxAuthOrgStatusQueryObserver.subscribe((data) => {
@@ -72,7 +72,7 @@ export default function loader() {
         (state) => state.isLoggedIn,
         (isLoggedIn) => {
           new QueryObserver(queryClient, {
-            ...pplxApiQueries.userSettings,
+            ...pplxApiQueries.userSettings.detail(),
             enabled: isLoggedIn,
           }).subscribe((data) => {
             if (!data.data) return;

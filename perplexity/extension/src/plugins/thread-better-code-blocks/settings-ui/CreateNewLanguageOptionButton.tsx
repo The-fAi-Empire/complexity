@@ -14,9 +14,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import type { BetterCodeBlockFineGrainedOptions } from "@/data/dashboard/better-code-blocks/better-code-blocks-options.types";
+import { queryClient } from "@/data/query-client";
 import { getBetterCodeBlocksFineGrainedOptionsService } from "@/services/indexed-db/better-code-blocks";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
 export default function CreateNewLanguageOptionButton() {
   const [open, setOpen] = useState(false);
@@ -65,7 +65,7 @@ export default function CreateNewLanguageOptionButton() {
     },
     onSettled: () => {
       queryClient.invalidateQueries({
-        queryKey: betterCodeBlocksFineGrainedOptionsQueries.list.queryKey,
+        queryKey: betterCodeBlocksFineGrainedOptionsQueries.list.all(),
         exact: true,
       });
       setLanguage("");

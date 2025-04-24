@@ -1,60 +1,56 @@
-import { createQueryKeys } from "@lukemorales/query-key-factory";
+import { queryOptions } from "@tanstack/react-query";
+import type { ZodType } from "zod";
 
-import { APP_CONFIG } from "@/app.config";
-import { cplxApiService } from "@/services/cplx-api";
-import type { CplxVersions } from "@/services/cplx-api/cplx-api.types";
-import { queryClient } from "@/utils/ts-query-client";
+import { CplxApiService } from "@/services/cplx-api";
 
-export const cplxApiQueries = createQueryKeys("cplxApi", {
-  versions: {
-    queryKey: null,
-    queryFn: async (): Promise<CplxVersions> => {
-      const parsedData = await cplxApiService.fetchVersions();
+export const cplxApiQueries = {
+  all: () => ["cplxApi"] as const,
 
-      const latest =
-        APP_CONFIG.BROWSER === "chrome" ? "latest" : "latestFirefox";
-
-      return {
-        latest: parsedData[latest],
-        changelogEntries: parsedData.changelogEntries,
-        canvasInstructionLastUpdated: parsedData.canvasInstructionLastUpdated,
-      };
-    },
+  changelog: {
+    all: () => [...cplxApiQueries.all(), "changelog"] as const,
+    detail: (params: { version?: string } = {}) =>
+      queryOptions({
+        queryKey: [...cplxApiQueries.changelog.all(), params] as const,
+        queryFn: () => CplxApiService.fetchChangelog(params),
+      }),
   },
-  featureCompat: {
-    queryKey: null,
-    queryFn: () => cplxApiService.fetchFeatureCompat(),
-  },
-  remoteLanguageModels: {
-    queryKey: null,
-    queryFn: () => cplxApiService.fetchLanguageModels(),
-  },
-  changelog: ({ version }: { version?: string } = {}) => ({
-    queryKey: [{ version }],
-    queryFn: () => cplxApiService.fetchChangelog({ version }),
-  }),
-  domSelectors: {
-    queryKey: null,
-    queryFn: () => cplxApiService.fetchDomSelectors(),
-  },
-  messageBlocksReactFiberNodePath: {
-    queryKey: null,
-    queryFn: async () => {
-      const resource =
-        await cplxApiService.fetchMessageBlocksReactFiberNodePath();
 
-      if (resource.startsWith("<"))
-        throw new Error("Failed to fetch remote fiber node path");
-
-      return resource.split(".");
-    },
+  remoteResource: {
+    all: () => [...cplxApiQueries.all(), "remoteResource"] as const,
+    detail: <T>(params: { resourcePath: string; zodSchema: ZodType<T> }) =>
+      queryOptions({
+        // eslint-disable-next-line @tanstack/query/exhaustive-deps
+        queryKey: [
+          ...cplxApiQueries.remoteResource.all(),
+          {
+            resourcePath: params.resourcePath,
+          },
+        ] as const,
+        queryFn: () => CplxApiService.fetchRemoteResource(params),
+      }),
   },
-});
 
-queryClient.setQueryDefaults(cplxApiQueries.versions.queryKey, {
-  retry: false,
-});
+  versionedRemoteResource: {
+    all: () => [...cplxApiQueries.all(), "versionedRemoteResource"] as const,
+    detail: <T>(params: { resourcePath: string; zodSchema: ZodType<T> }) =>
+      queryOptions({
+        // eslint-disable-next-line @tanstack/query/exhaustive-deps
+        queryKey: [
+          ...cplxApiQueries.versionedRemoteResource.all(),
+          {
+            resourcePath: params.resourcePath,
+          },
+        ] as const,
+        queryFn: () => CplxApiService.fetchVersionedRemoteResource(params),
+      }),
+  },
 
-queryClient.setQueryDefaults(cplxApiQueries.featureCompat.queryKey, {
-  retry: false,
-});
+  cacheBuster: {
+    all: () => [...cplxApiQueries.all(), "cacheBuster"] as const,
+    detail: () =>
+      queryOptions({
+        queryKey: [...cplxApiQueries.cacheBuster.all()] as const,
+        queryFn: () => CplxApiService.fetchSoftCacheBuster(),
+      }),
+  },
+};

@@ -1,8 +1,8 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { queryClient } from "@/data/query-client";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/services/indexed-db/better-code-blocks/query-keys";
-import { queryClient } from "@/utils/ts-query-client";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "cache:betterCodeBlocksFineGrainedOptions": void;
   }
@@ -16,7 +16,7 @@ export default function loader() {
       if (!pluginsStates["thread:betterCodeBlocks"]) return;
 
       await queryClient.prefetchQuery({
-        ...betterCodeBlocksFineGrainedOptionsQueries.list,
+        ...betterCodeBlocksFineGrainedOptionsQueries.list.detail(),
         gcTime: Infinity,
       });
     },

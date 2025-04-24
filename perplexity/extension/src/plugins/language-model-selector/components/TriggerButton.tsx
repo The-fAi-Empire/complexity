@@ -3,11 +3,10 @@ import { LuCpu } from "react-icons/lu";
 
 import FaAtom from "@/components/icons/FaAtom";
 import Tooltip from "@/components/Tooltip";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
-import { languageModelProviderIcons } from "@/data/plugins/query-box/language-model-selector/language-models-icons";
-import { isDeepResearchLanguageModelCode } from "@/data/plugins/query-box/language-model-selector/language-models.types";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import { isDeepResearchLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/predicates";
 
 export default function BetterLanguageModelSelectorTriggerButton() {
   const selectedLanguageModel = useSharedQueryBoxStore(
@@ -25,7 +24,9 @@ export default function BetterLanguageModelSelectorTriggerButton() {
 
   const modelInfo = useMemo(
     () =>
-      PplxLanguageModel.allModels.find((m) => m.code === selectedLanguageModel),
+      PplxLanguageModelsService.allModels.find(
+        (m) => m.code === selectedLanguageModel,
+      ),
     [selectedLanguageModel],
   );
 
@@ -34,7 +35,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
     if (isDeepResearchLanguageModelCode(selectedLanguageModel)) return FaAtom;
 
     return modelInfo?.provider != null
-      ? (languageModelProviderIcons?.[modelInfo.provider] ?? LuCpu)
+      ? (PplxLanguageModelsService.icons?.[modelInfo.provider] ?? LuCpu)
       : LuCpu;
   }, [selectedLanguageModel, modelInfo?.provider]);
 

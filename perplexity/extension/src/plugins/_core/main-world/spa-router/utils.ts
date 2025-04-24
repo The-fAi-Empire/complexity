@@ -1,4 +1,4 @@
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import type { MaybePromise } from "@/types/utils.types";
 import { UiUtils } from "@/utils/ui-utils";
 import type { whereAmI } from "@/utils/utils";
@@ -19,7 +19,7 @@ export function isNextWindowObjectExists() {
   return window.next !== undefined;
 }
 
-export function applyRouteIdAttrs(location: ReturnType<typeof whereAmI>) {
+export function applyRouteIdAttribute(location: ReturnType<typeof whereAmI>) {
   $(document.body).attr("location", location);
 }
 
@@ -37,17 +37,17 @@ export async function waitForRouteChangeComplete(
 
   await waitForConditionOrTimeout(check);
 
-  applyRouteIdAttrs(location);
+  applyRouteIdAttribute(location);
 
   async function checkThreadLoaded() {
     await UiUtils.waitForSpaIdle();
     return (
-      $(DomSelectorsRegistry.cachedSync.THREAD.MESSAGE.INNER_WRAPPER).length > 0
+      $(DomSelectorsService.cachedSync.THREAD.MESSAGE.INNER_WRAPPER).length > 0
     );
   }
 
   function checkHomeLoaded() {
-    return $(DomSelectorsRegistry.cachedSync.HOME.SLOGAN).length > 0;
+    return $(DomSelectorsService.cachedSync.HOME.SLOGAN).length > 0;
   }
 
   async function waitForConditionOrTimeout(

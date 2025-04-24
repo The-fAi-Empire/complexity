@@ -4,14 +4,19 @@ import { Portal } from "@/components/ui/portal";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useThreadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
-import hideNativeCodeBlocksCss from "@/plugins/thread-better-code-blocks/hide-native-code-blocks.css?inline";
+import { hideNativeCodeBlocksCssResourceConfig } from "@/plugins/thread-better-code-blocks/index.remote-resources";
 import MirroredCodeBlock from "@/plugins/thread-better-code-blocks/MirroredCodeBlock";
 import { MirroredCodeBlockContextProvider } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import {
   createMirroredPortalContainer,
   getBetterCodeBlockOptions,
 } from "@/plugins/thread-better-code-blocks/utils";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
+
+const hideNativeCodeBlocksCss = await getVersionedRemoteResource(
+  hideNativeCodeBlocksCssResourceConfig,
+);
 
 export function BetterCodeBlocks() {
   const codeBlocksChunks = useThreadCodeBlocksDomObserverStore(

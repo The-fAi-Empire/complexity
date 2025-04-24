@@ -1,9 +1,12 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
-import { parseCookies } from "@/plugins/_core/global-stores/pplx-cookies-store";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import {
+  pplxCookiesStore,
+  type Cookie,
+} from "@/plugins/_core/global-stores/pplx-cookies-store";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "store:pplxCookies": void;
   }
@@ -23,4 +26,36 @@ export default function loader() {
       });
     },
   });
+}
+
+export function parseCookies() {
+  const cookieStrings = document.cookie.split(";");
+
+  const parsedCookies: Cookie[] = cookieStrings
+    .map((cookieStr) => {
+      const parts = cookieStr.trim().split("=");
+      if (parts.length !== 2) return null;
+      const [cookieName, cookieValue] = parts;
+      if (!cookieName) return null;
+      return {
+        name: cookieName,
+        value: cookieValue,
+      };
+    })
+    .filter((cookie): cookie is Cookie => cookie !== null);
+
+  const prevCookies = pplxCookiesStore.getState().cookies;
+
+  const hasChanged =
+    prevCookies.length !== parsedCookies.length ||
+    prevCookies.some(
+      (prevCookie, index) =>
+        !parsedCookies[index] ||
+        prevCookie.name !== parsedCookies[index].name ||
+        prevCookie.value !== parsedCookies[index].value,
+    );
+
+  if (hasChanged) {
+    pplxCookiesStore.setState({ cookies: parsedCookies });
+  }
 }

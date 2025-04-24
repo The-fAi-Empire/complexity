@@ -9,6 +9,7 @@ import globals from "globals";
 import tseslint from "typescript-eslint";
 
 import boundariesConfig from "./eslint-config/boundaries.js";
+import tanstackQueryConfig from "./eslint-config/tanstack-query.js";
 
 const commonIgnores = [
   "dist/**",
@@ -36,6 +37,7 @@ export default tseslint.config(
   },
   { ...baseReactConfig[0], ignores: [...commonIgnores, "e2e/**"] },
   boundariesConfig,
+  tanstackQueryConfig,
   {
     languageOptions: {
       ecmaVersion: 2020,

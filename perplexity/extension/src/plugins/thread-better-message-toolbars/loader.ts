@@ -1,17 +1,32 @@
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import hideUnnecessaryButtonsCss from "@/plugins/thread-better-message-toolbars/hide-unnecessary-buttons.css?inline";
-import normalizeCss from "@/plugins/thread-better-message-toolbars/normalize.css?inline";
-import stickyCss from "@/plugins/thread-better-message-toolbars/sticky.css?inline";
+import {
+  threadBetterMessageToolbarsHideUnnecessaryButtonsCssResourceConfig,
+  threadBetterMessageToolbarsNormalizeCssResourceConfig,
+  threadBetterMessageToolbarsStickyCssResourceConfig,
+} from "@/plugins/thread-better-message-toolbars/index-remote-resources";
 import { setupStickyToolbars } from "@/plugins/thread-better-message-toolbars/stuck-toolbar-observer";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { insertCss, whereAmI } from "@/utils/utils";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
     "plugin:thread:betterMessageToolbars": void;
   }
 }
+
+const [normalizeCss, hideUnnecessaryButtonsCss, stickyCss] = await Promise.all([
+  getVersionedRemoteResource(
+    threadBetterMessageToolbarsNormalizeCssResourceConfig,
+  ),
+  getVersionedRemoteResource(
+    threadBetterMessageToolbarsHideUnnecessaryButtonsCssResourceConfig,
+  ),
+  getVersionedRemoteResource(
+    threadBetterMessageToolbarsStickyCssResourceConfig,
+  ),
+]);
 
 let cleanup: (() => void) | null = null;
 

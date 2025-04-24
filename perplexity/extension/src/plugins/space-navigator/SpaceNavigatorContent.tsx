@@ -22,7 +22,7 @@ export default function SpaceNavigatorContent({
 }) {
   const { isMobile } = useIsMobileStore();
 
-  const { data: spaces, isLoading } = useQuery(pplxApiQueries.spaces);
+  const { data: spaces, isLoading } = useQuery(pplxApiQueries.spaces.detail());
 
   const [searchValue, setSearchValue] = useState("");
 

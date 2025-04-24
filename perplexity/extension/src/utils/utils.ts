@@ -1,12 +1,8 @@
-import type { Key } from "ts-key-enum";
-
-import { APP_CONFIG } from "@/app.config";
-
 export const jsonUtils = {
   safeParse(json: string) {
     try {
       return JSON.parse(json);
-    } catch (error) {
+    } catch (_error) {
       return null;
     }
   },
@@ -124,6 +120,9 @@ export async function sleep(ms: number) {
 
 export async function fetchTextResource(url: string) {
   const response = await fetch(url);
+
+  invariant(response.ok, `Failed to fetch resource: ${url}`);
+
   return response.text();
 }
 
@@ -180,7 +179,7 @@ export function parseUrl(url: string = window.location.href): ParsedUrl {
     parsedUrl.hash = urlObject.hash.slice(1);
 
     parsedUrl.queryParams = new URLSearchParams(urlObject.search);
-  } catch (error) {
+  } catch (_error) {
     console.error("Invalid URL:", url);
   }
 
@@ -348,15 +347,9 @@ export function injectMainWorldScriptBlock({
 }
 
 export async function waitForDocumentReady() {
-  if (APP_CONFIG.BROWSER === "firefox") {
-    return new Promise((resolve) => {
-      return $(resolve);
-    });
-  }
-
-  while (document.head == null || document.body == null) {
-    await sleep(50);
-  }
+  return new Promise((resolve) => {
+    return $(resolve);
+  });
 }
 
 export function insertCss({
@@ -366,6 +359,8 @@ export function insertCss({
   css: string;
   id: string;
 }): () => void {
+  invariant(typeof css === "string", "css must be a string");
+
   if (!id.startsWith("cplx-")) id = `cplx-${id}`;
 
   const isLink = css.startsWith("chrome-extension://");
@@ -470,7 +465,7 @@ export function emojiCodeToString(emojiCode: string): string {
     });
 
     return String.fromCodePoint(...codePoints);
-  } catch (error) {
+  } catch (_error) {
     return "";
   }
 }
@@ -479,8 +474,8 @@ export function untrapWheel(e: React.WheelEvent<HTMLDivElement>) {
   e.stopPropagation();
 }
 
-export function getOptionsPageUrl() {
-  const prefix = APP_CONFIG.IS_DEV ? "src/entrypoints/options-page/" : "";
+export function getOptionsPageUrl({ isDev }: { isDev: boolean }) {
+  const prefix = isDev ? "src/entrypoints/options-page/" : "";
 
   return chrome.runtime.getURL(`${prefix}options.html`);
 }
@@ -491,7 +486,7 @@ export function getTaskScheduler() {
     : queueMicrotask;
 }
 
-export function keysToString(keys: (Key | string)[]) {
+export function keysToString(keys: string[]) {
   return keys.map((key) => key.toLowerCase()).join("+");
 }
 

@@ -15,8 +15,13 @@ import {
 } from "@/components/ui/dialog";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
-import normalizeCss from "@/plugins/force-writing-mode/normalize.css?inline";
+import { normalizeCssResourceConfig } from "@/plugins/force-writing-mode/index.remote-resources";
+import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { UiUtils } from "@/utils/ui-utils";
+
+const normalizeCss = await getVersionedRemoteResource(
+  normalizeCssResourceConfig,
+);
 
 export function ForceWritingModeToggle() {
   const [isOpen, setIsOpen] = useState(false);

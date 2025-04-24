@@ -1,32 +1,57 @@
 import { APP_CONFIG } from "@/app.config";
 import type { PluginId } from "@/data/plugin-registry/types";
-import type {
-  CplxVersions,
-  FeatureCompatibility,
-} from "@/services/cplx-api/cplx-api.types";
+import { queryClient } from "@/data/query-client";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { getRemoteResource } from "@/services/cplx-api/remote-resources/utils";
+import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
+import {
+  FeatureCompatibilitySchema,
+  type CplxVersions,
+  type FeatureCompatibility,
+} from "@/services/cplx-api/types";
 import { ExtensionSettingsService } from "@/services/extension-settings";
+import { featureCompatResourceConfig } from "@/services/plugins-states/index.remote-resources";
 import {
   initializePluginStates,
   getEnableStates,
   updatePluginStatesWithFeatureCompat,
 } from "@/services/plugins-states/utils";
-import { queryClient } from "@/utils/ts-query-client";
-import { invariant } from "@/utils/utils";
+import { invariant, isInContentScript } from "@/utils/utils";
 
 export class PluginsStatesService {
+  static get featureCompatQuery() {
+    return cplxApiQueries.remoteResource.detail({
+      resourcePath: featureCompatResourceConfig.resourcePath,
+      zodSchema: FeatureCompatibilitySchema,
+    });
+  }
+
+  static async featureCompatInlineQueryFn() {
+    return getRemoteResource(featureCompatResourceConfig);
+  }
+
   static cachedEnableStates: Record<PluginId, boolean> | null = null;
 
-  static getEnableStatesCachedSync(): Record<PluginId, boolean> {
+  static getEnableStatesCachedSync(params?: {
+    featureCompat: FeatureCompatibility;
+    cplxVersions: CplxVersions;
+  }): Record<PluginId, boolean> {
+    invariant(
+      isInContentScript(),
+      "This method can ONLY be used in content script",
+    );
+
     if (this.cachedEnableStates) return this.cachedEnableStates;
 
-    const featureCompat = queryClient.getQueryData<FeatureCompatibility>(
-      cplxApiQueries.featureCompat.queryKey,
-    );
+    const featureCompat =
+      params?.featureCompat ??
+      queryClient.getQueryData(
+        PluginsStatesService.featureCompatQuery.queryKey,
+      );
 
-    const cplxVersions = queryClient.getQueryData<CplxVersions>(
-      cplxApiQueries.versions.queryKey,
-    );
+    const cplxVersions =
+      params?.cplxVersions ??
+      queryClient.getQueryData(CplxVersionsService.query.queryKey);
 
     const pluginsStates = initializePluginStates();
 

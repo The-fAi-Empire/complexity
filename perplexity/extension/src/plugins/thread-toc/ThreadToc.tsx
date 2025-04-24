@@ -1,13 +1,13 @@
 import React from "react";
 import { LuX } from "react-icons/lu";
 
-import { DomSelectorsRegistry } from "@/data/dom-selectors-registry";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import FloatingToggle from "@/plugins/thread-toc/FloatingToggle";
 import TocItem from "@/plugins/thread-toc/TocItem";
 import { useHandleTouch } from "@/plugins/thread-toc/useHandleTouch";
 import { usePanelPosition } from "@/plugins/thread-toc/usePanelPosition";
 import { useThreadTocItems } from "@/plugins/thread-toc/useThreadTocItems";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { scrollToElement } from "@/utils/utils";
 
@@ -102,14 +102,14 @@ export function ThreadToc() {
               item={item}
               onClick={() => {
                 const $element = $(
-                  `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                  `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
                 );
                 if ($element.length)
                   scrollToElement($element, 0, tocItems.length < 10 ? 300 : 0);
               }}
               onContextMenu={() => {
                 const $element = $(
-                  `[data-cplx-component="${DomSelectorsRegistry.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                  `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
                 );
                 if ($element.length && $element.height() != null)
                   scrollToElement(

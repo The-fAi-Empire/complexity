@@ -1,13 +1,10 @@
-import { APP_CONFIG } from "@/app.config";
-import { asyncLoaderRegistry } from "@/data/async-dep-registry";
-import { PplxLanguageModel } from "@/data/plugins/query-box/language-model-selector/language-models";
-import { cplxApiQueries } from "@/services/cplx-api/query-keys";
-import { errorWrapper } from "@/utils/error-wrapper";
-import { queryClient } from "@/utils/ts-query-client";
+import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import type { LanguageModel } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 
-declare module "@/data/async-dep-registry" {
+declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
-    "cache:languageModels": void;
+    "cache:languageModels": LanguageModel[];
   }
 }
 
@@ -16,32 +13,28 @@ export default function loader() {
     id: "cache:languageModels",
     dependencies: ["cache:pluginsStates"],
     loader: async ({ "cache:pluginsStates": pluginsStates }) => {
-      if (APP_CONFIG.IS_DEV) return;
+      const localModels =
+        PplxLanguageModelsService.localModels as unknown as LanguageModel[];
 
-      if (!pluginsStates["queryBox:languageModelSelector"]) return undefined;
+      if (!pluginsStates["queryBox:languageModelSelector"]) return localModels;
 
-      const [data, error] = await errorWrapper(() =>
-        queryClient.fetchQuery({
-          ...cplxApiQueries.remoteLanguageModels,
-          gcTime: Infinity,
-        }),
-      )();
+      const data = await PplxLanguageModelsService.inlineQueryFn();
 
-      if (!error && data) {
-        PplxLanguageModel.allModels = data;
-        PplxLanguageModel.fastModels = data.filter(
-          (model) => model.type === "fast",
-        );
-        PplxLanguageModel.reasoningModels = data.filter(
-          (model) => model.type === "reasoning",
-        );
-        PplxLanguageModel.deepResearchModels = data.filter(
-          (model) => model.type === "deepResearch",
-        );
-        PplxLanguageModel.autoModels = data.filter(
-          (model) => model.type === "auto",
-        );
-      }
+      PplxLanguageModelsService.allModels = data;
+      PplxLanguageModelsService.fastModels = data.filter(
+        (model) => model.type === "fast",
+      );
+      PplxLanguageModelsService.reasoningModels = data.filter(
+        (model) => model.type === "reasoning",
+      );
+      PplxLanguageModelsService.deepResearchModels = data.filter(
+        (model) => model.type === "deepResearch",
+      );
+      PplxLanguageModelsService.autoModels = data.filter(
+        (model) => model.type === "auto",
+      );
+
+      return data;
     },
   });
 }
