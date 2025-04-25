@@ -23,26 +23,17 @@ export async function fetchResourceWithSchema<T>({
   zodSchema: ZodSchema<T>;
   pathPrefix: string;
 }): Promise<T> {
-  const text = await fetchTextResource(
-    getUrl({
-      path: `${pathPrefix}/${resourcePath}`,
-    }).toString(),
-  );
+  const url = getUrl({
+    path: `${pathPrefix}/${resourcePath}`,
+  });
 
-  try {
-    const data = JSON.parse(text);
+  const shouldJsonParse = url.pathname.endsWith(".json");
 
-    if (typeof data === "object" && data !== null) {
-      return zodSchema.parse(data);
-    }
+  const text = await fetchTextResource(url.toString());
 
-    return data as T;
-  } catch (error) {
-    if (typeof text === "string") {
-      return text as unknown as T;
-    }
-    throw error;
-  }
+  const data = shouldJsonParse ? JSON.parse(text) : text;
+
+  return zodSchema.parse(data);
 }
 
 export function getUrl({

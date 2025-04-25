@@ -359,7 +359,10 @@ export function insertCss({
   css: string;
   id: string;
 }): () => void {
-  invariant(typeof css === "string", "css must be a string");
+  invariant(
+    typeof css === "string",
+    "css must be a string, instead got: " + css,
+  );
 
   if (!id.startsWith("cplx-")) id = `cplx-${id}`;
 

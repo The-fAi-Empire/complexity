@@ -1,7 +1,7 @@
 import { remoteResourceTypes } from "@/services/cplx-api/types";
-import type {
-  VersionedRemoteResource,
-  VersionedRemoteResourceReturnType,
+import {
+  type VersionedRemoteResource,
+  type VersionedRemoteResourceReturnType,
 } from "@/services/cplx-api/versioned-remote-resources/types";
 import { invariant } from "@/utils/utils";
 
