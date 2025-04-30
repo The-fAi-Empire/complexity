@@ -17,7 +17,7 @@ The exact virtualization logic depends on several factors, but let's just keep i
 
 ## So what does this mean for Complexity before this PR?
 
-Complexity's Thread Plugins rely on [reactive stores](https://github.com/pnd280/complexity/tree/nxt/src/plugins/_core/dom-observers/thread) that hold all of the data for the thread, including titles, answers, sources, code blocks, etc. However the stores are only observe what's currently on the screen, in other words, things that exist in the DOM.
+Complexity's Thread Plugins rely on [reactive stores](../../src/plugins/_core/dom-observers/thread/) that hold all of the data for the thread, including titles, answers, sources, code blocks, etc. However the stores are only observe what's currently on the screen, in other words, things that exist in the DOM.
 
 Since these virtualized messages aren't present in the DOM, the extension can't observe their data or react to their changes. As a result, plugins like `Thread ToC` or `Canvas` (the list of all artifacts) can't access the data from these virtualized messages.
 
