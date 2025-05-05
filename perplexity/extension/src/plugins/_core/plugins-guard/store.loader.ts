@@ -71,10 +71,10 @@ export default function loader() {
       pluginGuardsStore.subscribe(
         (state) => state.isLoggedIn,
         (isLoggedIn) => {
-          new QueryObserver(queryClient, {
-            ...pplxApiQueries.userSettings.detail(),
-            enabled: isLoggedIn,
-          }).subscribe((data) => {
+          new QueryObserver(
+            queryClient,
+            pplxApiQueries.userSettings.detail(isLoggedIn),
+          ).subscribe((data) => {
             if (!data.data) return;
 
             pluginGuardsStore.setState((state) => {

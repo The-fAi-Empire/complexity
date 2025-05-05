@@ -64,7 +64,7 @@ export function ReleaseNotesPage() {
               key={version}
               className="x:relative x:mb-8 x:grid x:grid-cols-1 x:gap-4 x:last:mb-0 x:md:grid-cols-[8rem_1fr] x:md:gap-x-6"
             >
-              <div className="x:sticky x:top-4 x:flex x:h-fit x:flex-col-reverse x:items-start x:gap-2 x:self-start x:md:flex-col x:md:items-end">
+              <div className="x:top-4 x:flex x:h-fit x:flex-col-reverse x:items-start x:gap-2 x:self-start x:md:sticky x:md:flex-col x:md:items-end">
                 <div className="x:ml-2 x:text-right x:text-sm x:text-muted-foreground">
                   {releaseDate}
                 </div>

@@ -5,7 +5,12 @@ import { getPlatform } from "@/hooks/usePlatformDetection";
 
 const schema = z.object({
   enabled: z.boolean(),
-  hotkey: z.array(z.string()),
+  keybindings: z.object({
+    toggle: z.array(z.string()),
+    threadsSearch: z.array(z.string()),
+    spacesSearch: z.array(z.string()),
+    toggleSidecar: z.array(z.string()),
+  }),
 });
 
 declare module "@/data/plugin-registry/types" {
@@ -27,10 +32,23 @@ export default definePlugin({
   settingsSchema: {
     schema,
     fallback: {
-      hotkey: [
-        getPlatform() === "mac" ? Key.Meta : Key.Control,
-        getPlatform() === "mac" ? "i" : "k",
-      ],
+      keybindings: {
+        toggle: [
+          getPlatform() === "mac" ? Key.Meta : Key.Control,
+          getPlatform() === "mac" ? "i" : "k",
+        ],
+        threadsSearch: [
+          getPlatform() === "mac" ? Key.Meta : Key.Control,
+          Key.Alt,
+          "d",
+        ],
+        spacesSearch: [
+          getPlatform() === "mac" ? Key.Meta : Key.Control,
+          Key.Alt,
+          "s",
+        ],
+        toggleSidecar: [getPlatform() === "mac" ? Key.Meta : Key.Control, "e"],
+      },
       enabled: false,
     },
   },

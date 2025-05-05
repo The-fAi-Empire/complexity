@@ -1,7 +1,7 @@
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import type { MaybePromise } from "@/types/utils.types";
 import { UiUtils } from "@/utils/ui-utils";
-import type { whereAmI } from "@/utils/utils";
+import { isInContentScript, type whereAmI } from "@/utils/utils";
 
 export async function waitForNextjsGlobalObj(): Promise<void> {
   return new Promise((resolve) => {
@@ -71,5 +71,23 @@ export async function waitForRouteChangeComplete(
     };
 
     await Promise.race([checkCondition(), timeoutPromise]);
+  }
+}
+
+export async function softNavigate(url: string) {
+  if (!isInContentScript()) {
+    window.next!.router.push(url);
+  } else {
+    const { sendMessage } = await import("webext-bridge/content-script");
+    sendMessage("spa-router:push", { url }, "window");
+  }
+}
+
+export async function openInNewTab(url: string) {
+  if (!isInContentScript()) {
+    window.open(url, "_blank");
+  } else {
+    const { sendMessage } = await import("webext-bridge/content-script");
+    sendMessage("spa-router:openInNewTab", { url }, "window");
   }
 }

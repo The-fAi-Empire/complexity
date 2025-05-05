@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Arată previzualizări",
+      "hidePreviews": "Ascunde previzualizări"
+    },
     "input": {
-      "placeholder": "Tastați o comandă sau căutați..."
+      "searchPlaceholder": "Caută..."
     },
-    "noResults": "Nu s-au găsit rezultate pentru <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Căutare",
-      "quickNavigations": "Navigare rapidă",
-      "zenMode": "Modul Zen",
-      "colorScheme": "Schimbă schema de culori"
-    },
-    "filters": {
-      "threads": {
-        "label": "Fire de discuție",
-        "searchPlaceholder": "Caută fire de discuție..."
-      },
-      "spaces": {
-        "label": "Spații",
-        "searchPlaceholder": "Caută spații..."
-      }
+    "actions": {
+      "createNewThread": "Creează conversație nouă",
+      "toggleIncognitoEnable": "Activează modul incognito",
+      "toggleIncognitoDisable": "Dezactivează modul incognito",
+      "toggleLightMode": "Schimbă la modul luminos",
+      "toggleDarkMode": "Schimbă la modul întunecat"
     },
     "navigation": {
       "home": "Acasă",
-      "discover": "Descoperă",
       "library": "Bibliotecă",
-      "userSettings": "Setări utilizator",
-      "labs": "Laboratoare"
+      "spaces": "Spații",
+      "discover": "Descoperă",
+      "settings": "Setări",
+      "labs": "Laboratoare",
+      "current": "Curent",
+      "openInNewTab": "Deschide în tab nou",
+      "goTo": "Mergi la {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Întunecat",
-      "light": "Luminos",
-      "system": "Sistem"
+    "search": {
+      "threads": "Conversații",
+      "spaces": "Spații",
+      "threadsPlaceholder": "Caută conversații...",
+      "spacesPlaceholder": "Caută spații..."
     },
-    "threadSearch": {
-      "error": "Nu s-au putut obține firele de discuție. Încercați din nou mai târziu.",
-      "loading": "Se încarcă firele de discuție",
-      "empty": {
-        "withSearch": "Nu s-au găsit fire de discuție.",
-        "withoutSearch": "Începeți să tastați pentru a căuta"
+    "groups": {
+      "actions": "Acțiuni",
+      "navigation": "Navigare",
+      "search": "Căutare"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Deschide în tab nou",
+        "searchInSpace": "Caută în spațiu",
+        "goToSpace": "Mergi la spațiu",
+        "searchSpacePlaceholder": "Caută {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} fire de discuție recente cu termenul de căutare",
-        "withoutSearch": "Fire de discuție recente"
+      "commandItems": {
+        "errorFetching": "Eroare la obținerea spațiilor",
+        "noSpacesFound": "Nu s-au găsit spații"
       },
-      "spacePreview": {
-        "tooltip": "Clic pentru a căuta fire de discuție în acest spațiu"
+      "preview": {
+        "description": "Descriere",
+        "instructions": "Instrucțiuni",
+        "files": "Fișiere ({{count}})",
+        "webLinks": "Linkuri web ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Nu s-au putut obține spațiile. Încercați din nou mai târziu.",
-      "loading": "Se încarcă spațiile",
-      "empty": "Nu s-au găsit spații.",
-      "spaceThreads": {
-        "loading": "Se încarcă firele de discuție pentru \"{{title}}\"",
-        "error": "Nu s-au putut obține firele de discuție. Încercați din nou mai târziu.",
-        "empty": "Nu s-au găsit fire de discuție în acest spațiu.",
-        "heading": "Complexity poate căuta doar în cele mai recente 50 de fire de discuție."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Descriere:",
-          "instructions": "Instrucțiuni:"
-        },
-        "searchHint": "pentru a căuta fire de discuție în acest Spațiu"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Eroare la obținerea conversațiilor",
+        "noThreadsFound": "Nu s-au găsit conversații"
       }
     },
-    "zenMode": {
-      "enable": "Activează Modul Zen",
-      "disable": "Dezactivează Modul Zen"
-    },
-    "keywords": {
-      "enable": "activează",
-      "zen": "zen",
-      "mode": "mod",
-      "disable": "dezactivează",
-      "threads": "fire",
-      "spaces": "spații",
-      "search": "caută",
-      "home": "acasă",
-      "discover": "descoperă",
-      "library": "bibliotecă",
-      "user": "utilizator",
-      "settings": "setări",
-      "labs": "laboratoare",
-      "navigate": "navigare",
-      "dark": "întunecat",
-      "light": "luminos",
-      "system": "sistem",
-      "theme": "temă",
-      "change": "schimbă",
-      "color": "culoare",
-      "scheme": "schemă"
+    "common": {
+      "noResults": "Nu s-au găsit rezultate",
+      "current": "Curent"
     }
   }
 }

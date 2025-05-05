@@ -38,10 +38,8 @@ export default function PromptHistorySlashMenuItemsWrapper() {
 
   useEffect(() => {
     if (items && selectedValue) {
-      const lastFiveItems = items.slice(-3);
-      const isBottomItems = lastFiveItems.some(
-        (item) => item.id === selectedValue,
-      );
+      const lastItems = items.slice(-3);
+      const isBottomItems = lastItems.some((item) => item.id === selectedValue);
 
       if (isBottomItems && hasNextPage && !isFetching) {
         fetchNextPage();

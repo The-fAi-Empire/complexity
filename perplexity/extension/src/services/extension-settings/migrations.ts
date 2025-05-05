@@ -1,3 +1,4 @@
+import { produce } from "immer";
 import omit from "lodash/omit";
 
 import { DEFAULT_EXTENSION_SETTINGS } from "@/services/extension-settings/defaults";
@@ -23,6 +24,25 @@ export const migrations = {
     }
 
     console.log("v2 schema migrated");
+
+    return result;
+  },
+  3: (oldSettings: ExtensionSettings): ExtensionSettings => {
+    const [result, error] = errorWrapper(() => {
+      return produce(oldSettings, (draft) => {
+        draft.plugins.commandMenu.keybindings.toggle =
+          // @ts-expect-error
+          oldSettings.plugins.commandMenu.hotkey;
+      });
+    })();
+
+    if (error) {
+      console.error("Error migrating Command Menu keybindings", error);
+
+      return oldSettings;
+    }
+
+    console.log("Command Menu keybindings migrated");
 
     return result;
   },

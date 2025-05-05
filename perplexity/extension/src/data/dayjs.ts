@@ -73,7 +73,7 @@ export function unixTimestampToDate({
     .format(includeTime ? "lll" : "ll");
 }
 
-export function formatHowLongAgo(date: string) {
+export function formatRelativeTime(date: string) {
   return dayjs.utc(date).local().fromNow();
 }
 

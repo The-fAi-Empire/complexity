@@ -26,7 +26,7 @@ export function useCopyPplxThread() {
   const threadSlug = parseUrl().pathname.split("/").pop() || "";
 
   const { isFetching, refetch } = useQuery({
-    ...pplxApiQueries.threadInfo.detail(threadSlug),
+    ...pplxApiQueries.thread.detail(threadSlug),
     enabled: false,
   });
 

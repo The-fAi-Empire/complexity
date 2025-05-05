@@ -18,10 +18,7 @@ export default function usePplxUserSettings({
   const { isLoggedIn } = usePplxAuth();
 
   const query = useQuery({
-    ...pplxApiQueries.userSettings.detail(),
-    enabled: isLoggedIn,
-    staleTime: 5000,
-    gcTime: Infinity,
+    ...pplxApiQueries.userSettings.detail(isLoggedIn),
     ...props,
   });
 

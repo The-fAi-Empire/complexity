@@ -19,11 +19,15 @@ export default function KeyCombo({
       switch (key.toLowerCase()) {
         case "ctrl":
         case "control":
-          return isMac ? "⌘" : "Ctrl";
+          return "Ctrl";
+        case "meta":
+          return "⌘";
         case "alt":
           return isMac ? "⌥" : "Alt";
         case "shift":
           return "⇧";
+        case "enter":
+          return "⏎";
         default:
           return key;
       }
@@ -42,7 +46,7 @@ export default function KeyCombo({
             keyClassName,
           )}
         >
-          {key}
+          {key.length === 1 ? key.toUpperCase() : key}
         </span>
       ))}
     </span>

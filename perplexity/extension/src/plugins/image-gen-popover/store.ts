@@ -4,6 +4,7 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 import { queryClient } from "@/data/query-client";
+import { pluginGuardsStore } from "@/plugins/_core/plugins-guard/store";
 import {
   isImageModelCode,
   type ImageModel,
@@ -40,22 +41,27 @@ const imageGenModelSelectorStore = useImageGenModelSelectorStore;
 async function initImageGenModelSelectorStore() {
   let firstTime = true;
 
-  new QueryObserver(
-    queryClient,
-    pplxApiQueries.userSettings.detail(),
-  ).subscribe((data) => {
-    if (data.data && firstTime) {
-      imageGenModelSelectorStore.setState((state) => {
-        state.selectedImageGenModel = isImageModelCode(
-          data.data.default_image_generation_model,
-        )
-          ? data.data.default_image_generation_model
-          : "default";
-      });
+  pluginGuardsStore.subscribe(
+    (state) => state.isLoggedIn,
+    (isLoggedIn) => {
+      new QueryObserver(
+        queryClient,
+        pplxApiQueries.userSettings.detail(isLoggedIn),
+      ).subscribe((data) => {
+        if (data.data && firstTime) {
+          imageGenModelSelectorStore.setState((state) => {
+            state.selectedImageGenModel = isImageModelCode(
+              data.data.default_image_generation_model,
+            )
+              ? data.data.default_image_generation_model
+              : "default";
+          });
 
-      firstTime = false;
-    }
-  });
+          firstTime = false;
+        }
+      });
+    },
+  );
 }
 
 extensionExec(() => initImageGenModelSelectorStore())();

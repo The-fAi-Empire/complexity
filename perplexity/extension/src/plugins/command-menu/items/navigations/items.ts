@@ -1,0 +1,86 @@
+import { isHotkeyPressed } from "react-hotkeys-hook";
+import { LuSettings } from "react-icons/lu";
+import { SiPerplexity } from "react-icons/si";
+
+import PplxDiscover from "@/components/icons/PplxDiscover";
+import PplxLabs from "@/components/icons/PplxLabs";
+import PplxSpace from "@/components/icons/PplxSpace";
+import PplxThread from "@/components/icons/PplxThread";
+import {
+  openInNewTab,
+  softNavigate,
+} from "@/plugins/_core/main-world/spa-router/utils";
+import type { CommandItemProps } from "@/plugins/command-menu/types";
+
+export const navigationKeywords = ["navigation", "navigate", "go", "to"];
+
+export type NavigationCommandItemProps = CommandItemProps & {
+  url: string;
+};
+
+const createNavigationItem = ({
+  icon,
+  title,
+  value,
+  url,
+}: Pick<
+  NavigationCommandItemProps,
+  "icon" | "title" | "value" | "url"
+>): NavigationCommandItemProps => ({
+  eager: true,
+  group: t("plugin-command-menu:commandMenu.groups.navigation"),
+  icon,
+  keybinding: [],
+  keywords: navigationKeywords,
+  onSelect: () => {
+    if (isHotkeyPressed(Key.Alt)) {
+      openInNewTab(url);
+    } else {
+      softNavigate(url);
+    }
+  },
+  priority: 0,
+  show: true,
+  title,
+  url,
+  value,
+});
+
+export const getRawItems = (): NavigationCommandItemProps[] => [
+  createNavigationItem({
+    icon: SiPerplexity,
+    title: t("plugin-command-menu:commandMenu.navigation.home"),
+    value: "home",
+    url: "/",
+  }),
+  createNavigationItem({
+    icon: PplxThread,
+    title: t("plugin-command-menu:commandMenu.navigation.library"),
+    value: "library",
+    url: "/library",
+  }),
+  createNavigationItem({
+    icon: PplxSpace,
+    title: t("plugin-command-menu:commandMenu.navigation.spaces"),
+    value: "spaces",
+    url: "/spaces",
+  }),
+  createNavigationItem({
+    icon: PplxDiscover,
+    title: t("plugin-command-menu:commandMenu.navigation.discover"),
+    value: "discover",
+    url: "/discover",
+  }),
+  createNavigationItem({
+    icon: LuSettings,
+    title: t("plugin-command-menu:commandMenu.navigation.settings"),
+    value: "settings",
+    url: "/settings",
+  }),
+  createNavigationItem({
+    icon: PplxLabs,
+    title: t("plugin-command-menu:commandMenu.navigation.labs"),
+    value: "labs",
+    url: "https://labs.perplexity.ai/",
+  }),
+];

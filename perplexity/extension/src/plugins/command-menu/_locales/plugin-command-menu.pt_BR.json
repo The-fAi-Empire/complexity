@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Mostrar pré-visualizações",
+      "hidePreviews": "Ocultar pré-visualizações"
+    },
     "input": {
-      "placeholder": "Digite um comando ou pesquise..."
+      "searchPlaceholder": "Pesquisar..."
     },
-    "noResults": "Nenhum resultado encontrado para <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Pesquisar",
-      "quickNavigations": "Navegação rápida",
-      "zenMode": "Modo Zen",
-      "colorScheme": "Alterar esquema de cores"
-    },
-    "filters": {
-      "threads": {
-        "label": "Tópicos",
-        "searchPlaceholder": "Pesquisar tópicos..."
-      },
-      "spaces": {
-        "label": "Espaços",
-        "searchPlaceholder": "Pesquisar espaços..."
-      }
+    "actions": {
+      "createNewThread": "Criar nova conversa",
+      "toggleIncognitoEnable": "Ativar modo anônimo",
+      "toggleIncognitoDisable": "Desativar modo anônimo",
+      "toggleLightMode": "Mudar para modo claro",
+      "toggleDarkMode": "Mudar para modo escuro"
     },
     "navigation": {
       "home": "Início",
-      "discover": "Descobrir",
       "library": "Biblioteca",
-      "userSettings": "Configurações do usuário",
-      "labs": "Laboratório"
+      "spaces": "Espaços",
+      "discover": "Descobrir",
+      "settings": "Configurações",
+      "labs": "Laboratórios",
+      "current": "Atual",
+      "openInNewTab": "Abrir em nova aba",
+      "goTo": "Ir para {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Escuro",
-      "light": "Claro",
-      "system": "Sistema"
+    "search": {
+      "threads": "Conversas",
+      "spaces": "Espaços",
+      "threadsPlaceholder": "Pesquisar conversas...",
+      "spacesPlaceholder": "Pesquisar espaços..."
     },
-    "threadSearch": {
-      "error": "Falha ao buscar tópicos. Por favor, tente novamente mais tarde.",
-      "loading": "Carregando tópicos",
-      "empty": {
-        "withSearch": "Nenhum tópico encontrado.",
-        "withoutSearch": "Comece a digitar para pesquisar"
+    "groups": {
+      "actions": "Ações",
+      "navigation": "Navegação",
+      "search": "Pesquisa"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Abrir em nova aba",
+        "searchInSpace": "Pesquisar no espaço",
+        "goToSpace": "Ir para o espaço",
+        "searchSpacePlaceholder": "Pesquisar {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} tópico(s) mais recente(s) com o termo pesquisado",
-        "withoutSearch": "Tópicos recentes"
+      "commandItems": {
+        "errorFetching": "Erro ao buscar espaços",
+        "noSpacesFound": "Nenhum espaço encontrado"
       },
-      "spacePreview": {
-        "tooltip": "Clique para pesquisar tópicos neste espaço"
+      "preview": {
+        "description": "Descrição",
+        "instructions": "Instruções",
+        "files": "Arquivos ({{count}})",
+        "webLinks": "Links web ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Falha ao buscar espaços. Por favor, tente novamente mais tarde.",
-      "loading": "Carregando espaços",
-      "empty": "Nenhum espaço encontrado.",
-      "spaceThreads": {
-        "loading": "Carregando tópicos para \"{{title}}\"",
-        "error": "Falha ao buscar tópicos. Por favor, tente novamente mais tarde.",
-        "empty": "Nenhum tópico encontrado neste espaço.",
-        "heading": "O Complexity só pode pesquisar nos 50 tópicos mais recentes."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Descrição:",
-          "instructions": "Instruções:"
-        },
-        "searchHint": "para pesquisar tópicos neste Espaço"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Erro ao buscar conversas",
+        "noThreadsFound": "Nenhuma conversa encontrada"
       }
     },
-    "zenMode": {
-      "enable": "Ativar modo Zen",
-      "disable": "Desativar modo Zen"
-    },
-    "keywords": {
-      "enable": "ativar",
-      "zen": "zen",
-      "mode": "modo",
-      "disable": "desativar",
-      "threads": "tópicos",
-      "spaces": "espaços",
-      "search": "pesquisar",
-      "home": "início",
-      "discover": "descobrir",
-      "library": "biblioteca",
-      "user": "usuário",
-      "settings": "configurações",
-      "labs": "laboratório",
-      "navigate": "navegar",
-      "dark": "escuro",
-      "light": "claro",
-      "system": "sistema",
-      "theme": "tema",
-      "change": "alterar",
-      "color": "cor",
-      "scheme": "esquema"
+    "common": {
+      "noResults": "Nenhum resultado encontrado",
+      "current": "Atual"
     }
   }
 }

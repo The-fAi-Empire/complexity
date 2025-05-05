@@ -14,7 +14,7 @@ export class ExtensionSettingsService {
   static instance = storage.defineItem<ExtensionSettings>("local:settings", {
     init: () => DEFAULT_EXTENSION_SETTINGS,
     fallback: DEFAULT_EXTENSION_SETTINGS,
-    version: 2,
+    version: 3,
     migrations,
   });
 

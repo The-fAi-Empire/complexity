@@ -1,6 +1,6 @@
 ---
 description: 
-globs: *.ts,*.tsx
+globs: **/src/**/*.ts,**/src/**/*.tsx
 alwaysApply: false
 ---
 # AUTO-IMPORTS

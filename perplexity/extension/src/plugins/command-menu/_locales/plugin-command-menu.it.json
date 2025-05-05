@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Mostra anteprime",
+      "hidePreviews": "Nascondi anteprime"
+    },
     "input": {
-      "placeholder": "Digita un comando o cerca..."
+      "searchPlaceholder": "Cerca..."
     },
-    "noResults": "Nessun risultato trovato per <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Cerca",
-      "quickNavigations": "Navigazione rapida",
-      "zenMode": "Modalità Zen",
-      "colorScheme": "Cambia schema colori"
-    },
-    "filters": {
-      "threads": {
-        "label": "Discussioni",
-        "searchPlaceholder": "Cerca discussioni..."
-      },
-      "spaces": {
-        "label": "Spazi",
-        "searchPlaceholder": "Cerca spazi..."
-      }
+    "actions": {
+      "createNewThread": "Crea nuova discussione",
+      "toggleIncognitoEnable": "Attiva modalità in incognito",
+      "toggleIncognitoDisable": "Disattiva modalità in incognito",
+      "toggleLightMode": "Passa alla modalità chiara",
+      "toggleDarkMode": "Passa alla modalità scura"
     },
     "navigation": {
       "home": "Home",
-      "discover": "Scopri",
       "library": "Libreria",
-      "userSettings": "Impostazioni utente",
-      "labs": "Laboratori"
+      "spaces": "Spazi",
+      "discover": "Scopri",
+      "settings": "Impostazioni",
+      "labs": "Laboratori",
+      "current": "Corrente",
+      "openInNewTab": "Apri in nuova scheda",
+      "goTo": "Vai a {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Scuro",
-      "light": "Chiaro",
-      "system": "Sistema"
+    "search": {
+      "threads": "Discussioni",
+      "spaces": "Spazi",
+      "threadsPlaceholder": "Cerca discussioni...",
+      "spacesPlaceholder": "Cerca spazi..."
     },
-    "threadSearch": {
-      "error": "Impossibile recuperare le discussioni. Riprova più tardi.",
-      "loading": "Caricamento discussioni",
-      "empty": {
-        "withSearch": "Nessuna discussione trovata.",
-        "withoutSearch": "Inizia a digitare per cercare"
+    "groups": {
+      "actions": "Azioni",
+      "navigation": "Navigazione",
+      "search": "Ricerca"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Apri in nuova scheda",
+        "searchInSpace": "Cerca nello spazio",
+        "goToSpace": "Vai allo spazio",
+        "searchSpacePlaceholder": "Cerca {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} discussione/i più recente/i con il termine di ricerca",
-        "withoutSearch": "Discussioni recenti"
+      "commandItems": {
+        "errorFetching": "Errore nel recupero degli spazi",
+        "noSpacesFound": "Nessuno spazio trovato"
       },
-      "spacePreview": {
-        "tooltip": "Clicca per cercare discussioni in questo spazio"
+      "preview": {
+        "description": "Descrizione",
+        "instructions": "Istruzioni",
+        "files": "File ({{count}})",
+        "webLinks": "Link web ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Impossibile recuperare gli spazi. Riprova più tardi.",
-      "loading": "Caricamento spazi",
-      "empty": "Nessuno spazio trovato.",
-      "spaceThreads": {
-        "loading": "Caricamento discussioni per \"{{title}}\"",
-        "error": "Impossibile recuperare le discussioni. Riprova più tardi.",
-        "empty": "Nessuna discussione trovata in questo spazio.",
-        "heading": "Complexity può cercare solo nelle 50 discussioni più recenti."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Descrizione:",
-          "instructions": "Istruzioni:"
-        },
-        "searchHint": "per cercare discussioni in questo Spazio"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Errore nel recupero delle discussioni",
+        "noThreadsFound": "Nessuna discussione trovata"
       }
     },
-    "zenMode": {
-      "enable": "Attiva modalità Zen",
-      "disable": "Disattiva modalità Zen"
-    },
-    "keywords": {
-      "enable": "attiva",
-      "zen": "zen",
-      "mode": "modalità",
-      "disable": "disattiva",
-      "threads": "discussioni",
-      "spaces": "spazi",
-      "search": "cerca",
-      "home": "home",
-      "discover": "scopri",
-      "library": "libreria",
-      "user": "utente",
-      "settings": "impostazioni",
-      "labs": "laboratori",
-      "navigate": "naviga",
-      "dark": "scuro",
-      "light": "chiaro",
-      "system": "sistema",
-      "theme": "tema",
-      "change": "cambia",
-      "color": "colore",
-      "scheme": "schema"
+    "common": {
+      "noResults": "Nessun risultato trovato",
+      "current": "Corrente"
     }
   }
 }

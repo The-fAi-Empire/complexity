@@ -11,9 +11,11 @@ import type {
   ThreadMessageApiResponse,
   ThreadsSearchApiResponse,
   PplxUserSettingsApiResponse,
+  SpaceDetails,
 } from "@/services/pplx-api/pplx-api.types";
 import {
   PplxOrgSettingsApiResponseSchema,
+  SpaceDetailsSchema,
   SpaceFileDownloadUrlApiResponseSchema,
   SpaceFilesApiResponseSchema,
   SpacesApiResponseSchema,
@@ -90,12 +92,12 @@ export class PplxApiService {
     );
   }
 
-  static async fetchThreadInfo(
+  static async fetchThread(
     threadSlug: string,
   ): Promise<ThreadMessageApiResponse[]> {
     if (!threadSlug) throw new Error("Thread slug is required");
 
-    const url = `https://www.perplexity.ai/p/api/v1/thread/${threadSlug}?with_parent_info=true&source=web&limit=9999`;
+    const url = ENDPOINTS.THREAD(threadSlug);
 
     const resp = await fetchTextResource(url);
 
@@ -111,63 +113,39 @@ export class PplxApiService {
 
   static async fetchThreads({
     searchValue = "",
-    limit,
-    offset,
+    limit = 20,
+    offset = 0,
   }: {
     searchValue?: string;
     limit?: number;
     offset?: number;
   } = {}): Promise<ThreadsSearchApiResponse> {
-    const parseRawHtml = async () => {
-      const rawHtml = await fetchTextResource(ENDPOINTS.RAW_LIBRARY);
+    const resp = await fetch(ENDPOINTS.THREADS, {
+      method: "POST",
+      body: JSON.stringify({
+        limit,
+        offset,
+        search_term: searchValue,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (rawHtml == null) return;
+    const data = await resp.json();
 
-      const data = rawHtml.match(/\[\[\{\\"thread_number.*?\}\]\]/gs);
+    return ThreadsSearchApiResponseSchema.parse(data);
+  }
 
-      if (data == null || data.length <= 0) return;
-
-      const parsedData = jsonUtils.safeParse(jsonUtils.unescape(data[0]));
-
-      if (
-        parsedData == null ||
-        !Array.isArray(parsedData) ||
-        parsedData.length <= 0
-      )
-        return;
-
-      const validatedData = ThreadsSearchApiResponseSchema.safeParse(
-        parsedData[0],
-      );
-
-      if (!validatedData.success) return;
-
-      return validatedData.data;
-    };
-
-    const fetchViaApi = async () =>
-      ThreadsSearchApiResponseSchema.parse(
-        await internalWebSocketStore
-          .getState()
-          .common?.emitWithAck("list_ask_threads", {
-            version: "2.13",
-            source: "default",
-            limit,
-            offset,
-            search_term: searchValue,
-          }),
-      );
-
-    if (searchValue.length > 0) {
-      return await fetchViaApi();
-    } else {
-      return (await parseRawHtml()) ?? (await fetchViaApi());
-    }
+  static async fetchSpace(spaceUuid: Space["uuid"]): Promise<SpaceDetails> {
+    return SpaceDetailsSchema.parse(
+      JSON.parse(await fetchTextResource(ENDPOINTS.SPACE(spaceUuid))),
+    );
   }
 
   static async fetchSpaces(): Promise<Space[]> {
     return SpacesApiResponseSchema.parse(
-      JSON.parse(await fetchTextResource(ENDPOINTS.FETCH_SPACES)),
+      JSON.parse(await fetchTextResource(ENDPOINTS.SPACES)),
     );
   }
 
@@ -235,12 +213,24 @@ export class PplxApiService {
     return parsedData;
   }
 
-  static async fetchSpaceThreads(
-    spaceSlug: string,
-  ): Promise<SpaceThreadsApiResponse> {
+  static async fetchSpaceThreads({
+    spaceSlug,
+    limit = 20,
+    offset = 0,
+  }: {
+    spaceSlug: string;
+    limit?: number;
+    offset?: number;
+  }): Promise<SpaceThreadsApiResponse> {
     return SpaceThreadsApiResponseSchema.parse(
       JSON.parse(
-        await fetchTextResource(ENDPOINTS.FETCH_SPACE_THREADS(spaceSlug)),
+        await fetchTextResource(
+          ENDPOINTS.SPACE_THREADS({
+            spaceSlug,
+            limit,
+            offset,
+          }),
+        ),
       ),
     );
   }

@@ -44,7 +44,7 @@ export default function Version() {
       className="x:mx-auto x:mb-4 x:w-fit x:font-mono x:text-xs x:text-muted-foreground"
       onClick={handleClick}
     >
-      v{APP_CONFIG.VERSION}
+      v{APP_CONFIG.DISPLAY_VERSION}
     </div>
   );
 }

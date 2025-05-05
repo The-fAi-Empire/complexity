@@ -1,7 +1,8 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
+import { ChangelogContextAwareImageComponent } from "@/components/changelog/components/ChangelogContextAwareImageComponent";
 import { ChangelogHeadingComponent } from "@/components/changelog/components/ChangelogHeadingComponent";
-import { ChangelogImageComponent } from "@/components/changelog/components/ChangelogImageComponent";
+import { ChangelogImageCollectionComponent } from "@/components/changelog/components/ChangelogImageCollectionComponent";
 import { ChangelogSectionComponent } from "@/components/changelog/components/ChangelogSectionComponent";
 import LegacyChangelogItemsBlock from "@/components/changelog/components/LegacyChangelogItemsBlock";
 import type { ChangelogComponents } from "@/components/changelog/types";
@@ -26,9 +27,10 @@ export default function ChangelogRenderer({
       }
       return <div {...props} />;
     },
-    img: ChangelogImageComponent,
+    img: ChangelogContextAwareImageComponent,
     h2: ChangelogHeadingComponent,
     "items-block": LegacyChangelogItemsBlock,
+    "img-collection": ChangelogImageCollectionComponent,
   } as ChangelogComponents;
 
   return (

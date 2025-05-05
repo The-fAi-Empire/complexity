@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Εμφάνιση προεπισκοπήσεων",
+      "hidePreviews": "Απόκρυψη προεπισκοπήσεων"
+    },
     "input": {
-      "placeholder": "Πληκτρολογήστε μια εντολή ή αναζητήστε..."
+      "searchPlaceholder": "Αναζήτηση..."
     },
-    "noResults": "Δεν βρέθηκαν αποτελέσματα για <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Αναζήτηση",
-      "quickNavigations": "Γρήγορη πλοήγηση",
-      "zenMode": "Λειτουργία Zen",
-      "colorScheme": "Αλλαγή χρωματικού σχήματος"
-    },
-    "filters": {
-      "threads": {
-        "label": "Συνομιλίες",
-        "searchPlaceholder": "Αναζήτηση συνομιλιών..."
-      },
-      "spaces": {
-        "label": "Χώροι",
-        "searchPlaceholder": "Αναζήτηση χώρων..."
-      }
+    "actions": {
+      "createNewThread": "Δημιουργία νέας συζήτησης",
+      "toggleIncognitoEnable": "Ενεργοποίηση λειτουργίας ανώνυμης περιήγησης",
+      "toggleIncognitoDisable": "Απενεργοποίηση λειτουργίας ανώνυμης περιήγησης",
+      "toggleLightMode": "Αλλαγή σε φωτεινή λειτουργία",
+      "toggleDarkMode": "Αλλαγή σε σκοτεινή λειτουργία"
     },
     "navigation": {
       "home": "Αρχική",
-      "discover": "Ανακάλυψη",
       "library": "Βιβλιοθήκη",
-      "userSettings": "Ρυθμίσεις χρήστη",
-      "labs": "Εργαστήρια"
+      "spaces": "Χώροι",
+      "discover": "Ανακάλυψη",
+      "settings": "Ρυθμίσεις",
+      "labs": "Εργαστήρια",
+      "current": "Τρέχον",
+      "openInNewTab": "Άνοιγμα σε νέα καρτέλα",
+      "goTo": "Μετάβαση στο {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Σκούρο",
-      "light": "Φωτεινό",
-      "system": "Σύστημα"
+    "search": {
+      "threads": "Συζητήσεις",
+      "spaces": "Χώροι",
+      "threadsPlaceholder": "Αναζήτηση συζητήσεων...",
+      "spacesPlaceholder": "Αναζήτηση χώρων..."
     },
-    "threadSearch": {
-      "error": "Αποτυχία λήψης συνομιλιών. Παρακαλώ δοκιμάστε αργότερα.",
-      "loading": "Φόρτωση συνομιλιών",
-      "empty": {
-        "withSearch": "Δεν βρέθηκαν συνομιλίες.",
-        "withoutSearch": "Ξεκινήστε να πληκτρολογείτε για αναζήτηση"
+    "groups": {
+      "actions": "Ενέργειες",
+      "navigation": "Πλοήγηση",
+      "search": "Αναζήτηση"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Άνοιγμα σε νέα καρτέλα",
+        "searchInSpace": "Αναζήτηση στο χώρο",
+        "goToSpace": "Μετάβαση στο χώρο",
+        "searchSpacePlaceholder": "Αναζήτηση {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} πρόσφατες συνομιλίες με τον όρο αναζήτησης",
-        "withoutSearch": "Πρόσφατες συνομιλίες"
+      "commandItems": {
+        "errorFetching": "Σφάλμα κατά τη λήψη χώρων",
+        "noSpacesFound": "Δεν βρέθηκαν χώροι"
       },
-      "spacePreview": {
-        "tooltip": "Κάντε κλικ για αναζήτηση συνομιλιών σε αυτόν τον χώρο"
+      "preview": {
+        "description": "Περιγραφή",
+        "instructions": "Οδηγίες",
+        "files": "Αρχεία ({{count}})",
+        "webLinks": "Σύνδεσμοι ιστού ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Αποτυχία λήψης χώρων. Παρακαλώ δοκιμάστε αργότερα.",
-      "loading": "Φόρτωση χώρων",
-      "empty": "Δεν βρέθηκαν χώροι.",
-      "spaceThreads": {
-        "loading": "Φόρτωση συνομιλιών για \"{{title}}\"",
-        "error": "Αποτυχία λήψης συνομιλιών. Παρακαλώ δοκιμάστε αργότερα.",
-        "empty": "Δεν βρέθηκαν συνομιλίες σε αυτόν τον χώρο.",
-        "heading": "Το Complexity μπορεί να αναζητήσει μόνο στις 50 πιο πρόσφατες συνομιλίες."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Περιγραφή:",
-          "instructions": "Οδηγίες:"
-        },
-        "searchHint": "για αναζήτηση συνομιλιών σε αυτόν τον Χώρο"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Σφάλμα κατά τη λήψη συζητήσεων",
+        "noThreadsFound": "Δεν βρέθηκαν συζητήσεις"
       }
     },
-    "zenMode": {
-      "enable": "Ενεργοποίηση λειτουργίας Zen",
-      "disable": "Απενεργοποίηση λειτουργίας Zen"
-    },
-    "keywords": {
-      "enable": "ενεργοποίηση",
-      "zen": "zen",
-      "mode": "λειτουργία",
-      "disable": "απενεργοποίηση",
-      "threads": "συνομιλίες",
-      "spaces": "χώροι",
-      "search": "αναζήτηση",
-      "home": "αρχική",
-      "discover": "ανακάλυψη",
-      "library": "βιβλιοθήκη",
-      "user": "χρήστης",
-      "settings": "ρυθμίσεις",
-      "labs": "εργαστήρια",
-      "navigate": "πλοήγηση",
-      "dark": "σκούρο",
-      "light": "φωτεινό",
-      "system": "σύστημα",
-      "theme": "θέμα",
-      "change": "αλλαγή",
-      "color": "χρώμα",
-      "scheme": "σχήμα"
+    "common": {
+      "noResults": "Δεν βρέθηκαν αποτελέσματα",
+      "current": "Τρέχον"
     }
   }
 }

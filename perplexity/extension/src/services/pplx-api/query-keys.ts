@@ -1,4 +1,4 @@
-import { queryOptions } from "@tanstack/react-query";
+import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 import { PplxApiService } from "@/services/pplx-api";
 import type { Space } from "@/services/pplx-api/pplx-api.types";
@@ -8,10 +8,13 @@ export const pplxApiQueries = {
 
   userSettings: {
     all: () => [...pplxApiQueries.all(), "userSettings"] as const,
-    detail: () =>
+    detail: (isLoggedIn: boolean) =>
       queryOptions({
         queryKey: [...pplxApiQueries.userSettings.all()] as const,
         queryFn: () => PplxApiService.fetchUserSettings(),
+        staleTime: 5000,
+        enabled: isLoggedIn,
+        gcTime: Infinity,
       }),
   },
 
@@ -32,52 +35,75 @@ export const pplxApiQueries = {
     },
   },
 
-  threadInfo: {
-    all: () => [...pplxApiQueries.all(), "threadInfo"] as const,
+  thread: {
+    all: () => [...pplxApiQueries.all(), "thread"] as const,
     detail: (threadSlug: string) =>
       queryOptions({
-        queryKey: [...pplxApiQueries.threadInfo.all(), { threadSlug }] as const,
-        queryFn: () => PplxApiService.fetchThreadInfo(threadSlug),
+        queryKey: [...pplxApiQueries.thread.all(), { threadSlug }] as const,
+        queryFn: () => PplxApiService.fetchThread(threadSlug),
       }),
   },
 
-  threadsSearch: {
-    all: () => [...pplxApiQueries.all(), "threadsSearch"] as const,
-    detail: (
-      params: { searchValue?: string; limit?: number; offset?: number } = {},
-    ) =>
+  threads: {
+    all: () => [...pplxApiQueries.thread.all(), "all"] as const,
+    detail: (params: { searchValue?: string; offset?: number } = {}) =>
       queryOptions({
-        queryKey: [...pplxApiQueries.threadsSearch.all(), params] as const,
+        queryKey: [...pplxApiQueries.threads.all(), params] as const,
         queryFn: () => PplxApiService.fetchThreads(params),
       }),
+    infinite: {
+      all: () => [...pplxApiQueries.threads.all(), "infinite"] as const,
+      detail: ({
+        initialPageParam,
+        searchTerm,
+      }: {
+        initialPageParam?: number;
+        searchTerm?: string;
+      }) =>
+        infiniteQueryOptions({
+          queryKey: [
+            ...pplxApiQueries.threads.infinite.all(),
+            { searchTerm },
+          ] as const,
+          queryFn: (ctx) =>
+            PplxApiService.fetchThreads({
+              searchValue: searchTerm,
+              limit: 20,
+              offset: ctx.pageParam * 20,
+            }),
+          initialPageParam: initialPageParam ?? 0,
+          getNextPageParam: (lastPage, allPages) =>
+            lastPage[0]?.has_next_page ? allPages.length : undefined,
+        }),
+    },
   },
 
-  spaces: {
-    all: () => [...pplxApiQueries.all(), "spaces"] as const,
-    detail: () =>
+  space: {
+    all: () => [...pplxApiQueries.all(), "space"] as const,
+    detail: (spaceUuid: Space["uuid"]) =>
       queryOptions({
-        queryKey: [...pplxApiQueries.spaces.all()] as const,
-        queryFn: () => PplxApiService.fetchSpaces(),
+        queryKey: [...pplxApiQueries.space.all(), { spaceUuid }] as const,
+        queryFn: () => PplxApiService.fetchSpace(spaceUuid),
       }),
     files: {
       all: (spaceUuid: Space["uuid"]) =>
         [...pplxApiQueries.spaces.all(), "files", { spaceUuid }] as const,
       detail: (spaceUuid: Space["uuid"]) =>
         queryOptions({
-          queryKey: [...pplxApiQueries.spaces.files.all(spaceUuid)] as const,
+          queryKey: [...pplxApiQueries.space.files.all(spaceUuid)] as const,
           queryFn: () => PplxApiService.fetchSpaceFiles(spaceUuid),
         }),
       downloadUrl: {
         all: (spaceUuid: Space["uuid"], fileUuid: string) =>
           [
-            ...pplxApiQueries.spaces.files.all(spaceUuid),
+            ...pplxApiQueries.space.files.all(spaceUuid),
             "downloadUrl",
             { fileUuid },
           ] as const,
         detail: (spaceUuid: Space["uuid"], fileUuid: string) =>
           queryOptions({
             queryKey: [
-              ...pplxApiQueries.spaces.files.downloadUrl.all(
+              ...pplxApiQueries.space.files.downloadUrl.all(
                 spaceUuid,
                 fileUuid,
               ),
@@ -90,11 +116,59 @@ export const pplxApiQueries = {
     threads: {
       all: (spaceSlug: Space["slug"]) =>
         [...pplxApiQueries.spaces.all(), "threads", { spaceSlug }] as const,
-      detail: (spaceSlug: Space["slug"]) =>
+      detail: ({
+        spaceSlug,
+        offset = 0,
+      }: {
+        spaceSlug: Space["slug"];
+        offset?: number;
+      }) =>
         queryOptions({
-          queryKey: [...pplxApiQueries.spaces.threads.all(spaceSlug)] as const,
-          queryFn: () => PplxApiService.fetchSpaceThreads(spaceSlug),
+          queryKey: [
+            ...pplxApiQueries.space.threads.all(spaceSlug),
+            { offset },
+          ] as const,
+          queryFn: () =>
+            PplxApiService.fetchSpaceThreads({
+              spaceSlug,
+              limit: 20,
+              offset,
+            }),
         }),
+      infinite: {
+        all: (spaceSlug: Space["slug"]) =>
+          [...pplxApiQueries.space.threads.all(spaceSlug), "infinite"] as const,
+        detail: ({
+          spaceSlug,
+          initialPageParam,
+        }: {
+          spaceSlug: Space["slug"];
+          initialPageParam: number;
+        }) =>
+          infiniteQueryOptions({
+            queryKey: [
+              ...pplxApiQueries.space.threads.infinite.all(spaceSlug),
+            ] as const,
+            queryFn: ({ pageParam }) =>
+              PplxApiService.fetchSpaceThreads({
+                spaceSlug,
+                limit: 20,
+                offset: pageParam as number,
+              }),
+            initialPageParam,
+            getNextPageParam: (lastPage, _, lastPageParam) =>
+              lastPage[0]?.has_next_page ? lastPageParam + 20 : undefined,
+          }),
+      },
     },
+  },
+
+  spaces: {
+    all: () => [...pplxApiQueries.space.all(), "all"] as const,
+    detail: () =>
+      queryOptions({
+        queryKey: [...pplxApiQueries.spaces.all()] as const,
+        queryFn: () => PplxApiService.fetchSpaces(),
+      }),
   },
 };

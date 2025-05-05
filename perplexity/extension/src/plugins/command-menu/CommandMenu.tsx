@@ -1,35 +1,113 @@
-import { CommandDialog } from "@/components/ui/command";
-import { CommandContent } from "@/plugins/command-menu/components/CommandContent";
-import { CommandSearchInput } from "@/plugins/command-menu/components/CommandSearchInput";
-import useBindCommandMenuHotkeys from "@/plugins/command-menu/hooks/useBindCommandMenuHotkeys";
-import { useSearchFilter } from "@/plugins/command-menu/hooks/useSearchFilter";
-import { useCommandMenuStore } from "@/plugins/command-menu/public/store";
+import { useHotkeys } from "react-hotkeys-hook";
+
+import { Command, CommandDialog, CommandList } from "@/components/ui/command";
+import CommandFooter from "@/plugins/command-menu/components/CommandFooter";
+import CommandInput from "@/plugins/command-menu/components/CommandInput";
+import CommandSidecar from "@/plugins/command-menu/components/CommandSidecar";
+import useCustomScroll from "@/plugins/command-menu/hooks/useCustomScroll";
+import IndexPage from "@/plugins/command-menu/pages/IndexPage";
+import SpaceThreadsPage from "@/plugins/command-menu/pages/space-threads/Page";
+import SpacesPage from "@/plugins/command-menu/pages/spaces/Page";
+import ThreadsPage from "@/plugins/command-menu/pages/threads/Page";
+import { useCommandMenuStore } from "@/plugins/command-menu/store";
+import { ExtensionSettingsService } from "@/services/extension-settings";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
+import { keysToString } from "@/utils/utils";
 
 export function CommandMenu() {
-  const { open, setOpen, selectedValue, setSelectedValue } =
-    useCommandMenuStore();
+  const {
+    selectingValue,
+    setSelectingValue,
+    shouldLocalFilter,
+    open,
+    setOpen,
+    sidecarOpen,
+    setSidecarOpen,
+  } = useCommandMenuStore();
 
-  const { shouldFilter } = useSearchFilter();
-  useBindCommandMenuHotkeys();
+  const commandListRef = useRef<HTMLDivElement>(null);
+
+  const settings = ExtensionSettingsService.cachedSync.plugins.commandMenu;
+
+  useCustomScroll({ commandListRef });
+
+  useHotkeys(
+    keysToString(settings.keybindings.toggle),
+    (e) => {
+      e.stopImmediatePropagation();
+      setOpen(!open);
+    },
+    {
+      preventDefault: true,
+      enableOnContentEditable: true,
+      enableOnFormTags: true,
+    },
+  );
+
+  useHotkeys(
+    keysToString(settings.keybindings.toggleSidecar),
+    (e) => {
+      e.stopImmediatePropagation();
+      setSidecarOpen(!sidecarOpen);
+    },
+    {
+      enabled: open,
+      preventDefault: true,
+      enableOnContentEditable: true,
+      enableOnFormTags: true,
+    },
+  );
 
   return (
     <CommandDialog
-      open={open}
-      preventScroll={false}
-      commandProps={{
-        value: selectedValue,
-        onValueChange: setSelectedValue,
-        filter(value, search, keywords) {
-          const extendValue = value + (keywords?.join("") ?? "");
-          const normalizedSearch = search.replace(/\s+/g, "").toLowerCase();
-          return extendValue.includes(normalizedSearch) ? 1 : 0;
-        },
-        shouldFilter,
+      dialogContentProps={{
+        className: cn({
+          "x:max-w-[1000px]": sidecarOpen,
+          "x:max-w-xl": !sidecarOpen,
+        }),
       }}
+      open={open}
       onOpenChange={({ open }) => setOpen(open)}
     >
-      <CommandSearchInput />
-      <CommandContent />
+      <Command
+        value={selectingValue}
+        shouldFilter={shouldLocalFilter}
+        onValueChange={setSelectingValue}
+      >
+        <CommandInput />
+
+        <div className="x:grid x:grid-cols-2">
+          <div
+            className={cn(
+              "x:border-r x:border-border/50",
+              !sidecarOpen && "x:col-span-2",
+            )}
+          >
+            <CommandList
+              ref={commandListRef}
+              className={cn("x:min-h-[400px]", {
+                "x:h-[500px] x:max-h-[500px]": sidecarOpen,
+              })}
+            >
+              <IndexPage />
+              <SpacesPage />
+              <ThreadsPage />
+              <SpaceThreadsPage />
+            </CommandList>
+          </div>
+          {sidecarOpen && (
+            <div
+              className={cn(
+                PPLX_SCROLLBAR_CLASSES,
+                "x:h-[500px] x:max-h-[500px] x:overflow-y-auto",
+              )}
+            >
+              <CommandSidecar />
+            </div>
+          )}
+        </div>
+        <CommandFooter />
+      </Command>
     </CommandDialog>
   );
 }

@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "顯示預覽",
+      "hidePreviews": "隱藏預覽"
+    },
     "input": {
-      "placeholder": "輸入命令或搜尋..."
+      "searchPlaceholder": "搜尋..."
     },
-    "noResults": "未找到 <emphasis>{{code}}</emphasis> 的結果。",
-    "groups": {
-      "search": "搜尋",
-      "quickNavigations": "快速導航",
-      "zenMode": "禪意模式",
-      "colorScheme": "更改配色方案"
-    },
-    "filters": {
-      "threads": {
-        "label": "對話",
-        "searchPlaceholder": "搜尋對話..."
-      },
-      "spaces": {
-        "label": "空間",
-        "searchPlaceholder": "搜尋空間..."
-      }
+    "actions": {
+      "createNewThread": "建立新對話",
+      "toggleIncognitoEnable": "啟用無痕模式",
+      "toggleIncognitoDisable": "停用無痕模式",
+      "toggleLightMode": "切換至淺色模式",
+      "toggleDarkMode": "切換至深色模式"
     },
     "navigation": {
       "home": "首頁",
-      "discover": "探索",
-      "library": "收藏庫",
-      "userSettings": "用戶設定",
-      "labs": "實驗室"
-    },
-    "colorSchemes": {
-      "dark": "深色",
-      "light": "淺色",
-      "system": "系統"
-    },
-    "threadSearch": {
-      "error": "無法獲取對話。請稍後再試。",
-      "loading": "正在載入對話",
-      "empty": {
-        "withSearch": "未找到對話。",
-        "withoutSearch": "開始輸入以搜尋"
-      },
-      "heading": {
-        "withSearch": "{{count}} 個含有搜尋詞的最新對話",
-        "withoutSearch": "最近的對話"
-      },
-      "spacePreview": {
-        "tooltip": "點擊在此空間中搜尋對話"
-      }
-    },
-    "spaceSearch": {
-      "error": "無法獲取空間。請稍後再試。",
-      "loading": "正在載入空間",
-      "empty": "未找到空間。",
-      "spaceThreads": {
-        "loading": "正在載入「{{title}}」的對話",
-        "error": "無法獲取對話。請稍後再試。",
-        "empty": "此空間中未找到對話。",
-        "heading": "Complexity 只能搜尋 50 個最近的對話。"
-      },
-      "spaceItem": {
-        "details": {
-          "description": "描述：",
-          "instructions": "說明："
-        },
-        "searchHint": "搜尋此空間中的對話"
-      }
-    },
-    "zenMode": {
-      "enable": "啟用禪意模式",
-      "disable": "停用禪意模式"
-    },
-    "keywords": {
-      "enable": "啟用",
-      "zen": "禪意",
-      "mode": "模式",
-      "disable": "停用",
-      "threads": "對話",
+      "library": "資料庫",
       "spaces": "空間",
-      "search": "搜尋",
-      "home": "首頁",
       "discover": "探索",
-      "library": "收藏庫",
-      "user": "用戶",
       "settings": "設定",
       "labs": "實驗室",
-      "navigate": "導航",
-      "dark": "深色",
-      "light": "淺色",
-      "system": "系統",
-      "theme": "主題",
-      "change": "更改",
-      "color": "配色",
-      "scheme": "方案"
+      "current": "目前",
+      "openInNewTab": "在新分頁中開啟",
+      "goTo": "前往{{destination}}"
+    },
+    "search": {
+      "threads": "對話",
+      "spaces": "空間",
+      "threadsPlaceholder": "搜尋對話...",
+      "spacesPlaceholder": "搜尋空間..."
+    },
+    "groups": {
+      "actions": "操作",
+      "navigation": "導覽",
+      "search": "搜尋"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "在新分頁中開啟",
+        "searchInSpace": "在空間中搜尋",
+        "goToSpace": "前往空間",
+        "searchSpacePlaceholder": "搜尋{{spaceName}}..."
+      },
+      "commandItems": {
+        "errorFetching": "取得空間時發生錯誤",
+        "noSpacesFound": "未找到空間"
+      },
+      "preview": {
+        "description": "描述",
+        "instructions": "指南",
+        "files": "檔案 ({{count}})",
+        "webLinks": "網頁連結 ({{count}})"
+      }
+    },
+    "threads": {
+      "commandItems": {
+        "errorFetching": "取得對話時發生錯誤",
+        "noThreadsFound": "未找到對話"
+      }
+    },
+    "common": {
+      "noResults": "未找到結果",
+      "current": "目前"
     }
   }
 }

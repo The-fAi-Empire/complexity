@@ -21,6 +21,65 @@ export type PplxOrgSettingsApiResponse = z.infer<
   typeof PplxOrgSettingsApiResponseSchema
 >;
 
+export const SpaceSchema = z.object({
+  title: z.string(),
+  uuid: z.string(),
+  instructions: z.string(),
+  slug: z.string(),
+  emoji: z.string().nullable().optional(),
+  description: z.string(),
+  access: z.number(),
+  model_selection: (z.string() as z.ZodType<LanguageModel["code"]>).nullable(),
+  enable_web_by_default: z.boolean().nullable(),
+  updated_datetime: z.string(),
+});
+
+export const SpacesApiResponseSchema = z.array(SpaceSchema);
+
+export type Space = z.infer<typeof SpaceSchema>;
+
+export const SpaceDetailsSchema = SpaceSchema.extend({
+  file_count: z.number().nullable(),
+  focused_web_config: z
+    .object({
+      link_configs: z.array(
+        z.object({
+          link: z.string(),
+        }),
+      ),
+    })
+    .nullable(),
+});
+
+export type SpaceDetails = z.infer<typeof SpaceDetailsSchema>;
+
+export const SpaceFilesApiResponseSchema = z.object({
+  files: z.array(
+    z.object({
+      filename: z.string(),
+      file_title: z.string().nullable().optional(),
+      file_description: z.string().nullable().optional(),
+      file_uuid: z.string(),
+      file_s3_url: z.string().nullable(),
+      uploaded_by: z.string(),
+      file_size: z.number(),
+      time_created: z.string(),
+      error: z.string().nullable(),
+    }),
+  ),
+  num_total_files: z.number(),
+});
+
+export type SpaceFilesApiResponse = z.infer<typeof SpaceFilesApiResponseSchema>;
+
+export const SpaceFileDownloadUrlApiResponseSchema = z.object({
+  file_url: z.string(),
+});
+
+export type SpaceFileDownloadUrlApiResponse = z.infer<
+  typeof SpaceFileDownloadUrlApiResponseSchema
+>;
+
 export const ThreadMessageApiResponseSchema = z.object({
   query_str: z.string(),
   text: z.string(),
@@ -48,14 +107,13 @@ export const ThreadSearchApiSchema = z.object({
   query_count: z.number(),
   search_focus: z.string(),
   read_write_token: z.string(),
-  collection: z
-    .object({
-      uuid: z.string(),
-      title: z.string(),
-      emoji: z.string(),
-      slug: z.string(),
-    })
-    .optional(),
+  collection: SpaceSchema.pick({
+    uuid: true,
+    title: true,
+    slug: true,
+    emoji: true,
+  }).optional(),
+  has_next_page: z.boolean(),
 });
 
 export type ThreadSearchApi = z.infer<typeof ThreadSearchApiSchema>;
@@ -64,59 +122,6 @@ export const ThreadsSearchApiResponseSchema = z.array(ThreadSearchApiSchema);
 
 export type ThreadsSearchApiResponse = z.infer<
   typeof ThreadsSearchApiResponseSchema
->;
-
-export const SpaceSchema = z.object({
-  title: z.string(),
-  uuid: z.string(),
-  instructions: z.string(),
-  slug: z.string(),
-  emoji: z.string().nullable().optional(),
-  description: z.string(),
-  file_count: z.number().nullable(),
-  focused_web_config: z
-    .object({
-      link_configs: z.array(
-        z.object({
-          link: z.string(),
-        }),
-      ),
-    })
-    .nullable(),
-  access: z.number(),
-  model_selection: (z.string() as z.ZodType<LanguageModel["code"]>).nullable(),
-  enable_web_by_default: z.boolean().nullable(),
-});
-
-export const SpacesApiResponseSchema = z.array(SpaceSchema);
-
-export type Space = z.infer<typeof SpaceSchema>;
-
-export const SpaceFilesApiResponseSchema = z.object({
-  files: z.array(
-    z.object({
-      filename: z.string(),
-      file_title: z.string().nullable().optional(),
-      file_description: z.string().nullable().optional(),
-      file_uuid: z.string(),
-      file_s3_url: z.string().nullable(),
-      uploaded_by: z.string(),
-      file_size: z.number(),
-      time_created: z.string(),
-      error: z.string().nullable(),
-    }),
-  ),
-  num_total_files: z.number(),
-});
-
-export type SpaceFilesApiResponse = z.infer<typeof SpaceFilesApiResponseSchema>;
-
-export const SpaceFileDownloadUrlApiResponseSchema = z.object({
-  file_url: z.string(),
-});
-
-export type SpaceFileDownloadUrlApiResponse = z.infer<
-  typeof SpaceFileDownloadUrlApiResponseSchema
 >;
 
 export const SpaceThreadsApiResponseSchema = ThreadsSearchApiResponseSchema;

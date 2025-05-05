@@ -106,7 +106,7 @@ function findOrCreateContainer(
   }
 
   const $newContainer = $("<div>")
-    .addClass("x:[&:empty]:hidden")
+    .addClass("x:[&:empty]:hidden x:flex x:items-center x:justify-center")
     .internalComponentAttr(internalAttribute);
 
   if (position === "prepend") {

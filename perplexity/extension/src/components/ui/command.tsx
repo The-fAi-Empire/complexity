@@ -1,9 +1,12 @@
+import { Slot } from "@radix-ui/react-slot";
 import { Command as CommandPrimitive } from "cmdk";
 import * as React from "react";
 import { LuSearch as Search } from "react-icons/lu";
 
 import type { DialogProps } from "@/components/ui/dialog";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
+import { isInContentScript } from "@/utils/utils";
 
 const Command = ({
   className,
@@ -21,24 +24,36 @@ Command.displayName = CommandPrimitive.displayName;
 
 type CommandDialogProps = DialogProps & {
   commandProps?: React.ComponentProps<typeof CommandPrimitive>;
+  dialogContentProps?: React.ComponentProps<typeof DialogContent>;
 };
 
 const CommandDialog = ({
   children,
   commandProps,
+  dialogContentProps,
   ...props
 }: CommandDialogProps) => {
   return (
     <Dialog lazyMount unmountOnExit closeOnInteractOutside {...props}>
-      <DialogContent className="x:overflow-hidden x:p-0 x:shadow-lg">
+      <DialogContent
+        closeButton={false}
+        {...dialogContentProps}
+        className={cn(
+          "x:overflow-hidden x:p-0 x:shadow-lg",
+          dialogContentProps?.className,
+        )}
+      >
         <Command
-          className="x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground x:[&_[cmdk-group]]:px-2 x:[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 x:[&_[cmdk-input-wrapper]_svg]:h-4 x:[&_[cmdk-input-wrapper]_svg]:w-4 x:[&_[cmdk-input]]:h-12 x:[&_[cmdk-item]]:px-2 x:[&_[cmdk-item]]:py-2 x:[&_[cmdk-item]_svg]:h-4 x:[&_[cmdk-item]_svg]:w-4"
           filter={(value, search, keywords) => {
             const extendValue = value + " " + (keywords?.join(" ") || "");
             if (extendValue.includes(search)) return 1;
             return 0;
           }}
           {...commandProps}
+          className={cn(
+            "x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground x:[&_[cmdk-group]]:px-2 x:[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 x:[&_[cmdk-input-wrapper]_svg]:h-4 x:[&_[cmdk-input-wrapper]_svg]:w-4 x:[&_[cmdk-input]]:h-12 x:[&_[cmdk-item]_svg]:h-4 x:[&_[cmdk-item]_svg]:w-4",
+            commandProps?.className,
+          )}
         >
           {children}
         </Command>
@@ -65,9 +80,6 @@ const CommandInput = ({
     )}
     cmdk-input-wrapper=""
   >
-    {searchIcon && (
-      <Search className="x:mr-2 x:h-4 x:w-4 x:shrink-0 x:opacity-50" />
-    )}
     <CommandPrimitive.Input
       className={cn(
         "x:flex x:h-11 x:w-full x:rounded-lg x:bg-transparent x:py-3 x:text-sm x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
@@ -75,6 +87,9 @@ const CommandInput = ({
       )}
       {...props}
     />
+    {searchIcon && (
+      <Search className="x:mr-2 x:h-4 x:w-4 x:shrink-0 x:opacity-50" />
+    )}
   </div>
 );
 
@@ -86,7 +101,8 @@ const CommandList = ({
 }: React.ComponentProps<typeof CommandPrimitive.List>) => (
   <CommandPrimitive.List
     className={cn(
-      "custom-scrollbar x:max-h-[300px] x:overflow-x-hidden x:overflow-y-auto",
+      isInContentScript() ? PPLX_SCROLLBAR_CLASSES : "custom-scrollbar",
+      "x:max-h-[300px] x:overflow-x-hidden x:overflow-y-auto",
       className,
     )}
     {...props}
@@ -109,13 +125,27 @@ CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
 
 const CommandGroup = ({
   className,
+  heading,
+  rightAttributes,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Group>) => (
+}: React.ComponentProps<typeof CommandPrimitive.Group> & {
+  rightAttributes?: React.ReactNode;
+}) => (
   <CommandPrimitive.Group
     className={cn(
-      "x:overflow-hidden x:p-1 x:text-foreground x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:py-1.5 x:[&_[cmdk-group-heading]]:text-xs x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground",
+      "x:overflow-hidden x:p-1 x:text-foreground x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:py-1.5 x:[&_[cmdk-group-heading]]:text-xs x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground x:[&:has([cmdk-group-items]:empty)]:hidden",
       className,
     )}
+    heading={
+      <div className="x:flex x:items-center x:justify-between x:font-medium x:text-muted-foreground">
+        {typeof heading === "string" ? (
+          <div className="x:text-xs">{heading}</div>
+        ) : (
+          heading
+        )}
+        {rightAttributes}
+      </div>
+    }
     {...props}
   />
 );
@@ -134,19 +164,105 @@ const CommandSeparator = ({
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
 const CommandItem = ({
+  children,
   className,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Item>) => (
   <CommandPrimitive.Item
     className={cn(
-      "x:relative x:flex x:cursor-pointer x:items-center x:rounded-lg x:px-2 x:py-1.5 x:text-xs x:text-muted-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-primary x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
+      "x:group x:relative x:flex x:cursor-pointer x:items-center x:rounded-lg x:px-2 x:py-2 x:text-sm x:text-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-foreground x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
       className,
     )}
     {...props}
-  />
+  >
+    {children}
+  </CommandPrimitive.Item>
 );
 
 CommandItem.displayName = CommandPrimitive.Item.displayName;
+
+const CommandItemIcon = ({
+  className,
+  asChild,
+  ...props
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean;
+}) => {
+  const Comp = asChild ? Slot : "div";
+
+  return <Comp className={cn("x:mr-2 x:size-4", className)} {...props} />;
+};
+
+CommandItemIcon.displayName = "CommandItemIcon";
+
+const CommandItemTitle = ({
+  className,
+  children,
+  ...props
+}: React.ComponentProps<"div">) => {
+  if (typeof children === "string") {
+    return (
+      <span className={cn("x:truncate", className)} {...props}>
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <div className={className} {...props}>
+      {children}
+    </div>
+  );
+};
+
+CommandItemTitle.displayName = "CommandItemTitle";
+
+const CommandItemRightAttributes = ({
+  className,
+  asChild,
+  ...props
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean;
+}) => {
+  const Comp = asChild ? Slot : "div";
+
+  return (
+    <Comp
+      data-right-attributes
+      className={cn(
+        "x:ml-auto x:group-has-[[data-alt-right-attributes]]:group-aria-selected:hidden",
+        className,
+      )}
+      {...props}
+    />
+  );
+};
+
+CommandItemRightAttributes.displayName = "CommandItemRightAttributes";
+
+const CommandItemAlternateRightAttributes = ({
+  className,
+  asChild,
+  ...props
+}: React.ComponentProps<"div"> & {
+  asChild?: boolean;
+}) => {
+  const Comp = asChild ? Slot : "div";
+
+  return (
+    <Comp
+      data-alt-right-attributes
+      className={cn(
+        "x:ml-auto x:hidden x:group-aria-selected:block",
+        className,
+      )}
+      {...props}
+    />
+  );
+};
+
+CommandItemAlternateRightAttributes.displayName =
+  "CommandItemAlternateRightAttributes";
 
 const CommandShortcut = ({
   className,
@@ -171,6 +287,10 @@ export {
   CommandGroup,
   CommandInput,
   CommandItem,
+  CommandItemIcon,
+  CommandItemTitle,
+  CommandItemAlternateRightAttributes,
+  CommandItemRightAttributes,
   CommandList,
   CommandSeparator,
   CommandShortcut,

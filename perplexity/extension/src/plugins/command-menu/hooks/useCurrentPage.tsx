@@ -1,0 +1,13 @@
+import { useCommandMenuStore } from "@/plugins/command-menu/store";
+
+export function useCurrentPage() {
+  const pageStack = useCommandMenuStore((state) => state.pageStack);
+
+  if (pageStack.length === 0) return null;
+
+  const currentPage = pageStack[pageStack.length - 1];
+
+  if (currentPage == null) return null;
+
+  return currentPage;
+}

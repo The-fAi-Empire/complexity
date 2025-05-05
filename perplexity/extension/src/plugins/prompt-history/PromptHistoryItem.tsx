@@ -2,7 +2,7 @@ import { LuTrash } from "react-icons/lu";
 
 import CopyButton from "@/components/CopyButton";
 import { CommandItem } from "@/components/ui/command";
-import { formatHowLongAgo } from "@/data/dayjs";
+import { formatRelativeTime } from "@/data/dayjs";
 import { slashCommandMenuStore } from "@/plugins/slash-command-menu/index.public";
 
 type PromptHistoryItem = {
@@ -68,7 +68,7 @@ export default function PromptHistoryItem({
               </div>
             </>
           )}
-          <div>{formatHowLongAgo(item.createdAt)}</div>
+          <div>{formatRelativeTime(item.createdAt)}</div>
         </div>
       </div>
     </CommandItem>

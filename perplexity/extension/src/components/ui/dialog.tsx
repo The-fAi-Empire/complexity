@@ -48,7 +48,7 @@ const DialogContent = ({
           className={cn(
             "custom-scrollbar x:fixed x:top-[50%] x:left-[50%] x:z-50 x:flex x:max-h-[95vh] x:w-full x:max-w-lg x:flex-col x:overflow-y-auto x:fill-mode-forwards",
             "x:translate-x-[-50%] x:translate-y-[-50%] x:gap-4 x:border x:border-border/50 x:bg-background x:p-6 x:shadow-lg x:duration-200",
-            "x:max-hx:-[95vh] x:data-[state=closed]:hidden x:data-[state=closed]:animate-out x:data-[state=open]:fade-in-0",
+            "x:max-h-[95vh] x:data-[state=closed]:hidden x:data-[state=closed]:animate-out x:data-[state=open]:fade-in-0",
             "x:sm:rounded-lg",
             className,
           )}

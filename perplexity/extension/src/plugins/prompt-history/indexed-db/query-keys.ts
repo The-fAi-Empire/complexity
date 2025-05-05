@@ -24,11 +24,11 @@ export const promptHistoryQueries = {
         queryFn: (ctx) =>
           getPromptHistoryService().getPaginatedItems({
             searchTerm: searchTerm,
-            offset: ((ctx.pageParam as number) ?? 0) * ITEMS_PER_PAGE,
+            offset: ctx.pageParam * ITEMS_PER_PAGE,
             limit: ITEMS_PER_PAGE,
           }),
         initialPageParam: initialPageParam ?? 0,
-        getNextPageParam: (lastPage, allPages): number | undefined => {
+        getNextPageParam: (lastPage, allPages) => {
           const totalFetched = allPages.reduce(
             (acc, page) => acc + page.items.length,
             0,

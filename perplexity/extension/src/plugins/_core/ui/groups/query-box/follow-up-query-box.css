@@ -9,7 +9,7 @@
     @apply x:grid x:grid-cols-3 x:grid-rows-[1fr_auto] x:px-4;
 
     > div:nth-child(1) {
-      @apply x:col-start-1 x:col-end-4 x:p-0 x:pb-2;
+      @apply x:col-start-1 x:col-end-4 x:rounded-none x:p-0 x:pb-2;
     }
 
     > div:nth-child(2) {

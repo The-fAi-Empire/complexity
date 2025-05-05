@@ -15,8 +15,10 @@ Extract strings into the specified `.json` locale file.
 
 ⚠️ IMPORTANT RESTRICTIONS:
 - NEVER use or import the `useTranslation` hook
-- ALWAYS use the `t(...)` function directly, NEVER import `t` because it is available globally (auto-imported)
+- ALWAYS use the `t(...)` function directly
+- NEVER import `t` because it is available globally (auto-imported)
 - ONLY use `Trans` component for complex translations
+- DO NOT yap or say anything other than complete the task
 
 ## Examples
 ```json

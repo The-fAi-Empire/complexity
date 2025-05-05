@@ -213,7 +213,9 @@ export const whereAmI = (() => {
     same_origin: [new MatchPattern(`${hostnameGlob}/*`)],
   };
 
-  return function (providedUrl?: string): string {
+  type Location = keyof typeof patternMap;
+
+  return function (providedUrl?: string): Location | "unknown" {
     if (!providedUrl && typeof window === "undefined") {
       return "unknown";
     }
@@ -232,7 +234,7 @@ export const whereAmI = (() => {
           ),
         )
       ) {
-        return key;
+        return key as Location;
       }
     }
 

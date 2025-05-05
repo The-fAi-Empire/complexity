@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "显示预览",
+      "hidePreviews": "隐藏预览"
+    },
     "input": {
-      "placeholder": "输入命令或搜索..."
+      "searchPlaceholder": "搜索..."
     },
-    "noResults": "未找到与 <emphasis>{{code}}</emphasis> 相关的结果。",
-    "groups": {
-      "search": "搜索",
-      "quickNavigations": "快速导航",
-      "zenMode": "禅模式",
-      "colorScheme": "更改配色方案"
-    },
-    "filters": {
-      "threads": {
-        "label": "主题",
-        "searchPlaceholder": "搜索主题..."
-      },
-      "spaces": {
-        "label": "空间",
-        "searchPlaceholder": "搜索空间..."
-      }
+    "actions": {
+      "createNewThread": "创建新对话",
+      "toggleIncognitoEnable": "启用隐身模式",
+      "toggleIncognitoDisable": "禁用隐身模式",
+      "toggleLightMode": "切换至浅色模式",
+      "toggleDarkMode": "切换至深色模式"
     },
     "navigation": {
       "home": "首页",
-      "discover": "发现",
       "library": "资料库",
-      "userSettings": "用户设置",
-      "labs": "实验室"
-    },
-    "colorSchemes": {
-      "dark": "深色",
-      "light": "浅色",
-      "system": "系统"
-    },
-    "threadSearch": {
-      "error": "获取主题失败。请稍后重试。",
-      "loading": "正在加载主题",
-      "empty": {
-        "withSearch": "未找到主题。",
-        "withoutSearch": "开始输入以搜索"
-      },
-      "heading": {
-        "withSearch": "包含搜索词的{{count}}个最新主题",
-        "withoutSearch": "最近的主题"
-      },
-      "spacePreview": {
-        "tooltip": "点击搜索此空间中的主题"
-      }
-    },
-    "spaceSearch": {
-      "error": "获取空间失败。请稍后重试。",
-      "loading": "正在加载空间",
-      "empty": "未找到空间。",
-      "spaceThreads": {
-        "loading": "正在加载\"{{title}}\"的主题",
-        "error": "获取主题失败。请稍后重试。",
-        "empty": "此空间中未找到主题。",
-        "heading": "Complexity 只能搜索最新的50个主题。"
-      },
-      "spaceItem": {
-        "details": {
-          "description": "描述：",
-          "instructions": "说明："
-        },
-        "searchHint": "搜索此空间中的主题"
-      }
-    },
-    "zenMode": {
-      "enable": "启用禅模式",
-      "disable": "禁用禅模式"
-    },
-    "keywords": {
-      "enable": "启用",
-      "zen": "禅",
-      "mode": "模式",
-      "disable": "禁用",
-      "threads": "主题",
       "spaces": "空间",
-      "search": "搜索",
-      "home": "首页",
       "discover": "发现",
-      "library": "资料库",
-      "user": "用户",
       "settings": "设置",
       "labs": "实验室",
-      "navigate": "导航",
-      "dark": "深色",
-      "light": "浅色",
-      "system": "系统",
-      "theme": "主题",
-      "change": "更改",
-      "color": "颜色",
-      "scheme": "方案"
+      "current": "当前",
+      "openInNewTab": "在新标签页中打开",
+      "goTo": "前往{{destination}}"
+    },
+    "search": {
+      "threads": "对话",
+      "spaces": "空间",
+      "threadsPlaceholder": "搜索对话...",
+      "spacesPlaceholder": "搜索空间..."
+    },
+    "groups": {
+      "actions": "操作",
+      "navigation": "导航",
+      "search": "搜索"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "在新标签页中打开",
+        "searchInSpace": "在空间中搜索",
+        "goToSpace": "前往空间",
+        "searchSpacePlaceholder": "搜索{{spaceName}}..."
+      },
+      "commandItems": {
+        "errorFetching": "获取空间时出错",
+        "noSpacesFound": "未找到空间"
+      },
+      "preview": {
+        "description": "描述",
+        "instructions": "指南",
+        "files": "文件 ({{count}})",
+        "webLinks": "网页链接 ({{count}})"
+      }
+    },
+    "threads": {
+      "commandItems": {
+        "errorFetching": "获取对话时出错",
+        "noThreadsFound": "未找到对话"
+      }
+    },
+    "common": {
+      "noResults": "未找到结果",
+      "current": "当前"
     }
   }
 }

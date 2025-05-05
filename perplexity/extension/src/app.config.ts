@@ -18,6 +18,8 @@ const parsedEnv = EnvVarsSchema.parse(env);
 
 const APP_CONFIG = {
   VERSION: packageJson.version,
+  DISPLAY_VERSION: versionToString(packageJson.version),
+  PRERELEASE: "prerelease" in packageJson ? packageJson.prerelease : undefined,
   BROWSER: parsedEnv.VITE_TARGET_BROWSER,
   IS_DEV: Boolean(parsedEnv.DEV) || parsedEnv.NODE_ENV === "development",
   CPLX_CDN_URL: parsedEnv.VITE_CPLX_CDN_URL,
@@ -35,5 +37,13 @@ const APP_CONFIG = {
     ],
   },
 };
+
+function versionToString(version: string): string {
+  if ("prerelease" in packageJson && packageJson.prerelease) {
+    return `${version}-prerelease.${packageJson.prerelease}`;
+  }
+
+  return version;
+}
 
 export { APP_CONFIG };

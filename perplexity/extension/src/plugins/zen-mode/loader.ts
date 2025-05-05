@@ -1,11 +1,14 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { commandMenuStore } from "@/plugins/command-menu/index.public";
 import {
   alwaysHideRelatedQuestionsCssResourceConfig,
   zenModeCssResourceConfig,
 } from "@/plugins/zen-mode/index.remote-resources";
+import { toggleZenMode } from "@/plugins/zen-mode/utils";
 import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
-import { insertCss } from "@/utils/utils";
+import hotkeysJs from "@/utils/hotkeys-js";
+import { insertCss, keysToString } from "@/utils/utils";
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
@@ -18,7 +21,7 @@ export default async function loader() {
     id: "plugin:zenMode",
     dependencies: ["cache:pluginsStates", "cache:extensionSettings"],
     loader: async ({ "cache:pluginsStates": pluginsStates }) => {
-      if (!pluginsStates["zenMode"]) return;
+      if (!pluginsStates["commandMenu"] || !pluginsStates["zenMode"]) return;
 
       insertCss({
         css: await getVersionedRemoteResource(zenModeCssResourceConfig),
@@ -47,6 +50,19 @@ export default async function loader() {
           "true",
         );
       }
+
+      setupKeybinding();
     },
+  });
+}
+
+function setupKeybinding() {
+  const settings = ExtensionSettingsService.cachedSync;
+
+  hotkeysJs(keysToString(settings.plugins["zenMode"].hotkey), (event) => {
+    event.stopImmediatePropagation();
+    event.preventDefault();
+    toggleZenMode();
+    commandMenuStore.getState().setOpen(false);
   });
 }

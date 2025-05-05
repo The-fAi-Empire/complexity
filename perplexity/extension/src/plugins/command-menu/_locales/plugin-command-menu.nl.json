@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Voorbeelden tonen",
+      "hidePreviews": "Voorbeelden verbergen"
+    },
     "input": {
-      "placeholder": "Typ een commando of zoek..."
+      "searchPlaceholder": "Zoeken..."
     },
-    "noResults": "Geen resultaten gevonden voor <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Zoeken",
-      "quickNavigations": "Snelle navigatie",
-      "zenMode": "Zen Modus",
-      "colorScheme": "Kleurenschema wijzigen"
-    },
-    "filters": {
-      "threads": {
-        "label": "Threads",
-        "searchPlaceholder": "Zoek threads..."
-      },
-      "spaces": {
-        "label": "Spaces",
-        "searchPlaceholder": "Zoek spaces..."
-      }
+    "actions": {
+      "createNewThread": "Nieuwe thread aanmaken",
+      "toggleIncognitoEnable": "Incognitomodus inschakelen",
+      "toggleIncognitoDisable": "Incognitomodus uitschakelen",
+      "toggleLightMode": "Overschakelen naar lichte modus",
+      "toggleDarkMode": "Overschakelen naar donkere modus"
     },
     "navigation": {
       "home": "Home",
-      "discover": "Ontdekken",
       "library": "Bibliotheek",
-      "userSettings": "Gebruikersinstellingen",
-      "labs": "Labs"
+      "spaces": "Ruimtes",
+      "discover": "Ontdekken",
+      "settings": "Instellingen",
+      "labs": "Labs",
+      "current": "Huidig",
+      "openInNewTab": "Openen in nieuw tabblad",
+      "goTo": "Ga naar {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Donker",
-      "light": "Licht",
-      "system": "Systeem"
+    "search": {
+      "threads": "Threads",
+      "spaces": "Ruimtes",
+      "threadsPlaceholder": "Threads zoeken...",
+      "spacesPlaceholder": "Ruimtes zoeken..."
     },
-    "threadSearch": {
-      "error": "Kon threads niet ophalen. Probeer het later opnieuw.",
-      "loading": "Threads laden",
-      "empty": {
-        "withSearch": "Geen threads gevonden.",
-        "withoutSearch": "Begin met typen om te zoeken"
+    "groups": {
+      "actions": "Acties",
+      "navigation": "Navigatie",
+      "search": "Zoeken"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Openen in nieuw tabblad",
+        "searchInSpace": "Zoeken in ruimte",
+        "goToSpace": "Ga naar ruimte",
+        "searchSpacePlaceholder": "Zoeken in {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} laatste thread(s) met de zoekterm",
-        "withoutSearch": "Recente threads"
+      "commandItems": {
+        "errorFetching": "Fout bij ophalen van ruimtes",
+        "noSpacesFound": "Geen ruimtes gevonden"
       },
-      "spacePreview": {
-        "tooltip": "Klik om threads in deze space te zoeken"
+      "preview": {
+        "description": "Beschrijving",
+        "instructions": "Instructies",
+        "files": "Bestanden ({{count}})",
+        "webLinks": "Weblinks ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Kon spaces niet ophalen. Probeer het later opnieuw.",
-      "loading": "Spaces laden",
-      "empty": "Geen spaces gevonden.",
-      "spaceThreads": {
-        "loading": "Threads laden voor \"{{title}}\"",
-        "error": "Kon threads niet ophalen. Probeer het later opnieuw.",
-        "empty": "Geen threads gevonden in deze space.",
-        "heading": "Complexity kan alleen zoeken in de 50 meest recente threads."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Beschrijving:",
-          "instructions": "Instructies:"
-        },
-        "searchHint": "om threads in deze Space te zoeken"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Fout bij ophalen van threads",
+        "noThreadsFound": "Geen threads gevonden"
       }
     },
-    "zenMode": {
-      "enable": "Zen Modus inschakelen",
-      "disable": "Zen Modus uitschakelen"
-    },
-    "keywords": {
-      "enable": "inschakelen",
-      "zen": "zen",
-      "mode": "modus",
-      "disable": "uitschakelen",
-      "threads": "threads",
-      "spaces": "spaces",
-      "search": "zoeken",
-      "home": "home",
-      "discover": "ontdekken",
-      "library": "bibliotheek",
-      "user": "gebruiker",
-      "settings": "instellingen",
-      "labs": "labs",
-      "navigate": "navigeren",
-      "dark": "donker",
-      "light": "licht",
-      "system": "systeem",
-      "theme": "thema",
-      "change": "wijzigen",
-      "color": "kleur",
-      "scheme": "schema"
+    "common": {
+      "noResults": "Geen resultaten gevonden",
+      "current": "Huidig"
     }
   }
 }

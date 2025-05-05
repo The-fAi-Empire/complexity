@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Show Previews",
+      "hidePreviews": "Hide Previews"
+    },
     "input": {
-      "placeholder": "Type a command or search..."
+      "searchPlaceholder": "Search..."
     },
-    "noResults": "No results found for <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Search",
-      "quickNavigations": "Quick navigations",
-      "zenMode": "Zen Mode",
-      "colorScheme": "Change color scheme"
-    },
-    "filters": {
-      "threads": {
-        "label": "Threads",
-        "searchPlaceholder": "Search threads..."
-      },
-      "spaces": {
-        "label": "Spaces",
-        "searchPlaceholder": "Search spaces..."
-      }
+    "actions": {
+      "createNewThread": "Create New Thread",
+      "toggleIncognitoEnable": "Enable Incognito Mode",
+      "toggleIncognitoDisable": "Disable Incognito Mode",
+      "toggleLightMode": "Change to Light Mode",
+      "toggleDarkMode": "Change to Dark Mode"
     },
     "navigation": {
       "home": "Home",
-      "discover": "Discover",
       "library": "Library",
-      "userSettings": "User settings",
-      "labs": "Labs"
+      "spaces": "Spaces",
+      "discover": "Discover",
+      "settings": "Settings",
+      "labs": "Labs",
+      "current": "Current",
+      "openInNewTab": "Open in new tab",
+      "goTo": "Go to {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Dark",
-      "light": "Light",
-      "system": "System"
+    "search": {
+      "threads": "Threads",
+      "spaces": "Spaces",
+      "threadsPlaceholder": "Search Threads...",
+      "spacesPlaceholder": "Search Spaces..."
     },
-    "threadSearch": {
-      "error": "Failed to fetch threads. Please try again later.",
-      "loading": "Loading threads",
-      "empty": {
-        "withSearch": "No threads found.",
-        "withoutSearch": "Start typing to search"
+    "groups": {
+      "actions": "Actions",
+      "navigation": "Navigation",
+      "search": "Search"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Open in new tab",
+        "searchInSpace": "Search in Space",
+        "goToSpace": "Go to Space",
+        "searchSpacePlaceholder": "Search {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} latest thread(s) with the search term",
-        "withoutSearch": "Recent threads"
+      "commandItems": {
+        "errorFetching": "Error fetching Spaces",
+        "noSpacesFound": "No Spaces found"
       },
-      "spacePreview": {
-        "tooltip": "Click to search threads in this space"
+      "preview": {
+        "description": "Description",
+        "instructions": "Instructions",
+        "files": "Files ({{count}})",
+        "webLinks": "Web Links ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Failed to fetch spaces. Please try again later.",
-      "loading": "Loading spaces",
-      "empty": "No spaces found.",
-      "spaceThreads": {
-        "loading": "Loading threads for \"{{title}}\"",
-        "error": "Failed to fetch threads. Please try again later.",
-        "empty": "No threads found in this space.",
-        "heading": "Complexity can only search in the 50 most recent threads."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Description:",
-          "instructions": "Instructions:"
-        },
-        "searchHint": "to search for threads in this Space"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Error fetching Threads",
+        "noThreadsFound": "No Threads found"
       }
     },
-    "zenMode": {
-      "enable": "Enable Zen Mode",
-      "disable": "Disable Zen Mode"
-    },
-    "keywords": {
-      "enable": "enable",
-      "zen": "zen",
-      "mode": "mode",
-      "disable": "disable",
-      "threads": "threads",
-      "spaces": "spaces",
-      "search": "search",
-      "home": "home",
-      "discover": "discover",
-      "library": "library",
-      "user": "user",
-      "settings": "settings",
-      "labs": "labs",
-      "navigate": "navigate",
-      "dark": "dark",
-      "light": "light",
-      "system": "system",
-      "theme": "theme",
-      "change": "change",
-      "color": "color",
-      "scheme": "scheme"
+    "common": {
+      "noResults": "No results found",
+      "current": "Current"
     }
   }
 }

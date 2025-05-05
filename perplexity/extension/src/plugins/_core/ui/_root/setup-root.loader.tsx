@@ -32,9 +32,15 @@ export default function loader() {
       "cache:domSelectors",
     ],
     loader: () => {
-      const $root = $("<div>")
-        .attr("id", "complexity-root")
-        .appendTo(document.body);
+      const $existingPortals = $("[data-type=portal]");
+
+      const $root = $("<div>").attr("id", "complexity-root");
+
+      if ($existingPortals[0]) {
+        $root.insertBefore($existingPortals[0]);
+      } else {
+        $root.appendTo(document.body);
+      }
 
       if ($root[0] == null) return;
 

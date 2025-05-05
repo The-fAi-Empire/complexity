@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Zobrazit náhledy",
+      "hidePreviews": "Skrýt náhledy"
+    },
     "input": {
-      "placeholder": "Zadejte příkaz nebo hledejte..."
+      "searchPlaceholder": "Hledat..."
     },
-    "noResults": "Pro <emphasis>{{code}}</emphasis> nebyly nalezeny žádné výsledky.",
-    "groups": {
-      "search": "Hledat",
-      "quickNavigations": "Rychlá navigace",
-      "zenMode": "Zen režim",
-      "colorScheme": "Změnit barevné schéma"
-    },
-    "filters": {
-      "threads": {
-        "label": "Vlákna",
-        "searchPlaceholder": "Hledat vlákna..."
-      },
-      "spaces": {
-        "label": "Prostory",
-        "searchPlaceholder": "Hledat prostory..."
-      }
+    "actions": {
+      "createNewThread": "Vytvořit nové vlákno",
+      "toggleIncognitoEnable": "Povolit režim inkognito",
+      "toggleIncognitoDisable": "Zakázat režim inkognito",
+      "toggleLightMode": "Přepnout na světlý režim",
+      "toggleDarkMode": "Přepnout na tmavý režim"
     },
     "navigation": {
       "home": "Domů",
-      "discover": "Objevit",
       "library": "Knihovna",
-      "userSettings": "Nastavení uživatele",
-      "labs": "Laboratoř"
+      "spaces": "Prostory",
+      "discover": "Objevovat",
+      "settings": "Nastavení",
+      "labs": "Laboratoře",
+      "current": "Aktuální",
+      "openInNewTab": "Otevřít v nové záložce",
+      "goTo": "Přejít na {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Tmavý",
-      "light": "Světlý",
-      "system": "Systémový"
+    "search": {
+      "threads": "Vlákna",
+      "spaces": "Prostory",
+      "threadsPlaceholder": "Hledat vlákna...",
+      "spacesPlaceholder": "Hledat prostory..."
     },
-    "threadSearch": {
-      "error": "Nepodařilo se načíst vlákna. Zkuste to prosím později.",
-      "loading": "Načítání vláken",
-      "empty": {
-        "withSearch": "Nebyla nalezena žádná vlákna.",
-        "withoutSearch": "Začněte psát pro vyhledávání"
+    "groups": {
+      "actions": "Akce",
+      "navigation": "Navigace",
+      "search": "Hledání"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Otevřít v nové záložce",
+        "searchInSpace": "Hledat v prostoru",
+        "goToSpace": "Přejít do prostoru",
+        "searchSpacePlaceholder": "Prohledat {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} nejnovější vlákno/a s hledaným výrazem",
-        "withoutSearch": "Nedávná vlákna"
+      "commandItems": {
+        "errorFetching": "Chyba při načítání prostorů",
+        "noSpacesFound": "Žádné prostory nenalezeny"
       },
-      "spacePreview": {
-        "tooltip": "Kliknutím vyhledáte vlákna v tomto prostoru"
+      "preview": {
+        "description": "Popis",
+        "instructions": "Instrukce",
+        "files": "Soubory ({{count}})",
+        "webLinks": "Webové odkazy ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Nepodařilo se načíst prostory. Zkuste to prosím později.",
-      "loading": "Načítání prostorů",
-      "empty": "Nebyly nalezeny žádné prostory.",
-      "spaceThreads": {
-        "loading": "Načítání vláken pro \"{{title}}\"",
-        "error": "Nepodařilo se načíst vlákna. Zkuste to prosím později.",
-        "empty": "V tomto prostoru nebyla nalezena žádná vlákna.",
-        "heading": "Complexity může vyhledávat pouze v 50 nejnovějších vláknech."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Popis:",
-          "instructions": "Pokyny:"
-        },
-        "searchHint": "pro vyhledávání vláken v tomto Prostoru"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Chyba při načítání vláken",
+        "noThreadsFound": "Žádná vlákna nenalezena"
       }
     },
-    "zenMode": {
-      "enable": "Povolit Zen režim",
-      "disable": "Zakázat Zen režim"
-    },
-    "keywords": {
-      "enable": "povolit",
-      "zen": "zen",
-      "mode": "režim",
-      "disable": "zakázat",
-      "threads": "vlákna",
-      "spaces": "prostory",
-      "search": "hledat",
-      "home": "domů",
-      "discover": "objevit",
-      "library": "knihovna",
-      "user": "uživatel",
-      "settings": "nastavení",
-      "labs": "laboratoř",
-      "navigate": "navigovat",
-      "dark": "tmavý",
-      "light": "světlý",
-      "system": "systémový",
-      "theme": "téma",
-      "change": "změnit",
-      "color": "barva",
-      "scheme": "schéma"
+    "common": {
+      "noResults": "Žádné výsledky nenalezeny",
+      "current": "Aktuální"
     }
   }
 }

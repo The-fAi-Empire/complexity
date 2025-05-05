@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "미리보기 표시",
+      "hidePreviews": "미리보기 숨기기"
+    },
     "input": {
-      "placeholder": "명령어를 입력하거나 검색하세요..."
+      "searchPlaceholder": "검색..."
     },
-    "noResults": "<emphasis>{{code}}</emphasis>에 대한 검색 결과가 없습니다.",
-    "groups": {
-      "search": "검색",
-      "quickNavigations": "빠른 탐색",
-      "zenMode": "젠 모드",
-      "colorScheme": "색상 테마 변경"
-    },
-    "filters": {
-      "threads": {
-        "label": "스레드",
-        "searchPlaceholder": "스레드 검색..."
-      },
-      "spaces": {
-        "label": "스페이스",
-        "searchPlaceholder": "스페이스 검색..."
-      }
+    "actions": {
+      "createNewThread": "새 스레드 생성",
+      "toggleIncognitoEnable": "시크릿 모드 활성화",
+      "toggleIncognitoDisable": "시크릿 모드 비활성화",
+      "toggleLightMode": "라이트 모드로 변경",
+      "toggleDarkMode": "다크 모드로 변경"
     },
     "navigation": {
       "home": "홈",
-      "discover": "탐색",
       "library": "라이브러리",
-      "userSettings": "사용자 설정",
-      "labs": "실험실"
-    },
-    "colorSchemes": {
-      "dark": "다크",
-      "light": "라이트",
-      "system": "시스템"
-    },
-    "threadSearch": {
-      "error": "스레드를 가져오지 못했습니다. 나중에 다시 시도해 주세요.",
-      "loading": "스레드 로딩 중",
-      "empty": {
-        "withSearch": "스레드를 찾을 수 없습니다.",
-        "withoutSearch": "검색을 시작하려면 입력하세요"
-      },
-      "heading": {
-        "withSearch": "검색어가 포함된 최신 스레드 {{count}}개",
-        "withoutSearch": "최근 스레드"
-      },
-      "spacePreview": {
-        "tooltip": "이 스페이스의 스레드를 검색하려면 클릭하세요"
-      }
-    },
-    "spaceSearch": {
-      "error": "스페이스를 가져오지 못했습니다. 나중에 다시 시도해 주세요.",
-      "loading": "스페이스 로딩 중",
-      "empty": "스페이스를 찾을 수 없습니다.",
-      "spaceThreads": {
-        "loading": "\"{{title}}\"의 스레드 로딩 중",
-        "error": "스레드를 가져오지 못했습니다. 나중에 다시 시도해 주세요.",
-        "empty": "이 스페이스에서 스레드를 찾을 수 없습니다.",
-        "heading": "Complexity는 최근 50개의 스레드만 검색할 수 있습니다."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "설명:",
-          "instructions": "안내:"
-        },
-        "searchHint": "이 스페이스의 스레드 검색"
-      }
-    },
-    "zenMode": {
-      "enable": "젠 모드 활성화",
-      "disable": "젠 모드 비활성화"
-    },
-    "keywords": {
-      "enable": "활성화",
-      "zen": "젠",
-      "mode": "모드",
-      "disable": "비활성화",
-      "threads": "스레드",
       "spaces": "스페이스",
-      "search": "검색",
-      "home": "홈",
       "discover": "탐색",
-      "library": "라이브러리",
-      "user": "사용자",
       "settings": "설정",
       "labs": "실험실",
-      "navigate": "이동",
-      "dark": "다크",
-      "light": "라이트",
-      "system": "시스템",
-      "theme": "테마",
-      "change": "변경",
-      "color": "색상",
-      "scheme": "스키마"
+      "current": "현재",
+      "openInNewTab": "새 탭에서 열기",
+      "goTo": "{{destination}}로 이동"
+    },
+    "search": {
+      "threads": "스레드",
+      "spaces": "스페이스",
+      "threadsPlaceholder": "스레드 검색...",
+      "spacesPlaceholder": "스페이스 검색..."
+    },
+    "groups": {
+      "actions": "작업",
+      "navigation": "탐색",
+      "search": "검색"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "새 탭에서 열기",
+        "searchInSpace": "스페이스에서 검색",
+        "goToSpace": "스페이스로 이동",
+        "searchSpacePlaceholder": "{{spaceName}} 검색..."
+      },
+      "commandItems": {
+        "errorFetching": "스페이스 가져오기 오류",
+        "noSpacesFound": "스페이스를 찾을 수 없음"
+      },
+      "preview": {
+        "description": "설명",
+        "instructions": "지침",
+        "files": "파일 ({{count}})",
+        "webLinks": "웹 링크 ({{count}})"
+      }
+    },
+    "threads": {
+      "commandItems": {
+        "errorFetching": "스레드 가져오기 오류",
+        "noThreadsFound": "스레드를 찾을 수 없음"
+      }
+    },
+    "common": {
+      "noResults": "결과를 찾을 수 없음",
+      "current": "현재"
     }
   }
 }

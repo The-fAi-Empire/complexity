@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "पूर्वावलोकन दिखाएं",
+      "hidePreviews": "पूर्वावलोकन छिपाएं"
+    },
     "input": {
-      "placeholder": "कमांड टाइप करें या खोजें..."
+      "searchPlaceholder": "खोजें..."
     },
-    "noResults": "<emphasis>{{code}}</emphasis> के लिए कोई परिणाम नहीं मिला।",
-    "groups": {
-      "search": "खोजें",
-      "quickNavigations": "त्वरित नेविगेशन",
-      "zenMode": "ज़ेन मोड",
-      "colorScheme": "रंग योजना बदलें"
-    },
-    "filters": {
-      "threads": {
-        "label": "थ्रेड्स",
-        "searchPlaceholder": "थ्रेड्स खोजें..."
-      },
-      "spaces": {
-        "label": "स्पेस",
-        "searchPlaceholder": "स्पेस खोजें..."
-      }
+    "actions": {
+      "createNewThread": "नया थ्रेड बनाएं",
+      "toggleIncognitoEnable": "इनकॉग्निटो मोड सक्षम करें",
+      "toggleIncognitoDisable": "इनकॉग्निटो मोड अक्षम करें",
+      "toggleLightMode": "लाइट मोड में बदलें",
+      "toggleDarkMode": "डार्क मोड में बदलें"
     },
     "navigation": {
       "home": "होम",
-      "discover": "खोजें",
       "library": "लाइब्रेरी",
-      "userSettings": "उपयोगकर्ता सेटिंग्स",
-      "labs": "प्रयोगशाला"
+      "spaces": "स्पेस",
+      "discover": "खोजें",
+      "settings": "सेटिंग्स",
+      "labs": "लैब्स",
+      "current": "वर्तमान",
+      "openInNewTab": "नए टैब में खोलें",
+      "goTo": "{{destination}} पर जाएं"
     },
-    "colorSchemes": {
-      "dark": "डार्क",
-      "light": "लाइट",
-      "system": "सिस्टम"
-    },
-    "threadSearch": {
-      "error": "थ्रेड्स प्राप्त करने में विफल। कृपया बाद में पुनः प्रयास करें।",
-      "loading": "थ्रेड्स लोड हो रहे हैं",
-      "empty": {
-        "withSearch": "कोई थ्रेड नहीं मिला।",
-        "withoutSearch": "खोजने के लिए टाइप करना शुरू करें"
-      },
-      "heading": {
-        "withSearch": "खोज शब्द वाले {{count}} नवीनतम थ्रेड",
-        "withoutSearch": "हाल के थ्रेड्स"
-      },
-      "spacePreview": {
-        "tooltip": "इस स्पेस में थ्रेड्स खोजने के लिए क्लिक करें"
-      }
-    },
-    "spaceSearch": {
-      "error": "स्पेस प्राप्त करने में विफल। कृपया बाद में पुनः प्रयास करें।",
-      "loading": "स्पेस लोड हो रहे हैं",
-      "empty": "कोई स्पेस नहीं मिला।",
-      "spaceThreads": {
-        "loading": "\"{{title}}\" के लिए थ्रेड्स लोड हो रहे हैं",
-        "error": "थ्रेड्स प्राप्त करने में विफल। कृपया बाद में पुनः प्रयास करें।",
-        "empty": "इस स्पेस में कोई थ्रेड नहीं मिला।",
-        "heading": "Complexity केवल 50 नवीनतम थ्रेड्स में खोज सकता है।"
-      },
-      "spaceItem": {
-        "details": {
-          "description": "विवरण:",
-          "instructions": "निर्देश:"
-        },
-        "searchHint": "इस स्पेस में थ्रेड्स खोजने के लिए"
-      }
-    },
-    "zenMode": {
-      "enable": "ज़ेन मोड सक्षम करें",
-      "disable": "ज़ेन मोड अक्षम करें"
-    },
-    "keywords": {
-      "enable": "सक्षम",
-      "zen": "ज़ेन",
-      "mode": "मोड",
-      "disable": "अक्षम",
+    "search": {
       "threads": "थ्रेड्स",
       "spaces": "स्पेस",
-      "search": "खोज",
-      "home": "होम",
-      "discover": "खोजें",
-      "library": "लाइब्रेरी",
-      "user": "उपयोगकर्ता",
-      "settings": "सेटिंग्स",
-      "labs": "प्रयोगशाला",
-      "navigate": "नेविगेट",
-      "dark": "डार्क",
-      "light": "लाइट",
-      "system": "सिस्टम",
-      "theme": "थीम",
-      "change": "बदलें",
-      "color": "रंग",
-      "scheme": "योजना"
+      "threadsPlaceholder": "थ्रेड्स खोजें...",
+      "spacesPlaceholder": "स्पेस खोजें..."
+    },
+    "groups": {
+      "actions": "कार्रवाई",
+      "navigation": "नेविगेशन",
+      "search": "खोज"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "नए टैब में खोलें",
+        "searchInSpace": "स्पेस में खोजें",
+        "goToSpace": "स्पेस पर जाएं",
+        "searchSpacePlaceholder": "{{spaceName}} में खोजें..."
+      },
+      "commandItems": {
+        "errorFetching": "स्पेस लाने में त्रुटि",
+        "noSpacesFound": "कोई स्पेस नहीं मिला"
+      },
+      "preview": {
+        "description": "विवरण",
+        "instructions": "निर्देश",
+        "files": "फ़ाइलें ({{count}})",
+        "webLinks": "वेब लिंक ({{count}})"
+      }
+    },
+    "threads": {
+      "commandItems": {
+        "errorFetching": "थ्रेड्स लाने में त्रुटि",
+        "noThreadsFound": "कोई थ्रेड नहीं मिला"
+      }
+    },
+    "common": {
+      "noResults": "कोई परिणाम नहीं मिला",
+      "current": "वर्तमान"
     }
   }
 }

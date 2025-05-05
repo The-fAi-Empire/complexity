@@ -72,15 +72,6 @@ export const pplxLocalLanguageModels = [
     hideFromList: false,
   },
   {
-    label: "GPT-4.5",
-    shortLabel: "GPT-4.5",
-    code: "gpt45",
-    provider: "OpenAI",
-    limitKey: "gpt45_limit",
-    type: "fast",
-    hideFromList: false,
-  },
-  {
     label: "Grok-3 Beta",
     shortLabel: "Grok-3",
     code: "grok",

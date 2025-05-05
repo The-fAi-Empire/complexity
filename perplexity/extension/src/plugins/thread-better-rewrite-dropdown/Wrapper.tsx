@@ -12,7 +12,10 @@ const { ThreadBetterRewriteDropdown } = lazily(
 const ThreadBetterRewriteDropdownWrapper = withPluginsGuard(
   ThreadBetterRewriteDropdown,
   {
-    dependentPluginIds: ["thread:betterRewriteDropdowns"],
+    dependentPluginIds: [
+      "queryBox:languageModelSelector",
+      "thread:betterRewriteDropdowns",
+    ],
     requiresLoggedIn: true,
     allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
   },

@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Prikaži preglede",
+      "hidePreviews": "Sakrij preglede"
+    },
     "input": {
-      "placeholder": "Unesite naredbu ili pretražite..."
+      "searchPlaceholder": "Pretraži..."
     },
-    "noResults": "Nisu pronađeni rezultati za <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Pretraži",
-      "quickNavigations": "Brza navigacija",
-      "zenMode": "Zen način",
-      "colorScheme": "Promijeni shemu boja"
-    },
-    "filters": {
-      "threads": {
-        "label": "Razgovori",
-        "searchPlaceholder": "Pretraži razgovore..."
-      },
-      "spaces": {
-        "label": "Prostori",
-        "searchPlaceholder": "Pretraži prostore..."
-      }
+    "actions": {
+      "createNewThread": "Stvori novu temu",
+      "toggleIncognitoEnable": "Omogući inkognito način",
+      "toggleIncognitoDisable": "Onemogući inkognito način",
+      "toggleLightMode": "Promijeni na svijetli način",
+      "toggleDarkMode": "Promijeni na tamni način"
     },
     "navigation": {
       "home": "Početna",
+      "library": "Knjižnica",
+      "spaces": "Prostori",
       "discover": "Otkrij",
-      "library": "Biblioteka",
-      "userSettings": "Korisničke postavke",
-      "labs": "Laboratorij"
+      "settings": "Postavke",
+      "labs": "Laboratoriji",
+      "current": "Trenutno",
+      "openInNewTab": "Otvori u novoj kartici",
+      "goTo": "Idi na {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Tamno",
-      "light": "Svijetlo",
-      "system": "Sustav"
+    "search": {
+      "threads": "Teme",
+      "spaces": "Prostori",
+      "threadsPlaceholder": "Pretraži teme...",
+      "spacesPlaceholder": "Pretraži prostore..."
     },
-    "threadSearch": {
-      "error": "Dohvaćanje razgovora nije uspjelo. Molimo pokušajte kasnije.",
-      "loading": "Učitavanje razgovora",
-      "empty": {
-        "withSearch": "Nisu pronađeni razgovori.",
-        "withoutSearch": "Počnite tipkati za pretraživanje"
+    "groups": {
+      "actions": "Akcije",
+      "navigation": "Navigacija",
+      "search": "Pretraga"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Otvori u novoj kartici",
+        "searchInSpace": "Pretraži u prostoru",
+        "goToSpace": "Idi na prostor",
+        "searchSpacePlaceholder": "Pretraži {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} najnoviji razgovor(i) s traženim pojmom",
-        "withoutSearch": "Nedavni razgovori"
+      "commandItems": {
+        "errorFetching": "Greška pri dohvaćanju prostora",
+        "noSpacesFound": "Nisu pronađeni prostori"
       },
-      "spacePreview": {
-        "tooltip": "Kliknite za pretraživanje razgovora u ovom prostoru"
+      "preview": {
+        "description": "Opis",
+        "instructions": "Upute",
+        "files": "Datoteke ({{count}})",
+        "webLinks": "Web poveznice ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Dohvaćanje prostora nije uspjelo. Molimo pokušajte kasnije.",
-      "loading": "Učitavanje prostora",
-      "empty": "Nisu pronađeni prostori.",
-      "spaceThreads": {
-        "loading": "Učitavanje razgovora za \"{{title}}\"",
-        "error": "Dohvaćanje razgovora nije uspjelo. Molimo pokušajte kasnije.",
-        "empty": "Nisu pronađeni razgovori u ovom prostoru.",
-        "heading": "Complexity može pretraživati samo 50 najnovijih razgovora."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Opis:",
-          "instructions": "Upute:"
-        },
-        "searchHint": "za pretraživanje razgovora u ovom Prostoru"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Greška pri dohvaćanju tema",
+        "noThreadsFound": "Nisu pronađene teme"
       }
     },
-    "zenMode": {
-      "enable": "Omogući Zen način",
-      "disable": "Onemogući Zen način"
-    },
-    "keywords": {
-      "enable": "omogući",
-      "zen": "zen",
-      "mode": "način",
-      "disable": "onemogući",
-      "threads": "razgovori",
-      "spaces": "prostori",
-      "search": "pretraži",
-      "home": "početna",
-      "discover": "otkrij",
-      "library": "biblioteka",
-      "user": "korisnik",
-      "settings": "postavke",
-      "labs": "laboratorij",
-      "navigate": "navigiraj",
-      "dark": "tamno",
-      "light": "svijetlo",
-      "system": "sustav",
-      "theme": "tema",
-      "change": "promijeni",
-      "color": "boja",
-      "scheme": "shema"
+    "common": {
+      "noResults": "Nema pronađenih rezultata",
+      "current": "Trenutno"
     }
   }
 }

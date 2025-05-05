@@ -1,22 +1,15 @@
-export type SearchFilterType = "threads" | "spaces" | null;
+import type { ComponentProps } from "react";
 
-export type CommandMenuItem = {
-  id: string;
-  label: string;
-  keywords?: string[];
-  icon?: React.ReactNode;
+export type CommandItemProps = {
+  eager: boolean;
+  group: string;
+  icon: React.ComponentType<ComponentProps<"svg">>;
+  keybinding: string[];
+  keywords: string[];
   onSelect: () => void;
-};
-
-export type CommandMenuState = {
-  open: boolean;
-  searchValue: string;
-  selectedValue: string;
-  filter: SearchFilterType;
-  inputRef: React.RefObject<HTMLInputElement> | null;
-  setOpen: (open: boolean) => void;
-  setSearchValue: (value: string) => void;
-  setSelectedValue: (value: string) => void;
-  setFilter: (filter: SearchFilterType) => void;
-  setInputRef: (ref: React.RefObject<HTMLInputElement>) => void;
+  priority: number;
+  show: boolean;
+  title: string;
+  titleSuffixBadge?: string;
+  value: string;
 };

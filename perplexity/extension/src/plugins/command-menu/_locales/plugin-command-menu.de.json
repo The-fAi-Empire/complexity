@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Vorschauen anzeigen",
+      "hidePreviews": "Vorschauen ausblenden"
+    },
     "input": {
-      "placeholder": "Geben Sie einen Befehl ein oder suchen Sie..."
+      "searchPlaceholder": "Suchen..."
     },
-    "noResults": "Keine Ergebnisse gefunden für <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Suchen",
-      "quickNavigations": "Schnellnavigation",
-      "zenMode": "Zen-Modus",
-      "colorScheme": "Farbschema ändern"
-    },
-    "filters": {
-      "threads": {
-        "label": "Threads",
-        "searchPlaceholder": "Threads durchsuchen..."
-      },
-      "spaces": {
-        "label": "Spaces",
-        "searchPlaceholder": "Spaces durchsuchen..."
-      }
+    "actions": {
+      "createNewThread": "Neuen Thread erstellen",
+      "toggleIncognitoEnable": "Inkognito-Modus aktivieren",
+      "toggleIncognitoDisable": "Inkognito-Modus deaktivieren",
+      "toggleLightMode": "Zu hellem Modus wechseln",
+      "toggleDarkMode": "Zu dunklem Modus wechseln"
     },
     "navigation": {
       "home": "Startseite",
-      "discover": "Entdecken",
       "library": "Bibliothek",
-      "userSettings": "Benutzereinstellungen",
-      "labs": "Labor"
+      "spaces": "Spaces",
+      "discover": "Entdecken",
+      "settings": "Einstellungen",
+      "labs": "Labs",
+      "current": "Aktuell",
+      "openInNewTab": "In neuem Tab öffnen",
+      "goTo": "Zu {{destination}} gehen"
     },
-    "colorSchemes": {
-      "dark": "Dunkel",
-      "light": "Hell",
-      "system": "System"
+    "search": {
+      "threads": "Threads",
+      "spaces": "Spaces",
+      "threadsPlaceholder": "Threads durchsuchen...",
+      "spacesPlaceholder": "Spaces durchsuchen..."
     },
-    "threadSearch": {
-      "error": "Threads konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-      "loading": "Threads werden geladen",
-      "empty": {
-        "withSearch": "Keine Threads gefunden.",
-        "withoutSearch": "Beginnen Sie mit der Eingabe, um zu suchen"
+    "groups": {
+      "actions": "Aktionen",
+      "navigation": "Navigation",
+      "search": "Suche"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "In neuem Tab öffnen",
+        "searchInSpace": "In Space suchen",
+        "goToSpace": "Zum Space gehen",
+        "searchSpacePlaceholder": "{{spaceName}} durchsuchen..."
       },
-      "heading": {
-        "withSearch": "{{count}} neueste Thread(s) mit dem Suchbegriff",
-        "withoutSearch": "Aktuelle Threads"
+      "commandItems": {
+        "errorFetching": "Fehler beim Abrufen von Spaces",
+        "noSpacesFound": "Keine Spaces gefunden"
       },
-      "spacePreview": {
-        "tooltip": "Klicken Sie hier, um Threads in diesem Space zu suchen"
+      "preview": {
+        "description": "Beschreibung",
+        "instructions": "Anweisungen",
+        "files": "Dateien ({{count}})",
+        "webLinks": "Weblinks ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Spaces konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-      "loading": "Spaces werden geladen",
-      "empty": "Keine Spaces gefunden.",
-      "spaceThreads": {
-        "loading": "Threads für \"{{title}}\" werden geladen",
-        "error": "Threads konnten nicht geladen werden. Bitte versuchen Sie es später erneut.",
-        "empty": "Keine Threads in diesem Space gefunden.",
-        "heading": "Complexity kann nur in den 50 neuesten Threads suchen."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Beschreibung:",
-          "instructions": "Anweisungen:"
-        },
-        "searchHint": "um Threads in diesem Space zu suchen"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Fehler beim Abrufen von Threads",
+        "noThreadsFound": "Keine Threads gefunden"
       }
     },
-    "zenMode": {
-      "enable": "Zen-Modus aktivieren",
-      "disable": "Zen-Modus deaktivieren"
-    },
-    "keywords": {
-      "enable": "aktivieren",
-      "zen": "zen",
-      "mode": "modus",
-      "disable": "deaktivieren",
-      "threads": "threads",
-      "spaces": "spaces",
-      "search": "suchen",
-      "home": "startseite",
-      "discover": "entdecken",
-      "library": "bibliothek",
-      "user": "benutzer",
-      "settings": "einstellungen",
-      "labs": "labor",
-      "navigate": "navigieren",
-      "dark": "dunkel",
-      "light": "hell",
-      "system": "system",
-      "theme": "theme",
-      "change": "ändern",
-      "color": "farbe",
-      "scheme": "schema"
+    "common": {
+      "noResults": "Keine Ergebnisse gefunden",
+      "current": "Aktuell"
     }
   }
 }

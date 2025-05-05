@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Pokaż podglądy",
+      "hidePreviews": "Ukryj podglądy"
+    },
     "input": {
-      "placeholder": "Wpisz polecenie lub szukaj..."
+      "searchPlaceholder": "Szukaj..."
     },
-    "noResults": "Nie znaleziono wyników dla <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Szukaj",
-      "quickNavigations": "Szybka nawigacja",
-      "zenMode": "Tryb Zen",
-      "colorScheme": "Zmień schemat kolorów"
-    },
-    "filters": {
-      "threads": {
-        "label": "Wątki",
-        "searchPlaceholder": "Szukaj wątków..."
-      },
-      "spaces": {
-        "label": "Przestrzenie",
-        "searchPlaceholder": "Szukaj przestrzeni..."
-      }
+    "actions": {
+      "createNewThread": "Utwórz nowy wątek",
+      "toggleIncognitoEnable": "Włącz tryb incognito",
+      "toggleIncognitoDisable": "Wyłącz tryb incognito",
+      "toggleLightMode": "Zmień na tryb jasny",
+      "toggleDarkMode": "Zmień na tryb ciemny"
     },
     "navigation": {
       "home": "Strona główna",
-      "discover": "Odkrywaj",
       "library": "Biblioteka",
-      "userSettings": "Ustawienia użytkownika",
-      "labs": "Laboratorium"
+      "spaces": "Przestrzenie",
+      "discover": "Odkrywaj",
+      "settings": "Ustawienia",
+      "labs": "Laboratorium",
+      "current": "Bieżący",
+      "openInNewTab": "Otwórz w nowej karcie",
+      "goTo": "Przejdź do {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Ciemny",
-      "light": "Jasny",
-      "system": "Systemowy"
+    "search": {
+      "threads": "Wątki",
+      "spaces": "Przestrzenie",
+      "threadsPlaceholder": "Szukaj wątków...",
+      "spacesPlaceholder": "Szukaj przestrzeni..."
     },
-    "threadSearch": {
-      "error": "Nie udało się pobrać wątków. Spróbuj ponownie później.",
-      "loading": "Ładowanie wątków",
-      "empty": {
-        "withSearch": "Nie znaleziono wątków.",
-        "withoutSearch": "Zacznij pisać, aby wyszukać"
+    "groups": {
+      "actions": "Akcje",
+      "navigation": "Nawigacja",
+      "search": "Wyszukiwanie"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Otwórz w nowej karcie",
+        "searchInSpace": "Szukaj w przestrzeni",
+        "goToSpace": "Przejdź do przestrzeni",
+        "searchSpacePlaceholder": "Szukaj {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} najnowszy(ch) wątek(ów) z szukanym terminem",
-        "withoutSearch": "Ostatnie wątki"
+      "commandItems": {
+        "errorFetching": "Błąd podczas pobierania przestrzeni",
+        "noSpacesFound": "Nie znaleziono przestrzeni"
       },
-      "spacePreview": {
-        "tooltip": "Kliknij, aby wyszukać wątki w tej przestrzeni"
+      "preview": {
+        "description": "Opis",
+        "instructions": "Instrukcje",
+        "files": "Pliki ({{count}})",
+        "webLinks": "Linki internetowe ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Nie udało się pobrać przestrzeni. Spróbuj ponownie później.",
-      "loading": "Ładowanie przestrzeni",
-      "empty": "Nie znaleziono przestrzeni.",
-      "spaceThreads": {
-        "loading": "Ładowanie wątków dla \"{{title}}\"",
-        "error": "Nie udało się pobrać wątków. Spróbuj ponownie później.",
-        "empty": "Nie znaleziono wątków w tej przestrzeni.",
-        "heading": "Complexity może przeszukiwać tylko 50 najnowszych wątków."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Opis:",
-          "instructions": "Instrukcje:"
-        },
-        "searchHint": "aby wyszukać wątki w tej Przestrzeni"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Błąd podczas pobierania wątków",
+        "noThreadsFound": "Nie znaleziono wątków"
       }
     },
-    "zenMode": {
-      "enable": "Włącz tryb Zen",
-      "disable": "Wyłącz tryb Zen"
-    },
-    "keywords": {
-      "enable": "włącz",
-      "zen": "zen",
-      "mode": "tryb",
-      "disable": "wyłącz",
-      "threads": "wątki",
-      "spaces": "przestrzenie",
-      "search": "szukaj",
-      "home": "strona główna",
-      "discover": "odkrywaj",
-      "library": "biblioteka",
-      "user": "użytkownik",
-      "settings": "ustawienia",
-      "labs": "laboratorium",
-      "navigate": "nawiguj",
-      "dark": "ciemny",
-      "light": "jasny",
-      "system": "systemowy",
-      "theme": "motyw",
-      "change": "zmień",
-      "color": "kolor",
-      "scheme": "schemat"
+    "common": {
+      "noResults": "Nie znaleziono wyników",
+      "current": "Bieżący"
     }
   }
 }

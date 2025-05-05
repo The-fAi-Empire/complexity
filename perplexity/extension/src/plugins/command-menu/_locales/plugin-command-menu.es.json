@@ -1,96 +1,68 @@
 {
   "commandMenu": {
+    "sidecar": {
+      "showPreviews": "Mostrar vistas previas",
+      "hidePreviews": "Ocultar vistas previas"
+    },
     "input": {
-      "placeholder": "Escribe un comando o busca..."
+      "searchPlaceholder": "Buscar..."
     },
-    "noResults": "No se encontraron resultados para <emphasis>{{code}}</emphasis>.",
-    "groups": {
-      "search": "Buscar",
-      "quickNavigations": "Navegación rápida",
-      "zenMode": "Modo Zen",
-      "colorScheme": "Cambiar esquema de color"
-    },
-    "filters": {
-      "threads": {
-        "label": "Hilos",
-        "searchPlaceholder": "Buscar hilos..."
-      },
-      "spaces": {
-        "label": "Espacios",
-        "searchPlaceholder": "Buscar espacios..."
-      }
+    "actions": {
+      "createNewThread": "Crear nuevo hilo",
+      "toggleIncognitoEnable": "Activar modo incógnito",
+      "toggleIncognitoDisable": "Desactivar modo incógnito",
+      "toggleLightMode": "Cambiar a modo claro",
+      "toggleDarkMode": "Cambiar a modo oscuro"
     },
     "navigation": {
       "home": "Inicio",
-      "discover": "Descubrir",
       "library": "Biblioteca",
-      "userSettings": "Ajustes de usuario",
-      "labs": "Laboratorios"
+      "spaces": "Espacios",
+      "discover": "Descubrir",
+      "settings": "Configuración",
+      "labs": "Laboratorios",
+      "current": "Actual",
+      "openInNewTab": "Abrir en nueva pestaña",
+      "goTo": "Ir a {{destination}}"
     },
-    "colorSchemes": {
-      "dark": "Oscuro",
-      "light": "Claro",
-      "system": "Sistema"
+    "search": {
+      "threads": "Hilos",
+      "spaces": "Espacios",
+      "threadsPlaceholder": "Buscar hilos...",
+      "spacesPlaceholder": "Buscar espacios..."
     },
-    "threadSearch": {
-      "error": "Error al obtener los hilos. Por favor, inténtalo de nuevo más tarde.",
-      "loading": "Cargando hilos",
-      "empty": {
-        "withSearch": "No se encontraron hilos.",
-        "withoutSearch": "Empieza a escribir para buscar"
+    "groups": {
+      "actions": "Acciones",
+      "navigation": "Navegación",
+      "search": "Búsqueda"
+    },
+    "spaces": {
+      "footer": {
+        "openInNewTab": "Abrir en nueva pestaña",
+        "searchInSpace": "Buscar en espacio",
+        "goToSpace": "Ir al espacio",
+        "searchSpacePlaceholder": "Buscar en {{spaceName}}..."
       },
-      "heading": {
-        "withSearch": "{{count}} hilo(s) más reciente(s) con el término de búsqueda",
-        "withoutSearch": "Hilos recientes"
+      "commandItems": {
+        "errorFetching": "Error al cargar espacios",
+        "noSpacesFound": "No se encontraron espacios"
       },
-      "spacePreview": {
-        "tooltip": "Haz clic para buscar hilos en este espacio"
+      "preview": {
+        "description": "Descripción",
+        "instructions": "Instrucciones",
+        "files": "Archivos ({{count}})",
+        "webLinks": "Enlaces web ({{count}})"
       }
     },
-    "spaceSearch": {
-      "error": "Error al obtener los espacios. Por favor, inténtalo de nuevo más tarde.",
-      "loading": "Cargando espacios",
-      "empty": "No se encontraron espacios.",
-      "spaceThreads": {
-        "loading": "Cargando hilos para \"{{title}}\"",
-        "error": "Error al obtener los hilos. Por favor, inténtalo de nuevo más tarde.",
-        "empty": "No se encontraron hilos en este espacio.",
-        "heading": "Complexity solo puede buscar en los 50 hilos más recientes."
-      },
-      "spaceItem": {
-        "details": {
-          "description": "Descripción:",
-          "instructions": "Instrucciones:"
-        },
-        "searchHint": "para buscar hilos en este Espacio"
+    "threads": {
+      "commandItems": {
+        "errorFetching": "Error al cargar hilos",
+        "noThreadsFound": "No se encontraron hilos"
       }
     },
-    "zenMode": {
-      "enable": "Activar modo Zen",
-      "disable": "Desactivar modo Zen"
-    },
-    "keywords": {
-      "enable": "activar",
-      "zen": "zen",
-      "mode": "modo",
-      "disable": "desactivar",
-      "threads": "hilos",
-      "spaces": "espacios",
-      "search": "buscar",
-      "home": "inicio",
-      "discover": "descubrir",
-      "library": "biblioteca",
-      "user": "usuario",
-      "settings": "ajustes",
-      "labs": "laboratorios",
-      "navigate": "navegar",
-      "dark": "oscuro",
-      "light": "claro",
-      "system": "sistema",
-      "theme": "tema",
-      "change": "cambiar",
-      "color": "color",
-      "scheme": "esquema"
+    "common": {
+      "noResults": "No se encontraron resultados",
+      "current": "Actual"
     }
   }
 }

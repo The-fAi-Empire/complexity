@@ -8,6 +8,7 @@ declare module "@/types/webext-bridge-overrides" {
     "spa-router:push": ({ url }: { url: string }) => void;
     "spa-router:replace": ({ url }: { url: string }) => void;
     "spa-router:refresh": () => void;
+    "spa-router:openInNewTab": ({ url }: { url: string }) => void;
   }
 }
 
@@ -39,5 +40,9 @@ export function setupSpaRouterListeners() {
       throw new Error("Next.js window object not found");
 
     window.next?.router.refresh();
+  });
+
+  onMessage("spa-router:openInNewTab", ({ data: { url } }) => {
+    window.open(url, "_blank");
   });
 }
