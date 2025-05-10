@@ -1,0 +1,62 @@
+import { Switch } from "@/components/ui/switch";
+import { InlineCode } from "@/components/ui/typography";
+import type { PluginId } from "@/data/plugin-registry/types";
+import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
+import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
+
+export const pluginId: PluginId = "betterSearchParams";
+
+export default function SpacesThreadsForceWritingModePluginSettingsUi() {
+  const { settings, mutation } = useExtensionSettings();
+  const pluginSettings = settings?.plugins["betterSearchParams"];
+
+  return (
+    <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
+      <Switch
+        textLabel="Enable"
+        checked={pluginSettings?.enabled ?? false}
+        onCheckedChange={({ checked }) => {
+          mutation.mutate((draft) => {
+            draft.plugins["betterSearchParams"].enabled = checked;
+          });
+        }}
+      />
+
+      <div className="x:flex x:flex-col x:gap-4">
+        <div>
+          <span className="x:text-sm x:text-muted-foreground">
+            Query format:
+          </span>
+          <InlineCode>
+            https://www.perplexity.ai/<mark>#</mark>?q=%s&model=
+            <mark>&#123;model&#125;</mark>
+            &focus=<mark>&#123;focus&#125;</mark>&<mark>incognito</mark>
+          </InlineCode>
+        </div>
+        <div>
+          <div>
+            <span>Valid values for </span>
+            <InlineCode>&#123;focus&#125;</InlineCode>{" "}
+            <span>(separated by commas)</span>:
+          </div>
+          <InlineCode className="x:ml-1">writing</InlineCode>
+          <InlineCode className="x:ml-1">web</InlineCode>
+          <InlineCode className="x:ml-1">social</InlineCode>
+          <InlineCode className="x:ml-1">scholar</InlineCode>
+        </div>
+        <div>
+          <span>Valid values for </span>
+          <InlineCode>&#123;model&#125;</InlineCode>:
+          <div className="x:mt-1 x:ml-8 x:flex x:flex-col x:gap-2">
+            {PplxLanguageModelsService.allModels.map((model) => (
+              <div key={model.code}>
+                <span>{model.label}</span>
+                <InlineCode className="x:ml-1">{model.code}</InlineCode>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

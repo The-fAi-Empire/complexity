@@ -1,5 +1,8 @@
 import { MatchPattern } from "@webext-core/match-patterns";
 
+import type { MaybePromise } from "@/types/utils.types";
+import { errorWrapper } from "@/utils/error-wrapper";
+
 export const jsonUtils = {
   safeParse(json: string) {
     try {
@@ -513,5 +516,28 @@ export function keysToString(keys: string[]) {
 export function setCssProperty(property: string, value: string) {
   requestAnimationFrame(() => {
     $(document.body).css({ [property]: value });
+  });
+}
+
+export function waitUtil(params: {
+  condition: () => MaybePromise<boolean>;
+  timeout?: number;
+  interval?: number;
+}): Promise<void> {
+  const { condition, timeout = 5000, interval = 500 } = params;
+
+  return new Promise((resolve) => {
+    const intervalId = setInterval(async () => {
+      const [result, error] = await errorWrapper(condition)();
+      if (!error && result === true) {
+        clearInterval(intervalId);
+        resolve();
+      }
+    }, interval);
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+      resolve();
+    }, timeout);
   });
 }

@@ -10,8 +10,6 @@ export default function SpacesThreadsForceWritingModePluginSettingsUi() {
   const pluginSettings =
     settings?.plugins["queryBox:spacesThreadsForceWritingMode"];
 
-  if (!settings) return null;
-
   return (
     <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
       <Switch

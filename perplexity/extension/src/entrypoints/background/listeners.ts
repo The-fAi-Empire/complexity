@@ -1,6 +1,7 @@
 import { onMessage } from "webext-bridge/background";
 
 import { APP_CONFIG } from "@/app.config";
+import { declarativeNetRequestListener } from "@/entrypoints/background/declarative-net-request";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import { getOptionsPageUrl } from "@/utils/utils";
 
@@ -20,6 +21,8 @@ export function setupBackgroundListeners() {
   createDashboardShortcut();
 
   contentScriptListeners();
+
+  declarativeNetRequestListener();
 }
 
 function createDashboardShortcut() {

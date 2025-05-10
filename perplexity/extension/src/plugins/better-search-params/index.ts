@@ -1,0 +1,32 @@
+import { z } from "zod";
+
+import { definePlugin } from "@/data/plugin-registry/utils";
+
+const schema = z.object({
+  enabled: z.boolean(),
+});
+
+declare module "@/data/plugin-registry/types" {
+  interface PluginsSettingsRegistry {
+    betterSearchParams: z.infer<typeof schema>;
+  }
+}
+
+export default definePlugin({
+  manifest: {
+    id: "betterSearchParams",
+    settingsUiRouteSegment: "better-search-params",
+    title: "Better Search Params",
+    description:
+      "Extends search param to include model, focus modes, and incognito mode, etc.",
+    categories: ["misc"],
+    tags: ["new"],
+    dependentMainWorldCorePlugins: ["spaRouter"],
+  },
+  settingsSchema: {
+    schema,
+    fallback: {
+      enabled: false,
+    },
+  },
+});

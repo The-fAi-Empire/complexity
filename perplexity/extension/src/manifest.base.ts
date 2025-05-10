@@ -34,7 +34,12 @@ export const baseManifest: ExtendedManifestV3Export = {
     page: "src/entrypoints/options-page/options.html",
   },
 
-  permissions: ["storage", "unlimitedStorage", "contextMenus"],
+  permissions: [
+    "storage",
+    "unlimitedStorage",
+    "contextMenus",
+    "declarativeNetRequestWithHostAccess",
+  ],
   optional_permissions: [],
 
   host_permissions: [
