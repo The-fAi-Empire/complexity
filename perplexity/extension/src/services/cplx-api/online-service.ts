@@ -71,7 +71,7 @@ export class CplxApiService {
     return fetchTextResource(
       getUrl({
         path: "/cache-buster",
-        passiveCacheBusterInterval: 0,
+        passiveCacheBusterInterval: 5,
       }).toString(),
     );
   }

@@ -38,7 +38,7 @@ export async function fetchResourceWithSchema<T>({
 
 export function getUrl({
   path,
-  passiveCacheBusterInterval: passiveCachingBuster,
+  passiveCacheBusterInterval,
 }: {
   path: string;
   passiveCacheBusterInterval?: number;
@@ -48,7 +48,7 @@ export function getUrl({
   url.searchParams.set(
     "t",
     getTParam({
-      interval: passiveCachingBuster ?? 0,
+      interval: passiveCacheBusterInterval ?? 0,
     }).toString(),
   );
   return url;
