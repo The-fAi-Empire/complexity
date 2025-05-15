@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Șterge istoricul de prompturi",
+      "message": "Sunteți sigur că doriți să ștergeți tot istoricul de prompturi? Această acțiune nu poate fi anulată.",
+      "actions": {
+        "cancel": "Anulează",
+        "confirm": "Șterge tot"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Caută în istoricul de prompturi...",
+    "noResults": "Nu s-au găsit rezultate"
+  }
+}

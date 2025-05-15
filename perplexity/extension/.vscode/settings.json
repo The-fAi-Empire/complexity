@@ -27,9 +27,14 @@
   "i18n-ally.defaultNamespace": "common",
   "i18n-ally.displayLanguage": "en",
   "i18n-ally.enabledFrameworks": ["i18next", "react-i18next"],
+  "i18n-ally.usage.scanningIgnore": [
+    "**/dist/**/_locales",
+    "**/dist/**/_locales/*"
+  ],
   "i18n-ally.extract.autoDetect": false,
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["**/_locales", "**/_locales/*"],
+  "i18n-ally.localesPaths": ["**/src/**/_locales", "**/src/**/_locales/*"],
+  "i18n-ally.ignoredLocales": ["**/dist/**/_locales", "**/dist/**/_locales/*"],
   "i18n-ally.namespace": true,
   "i18n-ally.pathMatcher": "{namespace}.{locale}.json",
   "i18n-ally.sourceLanguage": "en",

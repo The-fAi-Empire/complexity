@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "내보내기",
-    "copied": "복사됨",
     "format": {
       "label": "형식 선택",
       "placeholder": "형식을 선택하세요"

@@ -1,4 +1,5 @@
 import type { RouteObject } from "react-router-dom";
+import { sendMessage } from "webext-bridge/content-script";
 
 import { softNavigate } from "@/plugins/_core/main-world/spa-router/utils";
 import {
@@ -6,7 +7,7 @@ import {
   setupTempInterceptor,
 } from "@/plugins/better-search-params/utils";
 import { PluginsStatesService } from "@/services/plugins-states";
-import { waitUtil } from "@/utils/utils";
+import { waitUntil } from "@/utils/utils";
 
 export const betterSearchParamsRouterRoute: RouteObject = {
   path: "",
@@ -25,20 +26,32 @@ export const betterSearchParamsRouterRoute: RouteObject = {
     if (query == null) return null;
 
     const cleanup = setupTempInterceptor({ model, focusModes, isIncognito });
+    await Promise.all([
+      waitUntil({
+        condition: async () => {
+          return sendMessage(
+            "network-intercept:isInitialized",
+            undefined,
+            "window",
+          );
+        },
+        timeout: 10000,
+        interval: 500,
+      }),
+      waitUntil({
+        condition: async () => {
+          const url = new URL(`/search/`, window.location.href);
 
-    await waitUtil({
-      condition: async () => {
-        const url = new URL(`/search/`, window.location.href);
+          url.searchParams.set("q", query);
 
-        url.searchParams.set("q", query);
+          softNavigate(url.toString());
 
-        softNavigate(url.toString());
-
-        return true;
-      },
-      timeout: 10000,
-      interval: 500,
-    });
+          return true;
+        },
+        timeout: 10000,
+        interval: 500,
+      }),
+    ]);
 
     setTimeout(() => {
       cleanup?.();

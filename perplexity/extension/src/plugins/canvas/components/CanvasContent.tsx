@@ -1,4 +1,4 @@
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabContent } from "@/components/ui/tabs";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { CANVAS_INITIAL_STATE } from "@/plugins/canvas/canvases";
 import CanvasCodeView from "@/plugins/canvas/components/CodeView";
@@ -37,10 +37,10 @@ export default function CanvasContent() {
       }
       className={cn(PPLX_SCROLLBAR_CLASSES, "x:size-full x:overflow-auto")}
     >
-      <TabsContent value="code" className="x:size-full">
+      <TabContent value="code" className="x:size-full">
         <CanvasCodeView />
-      </TabsContent>
-      <TabsContent
+      </TabContent>
+      <TabContent
         value="preview"
         className={cn("x:size-full", {
           "x:hidden":
@@ -48,7 +48,7 @@ export default function CanvasContent() {
         })}
       >
         <CanvasPreview key={`${previewKey}`} language={language} />
-      </TabsContent>
+      </TabContent>
     </Tabs>
   );
 }

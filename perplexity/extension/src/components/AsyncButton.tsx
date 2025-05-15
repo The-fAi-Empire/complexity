@@ -32,5 +32,3 @@ export default function AsyncButton({
     </Button>
   );
 }
-
-AsyncButton.displayName = "AsyncButton";

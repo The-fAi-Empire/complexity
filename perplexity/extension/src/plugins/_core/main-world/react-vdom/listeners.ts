@@ -7,6 +7,7 @@ import { triggerRewriteOption } from "@/plugins/_core/main-world/react-vdom/acti
 
 declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
+    "reactVdom:isInitialized": () => true;
     "reactVdom:getMessages": (params: {
       remoteFiberNodePath?: string[];
     }) => MessageBlockFiberData[] | null;
@@ -34,4 +35,8 @@ export async function setupReactVdomListeners() {
   onMessage("reactVdom:triggerRewriteOption", ({ data }) =>
     triggerRewriteOption(data),
   );
+
+  onMessage("reactVdom:isInitialized", () => {
+    return true;
+  });
 }

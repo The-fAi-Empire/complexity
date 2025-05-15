@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "匯出",
-    "copied": "已複製",
     "format": {
       "label": "選擇格式",
       "placeholder": "選擇一種格式"

@@ -25,6 +25,26 @@ export function setupBackgroundListeners() {
   declarativeNetRequestListener();
 }
 
+function extensionIconActionListener() {
+  chrome.action.onClicked.addListener(async () => {
+    const action = (await ExtensionSettingsService.get()).extensionIconAction;
+
+    if (action === "perplexity")
+      chrome.tabs.create({ url: "https://perplexity.ai/" });
+    else chrome.runtime.openOptionsPage();
+  });
+}
+
+function onboardingFlowTrigger() {
+  chrome.runtime.onInstalled.addListener(({ reason }) => {
+    if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
+      chrome.tabs.create({
+        url: `${getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV })}#/onboarding`,
+      });
+    }
+  });
+}
+
 function createDashboardShortcut() {
   chrome.contextMenus.removeAll();
 
@@ -43,16 +63,6 @@ function createDashboardShortcut() {
   });
 }
 
-function onboardingFlowTrigger() {
-  chrome.runtime.onInstalled.addListener(({ reason }) => {
-    if (reason === chrome.runtime.OnInstalledReason.INSTALL) {
-      chrome.tabs.create({
-        url: `${getOptionsPageUrl({ isDev: APP_CONFIG.IS_DEV })}#/onboarding`,
-      });
-    }
-  });
-}
-
 function contentScriptListeners() {
   onMessage("bg:getTabId", ({ sender }) => sender.tabId);
 
@@ -66,15 +76,5 @@ function contentScriptListeners() {
     chrome.tabs.create({
       url: `${optionsPageUrl}#/direct-release-notes?version=${version}`,
     });
-  });
-}
-
-function extensionIconActionListener() {
-  chrome.action.onClicked.addListener(async () => {
-    const action = (await ExtensionSettingsService.get()).extensionIconAction;
-
-    if (action === "perplexity")
-      chrome.tabs.create({ url: "https://perplexity.ai/" });
-    else chrome.runtime.openOptionsPage();
   });
 }

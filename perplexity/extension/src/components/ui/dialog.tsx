@@ -7,15 +7,16 @@ import { Portal } from "@/components/ui/portal";
 
 export type DialogProps = ArkDialog.RootProps;
 
-const Dialog = ArkDialog.Root;
+export const Dialog = ArkDialog.Root;
 
-const DialogTrigger = ArkDialog.Trigger;
+export const DialogTrigger = ArkDialog.Trigger;
 
-const DialogPortal = Portal;
+export const DialogClose = ArkDialog.CloseTrigger;
 
-const DialogClose = ArkDialog.CloseTrigger;
-
-const DialogOverlay = ({ className, ...props }: ArkDialog.BackdropProps) => {
+export function DialogOverlay({
+  className,
+  ...props
+}: ArkDialog.BackdropProps) {
   return (
     <ArkDialog.Backdrop
       className={cn(
@@ -27,22 +28,25 @@ const DialogOverlay = ({ className, ...props }: ArkDialog.BackdropProps) => {
       {...props}
     />
   );
-};
+}
 
-DialogOverlay.displayName = ArkDialog.Backdrop.displayName;
-
-const DialogContent = ({
+export function DialogContent({
   children,
   portal = true,
   className,
   closeButton = true,
+  overlayProps,
   ...props
-}: ArkDialog.ContentProps & { portal?: boolean; closeButton?: boolean }) => {
-  const Comp = portal ? DialogPortal : React.Fragment;
+}: ArkDialog.ContentProps & {
+  portal?: boolean;
+  closeButton?: boolean;
+  overlayProps?: ArkDialog.BackdropProps;
+}) {
+  const Comp = portal ? Portal : React.Fragment;
 
   return (
     <Comp>
-      <DialogOverlay />
+      <DialogOverlay {...overlayProps} />
       <ArkDialog.Positioner>
         <ArkDialog.Content
           className={cn(
@@ -65,11 +69,12 @@ const DialogContent = ({
       </ArkDialog.Positioner>
     </Comp>
   );
-};
+}
 
-DialogContent.displayName = ArkDialog.Content.displayName;
-
-function DialogHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export function DialogHeader({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn("x:flex x:flex-col x:space-y-1.5", className)}
@@ -78,9 +83,10 @@ function DialogHeader({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   );
 }
 
-DialogHeader.displayName = "DialogHeader";
-
-function DialogFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
+export function DialogFooter({
+  className,
+  ...props
+}: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -92,9 +98,7 @@ function DialogFooter({ className, ...props }: HTMLAttributes<HTMLDivElement>) {
   );
 }
 
-DialogFooter.displayName = "DialogFooter";
-
-const DialogTitle = ({ className, ...props }: ArkDialog.TitleProps) => {
+export function DialogTitle({ className, ...props }: ArkDialog.TitleProps) {
   return (
     <ArkDialog.Title
       className={cn(
@@ -104,33 +108,16 @@ const DialogTitle = ({ className, ...props }: ArkDialog.TitleProps) => {
       {...props}
     />
   );
-};
+}
 
-DialogTitle.displayName = "DialogTitle";
-
-const DialogDescription = ({
+export function DialogDescription({
   className,
   ...props
-}: ArkDialog.DescriptionProps) => {
+}: ArkDialog.DescriptionProps) {
   return (
     <ArkDialog.Description
       className={cn("x:text-sm x:text-muted-foreground", className)}
       {...props}
     />
   );
-};
-
-DialogDescription.displayName = "DialogDescription";
-
-export {
-  Dialog,
-  DialogPortal,
-  DialogOverlay,
-  DialogClose,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
-  DialogDescription,
-};
+}

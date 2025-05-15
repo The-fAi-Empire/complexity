@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity - Perplexity AI Υπερενισχυμένο",
   "sidebar": {
     "supporterMessage": "Παρακαλώ σκεφτείτε να γίνετε <emphasis>Υποστηρικτής</emphasis> για να διατηρήσετε το έργο ζωντανό!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "λέξεις",
     "characters": "χαρακτήρες",
-    "expand": "Επέκταση",
-    "collapse": "Σύμπτυξη",
     "rewrite": "Επανεγγραφή",
     "speakAloud": "Εκφώνηση",
     "stop": "Διακοπή"

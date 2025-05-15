@@ -1,7 +1,6 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouterStoreSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { handlePromptSave } from "@/plugins/prompt-history/utils";
-import { slashCommandMenuStore } from "@/plugins/slash-command-menu/index.public";
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
@@ -27,8 +26,6 @@ export default function loader() {
 
       // Soft navigation
       spaRouterStoreSubscribe((params) => {
-        slashCommandMenuStore.getState().actions.setIsOpen(false);
-
         if (params.state === "pending") {
           handlePromptSave({
             url: params.url,

@@ -1,90 +1,65 @@
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandList,
-} from "@/components/ui/command";
 import { PopoverContent } from "@/components/ui/popover";
-import type { QueryBoxType } from "@/plugins/_core/ui/groups/query-box/types";
-import { PromptHistorySlashMenuItemsWrapper } from "@/plugins/prompt-history/Wrapper.public";
-import ActionItems from "@/plugins/slash-command-menu/ActionItems";
-import { CommandInputHandler } from "@/plugins/slash-command-menu/components/CommandInputHandler";
-import FilterItems from "@/plugins/slash-command-menu/FilterItems";
+import { Tabs, TabsList } from "@/components/ui/tabs";
 import {
-  useSlashCommandMenuSelectedValue,
-  useSlashCommandMenuActions,
-  useSlashCommandMenuFilter,
+  SlashCommandMenuTabContent as PromptHistorySlashCommandMenuTabContent,
+  SlashCommandMenuTabTrigger as PromptHistorySlashCommandMenuTabTrigger,
+} from "@/plugins/prompt-history/index.public";
+import { useBlurHandler } from "@/plugins/slash-command-menu/hooks/useBlurHandler";
+import {
+  slashCommandMenuStore,
+  useSlashCommandMenuStore,
 } from "@/plugins/slash-command-menu/store";
-import { useCommandFilter } from "@/plugins/slash-command-menu/useCommandFilter";
+import type { ContentTabId } from "@/plugins/slash-command-menu/store/slices/content-tab";
+import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
-type CommandContentProps = {
-  commandRef: React.RefObject<HTMLDivElement | null>;
-  commandInputRef: React.RefObject<HTMLInputElement | null>;
-  anchor: HTMLElement;
-  storeType: QueryBoxType;
-};
+export default function CommandContent() {
+  const contentRef = useRef<HTMLDivElement | null>(null);
 
-const DefaultCommandGroup = memo(() => (
-  <CommandGroup>
-    <FilterItems />
-    <ActionItems />
-  </CommandGroup>
-));
+  useBlurHandler({
+    contentRef,
+    exceptionalElementSelectors: ["[data-prompt-history-clear-all-dialog]"],
+  });
 
-DefaultCommandGroup.displayName = "DefaultCommandGroup";
-
-export const CommandContent = memo((props: CommandContentProps) => {
-  const { storeType, anchor } = props;
-  const selectedValue = useSlashCommandMenuSelectedValue();
-  const { setSelectedValue } = useSlashCommandMenuActions();
-  const filter = useSlashCommandMenuFilter();
-
-  const { shouldFilterItems, calculateFilterScore } = useCommandFilter();
-
-  const memoizedFilter = useCallback(
-    (value: string, search: string) => {
-      return calculateFilterScore(value, search, undefined, filter);
-    },
-    [calculateFilterScore, filter],
-  );
-
-  const handleValueChange = useCallback(
-    (value: string) => setSelectedValue(value),
-    [setSelectedValue],
+  const activeContentTab = useSlashCommandMenuStore(
+    (store) => store.activeContentTab,
   );
 
   return (
     <PopoverContent
-      ref={props.commandRef}
+      ref={contentRef}
+      data-slash-command-menu-content
       className={cn(
-        "x:overflow-y-auto x:border-border x:p-0 x:font-medium x:shadow-none",
-        {
-          "x:rounded-b-none x:border-2 x:border-b-0": storeType !== "space",
-          "x:rounded-t-none x:border-2 x:border-t-0": storeType === "space",
-        },
+        PPLX_SCROLLBAR_CLASSES,
+        "x:w-(--reference-width) x:overflow-x-hidden x:border-border/80 x:bg-secondary x:p-0 x:shadow-lg x:rounded-2xl",
       )}
-      portal={false}
-      style={{ width: anchor.clientWidth }}
+      onKeyDown={(e) => {
+        if (e.key === Key.Escape) {
+          slashCommandMenuStore.getState().setOpen(false);
+        }
+      }}
     >
-      <Command
-        filter={memoizedFilter}
-        shouldFilter={shouldFilterItems(filter)}
-        value={selectedValue}
-        className={cn("x:bg-background x:dark:bg-secondary", {
-          "x:rounded-b-none": storeType !== "space",
-          "x:rounded-t-none": storeType === "space",
-        })}
-        onValueChange={handleValueChange}
+      <Tabs
+        orientation="vertical"
+        className="x:flex x:flex-row"
+        value={activeContentTab}
+        onValueChange={({ value }) => {
+          slashCommandMenuStore
+            .getState()
+            .setActiveContentTab(value as ContentTabId);
+        }}
       >
-        <CommandInputHandler {...props} />
-        <CommandList className="x:max-h-[200px] x:p-1">
-          <CommandEmpty>No results found</CommandEmpty>
-          {!filter && <DefaultCommandGroup />}
-          {filter === "promptHistory" && <PromptHistorySlashMenuItemsWrapper />}
-        </CommandList>
-      </Command>
+        <div className="x:max-h-[calc(var(--available-height)-50px)] x:w-full x:*:h-full">
+          <PromptHistorySlashCommandMenuTabContent />
+        </div>
+        <TabsList
+          className={cn(
+            PPLX_SCROLLBAR_CLASSES,
+            "x:flex-col x:justify-start x:overflow-x-hidden x:overflow-y-auto x:rounded-none x:border-l x:bg-background x:p-0 x:transition-all x:empty:hidden",
+          )}
+        >
+          <PromptHistorySlashCommandMenuTabTrigger />
+        </TabsList>
+      </Tabs>
     </PopoverContent>
   );
-});
-
-CommandContent.displayName = "CommandContent";
+}

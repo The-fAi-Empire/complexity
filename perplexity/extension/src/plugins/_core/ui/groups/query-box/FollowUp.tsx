@@ -3,8 +3,6 @@ import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-
 import { ScopedQueryBoxContextProvider } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { createToolbarPortalContainers } from "@/plugins/_core/ui/groups/query-box/utils";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
-import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
-import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
 
 export default function FollowUpQueryBoxWrapper() {
   const followUpQueryBox = queryBoxesDomObserverStore(
@@ -23,10 +21,7 @@ export default function FollowUpQueryBoxWrapper() {
       <Portal container={leftToolbar.leftContainer}>
         <BetterLanguageModelSelectorWrapper />
       </Portal>
-      <Portal container={leftToolbar.rightContainer}>
-        <SlashCommandMenuTriggerButtonWrapper />
-        <SlashCommandMenuWrapper anchor={followUpQueryBox} />
-      </Portal>
+      <Portal container={leftToolbar.rightContainer}>{null}</Portal>
     </ScopedQueryBoxContextProvider>
   );
 }

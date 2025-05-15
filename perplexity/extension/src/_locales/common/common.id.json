@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity - Perplexity AI Ditingkatkan",
   "sidebar": {
     "supporterMessage": "Mohon pertimbangkan untuk menjadi <emphasis>Pendukung</emphasis> untuk menjaga proyek ini tetap hidup!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "kata",
     "characters": "karakter",
-    "expand": "Perluas",
-    "collapse": "Ciutkan",
     "rewrite": "Tulis ulang",
     "speakAloud": "Ucapkan keras",
     "stop": "Berhenti"

@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity - Perplexity AI Îmbunătățit",
   "sidebar": {
     "supporterMessage": "Vă rugăm să considerați să deveniți un <emphasis>Susținător</emphasis> pentru a menține proiectul în viață!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "cuvinte",
     "characters": "caractere",
-    "expand": "Extinde",
-    "collapse": "Restrânge",
     "rewrite": "Rescrie",
     "speakAloud": "Citește cu voce tare",
     "stop": "Oprește"

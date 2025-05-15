@@ -519,7 +519,7 @@ export function setCssProperty(property: string, value: string) {
   });
 }
 
-export function waitUtil(params: {
+export function waitUntil(params: {
   condition: () => MaybePromise<boolean>;
   timeout?: number;
   interval?: number;

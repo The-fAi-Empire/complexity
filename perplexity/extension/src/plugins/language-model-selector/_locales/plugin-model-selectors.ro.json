@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Alege modelul de limbaj",
-    "proSearch": {
-      "tooltip": "Mai multe surse, interpreter de cod python"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Se adaptează la căutarea ta"

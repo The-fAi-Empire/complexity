@@ -8,47 +8,50 @@ type BreadcrumbProps = ComponentProps<"nav"> & {
   collapsed?: boolean;
 };
 
-const Breadcrumb = ({
+export function Breadcrumb({
   collapsed = true,
   className,
   ...props
-}: BreadcrumbProps) => (
-  <nav
-    aria-label="breadcrumb"
-    data-collapsed={collapsed}
-    className={cn("x:w-full x:overflow-hidden", className)}
-    {...props}
-  />
-);
-Breadcrumb.displayName = "Breadcrumb";
+}: BreadcrumbProps) {
+  return (
+    <nav
+      aria-label="breadcrumb"
+      data-collapsed={collapsed}
+      className={cn("x:w-full x:overflow-hidden", className)}
+      {...props}
+    />
+  );
+}
 
-const BreadcrumbList = ({ className, ...props }: ComponentProps<"ol">) => (
-  <ol
-    className={cn(
-      "x:flex x:items-center x:gap-1.5 x:text-sm x:text-muted-foreground",
-      className,
-    )}
-    {...props}
-  />
-);
-BreadcrumbList.displayName = "BreadcrumbList";
+export function BreadcrumbList({ className, ...props }: ComponentProps<"ol">) {
+  return (
+    <ol
+      className={cn(
+        "x:flex x:items-center x:gap-1.5 x:text-sm x:text-muted-foreground",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-const BreadcrumbItem = ({ className, ...props }: ComponentProps<"li">) => (
-  <li
-    data-item=""
-    className={cn("x:flex x:shrink-0 x:items-center", className)}
-    {...props}
-  />
-);
-BreadcrumbItem.displayName = "BreadcrumbItem";
+export function BreadcrumbItem({ className, ...props }: ComponentProps<"li">) {
+  return (
+    <li
+      data-item=""
+      className={cn("x:flex x:shrink-0 x:items-center", className)}
+      {...props}
+    />
+  );
+}
 
-const BreadcrumbLink = ({
+export function BreadcrumbLink({
   asChild,
   className,
   ...props
 }: ComponentProps<"a"> & {
   asChild?: boolean;
-}) => {
+}) {
   const Comp = asChild ? Slot : "a";
 
   return (
@@ -57,62 +60,57 @@ const BreadcrumbLink = ({
       {...props}
     />
   );
-};
-BreadcrumbLink.displayName = "BreadcrumbLink";
+}
 
-const BreadcrumbPage = ({ className, ...props }: ComponentProps<"span">) => (
-  <span
-    role="link"
-    aria-disabled="true"
-    aria-current="page"
-    className={cn("x:font-normal x:text-foreground", className)}
-    {...props}
-  />
-);
-BreadcrumbPage.displayName = "BreadcrumbPage";
+export function BreadcrumbPage({
+  className,
+  ...props
+}: ComponentProps<"span">) {
+  return (
+    <span
+      role="link"
+      aria-disabled="true"
+      aria-current="page"
+      className={cn("x:font-normal x:text-foreground", className)}
+      {...props}
+    />
+  );
+}
 
-const BreadcrumbSeparator = ({
+export function BreadcrumbSeparator({
   children,
   className,
   ...props
-}: ComponentProps<"li">) => (
-  <li
-    role="presentation"
-    aria-hidden="true"
-    data-separator=""
-    className={cn("x:[&>svg]:h-3.5 x:[&>svg]:w-3.5", className)}
-    {...props}
-  >
-    {children ?? <LuChevronRight />}
-  </li>
-);
-BreadcrumbSeparator.displayName = "BreadcrumbSeparator";
+}: ComponentProps<"li">) {
+  return (
+    <li
+      role="presentation"
+      aria-hidden="true"
+      data-separator=""
+      className={cn("x:[&>svg]:h-3.5 x:[&>svg]:w-3.5", className)}
+      {...props}
+    >
+      {children ?? <LuChevronRight />}
+    </li>
+  );
+}
 
-const BreadcrumbEllipsis = ({
+export function BreadcrumbEllipsis({
   className,
   ...props
-}: ComponentProps<"span">) => (
-  <span
-    role="presentation"
-    aria-hidden="true"
-    className={cn(
-      "x:flex x:h-9 x:w-9 x:items-center x:justify-center",
-      className,
-    )}
-    {...props}
-  >
-    <LuEllipsis className="x:h-4 x:w-4" />
-    <span className="x:sr-only">More</span>
-  </span>
-);
-BreadcrumbEllipsis.displayName = "BreadcrumbEllipsis";
-
-export {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-  BreadcrumbEllipsis,
-};
+}: ComponentProps<"span">) {
+  return (
+    <span
+      role="presentation"
+      aria-hidden="true"
+      className={cn(
+        "x:flex x:h-9 x:w-9 x:items-center x:justify-center",
+        className,
+      )}
+      {...props}
+    >
+      <LuEllipsis className="x:h-4 x:w-4" />
+      <span className="x:sr-only">More</span>
+    </span>
+  );
+}

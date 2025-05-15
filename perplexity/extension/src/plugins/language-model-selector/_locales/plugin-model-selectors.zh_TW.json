@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "選擇語言模型",
-    "proSearch": {
-      "tooltip": "更多資源，Python 程式碼解釋器"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "自動",
       "description": "適應您的查詢"

@@ -2,7 +2,7 @@ import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
 
-export const ITEMS_PER_PAGE = 5;
+export const ITEMS_PER_PAGE = 10;
 
 export const promptHistoryQueries = {
   all: () => ["promptHistory"] as const,

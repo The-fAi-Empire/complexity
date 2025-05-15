@@ -26,6 +26,8 @@ export function applyRouteIdAttribute(location: ReturnType<typeof whereAmI>) {
 export async function waitForRouteChangeComplete(
   location: ReturnType<typeof whereAmI>,
 ) {
+  const domSelectors = await DomSelectorsService.mainWorldCached();
+
   const locationChecks: Partial<
     Record<ReturnType<typeof whereAmI>, () => MaybePromise<boolean>>
   > = {
@@ -41,13 +43,11 @@ export async function waitForRouteChangeComplete(
 
   async function checkThreadLoaded() {
     await UiUtils.waitForSpaIdle();
-    return (
-      $(DomSelectorsService.cachedSync.THREAD.MESSAGE.INNER_WRAPPER).length > 0
-    );
+    return $(domSelectors.THREAD.MESSAGE.INNER_WRAPPER).length > 0;
   }
 
   function checkHomeLoaded() {
-    return $(DomSelectorsService.cachedSync.HOME.SLOGAN).length > 0;
+    return $(domSelectors.HOME.SLOGAN).length > 0;
   }
 
   async function waitForConditionOrTimeout(

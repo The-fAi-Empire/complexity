@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Izvoz",
-    "copied": "Kopirano",
     "format": {
       "label": "Odaberi format",
       "placeholder": "Odaberite format"

@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Prompt előzmények törlése",
+      "message": "Biztosan törölni szeretné az összes prompt előzményt? Ez a művelet nem visszavonható.",
+      "actions": {
+        "cancel": "Mégse",
+        "confirm": "Összes törlése"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Keresés a prompt előzményekben...",
+    "noResults": "Nincs találat"
+  }
+}

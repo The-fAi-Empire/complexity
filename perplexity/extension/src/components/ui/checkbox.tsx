@@ -1,4 +1,4 @@
-import { Checkbox as ArkCheckbox } from "@ark-ui/react";
+import { Checkbox as ArkCheckbox } from "@ark-ui/react/checkbox";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ReactNode } from "react";
 import { LuCheck } from "react-icons/lu";
@@ -41,7 +41,7 @@ type CheckboxProps = ArkCheckbox.RootProps &
     labelClassName?: string;
   };
 
-function Checkbox({
+export function Checkbox({
   label,
   labelClassName,
   className,
@@ -69,7 +69,3 @@ function Checkbox({
     </ArkCheckbox.Root>
   );
 }
-
-Checkbox.displayName = "Checkbox";
-
-export { Checkbox };

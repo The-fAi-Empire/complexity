@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Εξαγωγή",
-    "copied": "Αντιγράφηκε",
     "format": {
       "label": "Επιλέξτε μορφή",
       "placeholder": "Επιλέξτε μια μορφή"

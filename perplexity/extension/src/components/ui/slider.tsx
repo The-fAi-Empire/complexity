@@ -3,11 +3,11 @@ import type { ComponentProps } from "react";
 
 export type SliderProps = ArkSlider.RootProps;
 
-const SliderContext = ArkSlider.Context;
+export const SliderContext = ArkSlider.Context;
 
-const Slider = ArkSlider.Root;
+export const Slider = ArkSlider.Root;
 
-const SliderLabel = ({ className, ...props }: ArkSlider.LabelProps) => {
+export function SliderLabel({ className, ...props }: ArkSlider.LabelProps) {
   return (
     <ArkSlider.Label
       className={cn(
@@ -17,27 +17,30 @@ const SliderLabel = ({ className, ...props }: ArkSlider.LabelProps) => {
       {...props}
     />
   );
-};
+}
 
-const SliderValueText = ({ className, ...props }: ArkSlider.ValueTextProps) => {
+export function SliderValueText({
+  className,
+  ...props
+}: ArkSlider.ValueTextProps) {
   return (
     <ArkSlider.ValueText
       className={cn("x:text-sm x:text-muted-foreground", className)}
       {...props}
     />
   );
-};
+}
 
-const SliderControl = ({ className, ...props }: ArkSlider.ControlProps) => {
+export function SliderControl({ className, ...props }: ArkSlider.ControlProps) {
   return (
     <ArkSlider.Control
       className={cn("x:relative x:flex x:w-full x:touch-none", className)}
       {...props}
     />
   );
-};
+}
 
-const SliderTrack = ({ className, ...props }: ArkSlider.TrackProps) => {
+export function SliderTrack({ className, ...props }: ArkSlider.TrackProps) {
   return (
     <ArkSlider.Track
       className={cn(
@@ -47,18 +50,18 @@ const SliderTrack = ({ className, ...props }: ArkSlider.TrackProps) => {
       {...props}
     />
   );
-};
+}
 
-const SliderRange = ({ className, ...props }: ArkSlider.RangeProps) => {
+export function SliderRange({ className, ...props }: ArkSlider.RangeProps) {
   return (
     <ArkSlider.Range
       className={cn("x:absolute x:h-full x:bg-primary", className)}
       {...props}
     />
   );
-};
+}
 
-const SliderThumb = ({
+export function SliderThumb({
   className,
   indicatorProps,
   showValueIndicator,
@@ -66,7 +69,7 @@ const SliderThumb = ({
 }: ArkSlider.ThumbProps & {
   showValueIndicator?: boolean;
   indicatorProps?: ComponentProps<"div">;
-}) => {
+}) {
   return (
     <ArkSlider.Thumb
       className={cn(
@@ -90,21 +93,21 @@ const SliderThumb = ({
       <ArkSlider.HiddenInput />
     </ArkSlider.Thumb>
   );
-};
+}
 
-const SliderMarkerGroup = ({
+export function SliderMarkerGroup({
   className,
   ...props
-}: ArkSlider.MarkerGroupProps) => {
+}: ArkSlider.MarkerGroupProps) {
   return (
     <ArkSlider.MarkerGroup
       className={cn("x:relative x:mt-2 x:flex x:w-full", className)}
       {...props}
     />
   );
-};
+}
 
-const SliderMarker = ({ className, ...props }: ArkSlider.MarkerProps) => {
+export function SliderMarker({ className, ...props }: ArkSlider.MarkerProps) {
   return (
     <ArkSlider.Marker
       className={cn(
@@ -114,17 +117,4 @@ const SliderMarker = ({ className, ...props }: ArkSlider.MarkerProps) => {
       {...props}
     />
   );
-};
-
-export {
-  Slider,
-  SliderContext,
-  SliderLabel,
-  SliderValueText,
-  SliderControl,
-  SliderTrack,
-  SliderRange,
-  SliderThumb,
-  SliderMarkerGroup,
-  SliderMarker,
-};
+}

@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Scegli modello linguistico",
-    "proSearch": {
-      "tooltip": "Più fonti, interprete di codice Python"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Si adatta alla tua richiesta"

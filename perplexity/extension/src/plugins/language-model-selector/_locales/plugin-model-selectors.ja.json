@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "言語モデルを選択",
-    "proSearch": {
-      "tooltip": "より多くのソース、Pythonコードインタープリター"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "自動",
       "description": "クエリに応じて適応"

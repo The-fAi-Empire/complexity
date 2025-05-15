@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Ekspor",
-    "copied": "Disalin",
     "format": {
       "label": "Pilih format",
       "placeholder": "Pilih sebuah format"

@@ -1,7 +1,6 @@
-function Skeleton({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+import type { ComponentProps } from "react";
+
+export function Skeleton({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       className={cn("x:animate-pulse x:rounded-md x:bg-muted", className)}
@@ -9,5 +8,3 @@ function Skeleton({
     />
   );
 }
-
-export { Skeleton };

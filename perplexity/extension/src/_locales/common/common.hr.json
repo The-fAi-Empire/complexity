@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity | Perplexity AI Supercharged",
   "sidebar": {
     "supporterMessage": "Molimo razmislite o tome da postanete <emphasis>Podržavatelj</emphasis> kako biste održali projekt živim!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "riječi",
     "characters": "znakova",
-    "expand": "Proširi",
-    "collapse": "Sažmi",
     "rewrite": "Prepiši",
     "speakAloud": "Pročitaj naglas",
     "stop": "Zaustavi"

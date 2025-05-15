@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Odaberi jezični model",
-    "proSearch": {
-      "tooltip": "Više izvora, Python interpreter koda"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Prilagođava se vašem upitu"

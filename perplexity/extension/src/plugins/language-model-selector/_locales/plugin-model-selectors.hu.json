@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Nyelvi modell kiválasztása",
-    "proSearch": {
-      "tooltip": "Több forrás, Python kód értelmező"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Alkalmazkodik a lekérdezéshez"

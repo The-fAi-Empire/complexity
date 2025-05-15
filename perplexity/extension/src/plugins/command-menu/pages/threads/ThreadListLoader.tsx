@@ -1,5 +1,5 @@
 import { CommandEmpty } from "@/components/ui/command";
-import CommandItemSkeleton from "@/plugins/command-menu/components/Skeletons";
+import { CommandItemSkeleton } from "@/components/ui/command";
 
 type ThreadListLoaderProps = {
   isLoading: boolean;

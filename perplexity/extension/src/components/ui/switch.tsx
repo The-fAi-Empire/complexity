@@ -1,4 +1,4 @@
-import { Switch as ArkSwitch } from "@ark-ui/react";
+import { Switch as ArkSwitch } from "@ark-ui/react/switch";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ReactNode } from "react";
 
@@ -59,7 +59,7 @@ type SwitchProps = ArkSwitch.RootProps &
     textLabel?: ReactNode;
   };
 
-function Switch({
+export function Switch({
   textLabel,
   labelClassName,
   className,
@@ -72,32 +72,30 @@ function Switch({
       {...props}
     >
       <ArkSwitch.Context>
-        {({ checked }) => (
-          <>
-            <ArkSwitch.Control className={switchVariants({ size })}>
-              <ArkSwitch.Thumb className={thumbVariants({ size })} />
-            </ArkSwitch.Control>
-            {textLabel != null && textLabel !== "" && (
-              <ArkSwitch.Label
-                className={cn(
-                  labelVariants({ size }),
-                  {
-                    "x:text-primary": checked,
-                  },
-                  labelClassName,
-                )}
-              >
-                {textLabel}
-              </ArkSwitch.Label>
-            )}
-            <ArkSwitch.HiddenInput />
-          </>
-        )}
+        {function SwitchContext({ checked }) {
+          return (
+            <>
+              <ArkSwitch.Control className={switchVariants({ size })}>
+                <ArkSwitch.Thumb className={thumbVariants({ size })} />
+              </ArkSwitch.Control>
+              {textLabel != null && textLabel !== "" && (
+                <ArkSwitch.Label
+                  className={cn(
+                    labelVariants({ size }),
+                    {
+                      "x:text-primary": checked,
+                    },
+                    labelClassName,
+                  )}
+                >
+                  {textLabel}
+                </ArkSwitch.Label>
+              )}
+              <ArkSwitch.HiddenInput />
+            </>
+          );
+        }}
       </ArkSwitch.Context>
     </ArkSwitch.Root>
   );
 }
-
-Switch.displayName = "Switch";
-
-export { Switch };

@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Effacer l'historique des prompts",
+      "message": "Êtes-vous sûr de vouloir effacer tout l'historique des prompts ? Cette action ne peut pas être annulée.",
+      "actions": {
+        "cancel": "Annuler",
+        "confirm": "Tout effacer"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Rechercher dans l'historique des prompts...",
+    "noResults": "Aucun résultat trouvé"
+  }
+}

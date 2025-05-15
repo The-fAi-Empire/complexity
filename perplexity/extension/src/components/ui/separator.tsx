@@ -4,11 +4,11 @@ type SeparatorProps = HTMLAttributes<HTMLDivElement> & {
   orientation?: "horizontal" | "vertical";
 };
 
-const Separator = ({
+export function Separator({
   className,
   orientation = "horizontal",
   ...props
-}: SeparatorProps) => {
+}: SeparatorProps) {
   return (
     <div
       role="separator"
@@ -23,8 +23,4 @@ const Separator = ({
       {...props}
     />
   );
-};
-
-Separator.displayName = "Separator";
-
-export { Separator };
+}

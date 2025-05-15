@@ -1,5 +1,6 @@
-import { Tooltip as ArkTooltip, Portal } from "@ark-ui/react";
-import React, { use } from "react";
+import { Portal } from "@ark-ui/react/portal";
+import { Tooltip as ArkTooltip } from "@ark-ui/react/tooltip";
+import React from "react";
 
 type TooltipContext = {
   positioning: ArkTooltip.RootProps["positioning"];
@@ -13,7 +14,7 @@ const TooltipContext = createContext<TooltipContext>({
 
 const TooltipContextProvider = TooltipContext.Provider;
 
-const TooltipRoot = ({ positioning, ...props }: ArkTooltip.RootProps) => {
+export function TooltipRoot({ positioning, ...props }: ArkTooltip.RootProps) {
   return (
     <TooltipContextProvider value={{ positioning }}>
       <ArkTooltip.Root
@@ -24,9 +25,9 @@ const TooltipRoot = ({ positioning, ...props }: ArkTooltip.RootProps) => {
       />
     </TooltipContextProvider>
   );
-};
+}
 
-const TooltipTrigger = ({ ...props }: ArkTooltip.TriggerProps) => {
+export function TooltipTrigger({ ...props }: ArkTooltip.TriggerProps) {
   return (
     <ArkTooltip.Context>
       {({ setOpen }) => (
@@ -34,17 +35,15 @@ const TooltipTrigger = ({ ...props }: ArkTooltip.TriggerProps) => {
       )}
     </ArkTooltip.Context>
   );
-};
+}
 
-TooltipTrigger.displayName = "TooltipTrigger";
-
-const TooltipContent = ({
+export function TooltipContent({
   className,
   portal,
   ...props
 }: ArkTooltip.ContentProps & {
   portal: boolean;
-}) => {
+}) {
   const { positioning } = use(TooltipContext);
 
   if (!positioning) {
@@ -62,8 +61,10 @@ const TooltipContent = ({
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",
-            "x:data-[side=bottom]:slide-in-from-top-1 x:data-[side=left]:slide-in-from-right-1",
-            "x:data-[side=right]:slide-in-from-left-1 x:data-[side=top]:slide-in-from-bottom-1",
+            "x:data-[state=open]:data-[placement^=bottom]:slide-in-from-top-1/2 x:data-[state=open]:data-[placement^=left]:slide-in-from-right-1/2",
+            "x:data-[state=open]:data-[placement^=right]:slide-in-from-left-1/2 x:data-[state=open]:data-[placement^=top]:slide-in-from-bottom-1/2",
+            "x:data-[placement^=bottom]:origin-top x:data-[placement^=left]:origin-right",
+            "x:data-[placement^=right]:origin-left x:data-[placement^=top]:origin-bottom",
             className,
           )}
           data-side={positioning.placement}
@@ -72,8 +73,4 @@ const TooltipContent = ({
       </ArkTooltip.Positioner>
     </Comp>
   );
-};
-
-TooltipContent.displayName = "TooltipContent";
-
-export { TooltipRoot, TooltipTrigger, TooltipContent };
+}

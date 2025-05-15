@@ -18,6 +18,7 @@ import SpacesPageComponents from "@/plugins/_core/ui/route-groups/SpacesPage";
 import ThreadComponents from "@/plugins/_core/ui/route-groups/Thread";
 import CommandMenuWrapper from "@/plugins/command-menu/Wrapper";
 import OnCloudflareTimeoutWrapper from "@/plugins/on-cf-timeout-auto-reload/Wrapper";
+import { SlashCommandMenu } from "@/plugins/slash-command-menu/SlashCommandMenu";
 
 const { ExtensionContextInvalidationWatchdog } = lazily(
   () => import("@/components/ExtensionContextInvalidationWatchdog"),
@@ -42,6 +43,8 @@ export default function CsUiRoot() {
       <QueryBoxComponents />
 
       <CommandMenuWrapper />
+
+      <SlashCommandMenu />
 
       <OnCloudflareTimeoutWrapper />
 

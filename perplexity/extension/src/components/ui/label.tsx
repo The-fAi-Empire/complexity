@@ -1,9 +1,9 @@
 import { type LabelHTMLAttributes } from "react";
 
-const Label = ({
+export function Label({
   className,
   ...props
-}: LabelHTMLAttributes<HTMLLabelElement>) => {
+}: LabelHTMLAttributes<HTMLLabelElement>) {
   return (
     <label
       className={cn(
@@ -13,8 +13,4 @@ const Label = ({
       {...props}
     />
   );
-};
-
-Label.displayName = "Label";
-
-export { Label };
+}

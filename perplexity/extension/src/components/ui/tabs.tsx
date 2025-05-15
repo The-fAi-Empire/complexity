@@ -1,8 +1,12 @@
-import { Tabs as ArkTabs, useTabsContext } from "@ark-ui/react";
+import { Tabs as ArkTabs, useTabsContext } from "@ark-ui/react/tabs";
 
-const Tabs = ArkTabs.Root;
+export const Tabs = ArkTabs.Root;
 
-const TabsTrigger = ({ value, className, ...props }: ArkTabs.TriggerProps) => {
+export function TabTrigger({
+  value,
+  className,
+  ...props
+}: ArkTabs.TriggerProps) {
   const { value: selectedValue } = useTabsContext();
 
   return (
@@ -19,34 +23,30 @@ const TabsTrigger = ({ value, className, ...props }: ArkTabs.TriggerProps) => {
       {...props}
     />
   );
-};
+}
 
-TabsTrigger.displayName = "TabsTrigger";
+export function TabsList({ className, ...props }: ArkTabs.ListProps) {
+  return (
+    <ArkTabs.List
+      className={cn(
+        "x:inline-flex x:items-center x:rounded-md x:p-1 x:text-muted-foreground",
+        "x:data-[orientation=horizontal]:flex-wrap",
+        "x:data-[orientation=vertical]:flex-col x:data-[orientation=vertical]:gap-1",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-const TabsList = ({ className, ...props }: ArkTabs.ListProps) => (
-  <ArkTabs.List
-    className={cn(
-      "x:inline-flex x:items-center x:justify-center x:rounded-md x:p-1 x:text-muted-foreground",
-      "x:data-[orientation=horizontal]:flex-wrap",
-      "x:data-[orientation=vertical]:h-max x:data-[orientation=vertical]:flex-col x:data-[orientation=vertical]:gap-1",
-      className,
-    )}
-    {...props}
-  />
-);
-
-TabsList.displayName = "TabsList";
-
-const TabsContent = ({ className, ...props }: ArkTabs.ContentProps) => (
-  <ArkTabs.Content
-    className={cn(
-      "x:ring-offset-background x:focus-visible:ring-2 x:focus-visible:ring-ring x:focus-visible:ring-offset-2 x:focus-visible:outline-none",
-      className,
-    )}
-    {...props}
-  />
-);
-
-TabsContent.displayName = "TabsContent";
-
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+export function TabContent({ className, ...props }: ArkTabs.ContentProps) {
+  return (
+    <ArkTabs.Content
+      className={cn(
+        "x:ring-offset-background x:focus-visible:ring-2 x:focus-visible:ring-ring x:focus-visible:ring-offset-2 x:focus-visible:outline-none",
+        className,
+      )}
+      {...props}
+    />
+  );
+}

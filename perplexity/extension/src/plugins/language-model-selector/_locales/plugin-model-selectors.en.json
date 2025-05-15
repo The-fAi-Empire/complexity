@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Choose language model",
-    "proSearch": {
-      "tooltip": "More sources, python code interpreter"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Adapts to your query"

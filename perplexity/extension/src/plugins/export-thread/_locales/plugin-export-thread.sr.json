@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Извези",
-    "copied": "Копирано",
     "format": {
       "label": "Изабери формат",
       "placeholder": "Изаберите формат"

@@ -35,6 +35,7 @@ type CsUiPluginsGuardProps = GuardConditions & {
   additionalCheck?: AdditionalCheckFn;
   onNotSatisfiedAllConditions?: () => void;
   fallback?: React.ReactNode;
+  suspenseFallback?: React.ReactNode;
   customMessage?: string;
 };
 
@@ -216,7 +217,7 @@ export default function CsUiPluginsGuard(
         }
       }}
     >
-      <Suspense fallback={null}>{props.children}</Suspense>
+      <Suspense fallback={props.suspenseFallback}>{props.children}</Suspense>
     </ErrorBoundary>
   );
 }

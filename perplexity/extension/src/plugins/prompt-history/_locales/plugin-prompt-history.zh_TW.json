@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "清除提示歷史",
+      "message": "您確定要清除所有提示歷史嗎？此操作無法撤銷。",
+      "actions": {
+        "cancel": "取消",
+        "confirm": "全部清除"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "搜索提示歷史...",
+    "noResults": "未找到結果"
+  }
+}

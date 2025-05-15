@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity - Perplexity AI 超級加強版",
   "sidebar": {
     "supporterMessage": "請考慮成為<emphasis>支持者</emphasis>，以保持專案的持續運作！"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "字數",
     "characters": "字元數",
-    "expand": "展開",
-    "collapse": "收起",
     "rewrite": "重寫",
     "speakAloud": "朗讀",
     "stop": "停止"

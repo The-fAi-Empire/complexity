@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Kies taalmodel",
-    "proSearch": {
-      "tooltip": "Meer bronnen, python code-interpreter"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Past zich aan je zoekopdracht aan"

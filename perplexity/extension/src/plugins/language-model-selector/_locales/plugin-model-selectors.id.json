@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Pilih model bahasa",
-    "proSearch": {
-      "tooltip": "Lebih banyak sumber, interpreter kode python"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Otomatis",
       "description": "Menyesuaikan dengan pencarian Anda"

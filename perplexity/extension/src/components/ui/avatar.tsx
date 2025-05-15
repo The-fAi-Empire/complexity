@@ -1,37 +1,37 @@
-import * as ArkAvatar from "@ark-ui/react";
+import { Avatar as ArkAvatar } from "@ark-ui/react/avatar";
 
-const Avatar = ({ className, ...props }: ArkAvatar.AvatarRootProps) => (
-  <ArkAvatar.AvatarRoot
-    className={cn(
-      "x:relative x:flex x:h-10 x:w-10 x:shrink-0 x:overflow-hidden x:rounded-full",
-      className,
-    )}
-    {...props}
-  />
-);
+export function Avatar({ className, ...props }: ArkAvatar.RootProps) {
+  return (
+    <ArkAvatar.Root
+      className={cn(
+        "x:relative x:flex x:h-10 x:w-10 x:shrink-0 x:overflow-hidden x:rounded-full",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-Avatar.displayName = "Avatar";
+export function AvatarImage({ className, ...props }: ArkAvatar.ImageProps) {
+  return (
+    <ArkAvatar.Image
+      className={cn("x:aspect-square x:h-full x:w-full", className)}
+      {...props}
+    />
+  );
+}
 
-const AvatarImage = ({ className, ...props }: ArkAvatar.AvatarImageProps) => (
-  <ArkAvatar.AvatarImage
-    className={cn("x:aspect-square x:h-full x:w-full", className)}
-    {...props}
-  />
-);
-AvatarImage.displayName = ArkAvatar.AvatarImage.displayName;
-
-const AvatarFallback = ({
+export function AvatarFallback({
   className,
   ...props
-}: ArkAvatar.AvatarFallbackProps) => (
-  <ArkAvatar.AvatarFallback
-    className={cn(
-      "x:flex x:h-full x:w-full x:items-center x:justify-center x:rounded-full x:bg-muted",
-      className,
-    )}
-    {...props}
-  />
-);
-AvatarFallback.displayName = ArkAvatar.AvatarFallback.displayName;
-
-export { Avatar, AvatarImage, AvatarFallback };
+}: ArkAvatar.FallbackProps) {
+  return (
+    <ArkAvatar.Fallback
+      className={cn(
+        "x:flex x:h-full x:w-full x:items-center x:justify-center x:rounded-full x:bg-muted",
+        className,
+      )}
+      {...props}
+    />
+  );
+}

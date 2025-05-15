@@ -90,7 +90,12 @@ export default function CreateNewLanguageOptionButton() {
           </Button>
         </DialogTrigger>
       </Tooltip>
-      <DialogContent portal={false}>
+      <DialogContent
+        className="x:z-100"
+        overlayProps={{
+          className: "x:z-100",
+        }}
+      >
         <DialogHeader>Fine-tune specific block</DialogHeader>
         <Input
           value={language}

@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Vymazať históriu promptov",
+      "message": "Naozaj chcete vymazať celú históriu promptov? Túto akciu nie je možné vrátiť späť.",
+      "actions": {
+        "cancel": "Zrušiť",
+        "confirm": "Vymazať všetko"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Vyhľadať v histórii promptov...",
+    "noResults": "Neboli nájdené žiadne výsledky"
+  }
+}

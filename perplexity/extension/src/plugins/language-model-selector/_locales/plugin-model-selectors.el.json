@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Επιλογή γλωσσικού μοντέλου",
-    "proSearch": {
-      "tooltip": "Περισσότερες πηγές, διερμηνευτής κώδικα python"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Αυτόματο",
       "description": "Προσαρμόζεται στην αναζήτησή σας"

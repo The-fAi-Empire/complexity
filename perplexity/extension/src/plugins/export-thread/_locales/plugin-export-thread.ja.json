@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "エクスポート",
-    "copied": "コピー済み",
     "format": {
       "label": "フォーマットを選択",
       "placeholder": "フォーマットを選択してください"

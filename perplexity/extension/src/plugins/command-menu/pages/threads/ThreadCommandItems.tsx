@@ -1,7 +1,7 @@
 import { useDebounce } from "@uidotdev/usehooks";
 
 import { CommandGroup } from "@/components/ui/command";
-import CommandItemSkeleton from "@/plugins/command-menu/components/Skeletons";
+import { CommandItemSkeleton } from "@/components/ui/command";
 import ThreadItem from "@/plugins/command-menu/pages/threads/ThreadItem";
 import ThreadListLoader from "@/plugins/command-menu/pages/threads/ThreadListLoader";
 import useLoadMoreItems from "@/plugins/command-menu/pages/threads/useLoadMoreItems";
@@ -20,18 +20,17 @@ export default function ThreadCommandItems() {
     isError,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
     isFetching,
     isPlaceholderData,
+    isFetchingNextPage,
   } = usePplxInfiniteThreads({
     searchTerm: searchValue,
   });
 
   const { triggerRef } = useLoadMoreItems({
     hasNextPage,
-    isFetchingNextPage,
+    isFetching,
     fetchNextPage,
-    data,
   });
 
   return (
@@ -53,12 +52,10 @@ export default function ThreadCommandItems() {
               )),
             )}
           </CommandGroup>
-          {!isFetching && hasNextPage && (
-            <div ref={triggerRef} className="x:h-30" />
-          )}
           {isFetchingNextPage && (
             <CommandItemSkeleton count={3} className="x:h-14" />
           )}
+          {hasNextPage && <div ref={triggerRef} className="x:h-30" />}
         </>
       )}
 

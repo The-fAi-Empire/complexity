@@ -1,34 +1,69 @@
+import {
+  slashCommandMenuStore,
+  useSlashCommandMenuStore,
+} from "@/plugins/slash-command-menu/store";
+
 export function useBlurHandler({
-  queryBoxAnchor,
-  commandRef,
-  setIsOpen,
+  contentRef,
+  exceptionalElementSelectors = [],
 }: {
-  queryBoxAnchor: HTMLElement | null;
-  commandRef: React.RefObject<HTMLElement | null>;
-  setIsOpen: (isOpen: boolean) => void;
+  contentRef: React.RefObject<HTMLElement | null>;
+  exceptionalElementSelectors?: string[];
 }) {
-  const $textarea = $(queryBoxAnchor ?? {}).find("textarea");
+  const open = useSlashCommandMenuStore((state) => state.open);
 
-  const handleBlur = useCallback(
-    (e: JQuery.BlurEvent) => {
-      const relatedTarget = e.relatedTarget as HTMLElement | null;
-      const shouldKeepOpen =
-        relatedTarget &&
-        (commandRef.current?.contains(relatedTarget) ||
-          commandRef.current === relatedTarget ||
-          relatedTarget === $textarea[0]);
+  const isPartOfExceptionalElements = useCallback(
+    (target: Node | null) => {
+      if (!target) return false;
 
-      if (shouldKeepOpen) return;
-      setIsOpen(false);
+      if (exceptionalElementSelectors.length === 0) return false;
+
+      return exceptionalElementSelectors.some((selector) => {
+        const $elements = $(selector);
+        for (let i = 0; i < $elements.length; i++) {
+          const element = $elements[i];
+          if (element && element.contains(target)) return true;
+        }
+        return false;
+      });
     },
-    [$textarea, commandRef, setIsOpen],
+    [exceptionalElementSelectors],
   );
 
   useEffect(() => {
-    if (!$textarea.length) return;
-    $textarea.on("blur", handleBlur);
-    return () => {
-      $textarea.off("blur", handleBlur);
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      const eventTarget = event.target as Node;
+
+      if (contentRef.current?.contains(eventTarget)) return;
+
+      if (!isPartOfExceptionalElements(eventTarget)) {
+        slashCommandMenuStore.getState().setOpen(false);
+      }
     };
-  }, [$textarea, handleBlur]);
+
+    const handleFocusOut = () => {
+      setTimeout(() => {
+        const activeElement = document.activeElement;
+
+        const isWithinContent =
+          activeElement &&
+          contentRef.current &&
+          contentRef.current.contains(activeElement);
+
+        if (!isWithinContent && !isPartOfExceptionalElements(activeElement)) {
+          slashCommandMenuStore.getState().setOpen(false);
+        }
+      }, 0);
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("focusout", handleFocusOut);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("focusout", handleFocusOut);
+    };
+  }, [open, contentRef, isPartOfExceptionalElements]);
 }

@@ -1,20 +1,21 @@
-import { HoverCard as ArkHoverCard, Portal } from "@ark-ui/react";
+import { HoverCard as ArkHoverCard } from "@ark-ui/react/hover-card";
 import { Slot } from "@radix-ui/react-slot";
-import { createContext, use } from "react";
 
-const HoverCardRootProvider = ArkHoverCard.RootProvider;
+import { Portal } from "@/components/ui/portal";
+
+export const HoverCardRootProvider = ArkHoverCard.RootProvider;
 
 type HoverCardLocalContext = {
   portal: boolean;
 };
 
-const HoverCardLocalContext = createContext<HoverCardLocalContext>({
+export const HoverCardLocalContext = createContext<HoverCardLocalContext>({
   portal: true,
 });
 
-const HoverCardLocalContextProvider = HoverCardLocalContext.Provider;
+export const HoverCardLocalContextProvider = HoverCardLocalContext.Provider;
 
-function HoverCard({
+export function HoverCard({
   portal,
   ...props
 }: ArkHoverCard.RootProps & {
@@ -31,18 +32,14 @@ function HoverCard({
   );
 }
 
-HoverCard.displayName = "HoverCard";
-
-const HoverCardTrigger = ({ ...props }: ArkHoverCard.TriggerProps) => {
+export function HoverCardTrigger({ ...props }: ArkHoverCard.TriggerProps) {
   return <ArkHoverCard.Trigger {...props} />;
-};
+}
 
-HoverCardTrigger.displayName = "HoverCardTrigger";
-
-const HoverCardContent = ({
+export function HoverCardContent({
   className,
   ...props
-}: ArkHoverCard.ContentProps) => {
+}: ArkHoverCard.ContentProps) {
   const { portal } = use(HoverCardLocalContext);
 
   if (typeof portal === "undefined") {
@@ -60,8 +57,8 @@ const HoverCardContent = ({
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",
-            "x:data-[side=bottom]:slide-in-from-top-2 x:data-[side=left]:slide-in-from-right-2",
-            "x:data-[side=right]:slide-in-from-left-2 x:data-[side=top]:slide-in-from-bottom-2",
+            "x:data-[placement^=bottom]:origin-top x:data-[placement^=left]:origin-right",
+            "x:data-[placement^=right]:origin-left x:data-[placement^=top]:origin-bottom",
             className,
           )}
           {...props}
@@ -69,16 +66,6 @@ const HoverCardContent = ({
       </ArkHoverCard.Positioner>
     </Comp>
   );
-};
+}
 
-HoverCardContent.displayName = "HoverCardContent";
-
-const HoverCardContext = ArkHoverCard.Context;
-
-export {
-  HoverCard,
-  HoverCardRootProvider,
-  HoverCardTrigger,
-  HoverCardContent,
-  HoverCardContext,
-};
+export const HoverCardContext = ArkHoverCard.Context;

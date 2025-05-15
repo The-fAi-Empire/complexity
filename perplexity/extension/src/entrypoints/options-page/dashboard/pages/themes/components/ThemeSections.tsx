@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabContent, TabsList, TabTrigger } from "@/components/ui/tabs";
 import ThemeCard from "@/entrypoints/options-page/dashboard/pages/themes/components/ThemeCard/ThemeCard";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 import type { Theme } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
@@ -57,29 +57,29 @@ function MobileThemeSections({
     <Tabs defaultValue={defaultTab}>
       <TabsList>
         {localThemes.length > 0 && (
-          <TabsTrigger value="local">Local Themes</TabsTrigger>
+          <TabTrigger value="local">Local Themes</TabTrigger>
         )}
         {builtInThemes.length > 0 && (
-          <TabsTrigger value="built-in">Built-in Themes</TabsTrigger>
+          <TabTrigger value="built-in">Built-in Themes</TabTrigger>
         )}
-        <TabsTrigger value="community">Community Themes</TabsTrigger>
+        <TabTrigger value="community">Community Themes</TabTrigger>
       </TabsList>
 
       {builtInThemes.length > 0 && (
-        <TabsContent value="built-in" className="x:mt-4">
+        <TabContent value="built-in" className="x:mt-4">
           <ThemesGrid themes={builtInThemes} type="built-in" />
-        </TabsContent>
+        </TabContent>
       )}
 
       {localThemes.length > 0 && (
-        <TabsContent value="local" className="x:mt-4">
+        <TabContent value="local" className="x:mt-4">
           <ThemesGrid themes={localThemes} type="local" />
-        </TabsContent>
+        </TabContent>
       )}
 
-      <TabsContent value="community" className="x:mt-4">
+      <TabContent value="community" className="x:mt-4">
         <div className="x:text-muted-foreground">Coming soon</div>
-      </TabsContent>
+      </TabContent>
     </Tabs>
   );
 }

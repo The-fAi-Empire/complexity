@@ -27,7 +27,12 @@ export function DeleteLanguageOptionButton({
           <LuTrash2 />
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent
+        className="x:z-100"
+        overlayProps={{
+          className: "x:z-100",
+        }}
+      >
         <DialogHeader>
           <DialogTitle>Delete Language Option</DialogTitle>
           <DialogDescription>

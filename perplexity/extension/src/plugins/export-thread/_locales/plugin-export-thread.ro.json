@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Exportă",
-    "copied": "Copiat",
     "format": {
       "label": "Alege formatul",
       "placeholder": "Selectează un format"

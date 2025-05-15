@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity - Perplexity AI Verbeterd",
   "sidebar": {
     "supporterMessage": "Overweeg alstublieft om een <emphasis>Supporter</emphasis> te worden om het project levend te houden!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "woorden",
     "characters": "tekens",
-    "expand": "Uitklappen",
-    "collapse": "Inklappen",
     "rewrite": "Herschrijven",
     "speakAloud": "Hardop voorlezen",
     "stop": "Stop"

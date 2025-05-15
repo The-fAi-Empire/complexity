@@ -3,12 +3,14 @@ import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resour
 import { errorWrapper } from "@/utils/error-wrapper";
 import { getReactFiberKey } from "@/utils/utils";
 
-export function triggerRewriteOption(params: {
+export async function triggerRewriteOption(params: {
   messageBlockIndex: number;
   optionIndex?: number;
-}): boolean {
+}): Promise<boolean> {
+  const domSelectors = await DomSelectorsService.mainWorldCached();
+
   const { messageBlockIndex, optionIndex } = params;
-  const selector = `div[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR}"] ${DomSelectorsService.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
+  const selector = `div[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR}"] ${domSelectors.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
 
   const $rewriteButtonWrapper = $(selector).parent().parent();
 

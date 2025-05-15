@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Exportovat",
-    "copied": "Zkopírováno",
     "format": {
       "label": "Vybrat formát",
       "placeholder": "Vyberte formát"

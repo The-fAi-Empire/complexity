@@ -37,7 +37,7 @@ export default tseslint.config({
         type: "plugin-public-exports",
         mode: "full",
         capture: ["pluginName"],
-        pattern: ["src/plugins/*/**/*.public.ts"],
+        pattern: ["src/plugins/*/**/*.public.*"],
       },
       {
         type: "plugin",

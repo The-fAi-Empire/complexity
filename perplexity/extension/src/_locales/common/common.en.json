@@ -1,5 +1,4 @@
 {
-  "extensionDescription": "Complexity | Perplexity AI Supercharged",
   "sidebar": {
     "supporterMessage": "Please consider becoming a <emphasis>Supporter</emphasis> to keep the project alive!"
   },
@@ -18,8 +17,6 @@
   "misc": {
     "words": "words",
     "characters": "characters",
-    "expand": "Expand",
-    "collapse": "Collapse",
     "rewrite": "Rewrite",
     "speakAloud": "Speak aloud",
     "stop": "Stop"

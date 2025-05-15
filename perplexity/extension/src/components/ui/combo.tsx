@@ -1,4 +1,4 @@
-import { Combobox as ArkCombobox, Portal } from "@ark-ui/react";
+import { Combobox as ArkCombobox } from "@ark-ui/react/combobox";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
@@ -10,6 +10,7 @@ import {
   LuX,
 } from "react-icons/lu";
 
+import { Portal } from "@/components/ui/portal";
 import { untrapWheel } from "@/utils/utils";
 
 type ComboboxContext = {
@@ -22,7 +23,7 @@ const ComboboxContext = createContext<ComboboxContext>({
 
 const ComboboxContextProvider = ComboboxContext.Provider;
 
-function Combobox({
+export function Combobox({
   portal,
   ...props
 }: ComponentProps<typeof ArkCombobox.Root> & {
@@ -38,8 +39,6 @@ function Combobox({
     </ComboboxContextProvider>
   );
 }
-
-Combobox.displayName = "Combobox";
 
 const comboboxTriggerVariants = cva(
   "x:flex x:w-full x:items-center x:justify-between x:rounded-md x:px-2 x:text-sm x:font-medium x:transition-all x:duration-150 x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
@@ -58,14 +57,14 @@ const comboboxTriggerVariants = cva(
   },
 );
 
-const ComboboxTrigger = ({
+export function ComboboxTrigger({
   variant,
   className,
   children,
   ...props
 }: ArkCombobox.TriggerProps & {
   variant: VariantProps<typeof comboboxTriggerVariants>["variant"];
-}) => {
+}) {
   return (
     <ArkCombobox.Trigger
       className={cn(comboboxTriggerVariants({ variant }), className)}
@@ -75,11 +74,9 @@ const ComboboxTrigger = ({
       <ChevronDown className="x:ml-2 x:size-4 x:text-muted-foreground" />
     </ArkCombobox.Trigger>
   );
-};
+}
 
-ComboboxTrigger.displayName = "ComboboxTrigger";
-
-const ComboboxInput = ({ className, ...props }: ArkCombobox.InputProps) => {
+export function ComboboxInput({ className, ...props }: ArkCombobox.InputProps) {
   return (
     <div className="x:relative x:w-full">
       <ArkCombobox.Control>
@@ -96,13 +93,13 @@ const ComboboxInput = ({ className, ...props }: ArkCombobox.InputProps) => {
       </ArkCombobox.Control>
     </div>
   );
-};
+}
 
-const ComboboxInputMultipleValues = ({
+export function ComboboxInputMultipleValues({
   className,
   placeholder,
   ...props
-}: ArkCombobox.InputProps) => {
+}: ArkCombobox.InputProps) {
   return (
     <div className="x:relative x:w-full">
       <ArkCombobox.Control>
@@ -144,17 +141,13 @@ const ComboboxInputMultipleValues = ({
       </ArkCombobox.Control>
     </div>
   );
-};
+}
 
-ComboboxInputMultipleValues.displayName = "ComboboxInputMultipleValues";
-
-ComboboxInput.displayName = "ComboboxInput";
-
-const ComboboxClearTrigger = ({
+export function ComboboxClearTrigger({
   className,
   children,
   ...props
-}: ArkCombobox.ClearTriggerProps) => {
+}: ArkCombobox.ClearTriggerProps) {
   return (
     <ArkCombobox.ClearTrigger
       className={cn(
@@ -169,11 +162,12 @@ const ComboboxClearTrigger = ({
       {children ?? <ClearIcon className="x:size-4" />}
     </ArkCombobox.ClearTrigger>
   );
-};
+}
 
-ComboboxClearTrigger.displayName = "ComboboxClearTrigger";
-
-const ComboboxContent = ({ className, ...props }: ArkCombobox.ContentProps) => {
+export function ComboboxContent({
+  className,
+  ...props
+}: ArkCombobox.ContentProps) {
   const { portal } = use(ComboboxContext);
 
   if (typeof portal === "undefined") {
@@ -198,15 +192,13 @@ const ComboboxContent = ({ className, ...props }: ArkCombobox.ContentProps) => {
       </ArkCombobox.Positioner>
     </Comp>
   );
-};
+}
 
-ComboboxContent.displayName = "ComboboxContent";
-
-const ComboboxItem = ({
+export function ComboboxItem({
   className,
   children,
   ...props
-}: ArkCombobox.ItemProps) => {
+}: ArkCombobox.ItemProps) {
   return (
     <ArkCombobox.Item
       className={cn(
@@ -225,13 +217,11 @@ const ComboboxItem = ({
       <ArkCombobox.ItemText className="x:ml-6">{children}</ArkCombobox.ItemText>
     </ArkCombobox.Item>
   );
-};
+}
 
-ComboboxItem.displayName = "ComboboxItem";
+export const ComboboxGroup = ArkCombobox.ItemGroup;
 
-const ComboboxGroup = ArkCombobox.ItemGroup;
-
-const ComboboxLabel = ({ className, ...props }: ArkCombobox.LabelProps) => {
+export function ComboboxLabel({ className, ...props }: ArkCombobox.LabelProps) {
   return (
     <ArkCombobox.Label
       className={cn(
@@ -241,14 +231,12 @@ const ComboboxLabel = ({ className, ...props }: ArkCombobox.LabelProps) => {
       {...props}
     />
   );
-};
+}
 
-ComboboxLabel.displayName = "ComboboxLabel";
-
-const ComboboxItemGroupLabel = ({
+export function ComboboxItemGroupLabel({
   className,
   ...props
-}: ArkCombobox.ItemGroupLabelProps) => {
+}: ArkCombobox.ItemGroupLabelProps) {
   return (
     <ArkCombobox.ItemGroupLabel
       className={cn(
@@ -258,19 +246,4 @@ const ComboboxItemGroupLabel = ({
       {...props}
     />
   );
-};
-
-ComboboxItemGroupLabel.displayName = "ComboboxItemGroupLabel";
-
-export {
-  Combobox,
-  ComboboxTrigger,
-  ComboboxInput,
-  ComboboxInputMultipleValues,
-  ComboboxContent,
-  ComboboxItem,
-  ComboboxGroup,
-  ComboboxLabel,
-  ComboboxClearTrigger,
-  ComboboxItemGroupLabel,
-};
+}

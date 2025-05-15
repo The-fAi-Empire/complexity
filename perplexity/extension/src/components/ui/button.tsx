@@ -44,13 +44,13 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     asChild?: boolean;
   };
 
-const Button = ({
+export function Button({
   className,
   variant,
   size,
   asChild = false,
   ...props
-}: ButtonProps) => {
+}: ButtonProps) {
   const Comp = asChild ? Slot : "button";
 
   return (
@@ -59,8 +59,4 @@ const Button = ({
       {...props}
     />
   );
-};
-
-Button.displayName = "Button";
-
-export { Button };
+}

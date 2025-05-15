@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "プロンプト履歴をクリア",
+      "message": "プロンプト履歴をすべてクリアしてもよろしいですか？この操作は元に戻せません。",
+      "actions": {
+        "cancel": "キャンセル",
+        "confirm": "すべてクリア"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "プロンプト履歴を検索...",
+    "noResults": "結果が見つかりません"
+  }
+}

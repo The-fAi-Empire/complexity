@@ -1,8 +1,9 @@
+import { LuTrash } from "react-icons/lu";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -31,35 +32,21 @@ export default function ClearAllButton() {
       onOpenChange={({ open }) => setIsOpen(open)}
     >
       <DialogTrigger asChild>
-        <div className="x:ml-auto x:cursor-pointer x:text-xs x:text-muted-foreground x:transition-colors x:hover:text-foreground x:hover:underline">
-          {t(
-            "plugin-slash-command-menu:slashCommandMenu.filterItems.promptHistory.clearButton.label",
-          )}
-        </div>
+        <LuTrash className="x:size-3.5 x:cursor-pointer x:text-xs x:text-muted-foreground x:transition-colors x:hover:text-foreground x:hover:underline" />
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent data-prompt-history-clear-all-dialog>
         <DialogHeader>
           <DialogTitle>
-            {t(
-              "plugin-slash-command-menu:slashCommandMenu.filterItems.promptHistory.clearButton.dialog.title",
-            )}
+            {t("plugin-prompt-history:clearAllButton.dialog.title")}
           </DialogTitle>
-          <DialogDescription>
-            {t(
-              "plugin-slash-command-menu:slashCommandMenu.filterItems.promptHistory.clearButton.dialog.description",
-            )}
-          </DialogDescription>
         </DialogHeader>
+        <div>{t("plugin-prompt-history:clearAllButton.dialog.message")}</div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setIsOpen(false)}>
-            {t(
-              "plugin-slash-command-menu:slashCommandMenu.filterItems.promptHistory.clearButton.dialog.actions.cancel",
-            )}
+            {t("plugin-prompt-history:clearAllButton.dialog.actions.cancel")}
           </Button>
           <Button variant="destructive" onClick={handleClearAll}>
-            {t(
-              "plugin-slash-command-menu:slashCommandMenu.filterItems.promptHistory.clearButton.dialog.actions.confirm",
-            )}
+            {t("plugin-prompt-history:clearAllButton.dialog.actions.confirm")}
           </Button>
         </DialogFooter>
       </DialogContent>

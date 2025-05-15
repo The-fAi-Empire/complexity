@@ -1,4 +1,4 @@
-import { Portal, Select as ArkSelect } from "@ark-ui/react";
+import { Select as ArkSelect } from "@ark-ui/react/select";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import type { ComponentProps } from "react";
@@ -6,6 +6,7 @@ import { createContext, use } from "react";
 import { FaCheck } from "react-icons/fa6";
 import { LuChevronDown as ChevronDown } from "react-icons/lu";
 
+import { Portal } from "@/components/ui/portal";
 import { untrapWheel } from "@/utils/utils";
 
 type SelectLocalContext = {
@@ -18,9 +19,9 @@ const SelectLocalContext = createContext<SelectLocalContext>({
 
 const SelectLocalContextProvider = SelectLocalContext.Provider;
 
-const SelectContext = ArkSelect.Context;
+export const SelectContext = ArkSelect.Context;
 
-function Select<T>({
+export function Select<T>({
   portal,
   ...props
 }: ComponentProps<typeof ArkSelect.Root<T>> & {
@@ -36,8 +37,6 @@ function Select<T>({
     </SelectLocalContextProvider>
   );
 }
-
-Select.displayName = "Select";
 
 const selectTriggerVariants = cva(
   "x:flex x:w-full x:items-center x:justify-between x:rounded-lg x:px-2 x:text-sm x:font-medium x:transition-all x:duration-150 x:outline-none x:placeholder:text-muted-foreground x:focus-visible:bg-primary-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50 x:[&>span]:!truncate",
@@ -60,12 +59,12 @@ const selectTriggerVariants = cva(
 export type SelectTriggerProps = ArkSelect.TriggerProps &
   VariantProps<typeof selectTriggerVariants>;
 
-const SelectTrigger = ({
+export function SelectTrigger({
   variant = "default",
   className,
   children,
   ...props
-}: SelectTriggerProps) => {
+}: SelectTriggerProps) {
   return (
     <ArkSelect.Trigger
       className={cn(selectTriggerVariants({ variant }), className)}
@@ -77,23 +76,19 @@ const SelectTrigger = ({
       )}
     </ArkSelect.Trigger>
   );
-};
-
-SelectTrigger.displayName = "SelectTrigger";
+}
 
 export type SelectValueProps = ArkSelect.ValueTextProps;
 
-const SelectValue = ({ className, ...props }: SelectValueProps) => {
+export function SelectValue({ className, ...props }: SelectValueProps) {
   return (
     <ArkSelect.ValueText className={cn("x:truncate", className)} {...props} />
   );
-};
-
-SelectValue.displayName = "SelectValue";
+}
 
 export type SelectContentProps = ComponentProps<typeof ArkSelect.Content>;
 
-const SelectContent = ({ className, ...props }: SelectContentProps) => {
+export function SelectContent({ className, ...props }: SelectContentProps) {
   const { portal } = use(SelectLocalContext);
 
   if (typeof portal === "undefined") {
@@ -111,8 +106,8 @@ const SelectContent = ({ className, ...props }: SelectContentProps) => {
             "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
             "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
             "x:data-[state=closed]:zoom-out-95 x:data-[state=open]:zoom-in-95",
-            "x:data-[side=bottom]:slide-in-from-top-2 x:data-[side=left]:slide-in-from-right-2",
-            "x:data-[side=right]:slide-in-from-left-2 x:data-[side=top]:slide-in-from-bottom-2",
+            "x:data-[placement^=bottom]:origin-top x:data-[placement^=left]:origin-right",
+            "x:data-[placement^=right]:origin-left x:data-[placement^=top]:origin-bottom",
             className,
           )}
           onWheel={untrapWheel}
@@ -121,15 +116,13 @@ const SelectContent = ({ className, ...props }: SelectContentProps) => {
       </ArkSelect.Positioner>
     </Comp>
   );
-};
+}
 
-SelectContent.displayName = "SelectContent";
-
-const SelectGroup = ArkSelect.ItemGroup;
+export const SelectGroup = ArkSelect.ItemGroup;
 
 export type SelectLabelProps = ArkSelect.LabelProps;
 
-const SelectLabel = ({ className, ...props }: SelectLabelProps) => {
+export function SelectLabel({ className, ...props }: SelectLabelProps) {
   return (
     <ArkSelect.Label
       className={cn(
@@ -139,9 +132,7 @@ const SelectLabel = ({ className, ...props }: SelectLabelProps) => {
       {...props}
     />
   );
-};
-
-SelectLabel.displayName = "SelectLabel";
+}
 
 export type SelectItemProps = ArkSelect.ItemProps & {
   checkboxOnSingleItem?: boolean;
@@ -149,13 +140,13 @@ export type SelectItemProps = ArkSelect.ItemProps & {
   item: string;
 };
 
-const SelectItem = ({
+export function SelectItem({
   className,
   checkIconClassName,
   children,
   checkboxOnSingleItem = false,
   ...props
-}: SelectItemProps) => {
+}: SelectItemProps) {
   return (
     <ArkSelect.Context>
       {({ multiple, value }) => (
@@ -186,17 +177,4 @@ const SelectItem = ({
       )}
     </ArkSelect.Context>
   );
-};
-
-SelectItem.displayName = "SelectItem";
-
-export {
-  Select,
-  SelectContext,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-};
+}

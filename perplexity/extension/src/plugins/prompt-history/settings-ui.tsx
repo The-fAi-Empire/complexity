@@ -1,7 +1,19 @@
+import { createListCollection } from "@ark-ui/react";
+
+import { useHotkeyRecorder } from "@/components/hotkey-recorder";
 import { Image } from "@/components/ui/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
-import { P } from "@/components/ui/typography";
 import type { PluginId } from "@/data/plugin-registry/types";
+import type { SlashCommandMenuTabShortcut } from "@/plugins/slash-command-menu/shortcuts.types.public";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
 export const pluginId: PluginId = "queryBox:slashCommandMenu:promptHistory";
@@ -22,10 +34,10 @@ export default function PromptHistoryPluginSettingsUi() {
 
   return (
     <div className="x:flex x:max-w-lg x:flex-col x:gap-4">
-      <P>
+      <p>
         Frustrated when losing your prompt? This plugin will locally save your
         prompt to history and allow you to easily access it.
-      </P>
+      </p>
       <Switch
         textLabel="Enable"
         checked={pluginSettings?.enabled ?? false}
@@ -34,6 +46,8 @@ export default function PromptHistoryPluginSettingsUi() {
 
       {pluginSettings?.enabled && (
         <div className="x:ml-8 x:flex x:flex-col x:gap-2">
+          <SlashCommandMenuActivationShortcutsSettings />
+
           <Switch
             className="x:items-start"
             textLabel={
@@ -81,6 +95,96 @@ export default function PromptHistoryPluginSettingsUi() {
           alt="prompt-history"
           className="x:w-full"
         />
+      </div>
+    </div>
+  );
+}
+
+function SlashCommandMenuActivationShortcutsSettings() {
+  const { settings, mutation } = useExtensionSettings();
+
+  const shortcutType =
+    settings?.plugins["queryBox:slashCommandMenu:promptHistory"]?.shortcut
+      ?.type;
+  const shortcutValue =
+    settings?.plugins["queryBox:slashCommandMenu:promptHistory"]?.shortcut
+      ?.value;
+  const shortcutTypeItems = useMemo(
+    () => [
+      { id: "keybinding", title: "Keyboard Shortcut" },
+      { id: "command", title: "Text Command" },
+    ],
+    [],
+  );
+  const defaultKeys = useMemo(
+    () => (Array.isArray(shortcutValue) ? shortcutValue : []),
+    [shortcutValue],
+  );
+  const { HotkeyRecorderUi } = useHotkeyRecorder({
+    defaultKeys,
+    onSave: (keys) => {
+      mutation.mutate((draft) => {
+        draft.plugins[
+          "queryBox:slashCommandMenu:promptHistory"
+        ].shortcut.value = keys;
+      });
+    },
+  });
+
+  return (
+    <div className="x:mb-4">
+      <Label className="x:text-muted-foreground">Shortcut</Label>
+      <div className="x:flex x:items-center x:gap-4">
+        <Select
+          collection={createListCollection({
+            items: shortcutTypeItems,
+            itemToString: (item) => item.title,
+            itemToValue: (item) => item.id,
+          })}
+          value={[shortcutType ?? "keybinding"]}
+          positioning={{ sameWidth: true }}
+          onValueChange={({ value }) => {
+            mutation.mutate((draft) => {
+              draft.plugins[
+                "queryBox:slashCommandMenu:promptHistory"
+              ].shortcut.type = value[0] as SlashCommandMenuTabShortcut["type"];
+              draft.plugins[
+                "queryBox:slashCommandMenu:promptHistory"
+              ].shortcut.value = value[0] === "keybinding" ? [] : "";
+            });
+          }}
+        >
+          <SelectTrigger className="x:w-48 x:p-2">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {shortcutTypeItems.map((item) => (
+              <SelectItem key={item.id} item={item.id}>
+                {item.title}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+
+        {shortcutType === "keybinding" ? (
+          <HotkeyRecorderUi />
+        ) : (
+          <div className="x:flex x:w-fit x:items-center x:rounded-lg x:border x:p-0.5 x:*:font-mono x:*:tracking-widest">
+            <span className="x:ml-2">//</span>
+            <Input
+              className="x:w-full x:max-w-[300px] x:border-none x:p-0 x:text-base x:focus-visible:ring-0 x:focus-visible:ring-transparent"
+              placeholder="..."
+              defaultValue={shortcutValue}
+              onChange={(e) => {
+                mutation.mutate((draft) => {
+                  draft.plugins[
+                    "queryBox:slashCommandMenu:promptHistory"
+                  ].shortcut.value = e.target.value;
+                });
+              }}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { z } from "zod";
 
 import { definePlugin } from "@/data/plugin-registry/utils";
+import { SlashCommandMenuTabShortcutSchema } from "@/plugins/slash-command-menu/shortcuts.types.public";
 
 const schema = z.object({
   enabled: z.boolean(),
+  shortcut: SlashCommandMenuTabShortcutSchema,
   trigger: z.object({
     onSubmit: z.boolean(),
     onNavigation: z.boolean(),
@@ -32,6 +34,10 @@ export default definePlugin({
     schema,
     fallback: {
       enabled: false,
+      shortcut: {
+        type: "command",
+        value: "h",
+      },
       trigger: {
         onSubmit: true,
         onNavigation: true,

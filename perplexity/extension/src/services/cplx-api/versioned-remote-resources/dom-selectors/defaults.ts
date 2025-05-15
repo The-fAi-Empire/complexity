@@ -22,16 +22,17 @@ export const DOM_SELECTORS: DomSelectors = {
     /** The outermost container that wraps the thread container and the query box */
     NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
     PAGE_WRAPPER: ".h-\\[100dvh\\] > .max-h-screen",
-    WRAPPER: ".sticky.left-0.right-0 + .scrollable-container > div > div",
+    WRAPPER:
+      ".sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child",
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class=""]:first`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class=""]:first`,
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child > div > div:last-child`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child > div > div:last-child`,
       },
       MOBILE: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class*="erp-sidecar:"]:not(.mx-auto):first`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div > div:last-child div[class*="erp-sidecar:"]:not(.mx-auto):first`,
+        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div:first-child > div:first-child > .erp-sidecar\\:pb-0`,
+        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div:first-child > div:first-child > .erp-sidecar\\:pb-0`,
       },
     },
     MESSAGE: {
@@ -79,12 +80,10 @@ export const DOM_SELECTORS: DomSelectors = {
   },
   QUERY_BOX: {
     TEXTAREA: {
-      MAIN: 'body[location="home"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
-      SPACE:
-        'body[location="collection"] textarea[placeholder][autocomplete][style*="height"]:not([data-testid="quick-search-modal"] textarea)',
-      FOLLOW_UP:
-        'body[location="thread"] .grow.block textarea[placeholder][autocomplete]',
-      ARBITRARY: "textarea[placeholder][autocomplete]",
+      MAIN: 'body[location="home"] .grow.block textarea#ask-input',
+      SPACE: 'body[location="collection"] .grow.block textarea#ask-input',
+      FOLLOW_UP: 'body[location="thread"] .grow.block textarea#ask-input',
+      ARBITRARY: "textarea#ask-input",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:
@@ -112,7 +111,8 @@ export const DOM_SELECTORS: DomSelectors = {
     THREAD_TITLE:
       ".min-w-0 .cursor-pointer.transition.duration-300.hover\\:opacity-70",
     THREAD_TITLE_INPUT: 'input[placeholder="Untitled"]',
-    OVERFLOW_MENU_BUTTON_WRAPPER: "div:has(>span>button):has(svg.fa-ellipsis)",
+    OVERFLOW_MENU_BUTTON_WRAPPER:
+      "div:has(>span>button):has(svg.tabler-icon-dots)",
   },
 } as const;
 

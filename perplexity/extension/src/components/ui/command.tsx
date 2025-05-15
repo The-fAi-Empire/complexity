@@ -1,6 +1,8 @@
 import { Slot } from "@radix-ui/react-slot";
 import { Command as CommandPrimitive } from "cmdk";
+import type { ComponentProps } from "react";
 import * as React from "react";
+import { useEffect } from "react";
 import { LuSearch as Search } from "react-icons/lu";
 
 import type { DialogProps } from "@/components/ui/dialog";
@@ -8,31 +10,32 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 import { isInContentScript } from "@/utils/utils";
 
-const Command = ({
+export function Command({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive>) => (
-  <CommandPrimitive
-    className={cn(
-      "x:flex x:h-full x:w-full x:flex-col x:overflow-hidden x:rounded-lg x:bg-popover x:text-popover-foreground",
-      className,
-    )}
-    {...props}
-  />
-);
-Command.displayName = CommandPrimitive.displayName;
+}: React.ComponentProps<typeof CommandPrimitive>) {
+  return (
+    <CommandPrimitive
+      className={cn(
+        "x:flex x:h-full x:w-full x:flex-col x:overflow-hidden x:rounded-lg x:bg-popover x:text-popover-foreground",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
 type CommandDialogProps = DialogProps & {
   commandProps?: React.ComponentProps<typeof CommandPrimitive>;
   dialogContentProps?: React.ComponentProps<typeof DialogContent>;
 };
 
-const CommandDialog = ({
+export function CommandDialog({
   children,
   commandProps,
   dialogContentProps,
   ...props
-}: CommandDialogProps) => {
+}: CommandDialogProps) {
   return (
     <Dialog lazyMount unmountOnExit closeOnInteractOutside {...props}>
       <DialogContent
@@ -60,146 +63,146 @@ const CommandDialog = ({
       </DialogContent>
     </Dialog>
   );
-};
+}
 
-CommandDialog.displayName = "CommandDialog";
-
-const CommandInput = ({
+export function CommandInput({
   className,
   inputClassName,
   searchIcon = true,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input> & {
   inputClassName?: string;
-  searchIcon?: boolean;
-}) => (
-  <div
-    className={cn(
-      "x:flex x:items-center x:border-b x:border-border/50 x:px-3",
-      className,
-    )}
-    cmdk-input-wrapper=""
-  >
-    <CommandPrimitive.Input
+  searchIcon?: boolean | React.ReactNode;
+}) {
+  return (
+    <div
       className={cn(
-        "x:flex x:h-11 x:w-full x:rounded-lg x:bg-transparent x:py-3 x:text-sm x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
-        inputClassName,
+        "x:flex x:items-center x:border-b x:border-border/50 x:px-3",
+        className,
+      )}
+      cmdk-input-wrapper=""
+    >
+      <CommandPrimitive.Input
+        className={cn(
+          "x:flex x:h-11 x:w-full x:rounded-lg x:bg-transparent x:py-3 x:text-sm x:outline-none x:placeholder:text-muted-foreground x:disabled:cursor-not-allowed x:disabled:opacity-50",
+          inputClassName,
+        )}
+        {...props}
+      />
+      {typeof searchIcon === "boolean" && searchIcon && (
+        <Search className="x:mr-2 x:h-4 x:w-4 x:shrink-0 x:opacity-50" />
+      )}
+      {React.isValidElement(searchIcon) && searchIcon}
+    </div>
+  );
+}
+
+export function CommandList({
+  className,
+  ...props
+}: React.ComponentProps<typeof CommandPrimitive.List>) {
+  return (
+    <CommandPrimitive.List
+      className={cn(
+        isInContentScript() ? PPLX_SCROLLBAR_CLASSES : "custom-scrollbar",
+        "x:max-h-[300px] x:overflow-x-hidden x:overflow-y-auto",
+        className,
       )}
       {...props}
     />
-    {searchIcon && (
-      <Search className="x:mr-2 x:h-4 x:w-4 x:shrink-0 x:opacity-50" />
-    )}
-  </div>
-);
+  );
+}
 
-CommandInput.displayName = CommandPrimitive.Input.displayName;
-
-const CommandList = ({
+export function CommandEmpty({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.List>) => (
-  <CommandPrimitive.List
-    className={cn(
-      isInContentScript() ? PPLX_SCROLLBAR_CLASSES : "custom-scrollbar",
-      "x:max-h-[300px] x:overflow-x-hidden x:overflow-y-auto",
-      className,
-    )}
-    {...props}
-  />
-);
+}: React.ComponentProps<typeof CommandPrimitive.Empty>) {
+  return (
+    <CommandPrimitive.Empty
+      className={cn("x:py-6 x:text-center x:text-sm", className)}
+      {...props}
+    />
+  );
+}
 
-CommandList.displayName = CommandPrimitive.List.displayName;
-
-const CommandEmpty = ({
-  className,
-  ...props
-}: React.ComponentProps<typeof CommandPrimitive.Empty>) => (
-  <CommandPrimitive.Empty
-    className={cn("x:py-6 x:text-center x:text-sm", className)}
-    {...props}
-  />
-);
-
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
-
-const CommandGroup = ({
+export function CommandGroup({
   className,
   heading,
   rightAttributes,
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Group> & {
   rightAttributes?: React.ReactNode;
-}) => (
-  <CommandPrimitive.Group
-    className={cn(
-      "x:overflow-hidden x:p-1 x:text-foreground x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:py-1.5 x:[&_[cmdk-group-heading]]:text-xs x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground x:[&:has([cmdk-group-items]:empty)]:hidden",
-      className,
-    )}
-    heading={
-      <div className="x:flex x:items-center x:justify-between x:font-medium x:text-muted-foreground">
-        {typeof heading === "string" ? (
-          <div className="x:text-xs">{heading}</div>
-        ) : (
-          heading
-        )}
-        {rightAttributes}
-      </div>
-    }
-    {...props}
-  />
-);
+}) {
+  return (
+    <CommandPrimitive.Group
+      className={cn(
+        "x:overflow-hidden x:p-1 x:text-foreground x:[&_[cmdk-group-heading]]:px-2 x:[&_[cmdk-group-heading]]:py-1.5 x:[&_[cmdk-group-heading]]:text-xs x:[&_[cmdk-group-heading]]:font-medium x:[&_[cmdk-group-heading]]:text-muted-foreground x:[&:has([cmdk-group-items]:empty)]:hidden",
+        className,
+      )}
+      heading={
+        heading != null && (
+          <div className="x:flex x:items-center x:justify-between x:font-medium x:text-muted-foreground">
+            {typeof heading === "string" ? (
+              <div className="x:text-xs">{heading}</div>
+            ) : (
+              heading
+            )}
+            {rightAttributes}
+          </div>
+        )
+      }
+      {...props}
+    />
+  );
+}
 
-CommandGroup.displayName = CommandPrimitive.Group.displayName;
-
-const CommandSeparator = ({
+export function CommandSeparator({
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Separator>) => (
-  <CommandPrimitive.Separator
-    className={cn("x:-mx-1 x:h-px x:bg-border", className)}
-    {...props}
-  />
-);
-CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
+}: React.ComponentProps<typeof CommandPrimitive.Separator>) {
+  return (
+    <CommandPrimitive.Separator
+      className={cn("x:-mx-1 x:h-px x:bg-border", className)}
+      {...props}
+    />
+  );
+}
 
-const CommandItem = ({
+export function CommandItem({
   children,
   className,
   ...props
-}: React.ComponentProps<typeof CommandPrimitive.Item>) => (
-  <CommandPrimitive.Item
-    className={cn(
-      "x:group x:relative x:flex x:cursor-pointer x:items-center x:rounded-lg x:px-2 x:py-2 x:text-sm x:text-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-foreground x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
-      className,
-    )}
-    {...props}
-  >
-    {children}
-  </CommandPrimitive.Item>
-);
+}: React.ComponentProps<typeof CommandPrimitive.Item>) {
+  return (
+    <CommandPrimitive.Item
+      className={cn(
+        "x:group x:relative x:flex x:cursor-pointer x:items-center x:rounded-lg x:px-2 x:py-2 x:text-sm x:text-foreground x:outline-none x:select-none x:aria-selected:bg-primary-foreground x:aria-selected:text-foreground x:data-[disabled=true]:pointer-events-none x:data-[disabled=true]:opacity-50",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </CommandPrimitive.Item>
+  );
+}
 
-CommandItem.displayName = CommandPrimitive.Item.displayName;
-
-const CommandItemIcon = ({
+export function CommandItemIcon({
   className,
   asChild,
   ...props
 }: React.ComponentProps<"div"> & {
   asChild?: boolean;
-}) => {
+}) {
   const Comp = asChild ? Slot : "div";
 
   return <Comp className={cn("x:mr-2 x:size-4", className)} {...props} />;
-};
+}
 
-CommandItemIcon.displayName = "CommandItemIcon";
-
-const CommandItemTitle = ({
+export function CommandItemTitle({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) => {
+}: React.ComponentProps<"div">) {
   if (typeof children === "string") {
     return (
       <span className={cn("x:truncate", className)} {...props}>
@@ -213,17 +216,15 @@ const CommandItemTitle = ({
       {children}
     </div>
   );
-};
+}
 
-CommandItemTitle.displayName = "CommandItemTitle";
-
-const CommandItemRightAttributes = ({
+export function CommandItemRightAttributes({
   className,
   asChild,
   ...props
 }: React.ComponentProps<"div"> & {
   asChild?: boolean;
-}) => {
+}) {
   const Comp = asChild ? Slot : "div";
 
   return (
@@ -236,17 +237,15 @@ const CommandItemRightAttributes = ({
       {...props}
     />
   );
-};
+}
 
-CommandItemRightAttributes.displayName = "CommandItemRightAttributes";
-
-const CommandItemAlternateRightAttributes = ({
+export function CommandItemAlternateRightAttributes({
   className,
   asChild,
   ...props
 }: React.ComponentProps<"div"> & {
   asChild?: boolean;
-}) => {
+}) {
   const Comp = asChild ? Slot : "div";
 
   return (
@@ -259,15 +258,12 @@ const CommandItemAlternateRightAttributes = ({
       {...props}
     />
   );
-};
+}
 
-CommandItemAlternateRightAttributes.displayName =
-  "CommandItemAlternateRightAttributes";
-
-const CommandShortcut = ({
+export function CommandShortcut({
   className,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>) => {
+}: React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
       className={cn(
@@ -277,21 +273,59 @@ const CommandShortcut = ({
       {...props}
     />
   );
-};
-CommandShortcut.displayName = "CommandShortcut";
+}
 
-export {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandItemIcon,
-  CommandItemTitle,
-  CommandItemAlternateRightAttributes,
-  CommandItemRightAttributes,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-};
+export function CommandItemSkeleton({
+  count,
+  className,
+  ...props
+}: ComponentProps<"div"> & {
+  count: number;
+}) {
+  return (
+    <div className="x:flex x:flex-col x:gap-3 x:px-3 x:py-4">
+      {Array.from({ length: count }).map((_, index) => (
+        <div
+          key={index}
+          className={cn(
+            "x:h-8 x:w-full x:animate-pulse x:rounded-lg x:bg-muted",
+            className,
+          )}
+          {...props}
+        />
+      ))}
+    </div>
+  );
+}
+
+/**
+ * Custom hook to handle manual scrolling for CommandList when using memoized CommandItems.
+ * Use this when the default scroll behavior glitches.
+ */
+export function useCommandListManualScroll({
+  enabled,
+  commandListRef,
+  willUpdateValue,
+}: {
+  enabled: boolean;
+  commandListRef: React.RefObject<HTMLDivElement | null>;
+  willUpdateValue: string;
+}) {
+  useEffect(() => {
+    if (!enabled || !commandListRef.current) return;
+
+    requestAnimationFrame(() => {
+      const selectedItem = commandListRef.current?.querySelector(
+        '[cmdk-item][aria-selected="true"]',
+      );
+
+      if (selectedItem && selectedItem instanceof HTMLElement) {
+        selectedItem.scrollIntoView({
+          block: "nearest",
+          inline: "nearest",
+          behavior: "instant",
+        });
+      }
+    });
+  }, [commandListRef, enabled, willUpdateValue]);
+}

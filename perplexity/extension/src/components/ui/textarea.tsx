@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 
 type TextareaProps = ComponentProps<"textarea">;
 
-const Textarea = ({ className, ...props }: TextareaProps) => {
+export function Textarea({ className, ...props }: TextareaProps) {
   return (
     <textarea
       className={cn(
@@ -12,8 +12,4 @@ const Textarea = ({ className, ...props }: TextareaProps) => {
       {...props}
     />
   );
-};
-
-Textarea.displayName = "Textarea";
-
-export { Textarea };
+}

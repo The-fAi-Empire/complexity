@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useLocation, useSearchParams } from "react-router-dom";
 
 import { Switch } from "@/components/ui/switch";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabContent, TabsList, TabTrigger } from "@/components/ui/tabs";
 import type { PluginId } from "@/data/plugin-registry/types";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/plugins/thread-better-code-blocks/indexed-db/query-keys";
 import CreateNewLanguageOptionButton from "@/plugins/thread-better-code-blocks/settings-ui/CreateNewLanguageOptionButton";
@@ -42,28 +42,28 @@ export default function BetterCodeBlocksPluginSettingsUi() {
           }}
         >
           <TabsList className="x:mb-2 x:justify-start">
-            <TabsTrigger value="global">Global</TabsTrigger>
+            <TabTrigger value="global">Global</TabTrigger>
             {fineGrainedOptions?.map((option) => (
-              <TabsTrigger key={option.language} value={option.language}>
+              <TabTrigger key={option.language} value={option.language}>
                 {option.language}
-              </TabsTrigger>
+              </TabTrigger>
             ))}
             <CreateNewLanguageOptionButton />
           </TabsList>
-          <TabsContent
+          <TabContent
             value="global"
             className="x:max-w-[500px] x:rounded-md x:bg-secondary x:p-4"
           >
             <BetterCodeBlockGlobalOptions />
-          </TabsContent>
+          </TabContent>
           {fineGrainedOptions?.map((option) => (
-            <TabsContent
+            <TabContent
               key={option.language}
               value={option.language}
               className="x:rounded-md x:bg-secondary x:p-4"
             >
               <BetterCodeBlockFineGrainedOptions language={option.language} />
-            </TabsContent>
+            </TabContent>
           ))}
         </Tabs>
       )}

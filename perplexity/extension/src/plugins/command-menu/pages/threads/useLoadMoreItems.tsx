@@ -1,45 +1,29 @@
+import { useIntersectionObserver } from "@uidotdev/usehooks";
+
 type UseIntersectionObserverProps = {
   hasNextPage: boolean;
-  isFetchingNextPage: boolean;
+  isFetching: boolean;
   fetchNextPage: () => void;
-  data: any;
 };
 
 export default function useLoadMoreItems({
   hasNextPage,
-  isFetchingNextPage,
+  isFetching,
   fetchNextPage,
-  data,
-}: UseIntersectionObserverProps) {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const triggerRef = useRef<HTMLDivElement | null>(null);
+}: UseIntersectionObserverProps): {
+  triggerRef: (node: Element | null) => void;
+} {
+  const [triggerRef, entry] = useIntersectionObserver({
+    root: $("[data-command-menu-list]")[0],
+    threshold: 0,
+    rootMargin: "0px 0px 5px 0px",
+  });
 
   useEffect(() => {
-    if (!hasNextPage || isFetchingNextPage) return;
-
-    if (observerRef.current) {
-      observerRef.current.disconnect();
+    if (entry?.isIntersecting && hasNextPage && !isFetching) {
+      fetchNextPage();
     }
-
-    observerRef.current = new IntersectionObserver(
-      (entries) => {
-        if (entries[0] && entries[0].isIntersecting && hasNextPage) {
-          fetchNextPage();
-        }
-      },
-      { rootMargin: "200px 0px 0px 0px" },
-    );
-
-    if (triggerRef.current) {
-      observerRef.current.observe(triggerRef.current);
-    }
-
-    return () => {
-      if (observerRef.current) {
-        observerRef.current.disconnect();
-      }
-    };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage, data]);
+  }, [entry, hasNextPage, isFetching, fetchNextPage]);
 
   return { triggerRef };
 }

@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "选择语言模型",
-    "proSearch": {
-      "tooltip": "更多信息源，Python代码解释器"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "自动",
       "description": "根据查询自适应"

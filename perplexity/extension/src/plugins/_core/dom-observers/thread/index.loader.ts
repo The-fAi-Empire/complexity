@@ -1,3 +1,5 @@
+import { sendMessage } from "webext-bridge/window";
+
 import {
   CallbackQueue,
   createTaskId,
@@ -16,7 +18,7 @@ import {
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { whereAmI } from "@/utils/utils";
+import { waitUntil, whereAmI } from "@/utils/utils";
 
 declare module "@/plugins/_core/dom-observers/types" {
   interface CoreDomObserverRegistry {
@@ -37,14 +39,23 @@ export default function loader() {
       "messaging:spaRouter",
       "cache:pluginsStates",
       "cache:domSelectors",
+      "plugins:mainWorldCorePlugins:domSelectorsDependants",
     ],
-    loader: () => {
+    loader: async () => {
       if (
         !shouldEnableCoreObserver({
           coreObserverId: "thread",
         })
       )
         return;
+
+      await waitUntil({
+        interval: 500,
+        timeout: 2000,
+        condition: () => {
+          return sendMessage("reactVdom:isInitialized", undefined, "window");
+        },
+      });
 
       observeThread(whereAmI());
 

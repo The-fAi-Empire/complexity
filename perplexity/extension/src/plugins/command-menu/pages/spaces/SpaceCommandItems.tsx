@@ -9,12 +9,12 @@ import {
   CommandItemRightAttributes,
   CommandItemTitle,
 } from "@/components/ui/command";
+import { CommandItemSkeleton } from "@/components/ui/command";
 import { formatRelativeTime } from "@/data/dayjs";
 import {
   openInNewTab,
   softNavigate,
 } from "@/plugins/_core/main-world/spa-router/utils";
-import CommandItemSkeleton from "@/plugins/command-menu/components/Skeletons";
 import SpacesSearchItemsFooter from "@/plugins/command-menu/pages/spaces/Footer";
 import SpacesSearchItemsSidecar from "@/plugins/command-menu/pages/spaces/Sidecar";
 import {

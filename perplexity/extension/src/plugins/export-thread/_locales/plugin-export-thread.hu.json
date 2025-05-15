@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Exportálás",
-    "copied": "Másolva",
     "format": {
       "label": "Formátum választása",
       "placeholder": "Válasszon formátumot"

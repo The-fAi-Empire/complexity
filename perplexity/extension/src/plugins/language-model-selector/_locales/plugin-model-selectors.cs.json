@@ -1,9 +1,7 @@
 {
   "languageModelSelector": {
     "tooltip": "Vybrat jazykový model",
-    "proSearch": {
-      "tooltip": "Více zdrojů, interpret kódu Python"
-    },
+    "proSearch": {},
     "autoMode": {
       "title": "Auto",
       "description": "Přizpůsobí se vašemu dotazu"

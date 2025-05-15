@@ -1,4 +1,4 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabContent, TabsList, TabTrigger } from "@/components/ui/tabs";
 import { H2 } from "@/components/ui/typography";
 import {
   PLUGIN_CATEGORIES,
@@ -40,15 +40,15 @@ function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
       <Tabs defaultValue="queryBox">
         <TabsList className="x:w-full">
           {Object.keys(pluginsByCategory).map((category) => (
-            <TabsTrigger key={category} value={category}>
+            <TabTrigger key={category} value={category}>
               {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
-            </TabsTrigger>
+            </TabTrigger>
           ))}
         </TabsList>
         {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
-          <TabsContent key={category} value={category} className="x:mt-4">
+          <TabContent key={category} value={category} className="x:mt-4">
             <PluginsGrid pluginIds={pluginIds} />
-          </TabsContent>
+          </TabContent>
         ))}
       </Tabs>
     </div>

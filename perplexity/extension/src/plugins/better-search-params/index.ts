@@ -21,7 +21,7 @@ export default definePlugin({
       "Extends search param to include model, focus modes, and incognito mode, etc.",
     categories: ["misc"],
     tags: ["new"],
-    dependentMainWorldCorePlugins: ["spaRouter"],
+    dependentMainWorldCorePlugins: ["spaRouter", "networkIntercept"],
   },
   settingsSchema: {
     schema,

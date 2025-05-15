@@ -4,8 +4,6 @@ import { ScopedQueryBoxContextProvider } from "@/plugins/_core/ui/groups/query-b
 import { createToolbarPortalContainers } from "@/plugins/_core/ui/groups/query-box/utils";
 import ForceWritingModeToggle from "@/plugins/force-writing-mode/Wrapper";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
-import SlashCommandMenuTriggerButtonWrapper from "@/plugins/slash-command-menu/TriggerButtonWrapper";
-import SlashCommandMenuWrapper from "@/plugins/slash-command-menu/Wrapper";
 
 export default function SpaceQueryBoxWrapper() {
   const spaceQueryBox = queryBoxesDomObserverStore(
@@ -25,10 +23,7 @@ export default function SpaceQueryBoxWrapper() {
         <BetterLanguageModelSelectorWrapper />
       </Portal>
       <Portal container={leftToolbar.rightContainer}>
-        <div className="x:flex x:size-full x:flex-wrap x:items-center x:gap-2">
-          <SlashCommandMenuTriggerButtonWrapper />
-        </div>
-        <SlashCommandMenuWrapper anchor={spaceQueryBox} />
+        <div className="x:flex x:size-full x:flex-wrap x:items-center x:gap-2"></div>
       </Portal>
       <Portal container={rightToolbar.leftContainer}>
         <ForceWritingModeToggle />

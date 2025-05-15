@@ -1,5 +1,6 @@
 import { findReactFiberNodeValue } from "@/plugins/_core/main-world/react-vdom/utils";
 import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import type { PplxWebResult } from "@/utils/thread-export";
 import { UiUtils } from "@/utils/ui-utils";
@@ -25,10 +26,13 @@ export const localFiberNodePath = [
   "results",
 ];
 
-export function getMessages({
+export async function getMessages({
   remoteFiberNodePath,
-}: { remoteFiberNodePath?: string[] } = {}): MessageBlockFiberData[] | null {
-  const $messagesContainer = UiUtils.getMessagesContainer();
+}: { remoteFiberNodePath?: string[] } = {}): Promise<
+  MessageBlockFiberData[] | null
+> {
+  const domSelectors = await DomSelectorsService.mainWorldCached();
+  const $messagesContainer = UiUtils.getMessagesContainer(domSelectors);
 
   if (!$messagesContainer[0]) return null;
 

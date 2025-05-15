@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "निर्यात करें",
-    "copied": "कॉपी किया गया",
     "format": {
       "label": "प्रारूप चुनें",
       "placeholder": "एक प्रारूप चुनें"

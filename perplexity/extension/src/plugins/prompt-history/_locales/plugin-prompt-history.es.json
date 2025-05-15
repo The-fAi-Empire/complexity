@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Borrar historial de prompts",
+      "message": "¿Estás seguro de que quieres borrar todo el historial de prompts? Esta acción no se puede deshacer.",
+      "actions": {
+        "cancel": "Cancelar",
+        "confirm": "Borrar todo"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Buscar en el historial de prompts...",
+    "noResults": "No se encontraron resultados"
+  }
+}

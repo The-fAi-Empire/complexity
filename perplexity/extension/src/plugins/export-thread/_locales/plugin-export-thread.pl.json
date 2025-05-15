@@ -1,7 +1,6 @@
 {
   "exportButton": {
     "action": "Eksportuj",
-    "copied": "Skopiowano",
     "format": {
       "label": "Wybierz format",
       "placeholder": "Wybierz format"

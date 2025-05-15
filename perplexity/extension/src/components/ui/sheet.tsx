@@ -5,23 +5,24 @@ import { LuX as X } from "react-icons/lu";
 
 import { Portal } from "@/components/ui/portal";
 
-const Sheet = ArkDialog.Root;
-const SheetTrigger = ArkDialog.Trigger;
-const SheetClose = ArkDialog.CloseTrigger;
-const SheetPortal = Portal;
+export const Sheet = ArkDialog.Root;
+export const SheetTrigger = ArkDialog.Trigger;
+export const SheetClose = ArkDialog.CloseTrigger;
+export const SheetPortal = Portal;
 
-const SheetOverlay = ({ className, ...props }: ArkDialog.BackdropProps) => (
-  <ArkDialog.Backdrop
-    className={cn(
-      "x:fixed x:inset-0 x:z-50 x:bg-black/80",
-      "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
-      "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
-      className,
-    )}
-    {...props}
-  />
-);
-SheetOverlay.displayName = ArkDialog.Backdrop.displayName;
+export function SheetOverlay({ className, ...props }: ArkDialog.BackdropProps) {
+  return (
+    <ArkDialog.Backdrop
+      className={cn(
+        "x:fixed x:inset-0 x:z-50 x:bg-black/80",
+        "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in",
+        "x:data-[state=closed]:fade-out-0 x:data-[state=open]:fade-in-0",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
 const sheetVariants = cva(
   "x:fixed x:z-50 x:bg-background x:shadow-lg x:transition x:ease-in-out",
@@ -46,111 +47,103 @@ type SheetContentProps = ArkDialog.ContentProps &
     closeButton?: boolean;
   };
 
-const SheetContent = ({
+export function SheetContent({
   side = "right",
   className,
   children,
   closeButton = true,
   ...props
-}: SheetContentProps) => (
-  <SheetPortal>
-    <SheetOverlay />
-    <ArkDialog.Positioner>
-      <ArkDialog.Content
-        className={cn(
-          sheetVariants({ side }),
-          "x:p-6",
-          "x:border-border/50",
-          {
-            "x:h-[100dvh]": side === "left" || side === "right",
-            "x:h-auto x:max-h-[75vh] x:!w-screen":
-              side === "top" || side === "bottom",
-            "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in":
-              true,
-            "x:data-[state=closed]:slide-out-to-left x:data-[state=open]:slide-in-from-left":
-              side === "left",
-            "x:data-[state=closed]:slide-out-to-right x:data-[state=open]:slide-in-from-right":
-              side === "right",
-            "x:data-[state=closed]:slide-out-to-top x:data-[state=open]:slide-in-from-top":
-              side === "top",
-            "x:data-[state=closed]:slide-out-to-bottom x:data-[state=open]:slide-in-from-bottom":
-              side === "bottom",
-            "x:data-[state=closed]:duration-300 x:data-[state=open]:duration-300":
-              true,
-          },
-          className,
-        )}
-        {...props}
-      >
-        {children}
-        {closeButton && (
-          <SheetClose className="x:absolute x:top-4 x:right-4 x:rounded-sm x:opacity-70 x:ring-ring x:hover:opacity-100 x:focus:ring-2 x:focus:ring-offset-2 x:focus:outline-none x:disabled:pointer-events-none">
-            <X className="x:h-4 x:w-4" />
-            <span className="x:sr-only">Close</span>
-          </SheetClose>
-        )}
-      </ArkDialog.Content>
-    </ArkDialog.Positioner>
-  </SheetPortal>
-);
-SheetContent.displayName = ArkDialog.Content.displayName;
+}: SheetContentProps) {
+  return (
+    <SheetPortal>
+      <SheetOverlay />
+      <ArkDialog.Positioner>
+        <ArkDialog.Content
+          className={cn(
+            sheetVariants({ side }),
+            "x:p-6",
+            "x:border-border/50",
+            {
+              "x:h-[100dvh]": side === "left" || side === "right",
+              "x:h-auto x:max-h-[75vh] x:!w-screen":
+                side === "top" || side === "bottom",
+              "x:data-[state=closed]:animate-out x:data-[state=open]:animate-in":
+                true,
+              "x:data-[state=closed]:slide-out-to-left x:data-[state=open]:slide-in-from-left":
+                side === "left",
+              "x:data-[state=closed]:slide-out-to-right x:data-[state=open]:slide-in-from-right":
+                side === "right",
+              "x:data-[state=closed]:slide-out-to-top x:data-[state=open]:slide-in-from-top":
+                side === "top",
+              "x:data-[state=closed]:slide-out-to-bottom x:data-[state=open]:slide-in-from-bottom":
+                side === "bottom",
+              "x:data-[state=closed]:duration-300 x:data-[state=open]:duration-300":
+                true,
+            },
+            className,
+          )}
+          {...props}
+        >
+          {children}
+          {closeButton && (
+            <SheetClose className="x:absolute x:top-4 x:right-4 x:rounded-sm x:opacity-70 x:ring-ring x:hover:opacity-100 x:focus:ring-2 x:focus:ring-offset-2 x:focus:outline-none x:disabled:pointer-events-none">
+              <X className="x:h-4 x:w-4" />
+              <span className="x:sr-only">Close</span>
+            </SheetClose>
+          )}
+        </ArkDialog.Content>
+      </ArkDialog.Positioner>
+    </SheetPortal>
+  );
+}
 
-const SheetHeader = ({
+export function SheetHeader({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn("x:flex x:flex-col x:space-y-1.5", className)}
-    {...props}
-  />
-);
-SheetHeader.displayName = "SheetHeader";
+}: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn("x:flex x:flex-col x:space-y-1.5", className)}
+      {...props}
+    />
+  );
+}
 
-const SheetFooter = ({
+export function SheetFooter({
   className,
   ...props
-}: HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "x:flex x:flex-col-reverse x:sm:flex-row x:sm:justify-end x:sm:space-x-2",
-      className,
-    )}
-    {...props}
-  />
-);
-SheetFooter.displayName = "SheetFooter";
+}: HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      className={cn(
+        "x:flex x:flex-col-reverse x:sm:flex-row x:sm:justify-end x:sm:space-x-2",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-const SheetTitle = ({ className, ...props }: ArkDialog.TitleProps) => (
-  <ArkDialog.Title
-    className={cn(
-      "x:text-lg x:leading-none x:font-semibold x:tracking-tight",
-      className,
-    )}
-    {...props}
-  />
-);
-SheetTitle.displayName = ArkDialog.Title.displayName;
+export function SheetTitle({ className, ...props }: ArkDialog.TitleProps) {
+  return (
+    <ArkDialog.Title
+      className={cn(
+        "x:text-lg x:leading-none x:font-semibold x:tracking-tight",
+        className,
+      )}
+      {...props}
+    />
+  );
+}
 
-const SheetDescription = ({
+export function SheetDescription({
   className,
   ...props
-}: ArkDialog.DescriptionProps) => (
-  <ArkDialog.Description
-    className={cn("x:text-sm x:text-muted-foreground", className)}
-    {...props}
-  />
-);
-SheetDescription.displayName = ArkDialog.Description.displayName;
-
-export {
-  Sheet,
-  SheetPortal,
-  SheetOverlay,
-  SheetTrigger,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetFooter,
-  SheetTitle,
-  SheetDescription,
-};
+}: ArkDialog.DescriptionProps) {
+  return (
+    <ArkDialog.Description
+      className={cn("x:text-sm x:text-muted-foreground", className)}
+      {...props}
+    />
+  );
+}

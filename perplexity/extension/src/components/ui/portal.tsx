@@ -1,4 +1,4 @@
-import { Portal as ArkPortal } from "@ark-ui/react";
+import { Portal as ArkPortal } from "@ark-ui/react/portal";
 import React from "react";
 
 type PortalProps = {
@@ -6,7 +6,7 @@ type PortalProps = {
   container?: HTMLElement | null;
 };
 
-function Portal({ children, container }: PortalProps) {
+export function Portal({ children, container }: PortalProps) {
   if (container !== undefined && !document.contains(container)) return null;
 
   return (
@@ -19,5 +19,3 @@ function Portal({ children, container }: PortalProps) {
     </ArkPortal>
   );
 }
-
-export { Portal };

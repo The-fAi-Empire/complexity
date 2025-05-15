@@ -1,0 +1,16 @@
+{
+  "clearAllButton": {
+    "dialog": {
+      "title": "Hapus Riwayat Prompt",
+      "message": "Apakah Anda yakin ingin menghapus semua riwayat prompt? Tindakan ini tidak dapat dibatalkan.",
+      "actions": {
+        "cancel": "Batal",
+        "confirm": "Hapus Semua"
+      }
+    }
+  },
+  "promptHistory": {
+    "searchPlaceholder": "Cari riwayat prompt...",
+    "noResults": "Tidak ditemukan hasil"
+  }
+}
