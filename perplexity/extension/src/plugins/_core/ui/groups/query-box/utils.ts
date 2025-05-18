@@ -25,12 +25,16 @@ export function createToolbarPortalContainers({
   );
 
   // --- Left Toolbar ---
-  const $pplxLeftToolbarWrapper =
-    $queryBoxComponentsWrapper.find(">div:nth-child(2)"); // Might be brittle
+  const $pplxLeftToolbarWrapper = $queryBoxComponentsWrapper.find(
+    DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER.LEFT_WRAPPER,
+  );
 
   if ($pplxLeftToolbarWrapper.length) {
     $pplxLeftToolbarWrapper
-      .find(">div.flex:first-child")
+      .find(
+        DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER
+          .LEFT_COMPONENTS_WRAPPER,
+      )
       .internalComponentAttr(
         DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
           .PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER,
@@ -53,8 +57,9 @@ export function createToolbarPortalContainers({
 
   // --- Right Toolbar ---
   let $rightToolbarLeftContainer: JQuery<HTMLElement> | null = null;
-  const $pplxRightToolbarWrapper =
-    $queryBoxComponentsWrapper.find(">div:nth-child(3)");
+  const $pplxRightToolbarWrapper = $queryBoxComponentsWrapper.find(
+    DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER.RIGHT_WRAPPER,
+  );
 
   if ($pplxRightToolbarWrapper.length) {
     $pplxRightToolbarWrapper.internalComponentAttr(
@@ -63,7 +68,10 @@ export function createToolbarPortalContainers({
     );
 
     $pplxRightToolbarWrapper
-      .find(">div.flex:first-child")
+      .find(
+        DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER
+          .RIGHT_COMPONENTS_WRAPPER,
+      )
       .internalComponentAttr(
         DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
           .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
@@ -98,7 +106,7 @@ function findOrCreateContainer(
     return null;
   }
 
-  const selector = `[data-cplx-component="${internalAttribute}"]`;
+  const selector = DomSelectorsService.cplxAttribute(internalAttribute);
   const $existingContainer = $parentElement.find(selector);
 
   if ($existingContainer.length) {

@@ -1,6 +1,7 @@
 import SponsorDialogWrapper from "@/components/SponsorDialogWrapper";
 import { Portal } from "@/components/ui/portal";
 import { useHomeDomObserverStore } from "@/plugins/_core/dom-observers/home/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export function SponsorHomeLink() {
   const bottomBar = useHomeDomObserverStore((store) => store.$bottomBar?.[0]);
@@ -9,13 +10,15 @@ export function SponsorHomeLink() {
     if (!bottomBar) return null;
 
     const $existingContainer = $(bottomBar).find(
-      `[data-cplx-component="sponsor-home-link-container"]`,
+      DomSelectorsService.cplxAttribute(
+        DomSelectorsService.internalAttributes.HOME.SPONSOR_HOME_LINK_CONTAINER,
+      ),
     );
 
     if ($existingContainer.length) return $existingContainer[0];
 
     const $container = $("<div>").internalComponentAttr(
-      "sponsor-home-link-container",
+      DomSelectorsService.internalAttributes.HOME.SPONSOR_HOME_LINK_CONTAINER,
     );
 
     $(bottomBar).prepend($container);

@@ -50,7 +50,7 @@ const createObservers = (() => {
     if (!cachedTopMostObserver) {
       const navbarHeight =
         parseInt(
-          getComputedStyle(document.body).getPropertyValue("--navbar-height"),
+          getComputedStyle(document.body).getPropertyValue("--header-height"),
         ) || 53;
 
       cachedTopMostObserver = new IntersectionObserver(

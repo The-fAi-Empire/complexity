@@ -1,0 +1,48 @@
+import type { InfiniteData } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { usePrevious } from "@uidotdev/usehooks";
+import { useMemo } from "react";
+
+import { queryClient } from "@/data/query-client";
+import { promptHistoryQueries } from "@/plugins/slash-command-prompt-history/indexed-db/query-keys";
+import type { PromptHistory } from "@/plugins/slash-command-prompt-history/types";
+
+export function usePromptHistory({
+  searchValue,
+  enabled,
+}: {
+  searchValue: string;
+  enabled: boolean;
+}) {
+  const previousSearchValue = usePrevious(searchValue);
+
+  const query = useInfiniteQuery({
+    ...promptHistoryQueries.infinite.detail({
+      searchTerm: searchValue,
+      initialPageParam: 0,
+    }),
+    initialData: () => {
+      return queryClient.getQueryData<
+        InfiniteData<{ items: PromptHistory[]; total: number }, number>
+      >(
+        promptHistoryQueries.infinite.detail({
+          searchTerm: previousSearchValue ?? "",
+        }).queryKey,
+      );
+    },
+    enabled,
+  });
+
+  const items = useMemo(() => {
+    return query.data?.pages.flatMap((page) =>
+      page.items.map((item: PromptHistory) => ({
+        id: item.id,
+        prompt: item.prompt,
+        createdAt: new Date(item.createdAt).toISOString(),
+        keywords: item.prompt.split(" "),
+      })),
+    );
+  }, [query.data]);
+
+  return { query, items };
+}

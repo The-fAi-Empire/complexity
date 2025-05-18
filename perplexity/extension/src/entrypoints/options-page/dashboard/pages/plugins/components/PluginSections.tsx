@@ -7,7 +7,6 @@ import {
 import type { PluginId } from "@/data/plugin-registry/types";
 import NoPluginsFound from "@/entrypoints/options-page/dashboard/pages/plugins/components/NoPluginsFound";
 import { PluginsGrid } from "@/entrypoints/options-page/dashboard/pages/plugins/components/PluginsGrid";
-import PluginsEnableSet from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsEnableSet";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
 
 type PluginSectionsProps = {
@@ -34,34 +33,35 @@ export function PluginSections({ pluginsByCategory }: PluginSectionsProps) {
 }
 
 function MobilePluginSections({ pluginsByCategory }: PluginSectionsProps) {
+  const categories = Object.keys(pluginsByCategory);
+
   return (
-    <div className="x:flex x:flex-col">
-      <PluginsEnableSet />
-      <Tabs defaultValue="queryBox">
-        <TabsList className="x:w-full">
-          {Object.keys(pluginsByCategory).map((category) => (
-            <TabTrigger key={category} value={category}>
+    <Tabs defaultValue={categories[0]} activationMode="automatic">
+      <div className="x:w-full x:overflow-x-auto x:rounded-lg x:border x:bg-secondary">
+        <TabsList className="x:flex x:w-full x:max-w-full x:flex-nowrap">
+          {categories.map((category) => (
+            <TabTrigger
+              key={category}
+              value={category}
+              className="x:whitespace-nowrap"
+            >
               {PLUGIN_CATEGORIES[category as PluginCategory]?.label || category}
             </TabTrigger>
           ))}
         </TabsList>
-        {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
-          <TabContent key={category} value={category} className="x:mt-4">
-            <PluginsGrid pluginIds={pluginIds} />
-          </TabContent>
-        ))}
-      </Tabs>
-    </div>
+      </div>
+      {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
+        <TabContent key={category} value={category} className="x:mt-4">
+          <PluginsGrid pluginIds={pluginIds} />
+        </TabContent>
+      ))}
+    </Tabs>
   );
 }
 
 function DesktopPluginSections({ pluginsByCategory }: PluginSectionsProps) {
   return (
     <div className="x:flex x:flex-col x:gap-8">
-      <div className="x:flex x:items-center x:justify-end x:gap-4">
-        <PluginsEnableSet />
-      </div>
-
       {Object.entries(pluginsByCategory).map(([category, pluginIds]) => (
         <section key={category}>
           <H2 className="x:!text-lg x:font-semibold">

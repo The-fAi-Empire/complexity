@@ -1,6 +1,5 @@
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import { setCssProperty } from "@/utils/utils";
 
 export function findNavbar() {
   const $navbar = $(DomSelectorsService.cachedSync.THREAD.NAVBAR);
@@ -16,14 +15,6 @@ export function findNavbar() {
   $navbar.internalComponentAttr(
     DomSelectorsService.internalAttributes.THREAD.NAVBAR,
   );
-
-  if (!document.body.style.getPropertyValue("--navbar-height") && $navbar[0]) {
-    const navbarHeight = $navbar[0].offsetHeight;
-
-    if (navbarHeight > 0) {
-      setCssProperty("--navbar-height", `${navbarHeight}px`);
-    }
-  }
 
   threadDomObserverStore.setState({
     $navbar,
@@ -123,33 +114,5 @@ export function findPopper() {
 
   threadDomObserverStore.setState({
     $popper,
-  });
-}
-
-export function findMessageStickyHeaderHeight() {
-  const $messageStickyHeader = $(
-    DomSelectorsService.cachedSync.THREAD.MESSAGE.STICKY_HEADER,
-  ).last();
-
-  if (
-    !$messageStickyHeader.length ||
-    document.body.style.getPropertyValue(
-      "--message-block-sticky-header-height",
-    ) ||
-    !$messageStickyHeader[0]
-  )
-    return;
-
-  const stickyHeaderHeight = $messageStickyHeader[0].offsetHeight;
-
-  if (stickyHeaderHeight > 0) {
-    setCssProperty(
-      "--message-block-sticky-header-height",
-      `${stickyHeaderHeight}px`,
-    );
-  }
-
-  threadDomObserverStore.setState({
-    messageStickyHeaderHeight: stickyHeaderHeight,
   });
 }

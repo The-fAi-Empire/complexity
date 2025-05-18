@@ -84,7 +84,6 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
     DomObserver.create(createDomObserverId("queryBoxes", "home"), {
       target: document.body,
       config: { childList: true, subtree: true },
-      fireImmediately: true,
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findMainQueryBox,
@@ -107,7 +106,6 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
     DomObserver.create(createDomObserverId("queryBoxes", "collection"), {
       target: document.body,
       config: { childList: true, subtree: true },
-      fireImmediately: true,
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findSpaceQueryBox,
@@ -126,7 +124,6 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
       target: document.body,
       config: { childList: true, subtree: true },
       debounceTime: 500,
-      fireImmediately: true,
       onMutation: () =>
         CallbackQueue.getInstance().enqueue(
           findFollowUpQueryBox,

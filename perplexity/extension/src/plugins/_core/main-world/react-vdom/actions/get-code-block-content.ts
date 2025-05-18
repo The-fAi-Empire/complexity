@@ -11,7 +11,12 @@ export function getCodeBlockContent(params: {
   language: string;
 } | null {
   const { messageBlockIndex, codeBlockIndex } = params;
-  const selector = `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"] pre`;
+
+  const selector = `${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+  )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
+  )}[data-index="${codeBlockIndex}"] pre`;
 
   const $el = $(selector);
 

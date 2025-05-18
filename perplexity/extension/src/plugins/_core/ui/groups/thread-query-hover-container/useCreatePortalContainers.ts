@@ -1,4 +1,5 @@
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 const OBSERVER_ID = "query-hover-container-cplx-toolbars-wrapper";
 
@@ -19,7 +20,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
     );
 
     const $existingPortalContainer = $target.find(
-      `div[data-cplx-component="${OBSERVER_ID}"]`,
+      `div${DomSelectorsService.cplxAttribute(OBSERVER_ID)}`,
     );
 
     if ($existingPortalContainer[0]) return $existingPortalContainer[0];

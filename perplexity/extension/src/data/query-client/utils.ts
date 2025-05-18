@@ -9,6 +9,7 @@ import debounce from "lodash/debounce";
 import { APP_CONFIG } from "@/app.config";
 import { getQueryCacheService } from "@/data/query-client/indexed-db";
 import { cplxApiQueries } from "@/services/cplx-api/query-keys";
+import { pplxApiQueries } from "@/services/pplx-api/query-keys";
 
 export type QueryCacheEntry = {
   key: string;
@@ -64,17 +65,35 @@ export const persistRemoteResources = debounce(
       persister,
       buster: APP_CONFIG.VERSION,
       dehydrateOptions: {
-        shouldDehydrateQuery: (query: Query) => {
-          const queryKey = query.queryKey;
-          return (
-            Array.isArray(queryKey) && queryKey[0] === cplxApiQueries.all()[0]
-          );
-        },
+        shouldDehydrateQuery,
       },
     });
   },
   300,
 );
+
+function shouldDehydrateQuery(query: Query) {
+  const queryKey = query.queryKey;
+
+  const excludes = [cplxApiQueries.cacheBuster.detail().queryKey];
+
+  if (excludes.some((exclude) => queryKey.includes(exclude))) {
+    return false;
+  }
+
+  const includes = [
+    cplxApiQueries.all(),
+    pplxApiQueries.spaces.detail().queryKey,
+    pplxApiQueries.threads.infinite.detail({
+      searchTerm: "",
+      initialPageParam: 0,
+    }).queryKey,
+  ];
+
+  return includes.some(
+    (query) => Array.isArray(queryKey) && queryKey[0] === query[0],
+  );
+}
 
 export async function invalidateRemoteResources({
   queryClient,

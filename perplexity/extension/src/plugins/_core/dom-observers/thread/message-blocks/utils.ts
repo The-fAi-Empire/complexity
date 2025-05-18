@@ -6,7 +6,6 @@ import { type MessageBlockFiberData } from "@/plugins/_core/main-world/react-vdo
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { UiUtils } from "@/utils/ui-utils";
-import { setCssProperty } from "@/utils/utils";
 
 const remoteFiberNodePath = (
   await getVersionedRemoteResource(
@@ -114,17 +113,6 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
   $bottomBar.internalComponentAttr(
     DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR,
   );
-
-  if ($bottomBar[0]) {
-    const newHeight = `${$bottomBar[0].offsetHeight}px`;
-    const currentValue = getComputedStyle(document.body).getPropertyValue(
-      "--message-block-bottom-bar-height",
-    );
-
-    if (currentValue !== newHeight) {
-      setCssProperty("--message-block-bottom-bar-height", newHeight);
-    }
-  }
 
   return {
     $messageBlock,

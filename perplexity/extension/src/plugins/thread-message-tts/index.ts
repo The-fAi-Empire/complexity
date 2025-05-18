@@ -21,7 +21,7 @@ export default definePlugin({
     title: "Text-to-Speech",
     description: "Enable text-to-speech for messages in threads",
     categories: ["thread"],
-    tags: ["new", "ui"],
+    tags: ["ui"],
     dependentDomObservers: ["thread:messageBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
     uiGroup: ["thread:messageBlocks:toolbar"],

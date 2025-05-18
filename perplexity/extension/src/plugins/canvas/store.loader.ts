@@ -170,7 +170,11 @@ const handleCanvasBlockClick = (location: CodeBlockLocation) => {
     draft.selectedCodeBlockLocation = location;
     draft.state = "preview";
 
-    const selector = `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${location.messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${location.codeBlockIndex}"]`;
+    const selector = `${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+    )}[data-index="${location.messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK,
+    )}[data-index="${location.codeBlockIndex}"]`;
     scrollToElement($(selector), -100);
   });
 };

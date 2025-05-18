@@ -15,10 +15,16 @@ body[data-cplx-zen-mode="true"] {
     }
   }
 
+  /* Related follow-ups section */
   &[location="thread"] {
     [data-cplx-component="message-block"] {
-      /* Related follow-ups section */
-      .pb-32 > :last-child > div > :last-child > [class=""]:last-child {
+      .pb-threadInputHeightWithPadding
+        > div
+        > div:last-child
+        > div
+        > div
+        > div
+        > [class=""]:last-child {
         display: none;
       }
     }

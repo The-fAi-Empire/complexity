@@ -1,16 +1,21 @@
 import { PluginRegistry } from "@/data/plugin-registry/index";
-import type { PluginTagValues } from "@/data/plugin-registry/plugin-tags";
+import type {
+  PluginTagValues,
+  PluginCategory,
+} from "@/data/plugin-registry/plugin-tags";
 
 type UseFilteredPluginsParams = {
   searchTerm: string;
   selectedTags: PluginTagValues[];
   excludeTags: PluginTagValues[];
+  categories: PluginCategory[];
 };
 
 export function useFilteredPlugins({
   searchTerm,
   selectedTags,
   excludeTags,
+  categories,
 }: UseFilteredPluginsParams) {
   const filteredPlugins = useMemo(() => {
     return Object.values(PluginRegistry.manifests)
@@ -27,10 +32,19 @@ export function useFilteredPlugins({
         const hasExcludedTags =
           hasTags && excludeTags.some((tag) => plugin.tags!.includes(tag));
 
-        return matchesSearch && matchesTags && !hasExcludedTags;
+        const matchesCategories =
+          categories.length === 0 ||
+          (plugin.categories !== undefined &&
+            plugin.categories.some((category) =>
+              categories.includes(category),
+            ));
+
+        return (
+          matchesSearch && matchesTags && !hasExcludedTags && matchesCategories
+        );
       })
       .map((plugin) => plugin.id);
-  }, [excludeTags, searchTerm, selectedTags]);
+  }, [excludeTags, searchTerm, selectedTags, categories]);
 
   return filteredPlugins;
 }

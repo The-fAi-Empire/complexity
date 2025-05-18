@@ -13,7 +13,6 @@ import {
   findNavbar,
   findPopper,
   findWrapper,
-  findMessageStickyHeaderHeight,
   findPageWrapper,
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
@@ -79,7 +78,6 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
   DomObserver.create(createDomObserverId("thread"), {
     target: document.body,
     config: { childList: true, subtree: true },
-    fireImmediately: true,
     onMutation: () => {
       CallbackQueue.getInstance().enqueueArray([
         {
@@ -101,10 +99,6 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
         {
           id: createTaskId("thread", "navbarOverflowMenuButton"),
           callback: findNavbarOverflowMenuButtonWrapper,
-        },
-        {
-          id: createTaskId("thread", "messageStickyHeaderHeight"),
-          callback: findMessageStickyHeaderHeight,
         },
       ]);
     },

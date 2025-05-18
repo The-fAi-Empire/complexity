@@ -17,7 +17,7 @@ export default definePlugin({
     id: "queryBox:spacesThreadsForceWritingMode",
     settingsUiRouteSegment: "query-box-spaces-threads-force-writing-mode",
     title: "Spaces: Force Writing Mode",
-    tags: ["new", "experimental"],
+    tags: ["deprecated", "experimental"],
     description:
       "Force AI responses in Space's threads to use the old writing mode (toggleable)",
     categories: ["misc"],

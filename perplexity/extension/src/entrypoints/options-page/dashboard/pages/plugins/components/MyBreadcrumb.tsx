@@ -9,12 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-
-type NavItem = {
-  icon: React.ElementType;
-  label: string;
-  path: string;
-};
+import type { NavItem } from "@/entrypoints/options-page/components/sidebar/nav-items";
 
 type BreadcrumbItem = {
   label: string;

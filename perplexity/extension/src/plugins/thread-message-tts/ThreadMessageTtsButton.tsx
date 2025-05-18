@@ -109,7 +109,7 @@ export function ThreadMessageTtsButton() {
 
   if (playing && !firstChunkArrived) {
     return (
-      <div className="x:rounded-md x:p-2 x:text-muted-foreground">
+      <div className="x:rounded-full x:p-2 x:text-muted-foreground">
         <LuLoaderCircle className="x:size-4 x:animate-spin" />
       </div>
     );
@@ -132,7 +132,7 @@ export function ThreadMessageTtsButton() {
         <DropdownMenuTrigger asChild>
           <div
             tabIndex={0}
-            className="x:cursor-pointer x:rounded-lg x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95"
+            className="x:cursor-pointer x:rounded-full x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95"
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();

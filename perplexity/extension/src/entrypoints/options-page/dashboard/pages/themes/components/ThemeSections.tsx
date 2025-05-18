@@ -55,7 +55,7 @@ function MobileThemeSections({
 
   return (
     <Tabs defaultValue={defaultTab}>
-      <TabsList>
+      <TabsList className="x:mx-auto x:w-fit x:justify-center x:border x:bg-secondary">
         {localThemes.length > 0 && (
           <TabTrigger value="local">Local Themes</TabTrigger>
         )}
@@ -78,7 +78,9 @@ function MobileThemeSections({
       )}
 
       <TabContent value="community" className="x:mt-4">
-        <div className="x:text-muted-foreground">Coming soon</div>
+        <div className="x:text-center x:text-muted-foreground x:md:text-left">
+          Coming soon
+        </div>
       </TabContent>
     </Tabs>
   );

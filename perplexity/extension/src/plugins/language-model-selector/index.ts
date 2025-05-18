@@ -19,7 +19,7 @@ export default definePlugin({
     id: "queryBox:languageModelSelector",
     settingsUiRouteSegment: "query-box-language-model-selector",
     title: "Better Language Model Selector",
-    description: "Take complete control of all available language models.",
+    description: "Take complete control of all available language models",
     categories: ["queryBox"],
     tags: ["ui", "pplxPro"],
     uiGroup: ["queryBoxes:toolbar:main", "queryBoxes:toolbar:followUp"],

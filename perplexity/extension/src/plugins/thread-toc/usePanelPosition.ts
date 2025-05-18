@@ -46,7 +46,7 @@ export function usePanelPosition(): UsePanelPosition | null {
     if (!threadWrapperOffset) return null;
 
     const navbarHeightStr =
-      document.body.style.getPropertyValue("--navbar-height");
+      document.body.style.getPropertyValue("--header-height");
     const navbarHeight = navbarHeightStr ? parseInt(navbarHeightStr) : 53;
 
     let threadContentWrapperWidth = threadContentWrapper.offsetWidth ?? 0;
@@ -77,7 +77,7 @@ export function usePanelPosition(): UsePanelPosition | null {
 
     return {
       position: {
-        top: navbarHeight + 40,
+        top: navbarHeight + 20,
         left: threadContentWrapperWidth + threadContentWrapperOffset.left,
       },
       isOverflowing: panelRightEdge > window.innerWidth,

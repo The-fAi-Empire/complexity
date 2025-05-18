@@ -1,8 +1,7 @@
 import { LuTriangleAlert } from "react-icons/lu";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import Tooltip from "@/components/Tooltip";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -16,9 +15,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Switch } from "@/components/ui/switch";
 import { Ul } from "@/components/ui/typography";
 import { PluginRegistry } from "@/data/plugin-registry/index";
-import { PLUGIN_TAGS } from "@/data/plugin-registry/plugin-tags";
 import type { PluginId } from "@/data/plugin-registry/types";
 import { PLUGIN_SETTINGS_UIS } from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/loader";
+import { PluginTag } from "@/entrypoints/options-page/dashboard/pages/plugins/components/PluginTag";
 import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
@@ -29,6 +28,7 @@ type PluginCardProps = {
 
 export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const { settings, mutation } = useExtensionSettings();
 
@@ -95,22 +95,7 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
         <CardContent>
           <div className="x:flex x:flex-wrap x:gap-2">
             {tags.map((tag) => (
-              <Tooltip key={tag} content={PLUGIN_TAGS[tag].description}>
-                <Badge
-                  variant="secondary"
-                  className={cn(
-                    "x:border x:border-border/50 x:hover:bg-background",
-                    {
-                      "x:bg-destructive x:text-destructive-foreground x:hover:bg-destructive/80":
-                        tag === "experimental",
-                      "x:bg-primary x:text-primary-foreground x:hover:bg-primary/80":
-                        tag === "new",
-                    },
-                  )}
-                >
-                  {PLUGIN_TAGS[tag].label.toLocaleUpperCase()}
-                </Badge>
-              </Tooltip>
+              <PluginTag key={tag} tag={tag} />
             ))}
           </div>
         </CardContent>
@@ -120,11 +105,14 @@ export function PluginCard({ pluginId, isForceDisabled }: PluginCardProps) {
           {dialogContent != null && (
             <Button
               onClick={() =>
-                navigate(`/plugins/${routeSegment}`, {
-                  state: {
-                    fromPluginList: true,
+                navigate(
+                  `/plugins/${routeSegment}?${new URLSearchParams(searchParams)}`,
+                  {
+                    state: {
+                      fromPluginList: true,
+                    },
                   },
-                })
+                )
               }
             >
               Details

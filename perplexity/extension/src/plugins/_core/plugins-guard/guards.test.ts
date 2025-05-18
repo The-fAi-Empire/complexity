@@ -68,9 +68,13 @@ describe("Guard Functions", () => {
   describe("checkAccountTypes", () => {
     it("should return true when no account type restrictions", () => {
       const conditions: GuardConditions = {};
-      const params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember"> = {
+      const params: Pick<
+        GuardCheckParams,
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+      > = {
         hasActiveSub: false,
         isOrgMember: false,
+        isLoggedIn: true,
       };
       expect(checkAccountTypes(conditions, params)).toBe(true);
     });
@@ -79,9 +83,13 @@ describe("Guard Functions", () => {
       const conditions: GuardConditions = {
         allowedAccountTypes: [["free"], ["pro"]],
       };
-      const params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember"> = {
+      const params: Pick<
+        GuardCheckParams,
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+      > = {
         hasActiveSub: true,
         isOrgMember: true,
+        isLoggedIn: true,
       };
       expect(checkAccountTypes(conditions, params)).toBe(false);
     });
@@ -90,9 +98,13 @@ describe("Guard Functions", () => {
       const conditions: GuardConditions = {
         allowedAccountTypes: [["pro"], ["pro", "enterprise"]],
       };
-      const params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember"> = {
+      const params: Pick<
+        GuardCheckParams,
+        "hasActiveSub" | "isOrgMember" | "isLoggedIn"
+      > = {
         hasActiveSub: false,
         isOrgMember: false,
+        isLoggedIn: true,
       };
       expect(checkAccountTypes(conditions, params)).toBe(false);
     });

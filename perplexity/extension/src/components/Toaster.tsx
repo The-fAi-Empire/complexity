@@ -1,3 +1,5 @@
+import type { ComponentProps } from "react";
+
 import {
   Toast,
   ToastClose,
@@ -9,7 +11,11 @@ import {
 import { useToast } from "@/components/ui/use-toast";
 import { isReactNode } from "@/types/utils.types";
 
-export function Toaster() {
+export function Toaster({
+  viewportProps,
+}: {
+  viewportProps?: ComponentProps<typeof ToastViewport>;
+}) {
   const { toasts } = useToast();
 
   return (
@@ -28,7 +34,7 @@ export function Toaster() {
           </Toast>
         );
       })}
-      <ToastViewport />
+      <ToastViewport {...viewportProps} />
     </ToastProvider>
   );
 }

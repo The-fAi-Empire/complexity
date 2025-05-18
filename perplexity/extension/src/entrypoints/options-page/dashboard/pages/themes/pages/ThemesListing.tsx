@@ -19,7 +19,7 @@ export function ThemesListing() {
         <div>
           <h1 className="x:mb-2 x:text-2xl x:font-bold">Custom Themes</h1>
           <p className="x:text-muted-foreground">
-            Customize your Perplexity interface with curated themes
+            Customize your Perplexity interface
           </p>
         </div>
         <Button

@@ -10,7 +10,12 @@ export async function triggerRewriteOption(params: {
   const domSelectors = await DomSelectorsService.mainWorldCached();
 
   const { messageBlockIndex, optionIndex } = params;
-  const selector = `div[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR}"] ${domSelectors.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
+
+  const selector = `${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+  )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR,
+  )} ${domSelectors.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
 
   const $rewriteButtonWrapper = $(selector).parent().parent();
 

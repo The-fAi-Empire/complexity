@@ -22,7 +22,7 @@ export default definePlugin({
     title: "Better Code Blocks",
     description: "Enhance code blocks (in threads)",
     categories: ["thread"],
-    tags: ["ui", "codeBlockHighPerformanceImpact"],
+    tags: ["ui", "highPerfImpact"],
     dependentDomObservers: ["thread:codeBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
   },

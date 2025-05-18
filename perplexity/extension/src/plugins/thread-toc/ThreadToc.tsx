@@ -103,14 +103,18 @@ export function ThreadToc() {
               item={item}
               onClick={() => {
                 const $element = $(
-                  `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                  `${DomSelectorsService.cplxAttribute(
+                    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+                  )}[data-index="${item.id}"]`,
                 );
                 if ($element.length)
                   scrollToElement($element, 0, tocItems.length < 10 ? 300 : 0);
               }}
               onContextMenu={() => {
                 const $element = $(
-                  `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${item.id}"]`,
+                  `${DomSelectorsService.cplxAttribute(
+                    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+                  )}[data-index="${item.id}"]`,
                 );
                 if ($element.length && $element.height() != null)
                   scrollToElement(

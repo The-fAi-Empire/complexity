@@ -109,10 +109,6 @@ export class DomObserver {
     const targetValidation = this.validateTarget(config.target, id);
     if (!targetValidation.success) return targetValidation;
 
-    if (config.fireImmediately) {
-      config.onMutation();
-    }
-
     const observer = new MutationObserver(
       this.createMutationHandler(id, config),
     );

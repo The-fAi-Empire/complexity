@@ -1,58 +1,41 @@
-import { useCallback } from "react";
-
-import { Input } from "@/components/ui/input";
+import { PluginsFilter } from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugins-filter";
 import { PluginSections } from "@/entrypoints/options-page/dashboard/pages/plugins/components/PluginSections";
-import { TagsFilter } from "@/entrypoints/options-page/dashboard/pages/plugins/components/TagsFilter";
+import { SearchInput } from "@/entrypoints/options-page/dashboard/pages/plugins/components/SearchInput";
 import { useFilteredPlugins } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/useFilteredPlugins";
 import { usePluginCategories } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginCategories";
-import { usePluginFiltersStore } from "@/entrypoints/options-page/dashboard/pages/plugins/store";
+import { usePluginFilters } from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginFilters";
+import PluginsEnableSet from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsEnableSet";
 
 export default function PluginsListing() {
-  const filters = usePluginFiltersStore((state) => state.filters);
-  const setFilters = usePluginFiltersStore((state) => state.setFilters);
+  const { filters } = usePluginFilters();
 
   const filteredPluginIds = useFilteredPlugins({
     searchTerm: filters.searchTerm,
     selectedTags: filters.tags,
     excludeTags: filters.excludeTags,
+    categories: filters.categories,
   });
 
   const { pluginsByCategory } = usePluginCategories({
     filteredPluginIds,
   });
 
-  const handleSearchChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setFilters({
-        ...filters,
-        searchTerm: e.target.value,
-      });
-    },
-    [filters, setFilters],
-  );
-
   return (
-    <div className="x:size-full">
-      <h1 className="x:sr-only x:text-2xl x:font-bold">Plugins</h1>
-
-      <div className="x:flex x:size-full x:flex-col x:gap-4 x:md:mt-0">
-        <div className="x:ml-auto x:flex x:w-full x:flex-row-reverse x:gap-4 x:md:w-fit x:md:flex-row x:md:justify-end">
-          <TagsFilter />
-          <Input
-            type="search"
-            placeholder="Search plugins..."
-            value={filters.searchTerm}
-            onChange={handleSearchChange}
-          />
-        </div>
-
-        <div className="x:ml-auto x:text-center x:text-sm x:text-balance x:text-muted-foreground x:md:text-left">
+    <div className="x:flex x:size-full x:flex-col x:gap-4 x:md:mt-0">
+      <div className="x:flex x:flex-col x:items-center x:justify-between x:md:flex-row">
+        <div className="x:text-center x:text-sm x:text-balance x:text-muted-foreground x:md:text-left">
           A full page reload on Perplexity.ai is required when changing plugin
           settings.
         </div>
-
-        <PluginSections pluginsByCategory={pluginsByCategory} />
+        <PluginsEnableSet />
       </div>
+
+      <div className="x:flex x:w-full x:gap-2 x:md:w-md">
+        <SearchInput />
+        <PluginsFilter />
+      </div>
+
+      <PluginSections pluginsByCategory={pluginsByCategory} />
     </div>
   );
 }

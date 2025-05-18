@@ -52,7 +52,12 @@ export default function CanvasHeader() {
             canvasStore.getState().selectedCodeBlockLocation;
           if (!selectedCodeBlockLocation) return;
 
-          const selector = `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${selectedCodeBlockLocation.messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.MIRRORED_CODE_BLOCK}"][data-index="${selectedCodeBlockLocation.codeBlockIndex}"]`;
+          const selector = `${DomSelectorsService.cplxAttribute(
+            DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+          )}[data-index="${selectedCodeBlockLocation.messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+            DomSelectorsService.internalAttributes.THREAD.MESSAGE
+              .MIRRORED_CODE_BLOCK,
+          )}[data-index="${selectedCodeBlockLocation.codeBlockIndex}"]`;
 
           scrollToElement($(selector), -100);
         }}

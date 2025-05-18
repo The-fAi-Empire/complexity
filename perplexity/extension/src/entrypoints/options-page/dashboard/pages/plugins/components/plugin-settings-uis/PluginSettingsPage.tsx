@@ -2,22 +2,17 @@ import { LuChevronLeft } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 import { PluginRegistry } from "@/data/plugin-registry/index";
+import type { PluginId } from "@/data/plugin-registry/types";
 import { PLUGIN_SETTINGS_UIS } from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/loader";
 
 type PluginSettingsPageProps = {
-  pluginRouteSegment: string;
+  pluginId: PluginId;
 };
 
 export default function PluginSettingsPage({
-  pluginRouteSegment,
+  pluginId,
 }: PluginSettingsPageProps) {
-  const plugin = Object.values(PluginRegistry.manifests).find(
-    (plugin) => plugin.settingsUiRouteSegment === pluginRouteSegment,
-  );
-
-  const dialogContent = plugin ? PLUGIN_SETTINGS_UIS[plugin.id] : null;
-
-  if (!plugin) return null;
+  const plugin = PluginRegistry.manifests[pluginId];
 
   return (
     <div className="x:space-y-6">
@@ -32,7 +27,7 @@ export default function PluginSettingsPage({
         <h1 className="x:text-2xl x:font-bold">{plugin.title}</h1>
         <p className="x:mt-2 x:text-muted-foreground">{plugin.description}</p>
       </div>
-      {dialogContent}
+      {PLUGIN_SETTINGS_UIS[plugin.id]!.component}
     </div>
   );
 }

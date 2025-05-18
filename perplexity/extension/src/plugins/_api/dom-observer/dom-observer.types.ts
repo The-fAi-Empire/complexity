@@ -26,7 +26,6 @@ export type DomObserverConfig = {
   readonly target: Element | null;
   readonly config: MutationConfig;
   readonly debounceTime?: number;
-  readonly fireImmediately?: boolean;
   readonly onMutation: MutationCallback;
 };
 

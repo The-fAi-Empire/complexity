@@ -3,7 +3,15 @@ import React from "react";
 import type { PluginId } from "@/data/plugin-registry/types";
 import { invariant } from "@/utils/utils";
 
-export type PluginSettingsUIs = Partial<Record<PluginId, React.ReactNode>>;
+export type PluginSettingsUIs = Partial<
+  Record<
+    PluginId,
+    {
+      component: React.ReactNode;
+      openInFullScreen?: boolean;
+    }
+  >
+>;
 
 export const PLUGIN_SETTINGS_UIS: PluginSettingsUIs = (() => {
   const settingsUis: PluginSettingsUIs = {};
@@ -13,8 +21,9 @@ export const PLUGIN_SETTINGS_UIS: PluginSettingsUIs = (() => {
   }) as Record<
     string,
     {
-      default?: React.ComponentType;
-      pluginId?: PluginId;
+      default: React.ComponentType;
+      pluginId: PluginId;
+      openInFullScreen?: boolean;
     }
   >;
 
@@ -29,7 +38,10 @@ export const PLUGIN_SETTINGS_UIS: PluginSettingsUIs = (() => {
       `Plugin settings UI for "${module.pluginId}" is declared but missing \`pluginId\` export`,
     );
 
-    settingsUis[module.pluginId] = React.createElement(module.default);
+    settingsUis[module.pluginId] = {
+      component: React.createElement(module.default),
+      openInFullScreen: module.openInFullScreen ?? false,
+    };
   }
 
   return settingsUis;

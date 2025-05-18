@@ -8,21 +8,35 @@ export function usePluginCategories({
   filteredPluginIds: PluginId[];
 }) {
   return useMemo(() => {
-    const pluginsByCategory: Record<string, PluginId[]> = {};
+    const pluginsByCategory = Object.keys(PLUGIN_CATEGORIES).reduce<
+      Record<string, PluginId[]>
+    >((acc, category) => {
+      acc[category] = [];
+      return acc;
+    }, {});
 
-    Object.keys(PLUGIN_CATEGORIES).forEach((category) => {
-      pluginsByCategory[category] = [];
-    });
-
-    filteredPluginIds.forEach((pluginId) => {
+    for (const pluginId of filteredPluginIds) {
       const plugin = PluginRegistry.manifests[pluginId];
-      plugin.categories.forEach((category) => {
-        if (!pluginsByCategory[category]) {
-          pluginsByCategory[category] = [];
-        }
+      for (const category of plugin.categories) {
+        pluginsByCategory[category] = pluginsByCategory[category] || [];
         pluginsByCategory[category].push(pluginId);
+      }
+    }
+
+    for (const category in pluginsByCategory) {
+      if (!pluginsByCategory[category]) continue;
+
+      pluginsByCategory[category].sort((a, b) => {
+        const titleA = PluginRegistry.manifests[a].title;
+        const titleB = PluginRegistry.manifests[b].title;
+        const isCoreA = titleA.endsWith(": Core");
+        const isCoreB = titleB.endsWith(": Core");
+
+        if (isCoreA && !isCoreB) return -1;
+        if (!isCoreA && isCoreB) return 1;
+        return 0;
       });
-    });
+    }
 
     const nonEmptyCategories = Object.fromEntries(
       Object.entries(pluginsByCategory).filter(([, ids]) => ids.length > 0),

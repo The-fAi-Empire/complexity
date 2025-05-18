@@ -11,13 +11,13 @@ export const ENDPOINTS = {
   SAVE_SETTINGS:
     "https://www.perplexity.ai/rest/user/save-settings?version=2.18&source=default",
   THREAD: (threadSlug: string) =>
-    `https://www.perplexity.ai/rest/thread/${threadSlug}&version=2.18&source=default`,
+    `https://www.perplexity.ai/rest/thread/${threadSlug}?version=2.18&source=default`,
   THREADS:
     "https://www.perplexity.ai/rest/thread/list_ask_threads?version=2.18&source=default",
   SPACE: (spaceUuid: Space["uuid"]) =>
     `https://www.perplexity.ai/rest/collections/get_collection?collection_slug=${spaceUuid}&version=2.18&source=default`,
   SPACES:
-    "https://www.perplexity.ai/rest/collections/list_user_collections?limit=50&offset=0&version=2.13&source=default",
+    "https://www.perplexity.ai/rest/collections/list_user_collections?limit=100&offset=0&version=2.18&source=default",
   // This api doesnt support search term
   // TODO: add access state filter
   SPACE_THREADS: ({

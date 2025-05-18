@@ -135,7 +135,6 @@ async function getCodeBlockContent({
 
 function isCodeBlockInFlight({
   messageBlocks,
-
   messageBlockIndex,
   codeBlockIndex,
 }: {
@@ -149,7 +148,11 @@ function isCodeBlockInFlight({
   if (!isMessageBlockInFlight) return false;
 
   const codeBlock = document.querySelector(
-    `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex}"]`,
+    `${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+    )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
+    )}[data-index="${codeBlockIndex}"]`,
   );
 
   const parentElement = codeBlock?.parentElement;
@@ -161,7 +164,11 @@ function isCodeBlockInFlight({
   }
 
   const hasNextCodeBlock = document.querySelector(
-    `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK}"][data-index="${messageBlockIndex}"] [data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK}"][data-index="${codeBlockIndex + 1}"]`,
+    `${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
+    )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE.CODE_BLOCK,
+    )}[data-index="${codeBlockIndex + 1}"]`,
   );
 
   if (hasNextCodeBlock) return false;

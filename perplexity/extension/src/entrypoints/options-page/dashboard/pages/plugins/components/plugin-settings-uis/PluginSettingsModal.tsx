@@ -1,5 +1,5 @@
 import type { DialogOpenChangeDetails } from "@ark-ui/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import {
   Dialog,
@@ -23,10 +23,19 @@ export default function PluginSettingsModal({
 }: PluginSettingsModalProps) {
   const navigate = useNavigate();
   const { isMobile } = useIsMobileStore();
+  const location = useLocation();
+
+  const plugin = PluginRegistry.manifests[pluginId];
+
+  const fromPluginList = location.state?.fromPluginList === true;
 
   const handleClose = ({ open }: DialogOpenChangeDetails) => {
     if (!open) {
-      navigate("/plugins");
+      if (fromPluginList) {
+        navigate(-1);
+      } else {
+        navigate("/plugins");
+      }
     }
   };
 
@@ -40,12 +49,12 @@ export default function PluginSettingsModal({
         side={isMobile ? "bottom" : undefined}
       >
         <DialogHeader>
-          <DialogTitle>{PluginRegistry.manifests[pluginId].title}</DialogTitle>
+          <DialogTitle>{plugin.title}</DialogTitle>
           <DialogDescription className="x:whitespace-pre-line">
-            {PluginRegistry.manifests[pluginId].description}
+            {plugin.description}
           </DialogDescription>
         </DialogHeader>
-        <div className="x:mt-4">{PLUGIN_SETTINGS_UIS[pluginId]}</div>
+        <div className="x:mt-4">{PLUGIN_SETTINGS_UIS[pluginId]!.component}</div>
       </DialogContentComp>
     </DialogComp>
   );

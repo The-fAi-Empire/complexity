@@ -4,17 +4,20 @@ import { Button } from "@/components/ui/button";
 import { PluginRegistry } from "@/data/plugin-registry/index";
 import { isPluginId, type PluginId } from "@/data/plugin-registry/types";
 import Page from "@/entrypoints/options-page/components/Page";
+import { PLUGIN_SETTINGS_UIS } from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/loader";
 import PluginSettingsModal from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsModal";
 import PluginSettingsPage from "@/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/PluginSettingsPage";
 import usePluginsStates from "@/entrypoints/options-page/dashboard/pages/plugins/hooks/usePluginsStates";
 import PluginsListing from "@/entrypoints/options-page/dashboard/pages/plugins/PluginsListing";
 import useClearLocationState from "@/hooks/useClearLocationState";
+import useClearSearchParams from "@/hooks/useClearSearchParams";
 
 export default function PluginSettingsWrapper() {
   useClearLocationState();
+
   const navigate = useNavigate();
-  const { pluginId: pluginRouteSegment } = useParams();
   const location = useLocation();
+  const { pluginId: pluginRouteSegment } = useParams();
   const { pluginsStates } = usePluginsStates();
 
   const plugin = useMemo(
@@ -28,6 +31,10 @@ export default function PluginSettingsWrapper() {
   useNavigateAwayOnInvalidRoute({ pluginId: plugin?.id });
 
   const isFromPluginList = location.state?.fromPluginList === true;
+  const isOpenInFullScreen =
+    plugin != null && PLUGIN_SETTINGS_UIS[plugin.id]!.openInFullScreen;
+
+  useClearSearchParams({ enabled: !isFromPluginList });
 
   if (!plugin || !isPluginId(plugin.id)) {
     return null;
@@ -42,14 +49,14 @@ export default function PluginSettingsWrapper() {
 
   return (
     <>
-      {isFromPluginList ? (
+      {isFromPluginList && !isOpenInFullScreen ? (
         <>
           <PluginsListing />
           <PluginSettingsModal pluginId={plugin.id} />
         </>
       ) : (
         <Page title={plugin.title}>
-          <PluginSettingsPage pluginRouteSegment={pluginRouteSegment!} />
+          <PluginSettingsPage pluginId={plugin.id} />
         </Page>
       )}
     </>

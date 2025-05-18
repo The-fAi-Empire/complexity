@@ -54,7 +54,6 @@ function observeThreadMessageBlocks() {
       DomObserver.create(createDomObserverId("thread", "messageBlocks"), {
         target: $threadWrapper[0],
         config: { childList: true, subtree: true },
-        fireImmediately: true,
         onMutation,
       });
     },

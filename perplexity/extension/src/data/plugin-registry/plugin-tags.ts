@@ -3,9 +3,17 @@ export type PluginTagValues = keyof typeof PLUGIN_TAGS;
 export type PluginCategory = keyof typeof PLUGIN_CATEGORIES;
 
 export const PLUGIN_CATEGORIES = {
+  featured: {
+    label: "Featured",
+    description: "Newly added/updated plugins",
+  },
   queryBox: {
     label: "Query Box Utilities",
     description: "Add functionalities/tweaks to the query box",
+  },
+  prompting: {
+    label: "Prompting",
+    description: "Prompt-related utilities",
   },
   thread: {
     label: "Thread Utilities",
@@ -24,26 +32,6 @@ export const PLUGIN_CATEGORIES = {
 } as const satisfies Record<string, { label: string; description: string }>;
 
 export const PLUGIN_TAGS = {
-  ui: {
-    label: "UI",
-    description: "Add/Modify UI Elements on the page",
-  },
-  desktopOnly: {
-    label: "Desktop Only",
-    description: "Can only be used on desktop/screen width > 768px",
-  },
-  slashCommand: {
-    label: "Slash Command",
-    description: "Plugins that are enabled by typing a slash command",
-  },
-  privacy: {
-    label: "Privacy",
-    description: "Privacy related plugins",
-  },
-  pplxPro: {
-    label: "Perplexity Pro",
-    description: "Requires an active Perplexity Pro subscription",
-  },
   experimental: {
     label: "Experimental",
     description:
@@ -57,13 +45,37 @@ export const PLUGIN_TAGS = {
     label: "New",
     description: "Recently added plugins",
   },
-  codeBlockHighPerformanceImpact: {
-    label: "⚡",
-    description:
-      "May have a noticeable impact on performance in large threads with a large amount of code blocks.",
-  },
   chromiumOnly: {
     label: "Chromium Only",
     description: "Can only be used on Chromium-based browsers",
+  },
+  ui: {
+    label: "UI",
+    description: "Add/Modify UI Elements on the page",
+  },
+  slashCommand: {
+    label: "Slash Command",
+    description: "Can be used by typing a slash (/) in prompt input field",
+  },
+  desktopOnly: {
+    label: "Desktop Only",
+    description: "Can only be used on desktop/screen width > 768px",
+  },
+  privacy: {
+    label: "Privacy",
+    description: "Privacy related plugins",
+  },
+  pplxPro: {
+    label: "Perplexity Pro",
+    description: "Requires an active Perplexity Pro subscription",
+  },
+  highPerfImpact: {
+    label: "Performance",
+    description: "May have a noticeable impact on performance in large threads",
+  },
+  deprecated: {
+    label: "Deprecated",
+    description:
+      "Will not receive any updates and subject to removal without prior notice",
   },
 } as const satisfies Record<string, { label: string; description: string }>;

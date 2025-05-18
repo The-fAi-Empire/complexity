@@ -1,7 +1,0 @@
-@reference "../../assets/index.css";
-
-[data-cplx-component="message-block-bottom-bar"] {
-  button.rounded-full {
-    @apply x:rounded-lg;
-  }
-}

@@ -43,7 +43,7 @@ export function checkAuthStatus(
 
 export function checkAccountTypes(
   { allowedAccountTypes }: GuardConditions,
-  params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember">,
+  params: Pick<GuardCheckParams, "hasActiveSub" | "isOrgMember" | "isLoggedIn">,
 ): boolean {
   if (!allowedAccountTypes || !allowedAccountTypes?.length) return true;
 
@@ -54,6 +54,8 @@ export function checkAccountTypes(
   accountStatus.push(params.hasActiveSub ? "pro" : "free");
 
   return allowedAccountTypes.some((accountType) => {
+    if (accountType.includes("pro") && !params.isLoggedIn) return false;
+
     const sameLength = accountType.length === accountStatus.length;
     const sameStatus = accountType.every((status) =>
       accountStatus.includes(status),

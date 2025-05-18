@@ -10,7 +10,10 @@ export default function useObserver() {
   return useMemo(() => {
     if ($overflowMenuButtonWrapper == null || !$overflowMenuButtonWrapper[0]) {
       $(
-        `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
+        DomSelectorsService.cplxAttribute(
+          DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD
+            .EXPORT_THREAD_BUTTON,
+        ),
       ).remove();
 
       return null;
@@ -19,7 +22,10 @@ export default function useObserver() {
     const $wrapper = $($overflowMenuButtonWrapper[0]).parent();
 
     const $existingPortalContainer = $wrapper.find(
-      `[data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD.EXPORT_THREAD_BUTTON}"]`,
+      DomSelectorsService.cplxAttribute(
+        DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD
+          .EXPORT_THREAD_BUTTON,
+      ),
     );
 
     if ($existingPortalContainer.length) return $existingPortalContainer[0];

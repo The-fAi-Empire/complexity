@@ -12,7 +12,7 @@ export function ToastViewport({
   return (
     <ToastPrimitives.Viewport
       className={cn(
-        "x:fixed x:top-[var(--navbar-height,0)] x:left-1/2 x:z-[100] x:flex x:max-h-screen x:w-screen x:-translate-x-1/2 x:flex-col-reverse x:items-center x:justify-end x:p-4 x:md:right-8 x:md:left-[unset] x:md:w-auto x:md:max-w-[420px] x:md:translate-x-[unset]",
+        "x:fixed x:top-10 x:left-1/2 x:z-[100] x:flex x:max-h-screen x:w-screen x:-translate-x-1/2 x:flex-col-reverse x:items-center x:justify-end x:p-4 x:md:right-8 x:md:left-[unset] x:md:w-auto x:md:max-w-[420px] x:md:translate-x-[unset]",
         className,
       )}
       {...props}

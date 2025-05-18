@@ -3,7 +3,7 @@ import { isAutonomousCanvasLanguageString } from "@/plugins/canvas/index.public"
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import BaseCodeBlockWrapper from "@/plugins/thread-better-code-blocks/variants/base/Wrapper";
 import CanvasPlaceholderWrapper from "@/plugins/thread-better-code-blocks/variants/canvas-placeholders/Wrapper";
-import { ExtensionSettingsService } from "@/services/extension-settings";
+import { PluginsStatesService } from "@/services/plugins-states";
 
 const MirroredCodeBlock = memo(function MirroredCodeBlock() {
   const { codeBlock } = useMirroredCodeBlockContext();
@@ -11,9 +11,8 @@ const MirroredCodeBlock = memo(function MirroredCodeBlock() {
   const { isMobile } = useIsMobileStore();
   if (isMobile) return <BaseCodeBlockWrapper />;
 
-  const settings = ExtensionSettingsService.cachedSync;
   const isAutonomousCanvasLanguage =
-    settings.plugins["thread:canvas"].enabled &&
+    PluginsStatesService.cachedEnableStates?.["thread:canvas"] &&
     isAutonomousCanvasLanguageString(codeBlock?.content.language);
 
   if (isAutonomousCanvasLanguage) return <CanvasPlaceholderWrapper />;

@@ -19,7 +19,10 @@ export function SettingsDashboardLink() {
     if ($sidebarWrapper == null || !$sidebarWrapper.length) return null;
 
     const $existingContainer = $sidebarWrapper.find(
-      `[data-cplx-component="${DomSelectorsService.internalAttributes.SETTINGS_PAGE.CPLX_DASHBOARD_LINK}"]`,
+      DomSelectorsService.cplxAttribute(
+        DomSelectorsService.internalAttributes.SETTINGS_PAGE
+          .CPLX_DASHBOARD_LINK,
+      ),
     );
 
     if ($existingContainer[0]) return $existingContainer[0];

@@ -19,13 +19,11 @@ export function Dashboard() {
         <Sidebar />
       </SidebarWrapper>
 
-      <div className="x:flex x:flex-1 x:flex-col x:gap-4">
-        <main className="x:mx-auto x:mt-11 x:min-h-[100dvh] x:w-full x:max-w-[1800px] x:p-4 x:md:mt-0">
-          <Suspense fallback={<LoadingOverlay />}>
-            <Outlet />
-          </Suspense>
-        </main>
-      </div>
+      <main className="x:mx-auto x:mt-11 x:min-h-[100dvh] x:w-full x:max-w-[1800px] x:p-4 x:md:mt-0">
+        <Suspense fallback={<LoadingOverlay />}>
+          <Outlet />
+        </Suspense>
+      </main>
     </div>
   );
 }

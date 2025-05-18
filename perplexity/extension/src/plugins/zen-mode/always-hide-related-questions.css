@@ -1,9 +1,11 @@
 body[data-cplx-zen-mode-always-hide-related-questions="true"][location="thread"]
   [data-cplx-component="message-block"]
-  .pb-32
-  > :last-child
+  .pb-threadInputHeightWithPadding
   > div
-  > :last-child
+  > div:last-child
+  > div
+  > div
+  > div
   > [class=""]:last-child {
   display: none;
 }

@@ -5,34 +5,20 @@
 import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/types";
 
 export const DOM_SELECTORS: DomSelectors = {
-  SIDEBAR: {
-    WRAPPER: ".h-\\[100dvh\\] > .z-10:first-child",
-    TAB: {
-      CONTENT: {
-        WRAPPER: ">:first-child",
-        WRAPPER_COLLAPSED: ".-translate-x-1\\/3.opacity-0",
-      },
-      ANCHOR: {
-        HOME: ".group\\/header > a[href='/library']",
-        SPACES: ".group\\/history + a[href='/spaces']",
-      },
-    },
-  },
   THREAD: {
     /** The outermost container that wraps the thread container and the query box */
-    NAVBAR: ".sticky.left-0.right-0.top-0.z-10.border-b",
+    NAVBAR: ".h-headerHeight",
     PAGE_WRAPPER: ".h-\\[100dvh\\] > .max-h-screen",
-    WRAPPER:
-      ".sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child",
+    WRAPPER: ".h-headerHeight + div",
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child > div > div:last-child`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div> div:first-child > div > div:last-child`,
+        NORMAL: `.h-headerHeight + div > div > div[class=""]`,
+        BRANCHED: `.h-headerHeight + div > div > div[class=""]`,
       },
       MOBILE: {
-        NORMAL: `.sticky.left-0.right-0 + .scrollable-container > div > div > div:first-child > div:first-child > .erp-sidecar\\:pb-0`,
-        BRANCHED: `.sticky.left-0.right-0 + .scrollable-container > div > div > div:first-child > div:first-child > .erp-sidecar\\:pb-0`,
+        NORMAL: `.h-headerHeight + div div.erp-sidecar\\:pb-0`,
+        BRANCHED: `.h-headerHeight + div div.erp-sidecar\\:pb-0`,
       },
     },
     MESSAGE: {
@@ -46,7 +32,7 @@ export const DOM_SELECTORS: DomSelectors = {
       QUERY_HOVER_CONTAINER_CHILD: {
         EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
       },
-      STICKY_HEADER: "div.md\\:sticky > .max-w-threadContentWidth",
+      STICKY_HEADER: ".h-headerHeight",
       SOURCES: ".gap-sm.grid.grid-cols-4.md\\:px-0",
       ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
@@ -85,6 +71,12 @@ export const DOM_SELECTORS: DomSelectors = {
       FOLLOW_UP: 'body[location="thread"] .grow.block textarea#ask-input',
       ARBITRARY: "textarea#ask-input",
     },
+    COMPONENTS_WRAPPER: {
+      LEFT_WRAPPER: ">div:nth-child(2)",
+      LEFT_COMPONENTS_WRAPPER: ">div.flex:first-child",
+      RIGHT_WRAPPER: ">div:nth-child(3)",
+      RIGHT_COMPONENTS_WRAPPER: ">div.flex:first-child",
+    },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:
       'button[aria-label="Submit"], button[aria-label="Dictation"], button:has(svg.tabler-icon-square)',
@@ -94,17 +86,13 @@ export const DOM_SELECTORS: DomSelectors = {
     PRO_SEARCH_TOGGLE: "button#copilot-toggle",
     INCOGNITO_TOGGLE: ".mr-xs.flex.shrink-0.items-center",
   },
-  SPACES_PAGE: {
-    INFO_CARD: ".isolate.col-span-4 > div > div",
-    SPACE_CARD: `.contents a[data-testid="collection-preview"]`,
-  },
   SETTINGS_PAGE: {
     SIDEBAR_WRAPPER: ".w-sideBarWidth, .scrollable-container",
     SIDEBAR_CHILD: {
       BACK_BUTTON: ".mb-3.ml-2.flex.items-center.gap-2",
     },
   },
-  STICKY_NAVBAR: ".sticky.left-0.right-0.top-0.border-b",
+  STICKY_NAVBAR: ".h-headerHeight",
   SICKY_NAVBAR_CHILD: {
     THREAD_TITLE_WRAPPER:
       ".hidden.max-w-md.grow.items-center.justify-center.gap-x-xs.text-center.md\\:flex",
@@ -134,6 +122,7 @@ export const INTERNAL_ATTRIBUTES = {
     SLOGAN: "home-slogan",
     BOTTOM_BAR: "home-bottom-bar",
     LANGUAGE_SELECTOR: "home-language-selector",
+    SPONSOR_HOME_LINK_CONTAINER: "sponsor-home-link-container",
   },
   THREAD: {
     NAVBAR: "thread-navbar",

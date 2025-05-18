@@ -13,7 +13,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
 
   return messageBlocks.map((messageBlock) => {
     const $existingPortalContainer = messageBlock.nodes.$bottomBar.find(
-      `div[data-cplx-component="${OBSERVER_ID}"]`,
+      `div${DomSelectorsService.cplxAttribute(OBSERVER_ID)}`,
     );
 
     if ($existingPortalContainer[0]) return $existingPortalContainer[0];

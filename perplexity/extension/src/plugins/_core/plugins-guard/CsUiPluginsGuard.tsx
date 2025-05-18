@@ -86,7 +86,11 @@ function useGuardConditions(props: CsUiPluginsGuardProps) {
 
   const deviceValid = checkDeviceType(props, { isMobile });
   const authValid = checkAuthStatus(props, { isLoggedIn });
-  const accountValid = checkAccountTypes(props, { hasActiveSub, isOrgMember });
+  const accountValid = checkAccountTypes(props, {
+    hasActiveSub,
+    isOrgMember,
+    isLoggedIn,
+  });
   const dependenciesValid = checkPluginDependencies(props, {
     pluginsStates,
   });

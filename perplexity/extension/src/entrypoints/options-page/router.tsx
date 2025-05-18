@@ -57,15 +57,15 @@ export const router: ReturnType<typeof createHashRouter> = createHashRouter([
             element: <Page title="Plugins" page={PluginRoutes} />,
           },
           {
-            path: "themes/*",
+            path: "themes",
             children: ThemesPageRoutes,
           },
           {
-            path: "release-notes/*",
+            path: "release-notes",
             element: <Page title="Release Notes" page={ReleaseNotesPage} />,
           },
           {
-            path: "settings/*",
+            path: "settings",
             element: <Page title="Settings" page={SettingsPage} />,
           },
           {

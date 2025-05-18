@@ -5,7 +5,10 @@ import { queryClient } from "@/data/query-client";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useThreadCodeBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/code-blocks/store";
-import { hideNativeCodeBlocksCssResourceConfig } from "@/plugins/thread-better-code-blocks/index.remote-resources";
+import {
+  hideNativeCodeBlocksCssResourceConfig,
+  stickyHeaderCssResourceConfig,
+} from "@/plugins/thread-better-code-blocks/index.remote-resources";
 import { betterCodeBlocksFineGrainedOptionsQueries } from "@/plugins/thread-better-code-blocks/indexed-db/query-keys";
 import MirroredCodeBlock from "@/plugins/thread-better-code-blocks/MirroredCodeBlock";
 import { MirroredCodeBlockContextProvider } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
@@ -16,9 +19,10 @@ import {
 import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 
-const hideNativeCodeBlocksCss = await getVersionedRemoteResource(
-  hideNativeCodeBlocksCssResourceConfig,
-);
+const [hideNativeCodeBlocksCss, stickyHeaderCss] = await Promise.all([
+  getVersionedRemoteResource(hideNativeCodeBlocksCssResourceConfig),
+  getVersionedRemoteResource(stickyHeaderCssResourceConfig),
+]);
 
 await queryClient.prefetchQuery({
   ...betterCodeBlocksFineGrainedOptionsQueries.list.detail(),
@@ -34,6 +38,11 @@ export function BetterCodeBlocks() {
   useInsertCss({
     id: "cplx-hide-native-code-blocks",
     css: hideNativeCodeBlocksCss,
+  });
+
+  useInsertCss({
+    id: "cplx-sticky-header",
+    css: stickyHeaderCss,
   });
 
   if (!codeBlocksChunks) return null;

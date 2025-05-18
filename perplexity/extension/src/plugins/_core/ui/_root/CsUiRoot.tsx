@@ -1,10 +1,3 @@
-// --- [DO NOT REMOVE] ---
-// CRXJS treats statically imported css differently on dev build vs production build
-// must keep this for tailwind to generate and hmr arbitrary classes in dev mode (this will be removed when building for prod)
-import "@/assets/index.css";
-import "@/assets/cs.css";
-// --- [DO NOT REMOVE] ---
-
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { lazily } from "react-lazily";
 
@@ -17,8 +10,7 @@ import SettingsComponents from "@/plugins/_core/ui/route-groups/Settings";
 import SpacesPageComponents from "@/plugins/_core/ui/route-groups/SpacesPage";
 import ThreadComponents from "@/plugins/_core/ui/route-groups/Thread";
 import CommandMenuWrapper from "@/plugins/command-menu/Wrapper";
-import OnCloudflareTimeoutWrapper from "@/plugins/on-cf-timeout-auto-reload/Wrapper";
-import { SlashCommandMenu } from "@/plugins/slash-command-menu/SlashCommandMenu";
+import { SlashCommandMenu } from "@/plugins/slash-command/SlashCommandMenu";
 
 const { ExtensionContextInvalidationWatchdog } = lazily(
   () => import("@/components/ExtensionContextInvalidationWatchdog"),
@@ -46,8 +38,6 @@ export default function CsUiRoot() {
 
       <SlashCommandMenu />
 
-      <OnCloudflareTimeoutWrapper />
-
       <CsUiPluginsGuard
         desktopOnly
         additionalCheck={({ settings }) =>
@@ -62,13 +52,14 @@ export default function CsUiRoot() {
         <ExtensionContextInvalidationWatchdog />
       </CsUiPluginsGuard>
 
-      <Toaster />
+      <Toaster
+        viewportProps={{
+          className:
+            "x:top-0 x:md:[:where(body:is([location=thread],[location=collection])_*)]:top-[var(--header-height,70px)]",
+        }}
+      />
 
       <ReactQueryDevtools />
     </>
   );
 }
-
-export const csUiRootCss =
-  (await import("@/assets/index.css?inline")).default +
-  (await import("@/assets/cs.css?inline")).default;

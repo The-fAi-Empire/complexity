@@ -49,7 +49,6 @@ async function observeSettingsPage(location: ReturnType<typeof whereAmI>) {
   DomObserver.create(createDomObserverId("settingsPage", "topNavWrapper"), {
     target: document.body,
     config: { childList: true, subtree: true },
-    fireImmediately: true,
     onMutation: () =>
       CallbackQueue.getInstance().enqueueArray([
         {

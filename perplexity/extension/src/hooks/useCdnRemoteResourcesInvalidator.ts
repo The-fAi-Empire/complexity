@@ -28,11 +28,10 @@ export default function useCdnRemoteResourcesInvalidator({
         softCacheBuster !== remoteResourcesCacheBuster
       ) {
         storage.setItem(softCacheBusterKey, remoteResourcesCacheBuster);
-        if (softCacheBuster != null) {
-          invalidateRemoteResources({ queryClient });
-        }
-        callback?.();
+        invalidateRemoteResources({ queryClient });
         console.log("[CPLX] Cache invalidated");
+
+        callback?.();
       }
     })();
   }, [callback, queryClient, remoteResourcesCacheBuster]);

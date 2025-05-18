@@ -1,19 +1,6 @@
 import { z } from "zod";
 
 export const DomSelectorsSchema = z.object({
-  SIDEBAR: z.object({
-    WRAPPER: z.string(),
-    TAB: z.object({
-      CONTENT: z.object({
-        WRAPPER: z.string(),
-        WRAPPER_COLLAPSED: z.string(),
-      }),
-      ANCHOR: z.object({
-        HOME: z.string(),
-        SPACES: z.string(),
-      }),
-    }),
-  }),
   THREAD: z.object({
     NAVBAR: z.string(),
     PAGE_WRAPPER: z.string(),
@@ -72,16 +59,18 @@ export const DomSelectorsSchema = z.object({
       FOLLOW_UP: z.string(),
       ARBITRARY: z.string(),
     }),
+    COMPONENTS_WRAPPER: z.object({
+      LEFT_WRAPPER: z.string(),
+      LEFT_COMPONENTS_WRAPPER: z.string(),
+      RIGHT_WRAPPER: z.string(),
+      RIGHT_COMPONENTS_WRAPPER: z.string(),
+    }),
     ATTACH_BUTTON: z.string(),
     SUBMIT_BUTTON: z.string(),
     FORK_BUTTON: z.string(),
     WRAPPER: z.string(),
     PRO_SEARCH_TOGGLE: z.string(),
     INCOGNITO_TOGGLE: z.string(),
-  }),
-  SPACES_PAGE: z.object({
-    INFO_CARD: z.string(),
-    SPACE_CARD: z.string(),
   }),
   SETTINGS_PAGE: z.object({
     SIDEBAR_WRAPPER: z.string(),

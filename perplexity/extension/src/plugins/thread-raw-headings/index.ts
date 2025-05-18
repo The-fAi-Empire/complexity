@@ -19,7 +19,7 @@ export default definePlugin({
     title: "Raw Headings",
     description: "Prevent headings from being rendered as follow-up links",
     categories: ["thread"],
-    tags: ["new", "ui"],
+    tags: ["ui"],
     dependentDomObservers: ["thread:messageBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
   },

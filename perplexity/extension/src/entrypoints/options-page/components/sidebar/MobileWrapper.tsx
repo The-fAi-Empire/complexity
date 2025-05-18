@@ -2,7 +2,7 @@ import { LuPanelLeft } from "react-icons/lu";
 import { useLocation } from "react-router-dom";
 
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { navItems } from "@/entrypoints/options-page/components/sidebar/nav-items";
+import { useOptionsPageSidebarStore } from "@/entrypoints/options-page/components/sidebar/store";
 import MyBreadcrumb from "@/entrypoints/options-page/dashboard/pages/plugins/components/MyBreadcrumb";
 
 export default function MobileSidebar({
@@ -12,6 +12,7 @@ export default function MobileSidebar({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navItems = useOptionsPageSidebarStore((store) => store.navItems);
 
   useEffect(() => {
     setIsOpen(false);
