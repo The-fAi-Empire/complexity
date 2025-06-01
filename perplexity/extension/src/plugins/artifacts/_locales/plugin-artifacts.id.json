@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Klik untuk melihat konten"
+    },
+    "mermaid": {
+      "description": "Klik untuk melihat diagram"
+    },
+    "html": {
+      "description": "Klik untuk melihat halaman web"
+    },
+    "react": {
+      "description": "Klik untuk melihat halaman web"
+    },
+    "markmap": {
+      "description": "Klik untuk melihat peta pikiran"
+    }
+  },
+  "version": "Versi {{number}}",
+  "toggle": {
+    "preview": "Pratinjau",
+    "markdown": {
+      "raw": "Teks mentah"
+    },
+    "code": "Kode"
+  },
+  "list": {
+    "title": "Artifacts dalam percakapan ini",
+    "generating": "Menghasilkan...",
+    "versions": "{{count}} versi"
+  },
+  "tooltip": {
+    "refresh": "Segarkan",
+    "openList": "Buka daftar Artifacts",
+    "openInCodeSandbox": "Buka di CodeSandbox",
+    "openInMermaid": "Buka di Mermaid Live Editor",
+    "downloadSvg": "Unduh SVG",
+    "downloadAsInteractiveHtml": "Unduh sebagai HTML interaktif",
+    "viewAsInteractiveHtml": "Lihat sebagai HTML interaktif"
+  },
+  "error": {
+    "noSvg": "SVG tidak ditemukan",
+    "previewUrl": "Gagal menghasilkan URL pratinjau"
+  }
+} 

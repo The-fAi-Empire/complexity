@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Кликните да бисте видели садржај"
+    },
+    "mermaid": {
+      "description": "Кликните да бисте видели дијаграм"
+    },
+    "html": {
+      "description": "Кликните да бисте видели веб страницу"
+    },
+    "react": {
+      "description": "Кликните да бисте видели веб страницу"
+    },
+    "markmap": {
+      "description": "Кликните да бисте видели мапу ума"
+    }
+  },
+  "version": "Верзија {{number}}",
+  "toggle": {
+    "preview": "Преглед",
+    "markdown": {
+      "raw": "Сиров текст"
+    },
+    "code": "Код"
+  },
+  "list": {
+    "title": "Artifacts у овој конверзацији",
+    "generating": "Генерисање...",
+    "versions": "{{count}} верзија"
+  },
+  "tooltip": {
+    "refresh": "Освежи",
+    "openList": "Отвори листу Artifacts",
+    "openInCodeSandbox": "Отвори у CodeSandbox",
+    "openInMermaid": "Отвори у Mermaid Live Editor",
+    "downloadSvg": "Преузми SVG",
+    "downloadAsInteractiveHtml": "Преузми као интерактивни HTML",
+    "viewAsInteractiveHtml": "Прикажи као интерактивни HTML"
+  },
+  "error": {
+    "noSvg": "SVG није пронађен",
+    "previewUrl": "Неуспешно генерисање URL-а за преглед"
+  }
+} 

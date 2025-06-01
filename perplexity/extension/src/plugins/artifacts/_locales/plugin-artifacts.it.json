@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Clicca per visualizzare il contenuto"
+    },
+    "mermaid": {
+      "description": "Clicca per visualizzare il diagramma"
+    },
+    "html": {
+      "description": "Clicca per visualizzare la pagina web"
+    },
+    "react": {
+      "description": "Clicca per visualizzare la pagina web"
+    },
+    "markmap": {
+      "description": "Clicca per visualizzare la mappa mentale"
+    }
+  },
+  "version": "Versione {{number}}",
+  "toggle": {
+    "preview": "Anteprima",
+    "markdown": {
+      "raw": "Testo grezzo"
+    },
+    "code": "Codice"
+  },
+  "list": {
+    "title": "Artifacts in questa discussione",
+    "generating": "Generazione in corso...",
+    "versions": "{{count}} versioni"
+  },
+  "tooltip": {
+    "refresh": "Aggiorna",
+    "openList": "Apri lista Artifacts",
+    "openInCodeSandbox": "Apri in CodeSandbox",
+    "openInMermaid": "Apri in Mermaid Live Editor",
+    "downloadSvg": "Scarica SVG",
+    "downloadAsInteractiveHtml": "Scarica come HTML interattivo",
+    "viewAsInteractiveHtml": "Visualizza come HTML interattivo"
+  },
+  "error": {
+    "noSvg": "Nessun SVG trovato",
+    "previewUrl": "Impossibile generare l'URL di anteprima"
+  }
+} 

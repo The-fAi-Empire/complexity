@@ -1,4 +1,4 @@
-import { useCanvasStore } from "@/plugins/canvas/index.public";
+import { useArtifactsStore } from "@/plugins/artifacts/index.public";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import BetterCodeBlockHeader from "@/plugins/thread-better-code-blocks/variants/base/Header";
 import HighlightedCodeWrapper from "@/plugins/thread-better-code-blocks/variants/HighlightedCode";
@@ -8,15 +8,15 @@ const BaseCodeBlockWrapper = memo(function BaseCodeBlockWrapper() {
   const { maxHeight, sourceMessageBlockIndex, sourceCodeBlockIndex } =
     useMirroredCodeBlockContext();
 
-  const isCanvasEnabled =
-    PluginsStatesService.cachedEnableStates?.["thread:canvas"];
-  const selectedCanvasCodeBlockLocation = useCanvasStore(
+  const isArtifactEnabled =
+    PluginsStatesService.cachedEnableStates?.["thread:artifacts"];
+  const selectedArtifactCodeBlockLocation = useArtifactsStore(
     (state) => state.selectedCodeBlockLocation,
   );
-  const isSelectedCanvasCodeBlock =
-    selectedCanvasCodeBlockLocation?.messageBlockIndex ===
+  const isSelectedArtifactCodeBlock =
+    selectedArtifactCodeBlockLocation?.messageBlockIndex ===
       sourceMessageBlockIndex &&
-    selectedCanvasCodeBlockLocation?.codeBlockIndex === sourceCodeBlockIndex;
+    selectedArtifactCodeBlockLocation?.codeBlockIndex === sourceCodeBlockIndex;
 
   return (
     <div
@@ -24,7 +24,7 @@ const BaseCodeBlockWrapper = memo(function BaseCodeBlockWrapper() {
         "x:relative x:my-4 x:flex x:flex-col x:rounded-lg x:border x:border-border/50 x:bg-secondary x:font-mono x:transition-all",
         {
           "x:overflow-hidden": maxHeight === 0,
-          "x:border-primary": isCanvasEnabled && isSelectedCanvasCodeBlock,
+          "x:border-primary": isArtifactEnabled && isSelectedArtifactCodeBlock,
         },
       )}
     >

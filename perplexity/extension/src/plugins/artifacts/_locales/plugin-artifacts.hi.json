@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "सामग्री देखने के लिए क्लिक करें"
+    },
+    "mermaid": {
+      "description": "आरेख देखने के लिए क्लिक करें"
+    },
+    "html": {
+      "description": "वेब पेज देखने के लिए क्लिक करें"
+    },
+    "react": {
+      "description": "वेब पेज देखने के लिए क्लिक करें"
+    },
+    "markmap": {
+      "description": "माइंड मैप देखने के लिए क्लिक करें"
+    }
+  },
+  "version": "संस्करण {{number}}",
+  "toggle": {
+    "preview": "पूर्वावलोकन",
+    "markdown": {
+      "raw": "कच्चा पाठ"
+    },
+    "code": "कोड"
+  },
+  "list": {
+    "title": "इस थ्रेड में Artifacts",
+    "generating": "उत्पन्न हो रहा है...",
+    "versions": "{{count}} संस्करण"
+  },
+  "tooltip": {
+    "refresh": "रीफ्रेश करें",
+    "openList": "Artifacts सूची खोलें",
+    "openInCodeSandbox": "CodeSandbox में खोलें",
+    "openInMermaid": "Mermaid Live Editor में खोलें",
+    "downloadSvg": "SVG डाउनलोड करें",
+    "downloadAsInteractiveHtml": "इंटरैक्टिव HTML के रूप में डाउनलोड करें",
+    "viewAsInteractiveHtml": "इंटरैक्टिव HTML के रूप में देखें"
+  },
+  "error": {
+    "noSvg": "कोई SVG नहीं मिला",
+    "previewUrl": "पूर्वावलोकन URL उत्पन्न करने में विफल"
+  }
+} 

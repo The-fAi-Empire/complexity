@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
-import CanvasSimpleModeRenderButton from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/CanvasSimpleModeRenderButton";
+import ArtifactSimpleModeRenderButton from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/ArtifactSimpleModeRenderButton";
 import { ExpandCollapseButton } from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/ExpandCollapseButton";
 import { WrapToggleButton } from "@/plugins/thread-better-code-blocks/variants/base/header-buttons/WrapToggleButton";
 import { ExtensionSettingsService } from "@/services/extension-settings";
@@ -61,7 +61,7 @@ const BaseCodeBlockWrapperHeader = memo(function BaseCodeBlockWrapperHeader() {
           </div>
         ) : (
           <>
-            <CanvasSimpleModeRenderButton />
+            <ArtifactSimpleModeRenderButton />
             {isHorizontalOverflowing && <WrapToggleButton />}
             <CopyButton content={code} />
             {isVerticalOverflowing && (

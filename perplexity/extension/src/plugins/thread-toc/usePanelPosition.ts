@@ -14,15 +14,15 @@ import { whereAmI } from "@/utils/utils";
 
 export const PANEL_WIDTH = 230;
 
-type UsePanelPosition = {
+type PanelPosition = {
   position: { top: number; left: number };
   isOverflowing: boolean;
 };
 
-export function usePanelPosition(): UsePanelPosition | null {
+export function usePanelPosition(): PanelPosition | null {
   const { url } = useSpaRouter();
   const windowSize = useDebounce(useWindowSize(), 200);
-  const [panelPosition, setPanelPosition] = useState<UsePanelPosition | null>(
+  const [panelPosition, setPanelPosition] = useState<PanelPosition | null>(
     null,
   );
   const threadWrapper = useThreadDomObserverStore(
@@ -78,7 +78,7 @@ export function usePanelPosition(): UsePanelPosition | null {
     return {
       position: {
         top: navbarHeight + 20,
-        left: threadContentWrapperWidth + threadContentWrapperOffset.left,
+        left: threadContentWrapperWidth + threadContentWrapperOffset.left + 28,
       },
       isOverflowing: panelRightEdge > window.innerWidth,
     };

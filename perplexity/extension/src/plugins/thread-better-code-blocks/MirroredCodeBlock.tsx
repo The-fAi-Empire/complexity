@@ -1,8 +1,8 @@
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import { isAutonomousCanvasLanguageString } from "@/plugins/canvas/index.public";
+import { isAutonomousArtifactLanguageString } from "@/plugins/artifacts/index.public";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
+import ArtifactPlaceholderWrapper from "@/plugins/thread-better-code-blocks/variants/artifact-placeholders/Wrapper";
 import BaseCodeBlockWrapper from "@/plugins/thread-better-code-blocks/variants/base/Wrapper";
-import CanvasPlaceholderWrapper from "@/plugins/thread-better-code-blocks/variants/canvas-placeholders/Wrapper";
 import { PluginsStatesService } from "@/services/plugins-states";
 
 const MirroredCodeBlock = memo(function MirroredCodeBlock() {
@@ -11,11 +11,11 @@ const MirroredCodeBlock = memo(function MirroredCodeBlock() {
   const { isMobile } = useIsMobileStore();
   if (isMobile) return <BaseCodeBlockWrapper />;
 
-  const isAutonomousCanvasLanguage =
-    PluginsStatesService.cachedEnableStates?.["thread:canvas"] &&
-    isAutonomousCanvasLanguageString(codeBlock?.content.language);
+  const isAutonomousArtifactLanguage =
+    PluginsStatesService.cachedEnableStates?.["thread:artifacts"] &&
+    isAutonomousArtifactLanguageString(codeBlock?.content.language);
 
-  if (isAutonomousCanvasLanguage) return <CanvasPlaceholderWrapper />;
+  if (isAutonomousArtifactLanguage) return <ArtifactPlaceholderWrapper />;
 
   if (!codeBlock) return null;
 

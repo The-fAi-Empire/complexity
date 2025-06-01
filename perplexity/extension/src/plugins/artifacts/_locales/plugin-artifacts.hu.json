@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Kattintson a tartalom megtekintéséhez"
+    },
+    "mermaid": {
+      "description": "Kattintson a diagram megtekintéséhez"
+    },
+    "html": {
+      "description": "Kattintson a weboldal megtekintéséhez"
+    },
+    "react": {
+      "description": "Kattintson a weboldal megtekintéséhez"
+    },
+    "markmap": {
+      "description": "Kattintson a gondolattérkép megtekintéséhez"
+    }
+  },
+  "version": "Verzió {{number}}",
+  "toggle": {
+    "preview": "Előnézet",
+    "markdown": {
+      "raw": "Nyers szöveg"
+    },
+    "code": "Kód"
+  },
+  "list": {
+    "title": "Artifacts ebben a beszélgetésben",
+    "generating": "Generálás...",
+    "versions": "{{count}} verzió"
+  },
+  "tooltip": {
+    "refresh": "Frissítés",
+    "openList": "Artifacts listájának megnyitása",
+    "openInCodeSandbox": "Megnyitás CodeSandboxban",
+    "openInMermaid": "Megnyitás a Mermaid Live Editorban",
+    "downloadSvg": "SVG letöltése",
+    "downloadAsInteractiveHtml": "Letöltés interaktív HTML-ként",
+    "viewAsInteractiveHtml": "Megtekintés interaktív HTML-ként"
+  },
+  "error": {
+    "noSvg": "Nem található SVG",
+    "previewUrl": "Nem sikerült létrehozni az előnézeti URL-t"
+  }
+} 

@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Faceți clic pentru a vizualiza conținutul"
+    },
+    "mermaid": {
+      "description": "Faceți clic pentru a vizualiza diagrama"
+    },
+    "html": {
+      "description": "Faceți clic pentru a vizualiza pagina web"
+    },
+    "react": {
+      "description": "Faceți clic pentru a vizualiza pagina web"
+    },
+    "markmap": {
+      "description": "Faceți clic pentru a vizualiza harta mentală"
+    }
+  },
+  "version": "Versiunea {{number}}",
+  "toggle": {
+    "preview": "Previzualizare",
+    "markdown": {
+      "raw": "Text brut"
+    },
+    "code": "Cod"
+  },
+  "list": {
+    "title": "Artifacts în această conversație",
+    "generating": "Se generează...",
+    "versions": "{{count}} versiuni"
+  },
+  "tooltip": {
+    "refresh": "Reîmprospătare",
+    "openList": "Deschideți lista de Artifacts",
+    "openInCodeSandbox": "Deschideți în CodeSandbox",
+    "openInMermaid": "Deschideți în Mermaid Live Editor",
+    "downloadSvg": "Descărcați SVG",
+    "downloadAsInteractiveHtml": "Descărcați ca HTML interactiv",
+    "viewAsInteractiveHtml": "Vizualizați ca HTML interactiv"
+  },
+  "error": {
+    "noSvg": "Nu s-a găsit SVG",
+    "previewUrl": "Eșec la generarea URL-ului de previzualizare"
+  }
+}

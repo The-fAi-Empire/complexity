@@ -129,10 +129,10 @@ export class MarkmapRenderer {
       const $target = $(selector);
 
       if ($target.length === 0) {
-        console.warn("No elements found for rendering Markmap canvas");
+        console.warn("No elements found for rendering Markmap");
         return {
           success: false,
-          error: "No elements found for rendering Markmap canvas",
+          error: "No elements found for rendering Markmap",
         };
       }
 
@@ -149,7 +149,7 @@ export class MarkmapRenderer {
           if (!$target[0])
             return {
               success: false,
-              error: "No elements found for rendering Markmap canvas",
+              error: "No elements found for rendering Markmap",
             };
 
           this.currentMarkmapSvgNode = $target[0];

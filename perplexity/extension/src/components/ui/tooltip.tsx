@@ -2,22 +2,8 @@ import { Portal } from "@ark-ui/react/portal";
 import { Tooltip as ArkTooltip } from "@ark-ui/react/tooltip";
 import React, { type ComponentProps } from "react";
 
-type TooltipContext = ComponentProps<typeof ArkTooltip.Root>;
-
-const TooltipContext = createContext<TooltipContext>({
-  positioning: {
-    placement: "top",
-  },
-});
-
-const TooltipContextProvider = TooltipContext.Provider;
-
-export function TooltipRoot({ positioning, ...props }: ArkTooltip.RootProps) {
-  return (
-    <TooltipContextProvider value={{ positioning }}>
-      <ArkTooltip.Root unmountOnExit={false} lazyMount={true} {...props} />
-    </TooltipContextProvider>
-  );
+export function TooltipRoot({ ...props }: ArkTooltip.RootProps) {
+  return <ArkTooltip.Root unmountOnExit={false} lazyMount={true} {...props} />;
 }
 
 export function TooltipTrigger({
@@ -39,12 +25,6 @@ export function TooltipContent({
 }: ComponentProps<typeof ArkTooltip.Content> & {
   portal: boolean;
 }) {
-  const { positioning } = use(TooltipContext);
-
-  if (!positioning) {
-    throw new Error("TooltipContent must be used within a TooltipContext");
-  }
-
   const Comp = portal ? Portal : React.Fragment;
 
   return (
@@ -62,7 +42,6 @@ export function TooltipContent({
             "x:data-[placement^=right]:origin-left x:data-[placement^=top]:origin-bottom",
             className,
           )}
-          data-side={positioning.placement}
           {...props}
         />
       </ArkTooltip.Positioner>

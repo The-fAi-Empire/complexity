@@ -1,7 +1,7 @@
 import { createHashRouter } from "react-router-dom";
 
+import { artifactsPrePromptInstallationDialogRouterRoute } from "@/plugins/artifacts/components/PrePromptInstallationDialog";
 import { betterSearchParamsRouterRoute } from "@/plugins/better-search-params/route";
-import { canvasPrePromptInstallationDialogRouterRoute } from "@/plugins/canvas/components/PrePromptInstallationDialog";
 
 export const createRouter = () =>
   createHashRouter([
@@ -10,7 +10,7 @@ export const createRouter = () =>
       element: null,
       children: [
         betterSearchParamsRouterRoute,
-        canvasPrePromptInstallationDialogRouterRoute,
+        artifactsPrePromptInstallationDialogRouterRoute,
       ],
       errorElement: null,
     },

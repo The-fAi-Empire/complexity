@@ -2,7 +2,7 @@ import { useDebounce, useWindowSize } from "@uidotdev/usehooks";
 import type { ReactNode, RefObject } from "react";
 
 import CodeHighlighter from "@/components/CodeHighlighter";
-import { getInterpretedCanvasLanguage } from "@/plugins/canvas/index.public";
+import { getInterpretedArtifactLanguage } from "@/plugins/artifacts/index.public";
 import { useMirroredCodeBlockContext } from "@/plugins/thread-better-code-blocks/MirroredCodeBlockContext";
 import type { BetterCodeBlockFineGrainedOptions } from "@/plugins/thread-better-code-blocks/types";
 import { getBetterCodeBlockOptions } from "@/plugins/thread-better-code-blocks/utils";
@@ -16,7 +16,9 @@ const HighlightedCodeWrapper = memo(() => {
   const code = codeBlock?.content.code ?? "";
   const language = codeBlock?.content.language;
 
-  const interpretedLanguage = getInterpretedCanvasLanguage(language ?? "text");
+  const interpretedLanguage = getInterpretedArtifactLanguage(
+    language ?? "text",
+  );
 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const codeRef = useRef<HTMLDivElement>(null);

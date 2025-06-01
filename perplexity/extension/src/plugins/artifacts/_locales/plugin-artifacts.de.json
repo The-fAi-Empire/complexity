@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Klicken Sie zum Anzeigen des Inhalts"
+    },
+    "mermaid": {
+      "description": "Klicken Sie zum Anzeigen des Diagramms"
+    },
+    "html": {
+      "description": "Klicken Sie zum Anzeigen der Webseite"
+    },
+    "react": {
+      "description": "Klicken Sie zum Anzeigen der Webseite"
+    },
+    "markmap": {
+      "description": "Klicken Sie zum Anzeigen der Mindmap"
+    }
+  },
+  "version": "Version {{number}}",
+  "toggle": {
+    "preview": "Vorschau",
+    "markdown": {
+      "raw": "Rohtext"
+    },
+    "code": "Code"
+  },
+  "list": {
+    "title": "Artifacts in diesem Thread",
+    "generating": "Wird generiert...",
+    "versions": "{{count}} Versionen"
+  },
+  "tooltip": {
+    "refresh": "Aktualisieren",
+    "openList": "Artifacts-Liste öffnen",
+    "openInCodeSandbox": "In CodeSandbox öffnen",
+    "openInMermaid": "Im Mermaid Live Editor öffnen",
+    "downloadSvg": "SVG herunterladen",
+    "downloadAsInteractiveHtml": "Als interaktives HTML herunterladen",
+    "viewAsInteractiveHtml": "Als interaktives HTML anzeigen"
+  },
+  "error": {
+    "noSvg": "Kein SVG gefunden",
+    "previewUrl": "Fehler beim Generieren der Vorschau-URL"
+  }
+} 

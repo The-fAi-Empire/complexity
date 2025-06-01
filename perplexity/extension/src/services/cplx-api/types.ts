@@ -26,8 +26,6 @@ export const SemverSchema = z
 export const CplxVersionsApiResponseSchema = z.object({
   latest: SemverSchema,
   latestFirefox: SemverSchema,
-  changelogEntries: z.array(SemverSchema),
-  canvasInstructionLastUpdated: z.number().optional(),
 });
 
 export type CplxVersionsApiResponse = z.infer<
@@ -40,8 +38,6 @@ export const CplxVersionsSchema = CplxVersionsApiResponseSchema.transform(
 
     return {
       latest: data[latest],
-      canvasInstructionLastUpdated: data.canvasInstructionLastUpdated,
-      changelogEntries: data.changelogEntries,
     };
   },
 );

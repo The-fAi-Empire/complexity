@@ -9,8 +9,8 @@ const { default: ThreadQueryHoverContainerExtraButtonsWrapper } = lazily(
   () =>
     import("@/plugins/_core/ui/groups/thread-query-hover-container/Wrapper"),
 );
-const { default: CanvasWrapper } = lazily(
-  () => import("@/plugins/canvas/Wrapper"),
+const { default: ArtifactsWrapper } = lazily(
+  () => import("@/plugins/artifacts/Wrapper"),
 );
 const { default: ExportThreadWrapper } = lazily(
   () => import("@/plugins/export-thread/Wrapper"),
@@ -30,7 +30,7 @@ export default function ThreadComponents() {
     <CsUiPluginsGuard location={["thread"]}>
       <ImageGenModelSelectorWrapper />
 
-      <CanvasWrapper />
+      <ArtifactsWrapper />
 
       <BetterCodeBlocksWrapper />
 

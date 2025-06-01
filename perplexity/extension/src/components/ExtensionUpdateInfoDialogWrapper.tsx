@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Image } from "@/components/ui/image";
 import { toast } from "@/components/ui/use-toast";
+import { cplxApiQueries } from "@/services/cplx-api/query-keys";
 import { CplxVersionsService } from "@/services/cplx-api/remote-resources/versions";
 
 export default function ExtensionUpdateInfoDialogWrapper({
@@ -24,13 +25,17 @@ export default function ExtensionUpdateInfoDialogWrapper({
     ...CplxVersionsService.query,
   });
 
+  const { data: changelogListing } = useQuery(
+    cplxApiQueries.changelog.listing.detail(),
+  );
+
   if (!versions) return null;
 
   const latestVersion = versions.latest;
   const latestVersionWithChangelog =
-    versions.changelogEntries.find((entry) =>
-      semver.lte(entry, latestVersion),
-    ) ?? versions.changelogEntries[0]!;
+    Object.keys(changelogListing ?? {}).find((version) =>
+      semver.lte(version, latestVersion),
+    ) ?? Object.keys(changelogListing ?? {})[0]!;
 
   return (
     <Dialog>

@@ -14,8 +14,6 @@ export const versionsRemoteResourceConfig = defineRemoteResource({
   type: "json",
   fallback: {
     latest: APP_CONFIG.VERSION,
-    canvasInstructionLastUpdated: Date.now(),
-    changelogEntries: [],
   },
   zodSchema: CplxVersionsSchema as ZodSchema<CplxVersions>,
 });

@@ -10,12 +10,6 @@ body[data-cplx-zen-mode="true"] {
     }
   }
 
-  &[location="home"] {
-    .hidden.pb-md.md\:block {
-      display: none !important;
-    }
-  }
-
   /* Related follow-ups section */
   &[location="thread"] {
     [data-cplx-component="message-block"] {

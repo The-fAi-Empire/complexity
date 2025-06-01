@@ -1,0 +1,45 @@
+{
+  "placeholder": {
+    "markdown": {
+      "description": "Klikněte pro zobrazení obsahu"
+    },
+    "mermaid": {
+      "description": "Klikněte pro zobrazení diagramu"
+    },
+    "html": {
+      "description": "Klikněte pro zobrazení webové stránky"
+    },
+    "react": {
+      "description": "Klikněte pro zobrazení webové stránky"
+    },
+    "markmap": {
+      "description": "Klikněte pro zobrazení myšlenkové mapy"
+    }
+  },
+  "version": "Verze {{number}}",
+  "toggle": {
+    "preview": "Náhled",
+    "markdown": {
+      "raw": "Surový text"
+    },
+    "code": "Kód"
+  },
+  "list": {
+    "title": "Artifacts v této konverzaci",
+    "generating": "Generování...",
+    "versions": "{{count}} verzí"
+  },
+  "tooltip": {
+    "refresh": "Obnovit",
+    "openList": "Otevřít seznam Artifacts",
+    "openInCodeSandbox": "Otevřít v CodeSandbox",
+    "openInMermaid": "Otevřít v Mermaid Live Editor",
+    "downloadSvg": "Stáhnout SVG",
+    "downloadAsInteractiveHtml": "Stáhnout jako interaktivní HTML",
+    "viewAsInteractiveHtml": "Zobrazit jako interaktivní HTML"
+  },
+  "error": {
+    "noSvg": "SVG nenalezeno",
+    "previewUrl": "Nepodařilo se vygenerovat URL náhledu"
+  }
+} 
