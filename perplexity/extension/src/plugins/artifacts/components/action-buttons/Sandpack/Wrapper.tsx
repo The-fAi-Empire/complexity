@@ -23,7 +23,7 @@ export default function SandpackArtifactActionButtonsWrapper() {
 
   return (
     <div className="x:flex x:items-center x:gap-1">
-      <Tooltip content={t("plugin-artifacts:tooltip.openInCodeSandbox")}>
+      <Tooltip content={t("plugin-artifacts.tooltip.openInCodeSandbox")}>
         <Button
           variant="ghost"
           size="iconSm"

@@ -16,8 +16,8 @@ export function ExpandCollapseButton({
     <Tooltip
       content={
         maxHeight === defaultMaxHeight
-          ? t("plugin-better-code-blocks:headerButtons.expand.expand")
-          : t("plugin-better-code-blocks:headerButtons.expand.collapse")
+          ? t("plugin-better-code-blocks.headerButtons.expand.expand")
+          : t("plugin-better-code-blocks.headerButtons.expand.collapse")
       }
     >
       <div

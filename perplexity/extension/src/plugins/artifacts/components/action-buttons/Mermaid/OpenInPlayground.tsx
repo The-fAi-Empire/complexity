@@ -18,7 +18,7 @@ export default function MermaidOpenInPlayground() {
   if (!selectedCodeBlock) return null;
 
   return (
-    <Tooltip content={t("plugin-artifacts:tooltip.openInMermaid")}>
+    <Tooltip content={t("plugin-artifacts.tooltip.openInMermaid")}>
       <Button
         variant="ghost"
         size="iconSm"
@@ -35,7 +35,7 @@ export default function MermaidOpenInPlayground() {
 
           if (!url) {
             return toast({
-              title: t("plugin-artifacts:error.previewUrl"),
+              title: t("plugin-artifacts.error.previewUrl"),
             });
           }
 

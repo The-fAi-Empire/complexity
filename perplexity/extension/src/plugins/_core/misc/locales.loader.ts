@@ -1,10 +1,13 @@
-import { initializeDayjsLocale } from "@/data/dayjs";
-import { initializeI18next } from "@/data/i18next";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { initializeDayjsLocale, initializeI18n } from "@/services/i18n";
+import {
+  commonLocalesLazyGlob,
+  pluginLocalesLazyGlob,
+} from "@/services/i18n/consts";
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
-    "lib:i18next": void;
+    "lib:i18n": void;
     "lib:dayjs": void;
   }
 }
@@ -12,8 +15,11 @@ declare module "@/plugins/_core/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     dependencies: [],
-    id: "lib:i18next",
-    loader: initializeI18next,
+    id: "lib:i18n",
+    loader: () =>
+      initializeI18n({
+        lazyGlobs: [commonLocalesLazyGlob, pluginLocalesLazyGlob],
+      }),
   });
 
   asyncLoaderRegistry.register({

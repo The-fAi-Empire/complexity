@@ -7,7 +7,7 @@ import { ExtensionSettingsService } from "@/services/extension-settings";
 export const getRawItems = (): CommandItemProps[] => [
   {
     eager: true,
-    group: t("plugin-command-menu:commandMenu.groups.search"),
+    group: t("plugin-command-menu.groups.search"),
     icon: PplxThread,
     keybinding:
       ExtensionSettingsService.cachedSync.plugins.commandMenu.keybindings
@@ -16,9 +16,7 @@ export const getRawItems = (): CommandItemProps[] => [
     onSelect: () => {
       commandMenuStore.getState().pushPage({
         pageId: "threads",
-        searchPlaceholder: t(
-          "plugin-command-menu:commandMenu.search.threadsPlaceholder",
-        ),
+        searchPlaceholder: t("plugin-command-menu.search.threadsPlaceholder"),
         shouldLocalFilter: false,
         sidecarOpen: false,
         args: undefined,
@@ -26,12 +24,12 @@ export const getRawItems = (): CommandItemProps[] => [
     },
     priority: 0,
     show: true,
-    title: t("plugin-command-menu:commandMenu.search.threads"),
+    title: t("plugin-command-menu.search.threads"),
     value: "search-threads",
   },
   {
     eager: true,
-    group: t("plugin-command-menu:commandMenu.groups.search"),
+    group: t("plugin-command-menu.groups.search"),
     icon: PplxSpace,
     keybinding:
       ExtensionSettingsService.cachedSync.plugins.commandMenu.keybindings
@@ -40,9 +38,7 @@ export const getRawItems = (): CommandItemProps[] => [
     onSelect: () => {
       commandMenuStore.getState().pushPage({
         pageId: "spaces",
-        searchPlaceholder: t(
-          "plugin-command-menu:commandMenu.search.spacesPlaceholder",
-        ),
+        searchPlaceholder: t("plugin-command-menu.search.spacesPlaceholder"),
         shouldLocalFilter: true,
         sidecarOpen: false,
         args: undefined,
@@ -50,7 +46,7 @@ export const getRawItems = (): CommandItemProps[] => [
     },
     priority: 0,
     show: true,
-    title: t("plugin-command-menu:commandMenu.search.spaces"),
+    title: t("plugin-command-menu.search.spaces"),
     value: "search-spaces",
   },
 ];

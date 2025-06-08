@@ -69,7 +69,7 @@ export function ThreadBetterRewriteDropdown() {
         });
       }}
     >
-      <Tooltip content={t("misc.rewrite")}>
+      <Tooltip content={t("common.misc.rewrite")}>
         <DropdownMenuTrigger asChild>
           <div
             className="x:cursor-pointer x:rounded-full x:p-2 x:text-muted-foreground x:transition-all x:hover:bg-muted/50 x:hover:text-foreground x:active:scale-95"

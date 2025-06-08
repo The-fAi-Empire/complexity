@@ -1,0 +1,68 @@
+import { type LanguageMessages } from "@complexity/i18n";
+
+export default {
+  sidecar: {
+    showPreviews: "Vorschauen anzeigen",
+    hidePreviews: "Vorschauen ausblenden",
+  },
+  input: {
+    searchPlaceholder: "Suchen...",
+  },
+  actions: {
+    createNewThread: "Neuen Thread erstellen",
+    toggleIncognitoEnable: "Inkognito-Modus aktivieren",
+    toggleIncognitoDisable: "Inkognito-Modus deaktivieren",
+    toggleLightMode: "Zu hellem Modus wechseln",
+    toggleDarkMode: "Zu dunklem Modus wechseln",
+  },
+  navigation: {
+    home: "Startseite",
+    library: "Bibliothek",
+    spaces: "Spaces",
+    discover: "Entdecken",
+    settings: "Einstellungen",
+    labs: "Labs",
+    current: "Aktuell",
+    openInNewTab: "In neuem Tab öffnen",
+    goTo: "Zu {destination} gehen",
+  },
+  search: {
+    threads: "Threads",
+    spaces: "Spaces",
+    threadsPlaceholder: "Threads durchsuchen...",
+    spacesPlaceholder: "Spaces durchsuchen...",
+  },
+  groups: {
+    actions: "Aktionen",
+    navigation: "Navigation",
+    search: "Suche",
+  },
+  spaces: {
+    footer: {
+      openInNewTab: "In neuem Tab öffnen",
+      searchInSpace: "In Space suchen",
+      goToSpace: "Zum Space gehen",
+      searchSpacePlaceholder: "{spaceName} durchsuchen...",
+    },
+    commandItems: {
+      errorFetching: "Fehler beim Abrufen von Spaces",
+      noSpacesFound: "Keine Spaces gefunden",
+    },
+    preview: {
+      description: "Beschreibung",
+      instructions: "Anweisungen",
+      files: "Dateien ({count:number})",
+      webLinks: "Weblinks ({count:number})",
+    },
+  },
+  threads: {
+    commandItems: {
+      errorFetching: "Fehler beim Abrufen von Threads",
+      noThreadsFound: "Keine Threads gefunden",
+    },
+  },
+  common: {
+    noResults: "Keine Ergebnisse gefunden",
+    current: "Aktuell",
+  },
+} as const satisfies LanguageMessages;

@@ -115,7 +115,7 @@ export function PromptHistory() {
         className={cn("x:text-xs x:[&_input]:h-8 x:[&_input]:p-0", {
           "x:border-t x:border-b-0": placement?.startsWith("top"),
         })}
-        placeholder={t("plugin-prompt-history:promptHistory.searchPlaceholder")}
+        placeholder={t("plugin-prompt-history.search.placeholder")}
         searchIcon={searchValue.length <= 0 && <ClearAllButton />}
         value={searchValue}
         onValueChange={setSearchValue}
@@ -137,7 +137,7 @@ export function PromptHistory() {
         </CommandGroup>
         {!isLoading && (
           <CommandEmpty className="x:flex x:w-full x:items-center x:justify-center">
-            {t("plugin-prompt-history:promptHistory.noResults")}
+            {t("plugin-prompt-history.search.noResults")}
           </CommandEmpty>
         )}
         {(isLoading || isFetchingNextPage) && (

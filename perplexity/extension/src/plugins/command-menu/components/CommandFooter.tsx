@@ -31,12 +31,8 @@ export default function CommandFooter() {
                 <div>
                   <span>
                     {sidecarOpen
-                      ? t(
-                          "plugin-command-menu:commandMenu.sidecar.hidePreviews",
-                        )
-                      : t(
-                          "plugin-command-menu:commandMenu.sidecar.showPreviews",
-                        )}
+                      ? t("plugin-command-menu.sidecar.hidePreviews")
+                      : t("plugin-command-menu.sidecar.showPreviews")}
                   </span>
                   <KeyCombo
                     className="x:ml-2"

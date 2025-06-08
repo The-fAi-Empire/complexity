@@ -71,7 +71,7 @@ export default function ArtifactHeader() {
           })}
         >
           {artifactViewMode === "preview" && (
-            <Tooltip content={t("plugin-artifacts:tooltip.refresh")}>
+            <Tooltip content={t("plugin-artifacts.tooltip.refresh")}>
               <Button
                 variant="ghost"
                 size="iconSm"
@@ -86,7 +86,7 @@ export default function ArtifactHeader() {
             <>
               <PreviewToggle language={language} />
               {isAutonomousArtifactLanguage && (
-                <Tooltip content={t("plugin-artifacts:tooltip.openList")}>
+                <Tooltip content={t("plugin-artifacts.tooltip.openList")}>
                   <Button
                     variant="ghost"
                     size="iconSm"

@@ -1,0 +1,20 @@
+import type { LanguageMessages } from "@complexity/i18n";
+
+export default {
+  action: "エクスポート",
+  format: {
+    label: "フォーマットを選択",
+    placeholder: "フォーマットを選択してください",
+  },
+  includeCitations: "引用を含める",
+  actions: {
+    download: "ダウンロード",
+    copy: "コピー",
+  },
+  errors: {
+    downloadFailed: {
+      title: "❌ ダウンロードに失敗しました",
+      unknownError: "不明なエラーが発生しました",
+    },
+  },
+} as const satisfies LanguageMessages;

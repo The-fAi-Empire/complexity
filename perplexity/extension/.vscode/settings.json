@@ -24,20 +24,20 @@
     "**/dist/**/*": true,
     "**/node_modules/*/**": true
   },
-  "i18n-ally.defaultNamespace": "common",
-  "i18n-ally.displayLanguage": "en",
-  "i18n-ally.enabledFrameworks": ["i18next", "react-i18next"],
-  "i18n-ally.usage.scanningIgnore": [
-    "**/dist/**/_locales",
-    "**/dist/**/_locales/*"
-  ],
-  "i18n-ally.extract.autoDetect": false,
+
+  "i18n-ally.annotations": false,
+  "i18n-ally.editor.preferEditor": false,
+  "i18n-ally.enabledFrameworks": ["custom"],
+  "i18n-ally.enabledParsers": ["ts"],
   "i18n-ally.keystyle": "nested",
-  "i18n-ally.localesPaths": ["**/src/**/_locales", "**/src/**/_locales/*"],
-  "i18n-ally.ignoredLocales": ["**/dist/**/_locales", "**/dist/**/_locales/*"],
+  "i18n-ally.localesPaths": ["src/_locales", "src/plugins/*/_locales"],
+  "i18n-ally.pathMatcher": "{namespace}.{locale}.ts",
   "i18n-ally.namespace": true,
-  "i18n-ally.pathMatcher": "{namespace}.{locale}.json",
+  "i18n-ally.readonly": true,
   "i18n-ally.sourceLanguage": "en",
+  "i18n-ally.displayLanguage": "en",
+  "i18n-ally.fullReloadOnChanged": true,
+
   "npm.exclude": ["**/build", "**/dist/**"],
   "npm.scriptExplorerExclude": ["preinstall"],
   "search.exclude": {
@@ -50,6 +50,7 @@
     "**/node_modules": true,
     "**/public/locales/**/*": true
   },
+
   "tailwindCSS.experimental.classRegex": [
     [
       "addClass\\(\\s*([\"\\'`].*?[\"\\'`])\\s*\\)",
@@ -63,6 +64,7 @@
     ["cn\\(([^)]*)\\)", "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"]
   ],
   "tailwindCSS.experimental.configFile": "src/assets/index.css",
+
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.tsserver.maxTsServerMemory": 8192,
@@ -71,8 +73,10 @@
     "watchDirectory": "useFsEvents",
     "watchFile": "useFsEventsOnParentDirectory"
   },
+
   "window.title": "${dirty}🧩 Perplexity AI Enhancer${separator}${activeRepositoryBranchName}${separator}${activeEditorShort}",
   "workbench.editor.customLabels.patterns": {
+    "**/src/**/*.remote-resources.ts": "Remote Resources - ${dirname}",
     "**/src/data/plugin-registry/index.ts": "Plugin Registry",
     "**/src/entrypoints/background/index.ts": "Entrypoint - Background",
     "**/src/entrypoints/content-scripts/index.ts": "Entrypoint - Content Scripts",
@@ -83,7 +87,6 @@
     "**/src/manifest.firefox.ts": "Extension Manifest (Firefox)",
     "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
     "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
-    "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}",
-    "**/src/**/*.remote-resources.ts": "Remote Resources - ${dirname}"
+    "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"
   }
 }

@@ -12,9 +12,7 @@ const IndexPage = memo(() => {
       <ActionItems />
       <NavigationItems />
       <ZenModeCommandMenuEntriesWrapper />
-      <CommandEmpty>
-        {t("plugin-command-menu:commandMenu.common.noResults")}
-      </CommandEmpty>
+      <CommandEmpty>{t("plugin-command-menu.common.noResults")}</CommandEmpty>
     </CommandPage>
   );
 });

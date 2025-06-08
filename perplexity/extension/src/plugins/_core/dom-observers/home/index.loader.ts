@@ -8,11 +8,8 @@ import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import {
   findBottomBar,
   findSlogan,
-  observeLanguageSelector,
 } from "@/plugins/_core/dom-observers/home/utils";
-import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { whereAmI } from "@/utils/utils";
 
 declare module "@/plugins/_core/dom-observers/types" {
@@ -75,21 +72,5 @@ function observeHome(location: ReturnType<typeof whereAmI>) {
           id: createTaskId("home", "bottomBar"),
         },
       ]),
-  });
-
-  const $languageSelector = $(
-    DomSelectorsService.cachedSync.HOME.LANGUAGE_SELECTOR,
-  );
-
-  if (!$languageSelector[0]) return;
-
-  DomObserver.create(createDomObserverId("home", "languageSelector"), {
-    target: $languageSelector[0],
-    config: { attributes: true, attributeFilter: ["aria-label"] },
-    onMutation: () =>
-      CallbackQueue.getInstance().enqueue(
-        observeLanguageSelector,
-        createTaskId("home", "languageSelector"),
-      ),
   });
 }

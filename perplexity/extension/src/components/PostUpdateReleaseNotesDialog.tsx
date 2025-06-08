@@ -41,7 +41,7 @@ export function PostUpdateReleaseNotesDialog() {
       <DialogContent className="x:w-max x:max-w-[90vw]">
         <DialogHeader>
           <DialogTitle>
-            {t("common:releaseNotes.title", { version: APP_CONFIG.VERSION })}
+            {t("common.releaseNotes.title", { version: APP_CONFIG.VERSION })}
           </DialogTitle>
         </DialogHeader>
         <ChangelogRenderer
@@ -59,11 +59,11 @@ export function PostUpdateReleaseNotesDialog() {
             }}
           >
             <Button variant="outline">
-              {t("common:releaseNotes.dontShowAgain")}
+              {t("common.releaseNotes.dontShowAgain")}
             </Button>
           </DontShowAgainForFutureUpdatesConfirmDialog>
           <DialogClose asChild>
-            <Button>{t("common:releaseNotes.dismiss")}</Button>
+            <Button>{t("common.releaseNotes.dismiss")}</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>
@@ -84,23 +84,23 @@ function DontShowAgainForFutureUpdatesConfirmDialog({
       <DialogContent portal={false}>
         <DialogHeader>
           <DialogTitle>
-            {t("common:releaseNotes.confirmDialog.title")}
+            {t("common.releaseNotes.confirmDialog.title")}
           </DialogTitle>
         </DialogHeader>
 
         <div className="x:text-sm x:text-muted-foreground">
-          {t("common:releaseNotes.confirmDialog.message")}
+          {t("common.releaseNotes.confirmDialog.message")}
         </div>
 
         <DialogFooter>
           <DialogClose asChild>
             <Button variant="outline">
-              {t("common:releaseNotes.confirmDialog.cancel")}
+              {t("common.releaseNotes.confirmDialog.cancel")}
             </Button>
           </DialogClose>
           <DialogClose asChild>
             <Button onClick={onConfirm}>
-              {t("common:releaseNotes.confirmDialog.confirm")}
+              {t("common.releaseNotes.confirmDialog.confirm")}
             </Button>
           </DialogClose>
         </DialogFooter>

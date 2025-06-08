@@ -24,12 +24,12 @@ const unimportConfig: Partial<UnimportPluginOptions> = {
       ],
     },
     {
-      from: normalizePath("src/data/i18next.ts"),
-      imports: ["t", "i18n"],
-    },
-    {
       from: normalizePath("src/utils/deep-equal.ts"),
       imports: ["deepEqual"],
+    },
+    {
+      from: "@complexity/i18n",
+      imports: ["t", "extendT", "Trans", "TransWithPrefix"],
     },
   ],
   imports: [

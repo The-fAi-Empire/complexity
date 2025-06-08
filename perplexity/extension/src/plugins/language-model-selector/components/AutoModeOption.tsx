@@ -55,7 +55,7 @@ export default function AutoModeOption() {
               "x:text-lg": isMobile,
             })}
           >
-            {t("plugin-model-selectors:languageModelSelector:autoMode.title")}
+            {t("plugin-model-selectors.languageModelSelector.autoMode.title")}
           </div>
           <div
             className={cn("x:text-muted-foreground", {
@@ -63,7 +63,7 @@ export default function AutoModeOption() {
             })}
           >
             {t(
-              "plugin-model-selectors:languageModelSelector:autoMode.description",
+              "plugin-model-selectors.languageModelSelector.autoMode.description",
             )}
           </div>
         </div>

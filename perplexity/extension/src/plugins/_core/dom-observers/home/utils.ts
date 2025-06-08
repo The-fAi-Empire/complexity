@@ -40,19 +40,3 @@ export function findBottomBar() {
     $bottomBar,
   });
 }
-
-let previousLanguage = "";
-
-export function observeLanguageSelector() {
-  const ariaLabel =
-    $(DomSelectorsService.cachedSync.HOME.LANGUAGE_SELECTOR).attr(
-      "aria-label",
-    ) ?? "";
-
-  if (!previousLanguage || ariaLabel === previousLanguage) {
-    previousLanguage = ariaLabel;
-    return;
-  }
-
-  window.location.reload();
-}

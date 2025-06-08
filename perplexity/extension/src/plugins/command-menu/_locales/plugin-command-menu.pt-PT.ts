@@ -1,0 +1,68 @@
+import { type LanguageMessages } from "@complexity/i18n";
+
+export default {
+  sidecar: {
+    showPreviews: "Mostrar pré-visualizações",
+    hidePreviews: "Ocultar pré-visualizações",
+  },
+  input: {
+    searchPlaceholder: "Pesquisar...",
+  },
+  actions: {
+    createNewThread: "Criar nova conversa",
+    toggleIncognitoEnable: "Ativar modo de navegação privada",
+    toggleIncognitoDisable: "Desativar modo de navegação privada",
+    toggleLightMode: "Mudar para modo claro",
+    toggleDarkMode: "Mudar para modo escuro",
+  },
+  navigation: {
+    home: "Início",
+    library: "Biblioteca",
+    spaces: "Espaços",
+    discover: "Descobrir",
+    settings: "Definições",
+    labs: "Laboratórios",
+    current: "Atual",
+    openInNewTab: "Abrir em novo separador",
+    goTo: "Ir para {destination}",
+  },
+  search: {
+    threads: "Conversas",
+    spaces: "Espaços",
+    threadsPlaceholder: "Pesquisar conversas...",
+    spacesPlaceholder: "Pesquisar espaços...",
+  },
+  groups: {
+    actions: "Ações",
+    navigation: "Navegação",
+    search: "Pesquisa",
+  },
+  spaces: {
+    footer: {
+      openInNewTab: "Abrir em novo separador",
+      searchInSpace: "Pesquisar no espaço",
+      goToSpace: "Ir para o espaço",
+      searchSpacePlaceholder: "Pesquisar {spaceName}...",
+    },
+    commandItems: {
+      errorFetching: "Erro ao obter espaços",
+      noSpacesFound: "Nenhum espaço encontrado",
+    },
+    preview: {
+      description: "Descrição",
+      instructions: "Instruções",
+      files: "Ficheiros ({count:number})",
+      webLinks: "Ligações web ({count:number})",
+    },
+  },
+  threads: {
+    commandItems: {
+      errorFetching: "Erro ao obter conversas",
+      noThreadsFound: "Nenhuma conversa encontrada",
+    },
+  },
+  common: {
+    noResults: "Nenhum resultado encontrado",
+    current: "Atual",
+  },
+} as const satisfies LanguageMessages;

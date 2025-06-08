@@ -52,7 +52,7 @@ export function ImageGenModelSelector() {
         onValueChange={handleValueChange}
       >
         <Tooltip
-          content={t("plugin-model-selectors:imageGenModelSelector.tooltip")}
+          content={t("plugin-model-selectors.imageGenModelSelector.tooltip")}
           positioning={{
             gutter: 8,
           }}

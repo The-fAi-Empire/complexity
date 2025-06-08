@@ -46,12 +46,12 @@ export function CloudflareTimeoutActionDialog() {
           <DialogContent>
             <DialogHeader>
               {t(
-                "plugin-cloudflare-timeout-auto-reload:cloudflareTimeoutAutoReload:actionDialog.sessionTimeoutTitle",
+                "plugin-cloudflare-timeout-auto-reload.actionDialog.sessionTimeoutTitle",
               )}
             </DialogHeader>
             <DialogDescription>
               {t(
-                "plugin-cloudflare-timeout-auto-reload:cloudflareTimeoutAutoReload:actionDialog.sessionTimeoutDescription",
+                "plugin-cloudflare-timeout-auto-reload.actionDialog.sessionTimeoutDescription",
               )}
             </DialogDescription>
             <DialogFooter>
@@ -61,9 +61,7 @@ export function CloudflareTimeoutActionDialog() {
                   setOpen(false);
                 }}
               >
-                {t(
-                  "plugin-cloudflare-timeout-auto-reload:cloudflareTimeoutAutoReload:actionDialog.reload",
-                )}
+                {t("plugin-cloudflare-timeout-auto-reload.actionDialog.reload")}
                 {isAutoReload && <span> ({countdown})</span>}
               </Button>
               <Button
@@ -74,7 +72,7 @@ export function CloudflareTimeoutActionDialog() {
                 }}
               >
                 {t(
-                  "plugin-cloudflare-timeout-auto-reload:cloudflareTimeoutAutoReload:actionDialog.dismiss",
+                  "plugin-cloudflare-timeout-auto-reload.actionDialog.dismiss",
                 )}
               </Button>
             </DialogFooter>

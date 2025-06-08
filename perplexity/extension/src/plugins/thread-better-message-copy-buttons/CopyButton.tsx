@@ -56,7 +56,7 @@ const CopyButton = memo(function CopyButton({
         handleCopy((value as CopyOptions) === "default");
       }}
     >
-      <Tooltip content={t("plugin-better-copy-buttons:copyButton.tooltip")}>
+      <Tooltip content={t("plugin-better-copy-buttons.tooltip")}>
         <DropdownMenuTrigger asChild>
           <CopyButtonTrigger
             isFetching={isFetching}
@@ -72,9 +72,7 @@ const CopyButton = memo(function CopyButton({
             className="x:flex x:items-center x:gap-2"
           >
             <FaMarkdown className="x:size-4" />
-            <span>
-              {t("plugin-better-copy-buttons:copyButton.options.default")}
-            </span>
+            <span>{t("plugin-better-copy-buttons.options.default")}</span>
           </DropdownMenuItem>
           <DropdownMenuItem
             value={"without-citations" satisfies CopyOptions}
@@ -82,9 +80,7 @@ const CopyButton = memo(function CopyButton({
           >
             <LuLink2Off className="x:size-4" />
             <span>
-              {t(
-                "plugin-better-copy-buttons:copyButton.options.withoutCitations",
-              )}
+              {t("plugin-better-copy-buttons.options.withoutCitations")}
             </span>
           </DropdownMenuItem>
         </DropdownMenuContent>

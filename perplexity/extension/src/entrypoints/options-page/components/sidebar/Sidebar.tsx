@@ -1,5 +1,4 @@
 import type { ComponentProps } from "react";
-import { Trans } from "react-i18next";
 import { LuExternalLink, LuChevronDown, LuChevronRight } from "react-icons/lu";
 import { NavLink, useMatch } from "react-router-dom";
 
@@ -100,15 +99,13 @@ export default function Sidebar() {
         <SponsorDialogWrapper>
           <div className="x:group x:relative x:w-full x:cursor-pointer x:rounded-xl x:border x:border-border/50 x:bg-secondary x:p-4 x:text-sm x:font-medium x:shadow-lg x:transition-all x:hover:scale-105 x:hover:border-primary x:hover:bg-primary/10 x:md:text-balance">
             <Trans
-              i18nKey="sidebar.supporterMessage"
-              components={{
-                emphasis: (
-                  <span
-                    key="sidebar.supporterMessage"
-                    className="x:font-medium x:text-primary"
-                  />
-                ),
-              }}
+              tKey="common.sidebar.supporterMessage"
+              components={[
+                <span
+                  key="sidebar.supporterMessage"
+                  className="x:font-medium x:text-primary"
+                />,
+              ]}
             />
             <LuExternalLink className="x:absolute x:top-2 x:right-2 x:size-3.5 x:text-muted x:group-hover:text-primary" />
           </div>

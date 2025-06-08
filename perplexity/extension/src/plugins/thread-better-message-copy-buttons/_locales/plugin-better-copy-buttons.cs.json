@@ -1,9 +1,0 @@
-{
-  "copyButton": {
-    "tooltip": "Kopírovat zprávu",
-    "options": {
-      "default": "Výchozí",
-      "withoutCitations": "Bez citací"
-    }
-  }
-}

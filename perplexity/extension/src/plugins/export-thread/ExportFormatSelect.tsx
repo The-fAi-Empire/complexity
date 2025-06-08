@@ -20,7 +20,7 @@ export function ExportFormatSelect({ onValueChange }: ExportFormatSelectProps) {
   return (
     <div>
       <Label className="x:text-xs x:text-muted-foreground">
-        {t("plugin-export-thread:exportButton.format.label")}
+        {t("plugin-export-thread.format.label")}
       </Label>
 
       <Select
@@ -59,9 +59,7 @@ export function ExportFormatSelect({ onValueChange }: ExportFormatSelectProps) {
                   </div>
                 ) : (
                   <SelectValue
-                    placeholder={t(
-                      "plugin-export-thread:exportButton.format.placeholder",
-                    )}
+                    placeholder={t("plugin-export-thread.format.placeholder")}
                   />
                 );
               })()}

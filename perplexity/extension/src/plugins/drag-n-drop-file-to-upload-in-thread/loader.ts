@@ -62,7 +62,7 @@ export default function loader() {
           $overlay = $(`
         <div data-cplx-component="${DomSelectorsService.internalAttributes.THREAD.ATTACHMENT_DROP_ZONE}" class="cplx-file-upload-overlay">
           <div class="cplx-file-upload-overlay__content">
-            <div>${t("plugin-drag-n-drop-file-to-upload-in-thread:dropZone.message")}</div>
+            <div>${t("plugin-drag-n-drop-file-to-upload-in-thread.dropZone.message")}</div>
           </div>
         </div>
       `).appendTo("body");

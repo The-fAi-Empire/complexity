@@ -32,7 +32,7 @@ export default function NavigationItemsFooter({
 
     commandMenuStore.getState().setFooterItems([
       {
-        title: t("plugin-command-menu:commandMenu.navigation.openInNewTab"),
+        title: t("plugin-command-menu.navigation.openInNewTab"),
         keybinding: [Key.Alt, Key.Enter],
         onSelect: () => {
           openInNewTab(url);
@@ -40,7 +40,7 @@ export default function NavigationItemsFooter({
         },
       },
       {
-        title: t("plugin-command-menu:commandMenu.navigation.goTo", {
+        title: t("plugin-command-menu.navigation.goTo", {
           destination: selectedItem.title,
         }),
         keybinding: [Key.Enter],

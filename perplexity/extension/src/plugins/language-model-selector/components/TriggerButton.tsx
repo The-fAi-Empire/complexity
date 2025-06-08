@@ -34,7 +34,7 @@ export default function BetterLanguageModelSelectorTriggerButton() {
 
   return (
     <Tooltip
-      content={t("plugin-model-selectors:languageModelSelector.tooltip")}
+      content={t("plugin-model-selectors.languageModelSelector.tooltip")}
     >
       <div
         className={cn(

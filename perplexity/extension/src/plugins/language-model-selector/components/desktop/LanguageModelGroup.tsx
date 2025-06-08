@@ -83,11 +83,11 @@ export default function LanguageModelGroup({
         const limit =
           modelLimit === Infinity
             ? t(
-                "plugin-model-selectors:languageModelSelector.usesLeft.unlimited",
+                "plugin-model-selectors.languageModelSelector.usesLeft.unlimited",
               )
             : typeof modelLimit === "number"
               ? t(
-                  "plugin-model-selectors:languageModelSelector.usesLeft.limited",
+                  "plugin-model-selectors.languageModelSelector.usesLeft.limited",
                   { count: modelLimit },
                 )
               : "";

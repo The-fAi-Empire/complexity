@@ -1,0 +1,68 @@
+import { type LanguageMessages } from "@complexity/i18n";
+
+export default {
+  sidecar: {
+    showPreviews: "プレビューを表示",
+    hidePreviews: "プレビューを非表示",
+  },
+  input: {
+    searchPlaceholder: "検索...",
+  },
+  actions: {
+    createNewThread: "新しいスレッドを作成",
+    toggleIncognitoEnable: "シークレットモードを有効にする",
+    toggleIncognitoDisable: "シークレットモードを無効にする",
+    toggleLightMode: "ライトモードに変更",
+    toggleDarkMode: "ダークモードに変更",
+  },
+  navigation: {
+    home: "ホーム",
+    library: "ライブラリ",
+    spaces: "スペース",
+    discover: "発見",
+    settings: "設定",
+    labs: "ラボ",
+    current: "現在",
+    openInNewTab: "新しいタブで開く",
+    goTo: "{destination}に移動",
+  },
+  search: {
+    threads: "スレッド",
+    spaces: "スペース",
+    threadsPlaceholder: "スレッドを検索...",
+    spacesPlaceholder: "スペースを検索...",
+  },
+  groups: {
+    actions: "アクション",
+    navigation: "ナビゲーション",
+    search: "検索",
+  },
+  spaces: {
+    footer: {
+      openInNewTab: "新しいタブで開く",
+      searchInSpace: "スペース内を検索",
+      goToSpace: "スペースに移動",
+      searchSpacePlaceholder: "{spaceName}を検索...",
+    },
+    commandItems: {
+      errorFetching: "スペースの取得中にエラーが発生しました",
+      noSpacesFound: "スペースが見つかりません",
+    },
+    preview: {
+      description: "説明",
+      instructions: "指示",
+      files: "ファイル ({count:number})",
+      webLinks: "ウェブリンク ({count:number})",
+    },
+  },
+  threads: {
+    commandItems: {
+      errorFetching: "スレッドの取得中にエラーが発生しました",
+      noThreadsFound: "スレッドが見つかりません",
+    },
+  },
+  common: {
+    noResults: "結果が見つかりません",
+    current: "現在",
+  },
+} as const satisfies LanguageMessages;

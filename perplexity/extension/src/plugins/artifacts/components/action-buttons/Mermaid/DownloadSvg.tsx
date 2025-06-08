@@ -6,7 +6,7 @@ import { toast } from "@/components/ui/use-toast";
 
 export default function MermaidDownloadSvg() {
   return (
-    <Tooltip content={t("plugin-artifacts:tooltip.downloadSvg")}>
+    <Tooltip content={t("plugin-artifacts.tooltip.downloadSvg")}>
       <Button
         variant="ghost"
         size="iconSm"
@@ -17,7 +17,7 @@ export default function MermaidDownloadSvg() {
 
           if (!$svg[0]) {
             return toast({
-              title: t("plugin-artifacts:error.noSvg"),
+              title: t("plugin-artifacts.error.noSvg"),
             });
           }
 

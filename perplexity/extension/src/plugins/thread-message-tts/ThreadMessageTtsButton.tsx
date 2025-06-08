@@ -128,7 +128,9 @@ export function ThreadMessageTtsButton() {
         });
       }}
     >
-      <Tooltip content={playing ? t("misc.stop") : t("misc.speakAloud")}>
+      <Tooltip
+        content={playing ? t("common.misc.stop") : t("common.misc.speakAloud")}
+      >
         <DropdownMenuTrigger asChild>
           <div
             tabIndex={0}

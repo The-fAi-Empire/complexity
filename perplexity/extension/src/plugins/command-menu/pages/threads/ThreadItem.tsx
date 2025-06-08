@@ -7,7 +7,6 @@ import {
   CommandItemRightAttributes,
   CommandItemTitle,
 } from "@/components/ui/command";
-import { formatRelativeTime } from "@/data/dayjs";
 import {
   softNavigate,
   openInNewTab,
@@ -15,6 +14,7 @@ import {
 import { useCurrentPage } from "@/plugins/command-menu/hooks/useCurrentPage";
 import SpaceBadge from "@/plugins/command-menu/pages/threads/SpaceBadge";
 import { commandMenuStore } from "@/plugins/command-menu/store";
+import { formatRelativeTime } from "@/services/i18n";
 import type { ThreadSearchApi } from "@/services/pplx-api/pplx-api.types";
 import { jsonUtils } from "@/utils/utils";
 
@@ -32,7 +32,7 @@ const ThreadItem = memo(({ thread, searchValue }: ThreadItemProps) => {
     const content = jsonUtils.safeParse(thread.first_answer)?.answer as
       | string
       | null;
-    return content || "";
+    return content?.slice(0, 1000) ?? "";
   }, [thread.first_answer]);
 
   const keywords = useMemo(() => {
@@ -70,13 +70,13 @@ const ThreadItem = memo(({ thread, searchValue }: ThreadItemProps) => {
               <Highlight
                 ignoreCase
                 matchAll
-                query={searchValue}
-                text={thread.title}
+                query={searchValue.split(" ")}
+                text={thread.title.slice(0, 500)}
               />
             </div>
             {window.location.pathname.includes(thread.slug) && (
               <Badge variant="outline">
-                {t("plugin-command-menu:commandMenu.common.current")}
+                {t("plugin-command-menu.common.current")}
               </Badge>
             )}
             {!isSpaceThreadsPage && thread.collection && (
@@ -92,7 +92,7 @@ const ThreadItem = memo(({ thread, searchValue }: ThreadItemProps) => {
             <Highlight
               ignoreCase
               matchAll
-              query={searchValue}
+              query={searchValue.split(" ")}
               text={firstAnswer}
             />
           </div>

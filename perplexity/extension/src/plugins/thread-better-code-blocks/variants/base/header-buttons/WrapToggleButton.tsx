@@ -10,8 +10,8 @@ export function WrapToggleButton() {
     <Tooltip
       content={
         isWrapped
-          ? t("plugin-better-code-blocks:headerButtons.wrap.unwrap")
-          : t("plugin-better-code-blocks:headerButtons.wrap.wrap")
+          ? t("plugin-better-code-blocks.headerButtons.wrap.unwrap")
+          : t("plugin-better-code-blocks.headerButtons.wrap.wrap")
       }
     >
       <div

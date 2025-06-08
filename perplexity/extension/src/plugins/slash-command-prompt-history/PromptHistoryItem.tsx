@@ -8,8 +8,8 @@ import {
   CommandItemRightAttributes,
   CommandItemTitle,
 } from "@/components/ui/command";
-import { formatRelativeTime } from "@/data/dayjs";
 import { slashCommandMenuStore } from "@/plugins/slash-command/index.public";
+import { formatRelativeTime } from "@/services/i18n";
 
 type PromptHistoryItem = {
   id: string;
@@ -43,8 +43,8 @@ const PromptHistoryItem = memo(
           <Highlight
             ignoreCase
             matchAll
-            text={item.prompt}
-            query={searchValue}
+            text={item.prompt.slice(0, 1000)}
+            query={searchValue.split(" ")}
           />
         </CommandItemTitle>
         <CommandItemRightAttributes className="x:h-full x:shrink-0 x:text-xs x:text-muted-foreground">

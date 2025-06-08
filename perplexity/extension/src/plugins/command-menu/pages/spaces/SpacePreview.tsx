@@ -28,7 +28,7 @@ export default function SpacePreview({ space }: { space: Space }) {
       {space.description && (
         <div className="x:flex x:flex-col x:justify-between x:gap-2">
           <div className="x:text-sm x:font-medium x:text-muted-foreground">
-            {t("plugin-command-menu:commandMenu.spaces.preview.description")}
+            {t("plugin-command-menu.spaces.preview.description")}
           </div>
           <div className="x:line-clamp-3 x:whitespace-pre-wrap">
             {space.description}
@@ -38,7 +38,7 @@ export default function SpacePreview({ space }: { space: Space }) {
       {space.instructions && (
         <div className="x:flex x:flex-col x:justify-between x:gap-2">
           <div className="x:text-sm x:font-medium x:text-muted-foreground">
-            {t("plugin-command-menu:commandMenu.spaces.preview.instructions")}
+            {t("plugin-command-menu.spaces.preview.instructions")}
           </div>
           <div
             className={cn(
@@ -53,7 +53,7 @@ export default function SpacePreview({ space }: { space: Space }) {
       {files && files?.num_total_files > 0 && (
         <div className="x:flex x:flex-col x:justify-between x:gap-2">
           <div className="x:text-sm x:font-medium x:text-muted-foreground">
-            {t("plugin-command-menu:commandMenu.spaces.preview.files", {
+            {t("plugin-command-menu.spaces.preview.files", {
               count: files.num_total_files,
             })}
           </div>
@@ -66,7 +66,7 @@ export default function SpacePreview({ space }: { space: Space }) {
         spaceDetails.focused_web_config.link_configs.length > 0 && (
           <div className="x:flex x:flex-col x:justify-between x:gap-2">
             <div className="x:truncate x:text-sm x:font-medium x:text-muted-foreground">
-              {t("plugin-command-menu:commandMenu.spaces.preview.webLinks", {
+              {t("plugin-command-menu.spaces.preview.webLinks", {
                 count: spaceDetails.focused_web_config.link_configs.length,
               })}
             </div>

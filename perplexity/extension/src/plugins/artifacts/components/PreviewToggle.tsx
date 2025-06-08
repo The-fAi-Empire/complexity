@@ -24,7 +24,7 @@ export default function PreviewToggle({
         })}
       >
         {ARTIFACTS_LANGUAGE_PREVIEW_TOGGLE_TEXT[language] ??
-          t("plugin-artifacts:toggle.preview")}
+          t("plugin-artifacts.toggle.preview")}
       </div>
       <div
         className={cn("x:p-1 x:px-4 x:text-muted-foreground", {
@@ -33,7 +33,7 @@ export default function PreviewToggle({
         })}
       >
         {ARTIFACTS_LANGUAGE_RAW_TOGGLE_TEXT[language] ??
-          t("plugin-artifacts:toggle.code")}
+          t("plugin-artifacts.toggle.code")}
       </div>
     </div>
   );

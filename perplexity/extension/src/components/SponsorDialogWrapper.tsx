@@ -24,19 +24,19 @@ export default function SponsorDialogWrapper({
 
         <DialogHeader>
           <DialogTitle className="x:text-2xl">
-            {t("common:sponsorDialog.title")}
+            {t("common.sponsorDialog.title")}
           </DialogTitle>
           <DialogDescription className="x:text-foreground">
             <div className="x:flex x:flex-col x:gap-2">
-              <div>{t("common:sponsorDialog.description")}</div>
-              <div>{t("common:sponsorDialog.descriptionLine2")}</div>
+              <div>{t("common.sponsorDialog.description")}</div>
+              <div>{t("common.sponsorDialog.descriptionLine2")}</div>
             </div>
           </DialogDescription>
         </DialogHeader>
 
         <div className="x:w-full x:space-y-2">
           <div className="x:text-muted-foreground">
-            {t("common:sponsorDialog.donation.title")}
+            {t("common.sponsorDialog.donation.title")}
           </div>
           <div className="x:flex x:flex-col x:gap-2">
             <Button asChild className="x:space-x-2">
@@ -65,14 +65,14 @@ export default function SponsorDialogWrapper({
         </div>
         <div className="x:mt-4 x:w-full x:space-y-2">
           <div className="x:text-muted-foreground">
-            {t("common:sponsorDialog.sponsorship.title")}
+            {t("common.sponsorDialog.sponsorship.title")}
           </div>
           <Button asChild className="x:group x:w-full x:space-x-2">
             <a href="mailto:pnd280@gmail.com" target="_blank" rel="noreferrer">
               <span className="x:flex x:items-center x:gap-2 x:group-hover:hidden">
                 <LuMail className="x:size-6" />
                 <span>
-                  {t("common:sponsorDialog.sponsorship.contactEmail")}
+                  {t("common.sponsorDialog.sponsorship.contactEmail")}
                 </span>
               </span>
               <span className="x:hidden x:animate-in x:fade-in-0 x:group-hover:block x:group-hover:text-primary">

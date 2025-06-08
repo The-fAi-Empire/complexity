@@ -18,6 +18,7 @@ const schema = z.object({
   }),
 });
 
+// TODO: remove the `slashCommandMenu` and `slash-command` prefixes
 export default definePlugin({
   manifest: {
     id: "queryBox:slashCommandMenu:promptHistory",

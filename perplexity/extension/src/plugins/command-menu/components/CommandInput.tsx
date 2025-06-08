@@ -11,7 +11,7 @@ export default function CommandInput() {
 
   const placeholder = useMemo(() => {
     if (pageStack.length < 1)
-      return t("plugin-command-menu:commandMenu.input.searchPlaceholder");
+      return t("plugin-command-menu.input.searchPlaceholder");
     return pageStack[pageStack.length - 1]!.searchPlaceholder;
   }, [pageStack]);
 

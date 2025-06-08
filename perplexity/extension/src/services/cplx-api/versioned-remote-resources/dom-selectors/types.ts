@@ -56,7 +56,6 @@ export const DomSelectorsSchema = z.object({
   HOME: z.object({
     SLOGAN: z.string(),
     BOTTOM_BAR: z.string(),
-    LANGUAGE_SELECTOR: z.string(),
   }),
   QUERY_BOX: z.object({
     TEXTAREA: z.object({

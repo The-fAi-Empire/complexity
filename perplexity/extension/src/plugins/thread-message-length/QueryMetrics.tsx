@@ -25,8 +25,8 @@ export function QueryMetrics() {
 
   return (
     <div className="x:flex x:h-full x:items-center x:px-2 x:text-xs x:text-muted-foreground">
-      {wordCount} {t("common:misc.words")} | {characterCount}{" "}
-      {t("common:misc.characters")}
+      {wordCount} {t("common.misc.words")} | {characterCount}{" "}
+      {t("common.misc.characters")}
       {settings.plugins["thread:showMessageLength"].showTokens
         ? ` | ${tokenCount} tokens`
         : ""}

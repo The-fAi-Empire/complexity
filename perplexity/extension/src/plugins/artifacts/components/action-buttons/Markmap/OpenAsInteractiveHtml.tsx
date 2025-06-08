@@ -17,7 +17,7 @@ export default function OpenAsInteractiveHtml() {
   if (!selectedCodeBlock) return null;
 
   return (
-    <Tooltip content={t("plugin-artifacts:tooltip.viewAsInteractiveHtml")}>
+    <Tooltip content={t("plugin-artifacts.tooltip.viewAsInteractiveHtml")}>
       <Button
         variant="ghost"
         size="iconSm"

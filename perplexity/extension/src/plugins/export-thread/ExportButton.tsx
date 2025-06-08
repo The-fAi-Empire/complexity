@@ -29,7 +29,7 @@ const ExportButton = memo(function ExportButton() {
   const { copyThread, isFetching, getContent } = useCopyPplxThread();
   const [open, setOpen] = useState(false);
   const [includeCitations, setIncludeCitations] = useState(true);
-  const [format, setFormat] = useState<ExportOption["value"]>("markdown");
+  const [_format, setFormat] = useState<ExportOption["value"]>("markdown");
 
   const defaultIdleText = useMemo(
     () =>
@@ -65,15 +65,11 @@ const ExportButton = memo(function ExportButton() {
       } catch (error) {
         console.error("Failed to download:", error);
         toast({
-          title: t(
-            "plugin-export-thread:exportButton.errors.downloadFailed.title",
-          ),
+          title: t("plugin-export-thread.errors.downloadFailed.title"),
           description:
             error instanceof Error
               ? error.message
-              : t(
-                  "plugin-export-thread:exportButton.errors.downloadFailed.unknownError",
-                ),
+              : t("plugin-export-thread.errors.downloadFailed.unknownError"),
         });
       }
     },
@@ -86,7 +82,7 @@ const ExportButton = memo(function ExportButton() {
       positioning={{ placement: isMobile ? "bottom" : "bottom-end" }}
       onOpenChange={({ open }) => setOpen(open)}
     >
-      <Tooltip content={t("plugin-export-thread:exportButton.action")}>
+      <Tooltip content={t("plugin-export-thread.action")}>
         <PopoverTrigger asChild>
           <Button
             disabled={isThreadInFlight}
@@ -106,7 +102,7 @@ const ExportButton = memo(function ExportButton() {
         <div className="x:flex x:flex-col x:gap-4">
           <ExportFormatSelect onValueChange={setFormat} />
           <Checkbox
-            label={t("plugin-export-thread:exportButton.includeCitations")}
+            label={t("plugin-export-thread.includeCitations")}
             defaultChecked={includeCitations}
             onCheckedChange={({ checked }) => {
               setIncludeCitations(checked as boolean);

@@ -68,7 +68,6 @@ export const DOM_SELECTORS: DomSelectors = {
   HOME: {
     SLOGAN: ".mb-lg.md\\:absolute.text-center",
     BOTTOM_BAR: ".hidden.pb-md.md\\:block>div",
-    LANGUAGE_SELECTOR: "select#interface-language-select",
   },
   QUERY_BOX: {
     TEXTAREA: {

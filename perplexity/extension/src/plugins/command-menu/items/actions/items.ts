@@ -24,19 +24,19 @@ export const getRawItems = ({
 }: ActionItemsParams): CommandItemProps[] => [
   {
     eager: true,
-    group: t("plugin-command-menu:commandMenu.groups.actions"),
+    group: t("plugin-command-menu.groups.actions"),
     icon: FaPlus,
     keybinding: [],
     keywords: ["actions"],
     onSelect: () => softNavigate("/"),
     priority: 0,
     show: location !== "home",
-    title: t("plugin-command-menu:commandMenu.actions.createNewThread"),
+    title: t("plugin-command-menu.actions.createNewThread"),
     value: "create-new-thread",
   },
   {
     eager: true,
-    group: t("plugin-command-menu:commandMenu.groups.actions"),
+    group: t("plugin-command-menu.groups.actions"),
     icon: Incognito,
     keybinding: [getPlatform() === "mac" ? Key.Meta : Key.Control, ";"],
     keywords: ["actions", "private", "temporary"],
@@ -52,13 +52,13 @@ export const getRawItems = ({
     priority: isIncognito ? 1 : 0,
     show: true,
     title: isIncognito
-      ? t("plugin-command-menu:commandMenu.actions.toggleIncognitoDisable")
-      : t("plugin-command-menu:commandMenu.actions.toggleIncognitoEnable"),
+      ? t("plugin-command-menu.actions.toggleIncognitoDisable")
+      : t("plugin-command-menu.actions.toggleIncognitoEnable"),
     value: "toggle-incognito-mode",
   },
   {
     eager: true,
-    group: t("plugin-command-menu:commandMenu.groups.actions"),
+    group: t("plugin-command-menu.groups.actions"),
     icon: colorScheme === "dark" ? LuSun : LuMoon,
     keybinding: [],
     keywords: ["actions", "light", "dark"],
@@ -71,8 +71,8 @@ export const getRawItems = ({
     show: true,
     title:
       colorScheme === "dark"
-        ? t("plugin-command-menu:commandMenu.actions.toggleLightMode")
-        : t("plugin-command-menu:commandMenu.actions.toggleDarkMode"),
+        ? t("plugin-command-menu.actions.toggleLightMode")
+        : t("plugin-command-menu.actions.toggleDarkMode"),
     value: "toggle-color-scheme",
   },
 ];

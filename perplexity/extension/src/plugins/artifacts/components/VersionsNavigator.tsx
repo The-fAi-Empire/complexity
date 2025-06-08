@@ -72,7 +72,7 @@ export default function AutonomousArtifactVersionsNavigator() {
           scrollToElement($(selector), -100);
         }}
       >
-        {t("plugin-artifacts:version", {
+        {t("plugin-artifacts.version", {
           number: currentLocationIndex + 1,
         })}
       </div>

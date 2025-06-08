@@ -14,15 +14,13 @@ export default function ThreadListLoader({
   if (isError)
     return (
       <CommandEmpty>
-        {t(
-          "plugin-command-menu:commandMenu.threads.commandItems.errorFetching",
-        )}
+        {t("plugin-command-menu.threads.commandItems.errorFetching")}
       </CommandEmpty>
     );
 
   return (
     <CommandEmpty>
-      {t("plugin-command-menu:commandMenu.threads.commandItems.noThreadsFound")}
+      {t("plugin-command-menu.threads.commandItems.noThreadsFound")}
     </CommandEmpty>
   );
 }

@@ -59,56 +59,68 @@ declare module "@/plugins/_core/async-dep-registry" {
 
 asyncLoaderRegistry.register({
   id: "plugin:thread:artifacts:codeBlockPlaceholdersData",
-  dependencies: ["lib:i18next"],
+  dependencies: ["lib:i18n"],
   loader: () => {
     ARTIFACTS_LANGUAGE_PREVIEW_TOGGLE_TEXT = {
-      markdown: t("plugin-artifacts:toggle.preview"),
-      mermaid: t("plugin-artifacts:toggle.preview"),
-      html: t("plugin-artifacts:toggle.preview"),
-      react: t("plugin-artifacts:toggle.preview"),
-      plantuml: t("plugin-artifacts:toggle.preview"),
-      markmap: t("plugin-artifacts:toggle.preview"),
+      markdown: t("plugin-artifacts.toggle.preview"),
+      mermaid: t("plugin-artifacts.toggle.preview"),
+      html: t("plugin-artifacts.toggle.preview"),
+      react: t("plugin-artifacts.toggle.preview"),
+      plantuml: t("plugin-artifacts.toggle.preview"),
+      markmap: t("plugin-artifacts.toggle.preview"),
     };
 
     ARTIFACTS_LANGUAGE_RAW_TOGGLE_TEXT = {
-      markdown: t("plugin-artifacts:toggle.markdown.raw"),
-      mermaid: t("plugin-artifacts:toggle.code"),
-      html: t("plugin-artifacts:toggle.code"),
-      react: t("plugin-artifacts:toggle.code"),
-      plantuml: t("plugin-artifacts:toggle.code"),
-      markmap: t("plugin-artifacts:toggle.code"),
+      markdown: t("plugin-artifacts.toggle.markdown"),
+      mermaid: t("plugin-artifacts.toggle.code"),
+      html: t("plugin-artifacts.toggle.code"),
+      react: t("plugin-artifacts.toggle.code"),
+      plantuml: t("plugin-artifacts.toggle.code"),
+      markmap: t("plugin-artifacts.toggle.code"),
     };
 
     ARTIFACT_PLACEHOLDERS = {
       markdown: {
         icon: PiArticleDuotone,
         defaultTitle: "Markdown",
-        description: t("plugin-artifacts:placeholder.markdown.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "markdown",
+        }),
       },
       mermaid: {
         icon: LiaProjectDiagramSolid,
         defaultTitle: "Mermaid",
-        description: t("plugin-artifacts:placeholder.mermaid.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "mermaid",
+        }),
       },
       html: {
         icon: LuCodeXml,
         defaultTitle: "HTML",
-        description: t("plugin-artifacts:placeholder.html.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "html",
+        }),
       },
       react: {
         icon: BiLogoReact,
         defaultTitle: "React",
-        description: t("plugin-artifacts:placeholder.react.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "react",
+        }),
       },
       plantuml: {
         icon: LiaProjectDiagramSolid,
         defaultTitle: "PlantUML",
-        description: t("plugin-artifacts:placeholder.mermaid.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "plantuml",
+        }),
       },
       markmap: {
         icon: RiMindMap,
         defaultTitle: "Mindmap",
-        description: t("plugin-artifacts:placeholder.markmap.description"),
+        description: t("plugin-artifacts.placeholder.description", {
+          name: "markmap",
+        }),
       },
     };
   },

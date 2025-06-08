@@ -19,7 +19,7 @@ export default function DownloadAsInteractiveHtml() {
   });
 
   return (
-    <Tooltip content={t("plugin-artifacts:tooltip.downloadAsInteractiveHtml")}>
+    <Tooltip content={t("plugin-artifacts.tooltip.downloadAsInteractiveHtml")}>
       <Button
         variant="ghost"
         size="iconSm"

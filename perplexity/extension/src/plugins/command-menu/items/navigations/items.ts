@@ -28,7 +28,7 @@ const createNavigationItem = ({
   "icon" | "title" | "value" | "url"
 >): NavigationCommandItemProps => ({
   eager: true,
-  group: t("plugin-command-menu:commandMenu.groups.navigation"),
+  group: t("plugin-command-menu.groups.navigation"),
   icon,
   keybinding: [],
   keywords: navigationKeywords,
@@ -49,37 +49,37 @@ const createNavigationItem = ({
 export const getRawItems = (): NavigationCommandItemProps[] => [
   createNavigationItem({
     icon: SiPerplexity,
-    title: t("plugin-command-menu:commandMenu.navigation.home"),
+    title: t("plugin-command-menu.navigation.home"),
     value: "home",
     url: "/",
   }),
   createNavigationItem({
     icon: PplxThread,
-    title: t("plugin-command-menu:commandMenu.navigation.library"),
+    title: t("plugin-command-menu.navigation.library"),
     value: "library",
     url: "/library",
   }),
   createNavigationItem({
     icon: PplxSpace,
-    title: t("plugin-command-menu:commandMenu.navigation.spaces"),
+    title: t("plugin-command-menu.navigation.spaces"),
     value: "spaces",
     url: "/spaces",
   }),
   createNavigationItem({
     icon: PplxDiscover,
-    title: t("plugin-command-menu:commandMenu.navigation.discover"),
+    title: t("plugin-command-menu.navigation.discover"),
     value: "discover",
     url: "/discover",
   }),
   createNavigationItem({
     icon: LuSettings,
-    title: t("plugin-command-menu:commandMenu.navigation.settings"),
+    title: t("plugin-command-menu.navigation.settings"),
     value: "settings",
     url: "/account/details",
   }),
   createNavigationItem({
     icon: PplxLabs,
-    title: t("plugin-command-menu:commandMenu.navigation.labs"),
+    title: t("plugin-command-menu.navigation.labs"),
     value: "labs",
     url: "https://labs.perplexity.ai/",
   }),

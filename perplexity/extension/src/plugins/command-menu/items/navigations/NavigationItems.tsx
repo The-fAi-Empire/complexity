@@ -62,9 +62,7 @@ export default function NavigationItems() {
                     {location ===
                       locationMap[item.value as keyof typeof locationMap] && (
                       <Badge variant="outline">
-                        {t(
-                          "plugin-command-menu:commandMenu.navigation.current",
-                        )}
+                        {t("plugin-command-menu.navigation.current")}
                       </Badge>
                     )}
                   </CommandItemTitle>

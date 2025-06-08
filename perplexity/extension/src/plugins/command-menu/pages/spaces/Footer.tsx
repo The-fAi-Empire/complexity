@@ -22,7 +22,7 @@ export default function SpacesSearchItemsFooter() {
 
     commandMenuStore.getState().setFooterItems([
       {
-        title: t("plugin-command-menu:commandMenu.spaces.footer.openInNewTab"),
+        title: t("plugin-command-menu.spaces.footer.openInNewTab"),
         keybinding: [Key.Alt, Key.Enter],
         onSelect: () => {
           openInNewTab(`/collections/${space?.slug}`);
@@ -30,7 +30,7 @@ export default function SpacesSearchItemsFooter() {
         },
       },
       {
-        title: t("plugin-command-menu:commandMenu.spaces.footer.searchInSpace"),
+        title: t("plugin-command-menu.spaces.footer.searchInSpace"),
         keybinding: [Key.Shift, Key.Enter],
         onSelect: () => {
           commandMenuStore.getState().pushPage({
@@ -39,7 +39,7 @@ export default function SpacesSearchItemsFooter() {
               spaceSlug: space.slug,
             },
             searchPlaceholder: t(
-              "plugin-command-menu:commandMenu.spaces.footer.searchSpacePlaceholder",
+              "plugin-command-menu.spaces.footer.searchSpacePlaceholder",
               { spaceName: space.title },
             ),
             shouldLocalFilter: true,
@@ -48,7 +48,7 @@ export default function SpacesSearchItemsFooter() {
         },
       },
       {
-        title: t("plugin-command-menu:commandMenu.spaces.footer.goToSpace"),
+        title: t("plugin-command-menu.spaces.footer.goToSpace"),
         keybinding: [Key.Enter],
         onSelect: () => {
           softNavigate(`/collections/${space?.slug}`);

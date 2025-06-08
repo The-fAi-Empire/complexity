@@ -10,7 +10,7 @@ export default function ArtifactsList() {
     <div className="x:flex x:size-full x:flex-col x:gap-4">
       <div className="x:flex x:items-center x:justify-between x:border-b x:border-border/50 x:bg-background x:p-2 x:px-4">
         <div className="x:text-muted-foreground">
-          {t("plugin-artifacts:list.title")}
+          {t("plugin-artifacts.list.title")}
         </div>
         <Button
           variant="ghost"
@@ -52,7 +52,7 @@ export default function ArtifactsList() {
                   <div className="x:flex x:w-max x:items-center x:gap-1">
                     {isInFlight ? (
                       <span className="x:animate-pulse">
-                        {t("plugin-artifacts:list.generating")}
+                        {t("plugin-artifacts.list.generating")}
                       </span>
                     ) : (
                       <>
@@ -62,7 +62,7 @@ export default function ArtifactsList() {
                         {count > 1 && (
                           <span className="x:flex x:items-center x:gap-1 x:text-sm x:text-muted-foreground">
                             <span className="x:hidden x:lg:block">•</span>
-                            {t("plugin-artifacts:list.versions", { count })}
+                            {t("plugin-artifacts.list.versions", { count })}
                           </span>
                         )}
                       </>

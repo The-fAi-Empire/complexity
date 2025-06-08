@@ -10,7 +10,6 @@ import {
   CommandItemTitle,
 } from "@/components/ui/command";
 import { CommandItemSkeleton } from "@/components/ui/command";
-import { formatRelativeTime } from "@/data/dayjs";
 import {
   openInNewTab,
   softNavigate,
@@ -21,6 +20,7 @@ import {
   commandMenuStore,
   useCommandMenuStore,
 } from "@/plugins/command-menu/store";
+import { formatRelativeTime } from "@/services/i18n";
 import usePplxSpaces from "@/services/pplx-api/hooks/usePplxSpaces";
 import { emojiCodeToString } from "@/utils/utils";
 
@@ -33,7 +33,7 @@ export default function SpaceCommandItems() {
   if (isError)
     return (
       <CommandEmpty>
-        {t("plugin-command-menu:commandMenu.spaces.commandItems.errorFetching")}
+        {t("plugin-command-menu.spaces.commandItems.errorFetching")}
       </CommandEmpty>
     );
 
@@ -63,7 +63,7 @@ export default function SpaceCommandItems() {
                       spaceSlug: space.slug,
                     },
                     searchPlaceholder: t(
-                      "plugin-command-menu:commandMenu.spaces.footer.searchSpacePlaceholder",
+                      "plugin-command-menu.spaces.footer.searchSpacePlaceholder",
                       { spaceName: space.title },
                     ),
                     shouldLocalFilter: true,
@@ -87,7 +87,7 @@ export default function SpaceCommandItems() {
                   </div>
                   {window.location.pathname.includes(space.slug) && (
                     <Badge variant="outline">
-                      {t("plugin-command-menu:commandMenu.navigation.current")}
+                      {t("plugin-command-menu.navigation.current")}
                     </Badge>
                   )}
                 </div>
@@ -107,7 +107,7 @@ export default function SpaceCommandItems() {
       <SpacesSearchItemsFooter />
       <SpacesSearchItemsSidecar />
       <CommandEmpty>
-        {t("plugin-command-menu:commandMenu.spaces.commandItems.noSpacesFound")}
+        {t("plugin-command-menu.spaces.commandItems.noSpacesFound")}
       </CommandEmpty>
     </>
   );

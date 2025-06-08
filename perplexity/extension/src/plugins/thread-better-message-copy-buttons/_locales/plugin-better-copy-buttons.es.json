@@ -1,9 +1,0 @@
-{
-  "copyButton": {
-    "tooltip": "Copiar mensaje",
-    "options": {
-      "default": "Predeterminado",
-      "withoutCitations": "Sin citas"
-    }
-  }
-}
