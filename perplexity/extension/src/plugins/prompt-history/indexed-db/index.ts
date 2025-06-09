@@ -1,7 +1,7 @@
 import { defineProxyService } from "@webext-core/proxy-service";
 import { nanoid } from "nanoid";
 
-import type { PromptHistory } from "@/plugins/slash-command-prompt-history/types";
+import type { PromptHistory } from "@/plugins/prompt-history/types";
 import { db } from "@/services/indexed-db";
 
 class PromptHistoryService {

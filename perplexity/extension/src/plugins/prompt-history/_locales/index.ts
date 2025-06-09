@@ -1,4 +1,4 @@
-import type translations from "@/plugins/slash-command-prompt-history/_locales/plugin-prompt-history.en-US";
+import type translations from "@/plugins/prompt-history/_locales/plugin-prompt-history.en-US";
 
 export const namespace = "plugin-prompt-history";
 

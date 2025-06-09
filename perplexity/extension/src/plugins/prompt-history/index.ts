@@ -5,7 +5,7 @@ import { SlashCommandMenuTabShortcutSchema } from "@/plugins/slash-command/short
 
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
-    "queryBox:slashCommandMenu:promptHistory": z.infer<typeof schema>;
+    promptHistory: z.infer<typeof schema>;
   }
 }
 
@@ -21,14 +21,14 @@ const schema = z.object({
 // TODO: remove the `slashCommandMenu` and `slash-command` prefixes
 export default definePlugin({
   manifest: {
-    id: "queryBox:slashCommandMenu:promptHistory",
-    settingsUiRouteSegment: "query-box-slash-command-menu-prompt-history",
+    id: "promptHistory",
+    settingsUiRouteSegment: "prompt-history",
     title: "Prompt History",
     description: "Reuse previous prompts",
     categories: ["featured", "prompting"],
     tags: ["slashCommand"],
     dependentDomObservers: ["queryBoxes"],
-    dependentPlugins: ["queryBox:slashCommandMenu"],
+    dependentPlugins: ["slashCommand"],
     dependentMainWorldCorePlugins: ["spaRouter", "networkIntercept"],
   },
   settingsSchema: {

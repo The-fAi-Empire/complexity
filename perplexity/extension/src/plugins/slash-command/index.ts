@@ -4,7 +4,7 @@ import { definePlugin } from "@/data/plugin-registry/utils";
 
 declare module "@/data/plugin-registry/types" {
   interface PluginsSettingsRegistry {
-    "queryBox:slashCommandMenu": z.infer<typeof schema>;
+    slashCommand: z.infer<typeof schema>;
   }
 }
 
@@ -14,13 +14,13 @@ const schema = z.object({
 
 export default definePlugin({
   manifest: {
-    id: "queryBox:slashCommandMenu",
-    settingsUiRouteSegment: "query-box-slash-command-menu",
+    id: "slashCommand",
+    settingsUiRouteSegment: "slash-command-core",
     title: "Slash Command Menu: Core",
     description:
       "Allows you to use various slash commands to quickly access advanced features",
     categories: ["misc"],
-    tags: ["desktopOnly"],
+    tags: ["slashCommand", "desktopOnly"],
     uiGroup: ["queryBoxes:toolbar:main", "queryBoxes:toolbar:followUp"],
     dependentDomObservers: ["queryBoxes"],
     dependentMainWorldCorePlugins: ["spaRouter", "networkIntercept"],

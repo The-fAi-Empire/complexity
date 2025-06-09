@@ -1,15 +1,15 @@
 import { PopoverContent } from "@/components/ui/popover";
 import { Tabs, TabsList } from "@/components/ui/tabs";
+import {
+  PromptHistorySlashCommandMenuTabContent,
+  PromptHistorySlashCommandMenuTabTrigger,
+} from "@/plugins/prompt-history/index.public";
 import { useBlurHandler } from "@/plugins/slash-command/hooks/useBlurHandler";
 import {
   slashCommandMenuStore,
   useSlashCommandMenuStore,
 } from "@/plugins/slash-command/store";
 import type { ContentTabId } from "@/plugins/slash-command/store/slices/content-tab";
-import {
-  SlashCommandMenuTabContent as PromptHistorySlashCommandMenuTabContent,
-  SlashCommandMenuTabTrigger as PromptHistorySlashCommandMenuTabTrigger,
-} from "@/plugins/slash-command-prompt-history/index.public";
 import { PPLX_SCROLLBAR_CLASSES } from "@/utils/pplx-scrollbar-classes";
 
 export default function CommandContent() {

@@ -16,17 +16,15 @@ import type { PluginId } from "@/data/plugin-registry/types";
 import type { SlashCommandMenuTabShortcut } from "@/plugins/slash-command/shortcuts.types.public";
 import useExtensionSettings from "@/services/extension-settings/useExtensionSettings";
 
-export const pluginId: PluginId = "queryBox:slashCommandMenu:promptHistory";
+export const pluginId: PluginId = "promptHistory";
 
 export default function PromptHistoryPluginSettingsUi() {
   const { settings, mutation } = useExtensionSettings();
-  const pluginSettings =
-    settings?.plugins["queryBox:slashCommandMenu:promptHistory"];
+  const pluginSettings = settings?.plugins["promptHistory"];
 
   const handleEnableChange = (checked: boolean) => {
     mutation.mutate((draft) => {
-      draft.plugins["queryBox:slashCommandMenu:promptHistory"].enabled =
-        checked;
+      draft.plugins["promptHistory"].enabled = checked;
     });
   };
 
@@ -61,9 +59,7 @@ export default function PromptHistoryPluginSettingsUi() {
             checked={pluginSettings?.trigger.onSubmit ?? false}
             onCheckedChange={({ checked }) => {
               mutation.mutate((draft) => {
-                draft.plugins[
-                  "queryBox:slashCommandMenu:promptHistory"
-                ].trigger.onSubmit = checked;
+                draft.plugins["promptHistory"].trigger.onSubmit = checked;
               });
             }}
           />
@@ -81,9 +77,7 @@ export default function PromptHistoryPluginSettingsUi() {
             checked={pluginSettings?.trigger.onNavigation ?? false}
             onCheckedChange={({ checked }) => {
               mutation.mutate((draft) => {
-                draft.plugins[
-                  "queryBox:slashCommandMenu:promptHistory"
-                ].trigger.onNavigation = checked;
+                draft.plugins["promptHistory"].trigger.onNavigation = checked;
               });
             }}
           />
@@ -103,12 +97,8 @@ export default function PromptHistoryPluginSettingsUi() {
 function SlashCommandMenuActivationShortcutsSettings() {
   const { settings, mutation } = useExtensionSettings();
 
-  const shortcutType =
-    settings?.plugins["queryBox:slashCommandMenu:promptHistory"]?.shortcut
-      ?.type;
-  const shortcutValue =
-    settings?.plugins["queryBox:slashCommandMenu:promptHistory"]?.shortcut
-      ?.value;
+  const shortcutType = settings?.plugins["promptHistory"]?.shortcut?.type;
+  const shortcutValue = settings?.plugins["promptHistory"]?.shortcut?.value;
   const shortcutTypeItems = useMemo(
     () => [
       { id: "keybinding", title: "Keyboard Shortcut" },
@@ -124,9 +114,7 @@ function SlashCommandMenuActivationShortcutsSettings() {
     defaultKeys,
     onSave: (keys) => {
       mutation.mutate((draft) => {
-        draft.plugins[
-          "queryBox:slashCommandMenu:promptHistory"
-        ].shortcut.value = keys;
+        draft.plugins["promptHistory"].shortcut.value = keys;
       });
     },
   });
@@ -145,12 +133,10 @@ function SlashCommandMenuActivationShortcutsSettings() {
           positioning={{ sameWidth: true }}
           onValueChange={({ value }) => {
             mutation.mutate((draft) => {
-              draft.plugins[
-                "queryBox:slashCommandMenu:promptHistory"
-              ].shortcut.type = value[0] as SlashCommandMenuTabShortcut["type"];
-              draft.plugins[
-                "queryBox:slashCommandMenu:promptHistory"
-              ].shortcut.value = value[0] === "keybinding" ? [] : "";
+              draft.plugins["promptHistory"].shortcut.type =
+                value[0] as SlashCommandMenuTabShortcut["type"];
+              draft.plugins["promptHistory"].shortcut.value =
+                value[0] === "keybinding" ? [] : "";
             });
           }}
         >
@@ -177,9 +163,8 @@ function SlashCommandMenuActivationShortcutsSettings() {
               defaultValue={shortcutValue}
               onChange={(e) => {
                 mutation.mutate((draft) => {
-                  draft.plugins[
-                    "queryBox:slashCommandMenu:promptHistory"
-                  ].shortcut.value = e.target.value;
+                  draft.plugins["promptHistory"].shortcut.value =
+                    e.target.value;
                 });
               }}
             />

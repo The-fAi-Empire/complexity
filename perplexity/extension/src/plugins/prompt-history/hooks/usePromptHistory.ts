@@ -4,8 +4,8 @@ import { usePrevious } from "@uidotdev/usehooks";
 import { useMemo } from "react";
 
 import { queryClient } from "@/data/query-client";
-import { promptHistoryQueries } from "@/plugins/slash-command-prompt-history/indexed-db/query-keys";
-import type { PromptHistory } from "@/plugins/slash-command-prompt-history/types";
+import { promptHistoryQueries } from "@/plugins/prompt-history/indexed-db/query-keys";
+import type { PromptHistory } from "@/plugins/prompt-history/types";
 
 export function usePromptHistory({
   searchValue,

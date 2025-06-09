@@ -11,21 +11,21 @@ import {
 import { slashCommandMenuStore } from "@/plugins/slash-command/index.public";
 import { formatRelativeTime } from "@/services/i18n";
 
-type PromptHistoryItem = {
+type PromptHistoryCommandMenuItem = {
   id: string;
   prompt: string;
   createdAt: string;
   keywords: string[];
 };
 
-const PromptHistoryItem = memo(
+const PromptHistoryCommandMenuItem = memo(
   ({
     searchValue,
     item,
     onDelete,
   }: {
     searchValue: string;
-    item: PromptHistoryItem;
+    item: PromptHistoryCommandMenuItem;
     onDelete: (id: string) => void;
   }) => {
     return (
@@ -76,4 +76,4 @@ const PromptHistoryItem = memo(
   },
 );
 
-export default PromptHistoryItem;
+export default PromptHistoryCommandMenuItem;

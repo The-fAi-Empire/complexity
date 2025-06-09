@@ -1,9 +1,9 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
+import { tabId } from "@/plugins/prompt-history/slash-command/slash-command-menu-tab";
 import {
   getAnchor,
   slashCommandMenuStore,
 } from "@/plugins/slash-command/index.public";
-import { tabId } from "@/plugins/slash-command-prompt-history/slash-command-menu-tab";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 import hotkeysJs from "@/utils/hotkeys-js";
 import { keysToString } from "@/utils/utils";
@@ -19,16 +19,11 @@ export default function loader() {
     id: "plugin:queryBox:promptHistory:shortcut-init",
     dependencies: ["cache:pluginsStates"],
     loader: ({ "cache:pluginsStates": pluginsStates }) => {
-      if (
-        !pluginsStates["queryBox:slashCommandMenu"] ||
-        !pluginsStates["queryBox:slashCommandMenu:promptHistory"]
-      )
+      if (!pluginsStates["slashCommand"] || !pluginsStates["promptHistory"])
         return;
 
       const shortcut =
-        ExtensionSettingsService.cachedSync.plugins[
-          "queryBox:slashCommandMenu:promptHistory"
-        ].shortcut;
+        ExtensionSettingsService.cachedSync.plugins["promptHistory"].shortcut;
 
       if (shortcut.type === "keybinding") {
         hotkeysJs(keysToString(shortcut.value), () => {

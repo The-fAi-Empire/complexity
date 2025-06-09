@@ -1,6 +1,6 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { spaRouterStoreSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { handlePromptSave } from "@/plugins/slash-command-prompt-history/utils";
+import { handlePromptSave } from "@/plugins/prompt-history/utils";
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
@@ -17,10 +17,9 @@ export default function loader() {
       "cache:extensionSettings": extensionSettings,
     }) => {
       if (
-        !pluginsStates["queryBox:slashCommandMenu"] ||
-        !pluginsStates["queryBox:slashCommandMenu:promptHistory"] ||
-        !extensionSettings.plugins["queryBox:slashCommandMenu:promptHistory"]
-          .trigger.onNavigation
+        !pluginsStates["slashCommand"] ||
+        !pluginsStates["promptHistory"] ||
+        !extensionSettings.plugins["promptHistory"].trigger.onNavigation
       )
         return;
 

@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 import { ThemeSchema } from "@/plugins/_core/custom-theme/themes/theme-registry.types";
-import { PromptHistorySchema } from "@/plugins/slash-command-prompt-history/index.public";
+import { PromptHistorySchema } from "@/plugins/prompt-history/index.public";
 import { BetterCodeBlockFineGrainedOptionsSchema } from "@/plugins/thread-better-code-blocks/index.public";
 import { ExtensionSettingsSchema } from "@/services/extension-settings/types";
 

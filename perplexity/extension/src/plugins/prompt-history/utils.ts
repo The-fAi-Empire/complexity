@@ -1,5 +1,5 @@
 import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
-import { getPromptHistoryService } from "@/plugins/slash-command-prompt-history/indexed-db";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
 
 let lastUrl = window.location.pathname;
 

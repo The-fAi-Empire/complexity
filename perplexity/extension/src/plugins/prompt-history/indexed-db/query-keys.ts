@@ -1,6 +1,6 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
-import { getPromptHistoryService } from "@/plugins/slash-command-prompt-history/indexed-db";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
 
 export const ITEMS_PER_PAGE = 10;
 

@@ -8,7 +8,7 @@ const { SlashCommandMenu } = lazily(
 
 const SlashCommandMenuWrapper = withPluginsGuard(SlashCommandMenu, {
   desktopOnly: true,
-  dependentPluginIds: ["queryBox:slashCommandMenu"],
+  dependentPluginIds: ["slashCommand"],
 });
 
 export default SlashCommandMenuWrapper;

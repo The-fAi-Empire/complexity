@@ -8,8 +8,8 @@ import { TabContent, TabTrigger } from "@/components/ui/tabs";
 import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
 import { ExtensionSettingsService } from "@/services/extension-settings";
 
-const { PromptHistory } = lazily(
-  () => import("@/plugins/slash-command-prompt-history/PromptHistory"),
+const { PromptHistoryCommandMenuContent } = lazily(
+  () => import("@/plugins/prompt-history/slash-command/CommandMenuContent"),
 );
 
 declare module "@/plugins/slash-command/store/slices/content-tab" {
@@ -21,13 +21,10 @@ declare module "@/plugins/slash-command/store/slices/content-tab" {
 // eslint-disable-next-line react-refresh/only-export-components
 export const tabId = "promptHistory" as const;
 
-export function SlashCommandMenuTabContent() {
+export function PromptHistorySlashCommandMenuTabContent() {
   return (
     <CsUiPluginsGuard
-      dependentPluginIds={[
-        "queryBox:slashCommandMenu",
-        "queryBox:slashCommandMenu:promptHistory",
-      ]}
+      dependentPluginIds={["slashCommand", "promptHistory"]}
       suspenseFallback={
         <TabContent value={tabId} className="x:h-[200px]">
           <CommandItemSkeleton count={5} className="x:h-7" />
@@ -35,25 +32,18 @@ export function SlashCommandMenuTabContent() {
       }
     >
       <TabContent value={tabId}>
-        <PromptHistory />
+        <PromptHistoryCommandMenuContent />
       </TabContent>
     </CsUiPluginsGuard>
   );
 }
 
-export function SlashCommandMenuTabTrigger() {
+export function PromptHistorySlashCommandMenuTabTrigger() {
   const shortcut =
-    ExtensionSettingsService.cachedSync.plugins[
-      "queryBox:slashCommandMenu:promptHistory"
-    ].shortcut;
+    ExtensionSettingsService.cachedSync.plugins["promptHistory"].shortcut;
 
   return (
-    <CsUiPluginsGuard
-      dependentPluginIds={[
-        "queryBox:slashCommandMenu",
-        "queryBox:slashCommandMenu:promptHistory",
-      ]}
-    >
+    <CsUiPluginsGuard dependentPluginIds={["slashCommand", "promptHistory"]}>
       <Tooltip
         content={
           <div className="x:flex x:flex-col x:items-center x:justify-center x:gap-1">

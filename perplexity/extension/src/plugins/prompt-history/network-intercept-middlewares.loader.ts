@@ -2,8 +2,8 @@ import { queryClient } from "@/data/query-client";
 import { networkInterceptMiddlewareManager } from "@/plugins/_api/network-intercept-middleware-manager/middleware-manager";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import { parsePerplexityAskEvent } from "@/plugins/_core/main-world/network-intercept/utils/parse-perplexity-ask-event";
-import { getPromptHistoryService } from "@/plugins/slash-command-prompt-history/indexed-db";
-import { promptHistoryQueries } from "@/plugins/slash-command-prompt-history/indexed-db/query-keys";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
+import { promptHistoryQueries } from "@/plugins/prompt-history/indexed-db/query-keys";
 
 declare module "@/plugins/_core/async-dep-registry" {
   interface AsyncLoadersRegistry {
@@ -20,10 +20,9 @@ export default function loader() {
       "cache:extensionSettings": extensionSettings,
     }) => {
       if (
-        !pluginsStates["queryBox:slashCommandMenu"] ||
-        !pluginsStates["queryBox:slashCommandMenu:promptHistory"] ||
-        !extensionSettings.plugins["queryBox:slashCommandMenu:promptHistory"]
-          .trigger.onSubmit
+        !pluginsStates["slashCommand"] ||
+        !pluginsStates["promptHistory"] ||
+        !extensionSettings.plugins["promptHistory"].trigger.onSubmit
       )
         return;
 

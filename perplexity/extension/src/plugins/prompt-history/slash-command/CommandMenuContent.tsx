@@ -13,15 +13,15 @@ import {
 import { CommandItemSkeleton } from "@/components/ui/command";
 import { queryClient } from "@/data/query-client";
 import { getPlatform } from "@/hooks/usePlatformDetection";
-import ClearAllButton from "@/plugins/slash-command-prompt-history/ClearAllButton";
-import { getPromptHistoryService } from "@/plugins/slash-command-prompt-history/indexed-db";
-import { promptHistoryQueries } from "@/plugins/slash-command-prompt-history/indexed-db/query-keys";
-import PromptHistoryItem from "@/plugins/slash-command-prompt-history/PromptHistoryItem";
-import useLoadMoreItems from "@/plugins/slash-command-prompt-history/useLoadMoreItems";
-import { usePromptHistory } from "@/plugins/slash-command-prompt-history/usePromptHistory";
+import ClearAllButton from "@/plugins/prompt-history/components/ClearAllButton";
+import useLoadMoreItems from "@/plugins/prompt-history/hooks/useLoadMoreItems";
+import { usePromptHistory } from "@/plugins/prompt-history/hooks/usePromptHistory";
+import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
+import { promptHistoryQueries } from "@/plugins/prompt-history/indexed-db/query-keys";
+import PromptHistoryCommandMenuItem from "@/plugins/prompt-history/slash-command/CommandMenuItem";
 import { keysToString } from "@/utils/utils";
 
-export function PromptHistory() {
+export function PromptHistoryCommandMenuContent() {
   const [searchValue, setSearchValue] = useState("");
   const [selectingValue, setSelectingValue] = useState("");
   const debouncedSearchValue = useDebounce(searchValue, 200);
@@ -67,7 +67,7 @@ export function PromptHistory() {
       e.preventDefault();
       e.stopPropagation();
 
-      $(`[data-value='${selectingValue}'] [data-copy-button]`).click();
+      $(`[data-value='${selectingValue}'] [data-copy-button]`).trigger("click");
     },
     {
       enableOnFormTags: true,
@@ -127,7 +127,7 @@ export function PromptHistory() {
       >
         <CommandGroup>
           {items.map((item) => (
-            <PromptHistoryItem
+            <PromptHistoryCommandMenuItem
               key={item.id}
               searchValue={searchValue}
               item={item}
