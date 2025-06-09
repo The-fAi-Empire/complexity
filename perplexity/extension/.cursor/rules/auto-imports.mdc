@@ -24,11 +24,7 @@ This project uses automatic imports via unimport. The following dependencies are
   - `isMainWorldContext`
   - `isExtensionContext`
   - `invariant`
-  
-- From `src/data/i18next.ts`: 
-  - `t`
-  - `i18n`
-  
+
 - From `src/utils/deep-equal.ts`: 
   - `deepEqual`
   

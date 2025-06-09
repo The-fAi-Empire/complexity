@@ -13,11 +13,11 @@ import { Toaster } from "@/components/Toaster";
 import { queryClient } from "@/data/query-client";
 import { setupOptionPageListeners } from "@/entrypoints/options-page/listeners";
 import { extensionSettingsQueries } from "@/services/extension-settings/query-keys";
+import { initializeDayjsLocale, initializeI18n } from "@/services/i18n";
 import {
   commonLocalesLazyGlob,
   dashboardLocalesLazyGlob,
 } from "@/services/i18n/consts";
-import { initializeDayjsLocale, initializeI18n } from "@/services/i18n";
 
 const { CdnRemoteResourcesInvalidator } = lazily(
   () => import("@/components/CdnRemoteResourcesInvalidator"),

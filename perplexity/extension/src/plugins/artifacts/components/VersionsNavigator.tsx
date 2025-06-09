@@ -17,7 +17,7 @@ export default function AutonomousArtifactVersionsNavigator() {
     codeBlockIndex: selectedCodeBlockLocation?.codeBlockIndex,
   });
 
-  const artifactBlocks = useArtifactsStore((state) => state.ArtifactBlocks);
+  const artifactBlocks = useArtifactsStore((state) => state.artifactBlocks);
   const artifactTitle = getArtifactTitle(selectedCodeBlock?.content.language);
 
   const versions = artifactBlocks[artifactTitle];

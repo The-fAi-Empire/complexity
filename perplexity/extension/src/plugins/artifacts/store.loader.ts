@@ -109,7 +109,7 @@ const initializeAutonomousMode = () => {
           });
 
           artifactsStore.setState((draft) => {
-            draft.ArtifactBlocks = newArtifactBlocks;
+            draft.artifactBlocks = newArtifactBlocks;
           });
         },
         { timeout: 2000 },

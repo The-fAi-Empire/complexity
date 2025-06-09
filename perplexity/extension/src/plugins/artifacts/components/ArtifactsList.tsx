@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { artifactsStore, useArtifactsStore } from "@/plugins/artifacts/store";
 
 export default function ArtifactsList() {
-  const artifactBlocks = useArtifactsStore((state) => state.ArtifactBlocks);
+  const artifactBlocks = useArtifactsStore((state) => state.artifactBlocks);
 
   return (
     <div className="x:flex x:size-full x:flex-col x:gap-4">
