@@ -27,6 +27,15 @@ export const pplxLocalLanguageModels = [
     hideFromList: false,
   },
   {
+    label: "o3",
+    shortLabel: "o3",
+    code: "o3",
+    provider: "OpenAI",
+    limitKey: "gpt4_limit",
+    type: "reasoning",
+    hideFromList: false,
+  },
+  {
     label: "o4 Mini",
     shortLabel: "o4 Mini",
     code: "o4mini",

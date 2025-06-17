@@ -1,27 +1,60 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
 import type { QueryBoxesDomObserverStoreType } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
+import { isContentEditable } from "@/plugins/_core/ui/groups/query-box/utils";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 const OBSERVER_ID = "submit-on-ctrl-enter";
 
-function submitOnCtrlEnter(queryBoxes: QueryBoxesDomObserverStoreType["main"]) {
-  Object.values(queryBoxes).forEach(($queryBox) => {
-    if (!$queryBox || !$queryBox.length) return;
+function isModifierEnterPressed(e: KeyboardEvent) {
+  return e.key === "Enter" && (e.ctrlKey || e.metaKey);
+}
 
-    const $textarea = $queryBox.find("textarea");
+function isTypeaheadMenuPresent() {
+  return $(DomSelectorsService.cachedSync.QUERY_BOX.TYPEAHEAD_MENU).length > 0;
+}
 
-    if (!$textarea.length) return;
+function submitOnCtrlEnter(
+  queryBoxTextboxes: QueryBoxesDomObserverStoreType["textbox"],
+) {
+  Object.values(queryBoxTextboxes).forEach((textbox) => {
+    if (!textbox) return;
 
-    if (!$textarea.length || $textarea.attr(OBSERVER_ID)) return;
+    const $textbox = $(textbox);
 
-    $textarea.attr(OBSERVER_ID, "true");
+    if (!$textbox.length || $textbox.attr(OBSERVER_ID)) return;
 
-    $textarea.on("keydown", (e) => {
-      if (e.key === "Enter") {
-        if (e.ctrlKey || e.metaKey) return;
-        e.stopPropagation();
-      }
-    });
+    $textbox.attr(OBSERVER_ID, "true");
+
+    if (isContentEditable(textbox)) {
+      textbox.addEventListener(
+        "keydown",
+        function (e) {
+          if (e.key === "Enter") {
+            if (isModifierEnterPressed(e) || isTypeaheadMenuPresent())
+              return true;
+
+            e.stopPropagation();
+            return false;
+          }
+
+          return true;
+        },
+        true,
+      );
+    } else {
+      $textbox.on("keydown", (e) => {
+        if (e.key === "Enter") {
+          if (
+            isModifierEnterPressed(e as unknown as KeyboardEvent) ||
+            isTypeaheadMenuPresent()
+          )
+            return;
+
+          e.stopPropagation();
+        }
+      });
+    }
   });
 }
 
@@ -34,20 +67,25 @@ declare module "@/plugins/_core/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "plugin:queryBox:submitOnCtrlEnter",
-    dependencies: ["cache:pluginsStates"],
+    dependencies: ["cache:pluginsStates", "cache:domSelectors"],
     loader: ({ "cache:pluginsStates": pluginsStates }) => {
       if (!pluginsStates["queryBox:submitOnCtrlEnter"]) return;
 
       queryBoxesDomObserverStore.subscribe(
         (store) => ({
-          main: store.main,
-          followUp: store.followUp,
+          main: store.textbox.main,
+          space: store.textbox.space,
+          followUp: store.textbox.followUp,
         }),
-        ({ main, followUp }) => {
+        ({ main, space, followUp }) => {
           submitOnCtrlEnter({
-            ...main,
-            ...followUp,
+            main,
+            space,
+            followUp,
           });
+        },
+        {
+          equalityFn: deepEqual,
         },
       );
     },

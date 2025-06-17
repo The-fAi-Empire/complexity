@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useInsertCss } from "@/hooks/useInsertCss";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
-import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import { getActiveQueryBoxTextbox } from "@/plugins/_core/ui/groups/query-box/utils";
 import styles from "@/plugins/artifacts/components/renderer/sandpack.css?inline";
 import { artifactsStore, useArtifactsStore } from "@/plugins/artifacts/store";
 import {
@@ -123,10 +123,10 @@ function FixErrorButtons() {
         variant="destructive"
         onClick={() => {
           if (!sandpack.error) return;
-          const $textarea = getActiveQueryBoxTextarea();
-          if (!$textarea.length) return;
+          const $queryBoxTextbox = getActiveQueryBoxTextbox();
+          if (!$queryBoxTextbox.length) return;
           const errorText = `${isAutonomousArtifact && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${sandpack.error.message}`;
-          $textarea.trigger("focus");
+          $queryBoxTextbox.trigger("focus");
           document.execCommand("insertText", false, errorText);
         }}
       >

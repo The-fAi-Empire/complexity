@@ -58,24 +58,32 @@ export const DomSelectorsSchema = z.object({
     BOTTOM_BAR: z.string(),
   }),
   QUERY_BOX: z.object({
-    TEXTAREA: z.object({
+    WRAPPER: z.object({
       MAIN: z.string(),
       SPACE: z.string(),
       FOLLOW_UP: z.string(),
       ARBITRARY: z.string(),
     }),
-    COMPONENTS_WRAPPER: z.object({
-      LEFT_WRAPPER: z.string(),
-      LEFT_COMPONENTS_WRAPPER: z.string(),
-      RIGHT_WRAPPER: z.string(),
-      RIGHT_COMPONENTS_WRAPPER: z.string(),
+    ATTR_WRAPPER: z.string(),
+    ATTR_WRAPPER_CHILD: z.object({
+      LEFT_ATTR_WRAPPER: z.string(),
+      RIGHT_ATTR_WRAPPER: z.string(),
+    }),
+    TEXTBOX: z.object({
+      MAIN: z.string(),
+      SPACE: z.string(),
+      FOLLOW_UP: z.string(),
+      ARBITRARY: z.string(),
     }),
     ATTACH_BUTTON: z.string(),
     SUBMIT_BUTTON: z.string(),
     FORK_BUTTON: z.string(),
-    WRAPPER: z.string(),
     PRO_SEARCH_TOGGLE: z.string(),
     INCOGNITO_TOGGLE: z.string(),
+    TYPEAHEAD_MENU: z.string(),
+    CONTENT_EDITABLE: z.object({
+      TEXTCONTENT_NODE: z.string(),
+    }),
   }),
   SETTINGS_PAGE: z.object({
     SIDEBAR_WRAPPER: z.string(),

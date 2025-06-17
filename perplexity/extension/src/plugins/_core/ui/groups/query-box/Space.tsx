@@ -6,15 +6,15 @@ import ForceWritingModeToggle from "@/plugins/force-writing-mode/Wrapper";
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 
 export default function SpaceQueryBoxWrapper() {
-  const spaceQueryBox = queryBoxesDomObserverStore(
-    (store) => store.main.$spaceQueryBox?.[0],
+  const spaceQueryBoxWrapper = queryBoxesDomObserverStore(
+    (store) => store.wrapper.space,
     deepEqual,
   );
 
-  if (!spaceQueryBox) return null;
+  if (!spaceQueryBoxWrapper) return null;
 
   const { leftToolbar, rightToolbar } = createToolbarPortalContainers({
-    queryBox: spaceQueryBox,
+    queryBoxWrapper: spaceQueryBoxWrapper,
   });
 
   return (

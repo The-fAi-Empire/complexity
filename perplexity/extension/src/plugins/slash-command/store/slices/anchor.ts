@@ -1,10 +1,7 @@
 import type { UsePopoverProps } from "@ark-ui/react";
 
 import type { BoundStateCreator } from "@/plugins/slash-command/store/types";
-import type {
-  getTextareaSelection,
-  getTextareaWordAtCaret,
-} from "@/utils/textarea-utils";
+import type { getSelection, getWordAtCaret } from "@/utils/textarea-utils";
 
 export type AnchorSlice = {
   anchor: {
@@ -12,8 +9,8 @@ export type AnchorSlice = {
     positioningOptions: UsePopoverProps["positioning"] | null;
     inputField: HTMLElement | null;
     contentActions: {
-      getWordAtCaret: () => ReturnType<typeof getTextareaWordAtCaret>;
-      getSelectedText: () => ReturnType<typeof getTextareaSelection>;
+      getWordAtCaret: () => ReturnType<typeof getWordAtCaret>;
+      getSelectedText: () => ReturnType<typeof getSelection>;
       insertText: (text: string) => void;
       deleteTriggerPhrase: () => void;
       setSelection: (
@@ -43,8 +40,8 @@ export type AnchorSlice = {
               end: number;
             } | null,
           ) => void;
-          getWordAtCaret: () => ReturnType<typeof getTextareaWordAtCaret>;
-          getSelectedText: () => ReturnType<typeof getTextareaSelection>;
+          getWordAtCaret: () => ReturnType<typeof getWordAtCaret>;
+          getSelectedText: () => ReturnType<typeof getSelection>;
           insertText: (text: string) => void;
           deleteTriggerPhrase: () => void;
           scrollIntoCaretView: () => void;

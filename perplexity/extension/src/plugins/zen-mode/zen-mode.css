@@ -2,10 +2,10 @@
 
 body[data-cplx-zen-mode="true"] {
   /* the "Help" floating button */
-  .bottom-md.right-md.m-sm.fixed.hidden.lg\:block {
+  main > .bottom-md.right-md.m-sm.fixed.hidden {
     display: none;
   }
-  
+
   /* Sidebar */
   .group\/sidebar {
     display: none;

@@ -1,5 +1,5 @@
 import semver from "semver";
-import { z } from "zod";
+import { z, type ZodSchema } from "zod";
 
 import { APP_CONFIG } from "@/app.config";
 import type { PluginId } from "@/data/plugin-registry/types";
@@ -54,3 +54,21 @@ export type FeatureCompatibility = z.infer<typeof FeatureCompatibilitySchema>;
 export const ChangelogListingSchema = z.record(SemverSchema, z.string());
 
 export type ChangelogListing = z.infer<typeof ChangelogListingSchema>;
+
+export interface ICplxApiService {
+  fetchChangelog(options?: { version?: string }): Promise<string>;
+
+  fetchChangelogListing(): Promise<ChangelogListing>;
+
+  fetchRemoteResource<T>(params: {
+    resourcePath: string;
+    zodSchema: ZodSchema<T>;
+  }): Promise<T>;
+
+  fetchVersionedRemoteResource<T>(params: {
+    resourcePath: string;
+    zodSchema: ZodSchema<T>;
+  }): Promise<T>;
+
+  fetchSoftCacheBuster(): Promise<string>;
+}

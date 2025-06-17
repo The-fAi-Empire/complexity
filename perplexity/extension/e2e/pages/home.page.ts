@@ -13,7 +13,7 @@ export class HomePage extends BasePage implements Extracted {
 
   async verifyKeyElements(): Promise<void> {
     const heading = this.page.locator(
-      DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
+      DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.MAIN,
     );
     await expect(heading).toBeVisible({
       timeout: E2E_CONFIG.TIMEOUTS.HEADING_VISIBLE,

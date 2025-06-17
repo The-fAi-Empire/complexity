@@ -5,15 +5,15 @@ import { createToolbarPortalContainers } from "@/plugins/_core/ui/groups/query-b
 import BetterLanguageModelSelectorWrapper from "@/plugins/language-model-selector/Wrapper";
 
 export default function MainQueryBoxWrapper() {
-  const mainQueryBox = queryBoxesDomObserverStore(
-    (store) => store.main.$mainQueryBox?.[0],
+  const mainQueryBoxWrapper = queryBoxesDomObserverStore(
+    (store) => store.wrapper.main,
     deepEqual,
   );
 
-  if (!mainQueryBox) return null;
+  if (!mainQueryBoxWrapper) return null;
 
   const { leftToolbar } = createToolbarPortalContainers({
-    queryBox: mainQueryBox,
+    queryBoxWrapper: mainQueryBoxWrapper,
   });
 
   return (

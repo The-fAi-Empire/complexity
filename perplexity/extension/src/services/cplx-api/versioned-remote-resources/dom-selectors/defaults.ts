@@ -43,7 +43,7 @@ export const DOM_SELECTORS: DomSelectors = {
       ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
       BOTTOM_BAR:
-        ".gap-y-md.flex.flex-col > .flex.items-center.justify-between",
+        ".gap-y-sm.md\\:gap-y-md.flex.flex-col > .flex.items-center.justify-between",
       BOTTOM_BAR_CHILD: {
         REWRITE_BUTTON: "button:has(svg.tabler-icon-repeat)",
         COPY_BUTTON: "button[aria-label]:has(svg.tabler-icon-copy)",
@@ -70,26 +70,33 @@ export const DOM_SELECTORS: DomSelectors = {
     BOTTOM_BAR: ".hidden.pb-md.md\\:block>div",
   },
   QUERY_BOX: {
-    TEXTAREA: {
-      MAIN: 'body[location="home"] .grow.block textarea#ask-input',
-      SPACE: 'body[location="collection"] .grow.block textarea#ask-input',
-      FOLLOW_UP: 'body[location="thread"] .grow.block textarea#ask-input',
-      ARBITRARY: "textarea#ask-input",
+    WRAPPER: {
+      MAIN: 'body[location="home"] .grow.block',
+      SPACE: 'body[location="collection"] .grow.block',
+      FOLLOW_UP: 'body[location="thread"] .grow.block',
+      ARBITRARY: ".grow.block",
     },
-    COMPONENTS_WRAPPER: {
-      LEFT_WRAPPER: ">div:nth-child(2)",
-      LEFT_COMPONENTS_WRAPPER: ">div.flex:first-child",
-      RIGHT_WRAPPER: ">div:nth-child(3)",
-      RIGHT_COMPONENTS_WRAPPER: ">div.flex:first-child",
+    ATTR_WRAPPER: "> div > div > div",
+    ATTR_WRAPPER_CHILD: {
+      LEFT_ATTR_WRAPPER: ">div:nth-child(2)",
+      RIGHT_ATTR_WRAPPER: ">div:nth-child(3)",
+    },
+    TEXTBOX: {
+      MAIN: "#ask-input",
+      SPACE: "#ask-input",
+      FOLLOW_UP: "#ask-input",
+      ARBITRARY: "#ask-input",
     },
     ATTACH_BUTTON: 'button:has([data-icon="paperclip"]):last',
     SUBMIT_BUTTON:
       'button[aria-label="Submit"], button[aria-label="Dictation"], button:has(svg.tabler-icon-square)',
     FORK_BUTTON: 'button svg[data-icon="code-fork"]',
-    /** The floating container that wraps the query box */
-    WRAPPER: ".grow.block",
     PRO_SEARCH_TOGGLE: "button#copilot-toggle",
     INCOGNITO_TOGGLE: ".mr-xs.flex.shrink-0.items-center",
+    TYPEAHEAD_MENU: "#typeahead-menu",
+    CONTENT_EDITABLE: {
+      TEXTCONTENT_NODE: '[data-lexical-text="true"]',
+    },
   },
   SETTINGS_PAGE: {
     SIDEBAR_WRAPPER: ".w-sideBarWidth, .scrollable-container",

@@ -2,24 +2,17 @@ import { createListCollection } from "@ark-ui/react";
 
 import { Select, SelectContext, SelectTrigger } from "@/components/ui/select";
 import { useIsMobileStore } from "@/hooks/use-is-mobile-store";
-import { useInsertCss } from "@/hooks/useInsertCss";
 import { useRegisteredGlobalCssEntry } from "@/plugins/_core/global-stores/global-css-store";
 import { useScopedQueryBoxContext } from "@/plugins/_core/ui/groups/query-box/context/context";
 import { useSharedQueryBoxStore } from "@/plugins/_core/ui/groups/query-box/shared-store";
-import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import { getActiveQueryBoxTextbox } from "@/plugins/_core/ui/groups/query-box/utils";
 import DesktopContent from "@/plugins/language-model-selector/components/desktop";
 import MobileContent from "@/plugins/language-model-selector/components/mobile";
 import BetterLanguageModelSelectorTriggerButton from "@/plugins/language-model-selector/components/TriggerButton";
 import { LanguageModelSelectorContext } from "@/plugins/language-model-selector/context";
-import { hideNativeModelSelectorCssResourceConfig } from "@/plugins/language-model-selector/index.remote-resources";
 import { PplxLanguageModelsService } from "@/services/cplx-api/remote-resources/pplx-language-models";
 import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-language-models/types";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
-
-const hideNativeModelSelector = await getVersionedRemoteResource(
-  hideNativeModelSelectorCssResourceConfig,
-);
 
 export function LanguageModelSelector() {
   const { isMobile } = useIsMobileStore();
@@ -34,11 +27,6 @@ export function LanguageModelSelector() {
   const [isOpen, setIsOpen] = useState(false);
 
   const selectItems = useMemo(getSelectItems, []);
-
-  useInsertCss({
-    id: "hide-native-model-selector",
-    css: hideNativeModelSelector,
-  });
 
   useRegisterGlobalCss();
 
@@ -62,7 +50,7 @@ export function LanguageModelSelector() {
       onValueChange={({ value }) => {
         setSelectedLanguageModel(value[0] as LanguageModelCode);
         setTimeout(() => {
-          getActiveQueryBoxTextarea().trigger("focus");
+          getActiveQueryBoxTextbox().trigger("focus");
         }, 100);
       }}
       onHighlightChange={({ highlightedValue }) =>
@@ -73,7 +61,7 @@ export function LanguageModelSelector() {
           event.preventDefault();
           event.stopPropagation();
           setTimeout(() => {
-            getActiveQueryBoxTextarea().trigger("focus");
+            getActiveQueryBoxTextbox().trigger("focus");
           }, 100);
         }
       }}
@@ -119,6 +107,12 @@ function useRegisterGlobalCss() {
     entryIds: ["normalize-follow-up-query-box"],
     subscriberId,
     subscribe: store.type === "follow-up",
+  });
+
+  useRegisteredGlobalCssEntry({
+    entryIds: ["hide-native-model-selector"],
+    subscriberId: `${subscriberId}#${store.type}`,
+    subscribe: true,
   });
 }
 

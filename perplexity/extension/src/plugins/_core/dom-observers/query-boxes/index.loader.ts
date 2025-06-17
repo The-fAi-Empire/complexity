@@ -5,7 +5,6 @@ import {
 import { DomObserver } from "@/plugins/_api/dom-observer/dom-observer";
 import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.types";
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
-import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import {
   findFollowUpQueryBox,
   findMainQueryBox,
@@ -13,15 +12,13 @@ import {
 } from "@/plugins/_core/dom-observers/query-boxes/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
+import type { MaybePromise } from "@/types/utils.types";
 import { whereAmI } from "@/utils/utils";
 
 const cleanup = () => {
   DomObserver.destroy(createDomObserverId("queryBoxes", "home"));
   DomObserver.destroy(createDomObserverId("queryBoxes", "collection"));
   DomObserver.destroy(createDomObserverId("queryBoxes", "followUp"));
-  DomObserver.destroy(
-    createDomObserverId("queryBoxes", "pplxComponentsWrapper"),
-  );
 };
 
 declare module "@/plugins/_core/dom-observers/types" {
@@ -70,65 +67,25 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
 
   cleanup();
 
-  if (location === "home") {
-    queryBoxesDomObserverStore.getState().setMainNodes({
-      $spaceQueryBox: null,
-    });
+  const handlerMap: Partial<
+    Record<ReturnType<typeof whereAmI>, () => MaybePromise<void>>
+  > = {
+    home: findMainQueryBox,
+    collection: findSpaceQueryBox,
+    thread: findFollowUpQueryBox,
+  };
 
-    queryBoxesDomObserverStore.setState({
-      followUp: {
-        $followUpQueryBox: null,
-      },
-    });
+  const handler = handlerMap[location];
 
-    DomObserver.create(createDomObserverId("queryBoxes", "home"), {
-      target: document.body,
-      config: { childList: true, subtree: true },
-      onMutation: () =>
-        CallbackQueue.getInstance().enqueue(
-          findMainQueryBox,
-          createTaskId("queryBoxes", "home"),
-        ),
-    });
-  }
+  if (!handler) return;
 
-  if (location === "collection") {
-    queryBoxesDomObserverStore.getState().setMainNodes({
-      $mainQueryBox: null,
-    });
-
-    queryBoxesDomObserverStore.setState({
-      followUp: {
-        $followUpQueryBox: null,
-      },
-    });
-
-    DomObserver.create(createDomObserverId("queryBoxes", "collection"), {
-      target: document.body,
-      config: { childList: true, subtree: true },
-      onMutation: () =>
-        CallbackQueue.getInstance().enqueue(
-          findSpaceQueryBox,
-          createTaskId("queryBoxes", "collection"),
-        ),
-    });
-  }
-
-  if (location === "thread") {
-    queryBoxesDomObserverStore.getState().setMainNodes({
-      $mainQueryBox: null,
-      $spaceQueryBox: null,
-    });
-
-    DomObserver.create(createDomObserverId("queryBoxes", "followUp"), {
-      target: document.body,
-      config: { childList: true, subtree: true },
-      debounceTime: 500,
-      onMutation: () =>
-        CallbackQueue.getInstance().enqueue(
-          findFollowUpQueryBox,
-          createTaskId("queryBoxes", "followUp"),
-        ),
-    });
-  }
+  DomObserver.create(createDomObserverId("queryBoxes", location), {
+    target: document.body,
+    config: { childList: true, subtree: true },
+    onMutation: () =>
+      CallbackQueue.getInstance().enqueue(
+        handler,
+        createTaskId("queryBoxes", location),
+      ),
+  });
 }

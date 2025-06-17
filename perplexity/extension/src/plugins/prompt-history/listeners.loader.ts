@@ -1,5 +1,4 @@
 import { asyncLoaderRegistry } from "@/plugins/_core/async-dep-registry";
-import { spaRouterStoreSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
 import { handlePromptSave } from "@/plugins/prompt-history/utils";
 
 declare module "@/plugins/_core/async-dep-registry" {
@@ -23,17 +22,10 @@ export default function loader() {
       )
         return;
 
-      // Soft navigation
-      spaRouterStoreSubscribe((params) => {
-        if (params.state === "pending") {
-          handlePromptSave({
-            url: params.url,
-            type: "soft",
-          });
-        }
+      window.addEventListener("spa-router:route-change", () => {
+        handlePromptSave({ url: window.location.pathname, type: "soft" });
       });
 
-      // Hard navigation
       window.addEventListener("beforeunload", () => {
         handlePromptSave({ url: window.location.pathname, type: "hard" });
       });

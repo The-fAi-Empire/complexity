@@ -5,7 +5,7 @@ import svgPanZoom from "svg-pan-zoom";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
-import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import { getActiveQueryBoxTextbox } from "@/plugins/_core/ui/groups/query-box/utils";
 import { useArtifactsStore } from "@/plugins/artifacts/store";
 import {
   formatArtifactTitle,
@@ -127,13 +127,13 @@ export default function PlantUmlRenderer() {
             onClick={() => {
               if (!error.message) return;
 
-              const $textarea = getActiveQueryBoxTextarea();
+              const $queryBoxTextbox = getActiveQueryBoxTextbox();
 
-              if (!$textarea.length) return;
+              if (!$queryBoxTextbox.length) return;
 
               const errorText = `${isAutonomousArtifact && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${error.message}`;
 
-              $textarea.trigger("focus");
+              $queryBoxTextbox.trigger("focus");
 
               document.execCommand("insertText", false, errorText);
             }}

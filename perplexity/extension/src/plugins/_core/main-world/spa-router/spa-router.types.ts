@@ -1,3 +1,3 @@
 export type NextRouter = typeof window.next;
 
-export type RouterEvent = "push" | "replace" | "popstate";
+export type RouterEvent = "push" | "pushState" | "replace" | "popstate";

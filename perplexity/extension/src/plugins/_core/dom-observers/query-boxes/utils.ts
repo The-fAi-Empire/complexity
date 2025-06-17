@@ -5,6 +5,8 @@ import {
 import { queryBoxesDomObserverStore } from "@/plugins/_core/dom-observers/query-boxes/store";
 import { isInternalNodeExists } from "@/plugins/_core/dom-observers/utils";
 import { getActiveQueryBox } from "@/plugins/_core/ui/groups/query-box/utils";
+import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { whereAmI } from "@/utils/utils";
 
 const OBSERVER_ID = {
   MAIN_QUERY_BOX: "cplx-main-query-box",
@@ -13,10 +15,23 @@ const OBSERVER_ID = {
 };
 
 export function findMainQueryBox() {
+  if (whereAmI() !== "home") {
+    queryBoxesDomObserverStore.getState().setWrapperNodes({
+      main: null,
+    });
+
+    queryBoxesDomObserverStore.getState().setTextboxNodes({
+      main: null,
+    });
+
+    return;
+  }
+
   const existingMainQueryBox =
-    queryBoxesDomObserverStore.getState().main.$mainQueryBox?.[0];
+    queryBoxesDomObserverStore.getState().wrapper.main;
 
   if (
+    existingMainQueryBox != null &&
     isInternalNodeExists({
       node: existingMainQueryBox,
       selector: `[${OBSERVER_ID.MAIN_QUERY_BOX}]`,
@@ -24,22 +39,41 @@ export function findMainQueryBox() {
   )
     return;
 
-  const $mainQueryBox = getActiveQueryBox({ type: "main" });
+  const $mainQueryBoxTextbox = getActiveQueryBox({ type: "main" });
 
-  if (!$mainQueryBox.length) return;
+  if (!$mainQueryBoxTextbox.length) return;
 
-  $mainQueryBox.attr(OBSERVER_ID.MAIN_QUERY_BOX, "true");
+  $mainQueryBoxTextbox.attr(OBSERVER_ID.MAIN_QUERY_BOX, "true");
 
-  queryBoxesDomObserverStore.getState().setMainNodes({
-    $mainQueryBox,
+  queryBoxesDomObserverStore.getState().setWrapperNodes({
+    main: $mainQueryBoxTextbox[0],
+  });
+
+  queryBoxesDomObserverStore.getState().setTextboxNodes({
+    main: $mainQueryBoxTextbox.find(
+      DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.MAIN,
+    )[0],
   });
 }
 
 export function findSpaceQueryBox() {
+  if (whereAmI() !== "collection") {
+    queryBoxesDomObserverStore.getState().setWrapperNodes({
+      space: null,
+    });
+
+    queryBoxesDomObserverStore.getState().setTextboxNodes({
+      space: null,
+    });
+
+    return;
+  }
+
   const existingSpaceQueryBox =
-    queryBoxesDomObserverStore.getState().main.$spaceQueryBox?.[0];
+    queryBoxesDomObserverStore.getState().wrapper.space;
 
   if (
+    existingSpaceQueryBox != null &&
     isInternalNodeExists({
       node: existingSpaceQueryBox,
       selector: `[${OBSERVER_ID.SPACE_QUERY_BOX}]`,
@@ -55,16 +89,35 @@ export function findSpaceQueryBox() {
 
   $spaceQueryBox.attr(OBSERVER_ID.SPACE_QUERY_BOX, "true");
 
-  queryBoxesDomObserverStore.getState().setMainNodes({
-    $spaceQueryBox,
+  queryBoxesDomObserverStore.getState().setWrapperNodes({
+    space: $spaceQueryBox[0],
+  });
+
+  queryBoxesDomObserverStore.getState().setTextboxNodes({
+    space: $spaceQueryBox.find(
+      DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.SPACE,
+    )[0],
   });
 }
 
 export async function findFollowUpQueryBox() {
+  if (whereAmI() !== "thread") {
+    queryBoxesDomObserverStore.getState().setWrapperNodes({
+      followUp: null,
+    });
+
+    queryBoxesDomObserverStore.getState().setTextboxNodes({
+      followUp: null,
+    });
+
+    return;
+  }
+
   const existingFollowUpQueryBox =
-    queryBoxesDomObserverStore.getState().followUp.$followUpQueryBox?.[0];
+    queryBoxesDomObserverStore.getState().wrapper.followUp;
 
   if (
+    existingFollowUpQueryBox != null &&
     isInternalNodeExists({
       node: existingFollowUpQueryBox,
       selector: `[${OBSERVER_ID.FOLLOW_UP_QUERY_BOX}]`,
@@ -88,9 +141,13 @@ export async function findFollowUpQueryBox() {
 
   $followUpQueryBox.attr(OBSERVER_ID.FOLLOW_UP_QUERY_BOX, "true");
 
-  queryBoxesDomObserverStore.setState({
-    followUp: {
-      $followUpQueryBox,
-    },
+  queryBoxesDomObserverStore.getState().setWrapperNodes({
+    followUp: $followUpQueryBox[0],
+  });
+
+  queryBoxesDomObserverStore.getState().setTextboxNodes({
+    followUp: $followUpQueryBox.find(
+      DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.FOLLOW_UP,
+    )[0],
   });
 }

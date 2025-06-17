@@ -3,19 +3,29 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 export type QueryBoxesDomObserverStoreType = {
-  main: {
-    $mainQueryBox: JQuery<HTMLElement> | null;
-    $spaceQueryBox: JQuery<HTMLElement> | null;
+  wrapper: {
+    main: HTMLElement | null;
+    space: HTMLElement | null;
+    followUp: HTMLElement | null;
   };
-  setMainNodes: (
-    nodes: Partial<{
-      $mainQueryBox: JQuery<HTMLElement> | null;
-      $spaceQueryBox: JQuery<HTMLElement> | null;
-    }>,
-  ) => void;
-  followUp: {
-    $followUpQueryBox: JQuery<HTMLElement> | null;
+
+  setWrapperNodes: (wrapper: {
+    main?: HTMLElement | null;
+    space?: HTMLElement | null;
+    followUp?: HTMLElement | null;
+  }) => void;
+
+  textbox: {
+    main: HTMLElement | null;
+    space: HTMLElement | null;
+    followUp: HTMLElement | null;
   };
+
+  setTextboxNodes: (textbox: {
+    main?: HTMLElement | null;
+    space?: HTMLElement | null;
+    followUp?: HTMLElement | null;
+  }) => void;
 
   resetStore: () => void;
 };
@@ -24,30 +34,47 @@ export const queryBoxesDomObserverStore =
   createWithEqualityFn<QueryBoxesDomObserverStoreType>()(
     subscribeWithSelector(
       immer(
-        (set): QueryBoxesDomObserverStoreType => ({
-          main: {
-            $mainQueryBox: null,
-            $spaceQueryBox: null,
+        (set, get): QueryBoxesDomObserverStoreType => ({
+          wrapper: {
+            main: null,
+            space: null,
+            followUp: null,
           },
-          setMainNodes: (nodes) =>
-            set((draft) => ({
-              ...draft,
-              main: {
-                ...draft.main,
-                ...nodes,
+          textbox: {
+            main: null,
+            space: null,
+            followUp: null,
+          },
+
+          setWrapperNodes: (wrapper) => {
+            set({
+              wrapper: {
+                ...get().wrapper,
+                ...wrapper,
               },
-            })),
-          followUp: {
-            $followUpQueryBox: null,
+            });
           },
+
+          setTextboxNodes: (textbox) => {
+            set({
+              textbox: {
+                ...get().textbox,
+                ...textbox,
+              },
+            });
+          },
+
           resetStore: () => {
             set({
-              main: {
-                $mainQueryBox: null,
-                $spaceQueryBox: null,
+              wrapper: {
+                main: null,
+                space: null,
+                followUp: null,
               },
-              followUp: {
-                $followUpQueryBox: null,
+              textbox: {
+                main: null,
+                space: null,
+                followUp: null,
               },
             });
           },

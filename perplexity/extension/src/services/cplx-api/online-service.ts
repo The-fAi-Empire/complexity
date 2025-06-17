@@ -4,11 +4,12 @@ import { APP_CONFIG } from "@/app.config";
 import {
   ChangelogListingSchema,
   type ChangelogListing,
+  type ICplxApiService,
 } from "@/services/cplx-api/types";
 import { fetchResourceWithSchema, getUrl } from "@/services/cplx-api/utils";
 import { fetchTextResource } from "@/utils/utils";
-export class CplxApiService {
-  static async fetchChangelog({ version }: { version?: string } = {}) {
+export class CplxApiOnlineService implements ICplxApiService {
+  async fetchChangelog({ version }: { version?: string } = {}) {
     const targetVersion = version ?? APP_CONFIG.VERSION;
 
     const resp = await fetch(
@@ -27,7 +28,7 @@ export class CplxApiService {
     return resp.text();
   }
 
-  static async fetchChangelogListing(): Promise<ChangelogListing> {
+  async fetchChangelogListing(): Promise<ChangelogListing> {
     return ChangelogListingSchema.parse(
       JSON.parse(
         await fetchTextResource(
@@ -39,7 +40,7 @@ export class CplxApiService {
     );
   }
 
-  static async fetchRemoteResource<T>({
+  async fetchRemoteResource<T>({
     resourcePath,
     zodSchema,
   }: {
@@ -53,7 +54,7 @@ export class CplxApiService {
     });
   }
 
-  static async fetchVersionedRemoteResource<T>({
+  async fetchVersionedRemoteResource<T>({
     resourcePath,
     zodSchema,
   }: {
@@ -67,7 +68,7 @@ export class CplxApiService {
     });
   }
 
-  static async fetchSoftCacheBuster() {
+  async fetchSoftCacheBuster() {
     return fetchTextResource(
       getUrl({
         path: "/cache-buster",

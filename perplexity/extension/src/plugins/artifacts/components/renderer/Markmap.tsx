@@ -5,7 +5,7 @@ import { sendMessage } from "webext-bridge/content-script";
 import { Button } from "@/components/ui/button";
 import useThreadCodeBlock from "@/plugins/_core/dom-observers/thread/code-blocks/hooks/useThreadCodeBlock";
 import { useColorSchemeStore } from "@/plugins/_core/global-stores/color-scheme-store";
-import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import { getActiveQueryBoxTextbox } from "@/plugins/_core/ui/groups/query-box/utils";
 import { useArtifactsStore } from "@/plugins/artifacts/store";
 import {
   formatArtifactTitle,
@@ -88,12 +88,12 @@ export default function MarkmapRenderer() {
               className="x:w-max"
               variant="destructive"
               onClick={() => {
-                const $textarea = getActiveQueryBoxTextarea();
-                if (!$textarea.length) return;
+                const $queryBoxTextbox = getActiveQueryBoxTextbox();
+                if (!$queryBoxTextbox.length) return;
 
                 const errorText = `${isAutonomousArtifact && title ? `An error occurred while rendering "${title}": ` : ""}\n\n${result.error}`;
 
-                $textarea.trigger("focus");
+                $queryBoxTextbox.trigger("focus");
                 document.execCommand("insertText", false, errorText);
               }}
             >

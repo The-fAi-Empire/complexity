@@ -74,6 +74,8 @@ const dispatchRouteChange = async ({
   trigger: RouterEvent;
   newUrl: string;
 }) => {
+  window.dispatchEvent(new Event("spa-router:route-change"));
+
   const url = new URL(newUrl, window.location.href);
   const fullUrl = url.pathname + url.search + url.hash;
 

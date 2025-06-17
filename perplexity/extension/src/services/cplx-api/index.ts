@@ -1,10 +1,14 @@
 import { APP_CONFIG } from "@/app.config";
 import { CplxApiOfflineService } from "@/services/cplx-api/offline-service";
-import { CplxApiService as CplxApiOnlineService } from "@/services/cplx-api/online-service";
+import { CplxApiOnlineService } from "@/services/cplx-api/online-service";
+import type { ICplxApiService } from "@/services/cplx-api/types";
 
-type CplxApiServiceType = typeof CplxApiOnlineService;
+const createCplxApiService = (): ICplxApiService => {
+  if (APP_CONFIG.CPLX_CDN_URL != null) {
+    return new CplxApiOnlineService();
+  }
 
-export const CplxApiService: CplxApiServiceType =
-  APP_CONFIG.CPLX_CDN_URL != null
-    ? CplxApiOnlineService
-    : CplxApiOfflineService;
+  return new CplxApiOfflineService();
+};
+
+export const CplxApiService = createCplxApiService();

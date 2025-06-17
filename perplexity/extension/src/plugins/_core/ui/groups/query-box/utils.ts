@@ -4,9 +4,9 @@ import { isLanguageModelCode } from "@/services/cplx-api/remote-resources/pplx-l
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
 export function createToolbarPortalContainers({
-  queryBox,
+  queryBoxWrapper,
 }: {
-  queryBox: HTMLElement;
+  queryBoxWrapper: HTMLElement;
 }): {
   leftToolbar: {
     leftContainer: HTMLElement | null;
@@ -17,8 +17,9 @@ export function createToolbarPortalContainers({
     rightContainer: HTMLElement | null;
   };
 } {
-  const $textareaWrapper = $(queryBox).find("textarea").parent();
-  const $queryBoxComponentsWrapper = $textareaWrapper.parent();
+  const $queryBoxComponentsWrapper = $(queryBoxWrapper).find(
+    DomSelectorsService.cachedSync.QUERY_BOX.ATTR_WRAPPER,
+  );
 
   $queryBoxComponentsWrapper.internalComponentAttr(
     DomSelectorsService.internalAttributes.QUERY_BOX_CHILD.COMPONENTS_WRAPPER,
@@ -26,64 +27,49 @@ export function createToolbarPortalContainers({
 
   // --- Left Toolbar ---
   const $pplxLeftToolbarWrapper = $queryBoxComponentsWrapper.find(
-    DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER.LEFT_WRAPPER,
+    DomSelectorsService.cachedSync.QUERY_BOX.ATTR_WRAPPER_CHILD
+      .LEFT_ATTR_WRAPPER,
   );
 
-  if ($pplxLeftToolbarWrapper.length) {
-    $pplxLeftToolbarWrapper
-      .find(
-        DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER
-          .LEFT_COMPONENTS_WRAPPER,
-      )
-      .internalComponentAttr(
-        DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
-          .PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER,
-      );
-  }
-
-  const $leftToolbarLeftContainer = findOrCreateContainer(
-    $pplxLeftToolbarWrapper,
+  $pplxLeftToolbarWrapper.internalComponentAttr(
     DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
-      .CPLX_LEFT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
-    "prepend",
+      .PPLX_LEFT_TOOLBAR_COMPONENTS_WRAPPER,
   );
 
-  const $leftToolbarRightContainer = findOrCreateContainer(
-    $pplxLeftToolbarWrapper,
-    DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
-      .CPLX_LEFT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER,
-    "append",
-  );
+  const $leftToolbarLeftContainer = findOrCreateContainer({
+    $parentElement: $pplxLeftToolbarWrapper,
+    internalAttribute:
+      DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
+        .CPLX_LEFT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
+    position: "prepend",
+  });
+
+  const $leftToolbarRightContainer = findOrCreateContainer({
+    $parentElement: $pplxLeftToolbarWrapper,
+    internalAttribute:
+      DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
+        .CPLX_LEFT_TOOLBAR_COMPONENTS_RIGHT_WRAPPER,
+    position: "append",
+  });
 
   // --- Right Toolbar ---
-  let $rightToolbarLeftContainer: JQuery<HTMLElement> | null = null;
   const $pplxRightToolbarWrapper = $queryBoxComponentsWrapper.find(
-    DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER.RIGHT_WRAPPER,
+    DomSelectorsService.cachedSync.QUERY_BOX.ATTR_WRAPPER_CHILD
+      .RIGHT_ATTR_WRAPPER,
   );
 
-  if ($pplxRightToolbarWrapper.length) {
-    $pplxRightToolbarWrapper.internalComponentAttr(
-      DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
-        .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
-    );
+  $pplxRightToolbarWrapper.internalComponentAttr(
+    DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
+      .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
+  );
 
-    $pplxRightToolbarWrapper
-      .find(
-        DomSelectorsService.cachedSync.QUERY_BOX.COMPONENTS_WRAPPER
-          .RIGHT_COMPONENTS_WRAPPER,
-      )
-      .internalComponentAttr(
-        DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
-          .PPLX_RIGHT_TOOLBAR_COMPONENTS_WRAPPER,
-      );
-
-    $rightToolbarLeftContainer = findOrCreateContainer(
-      $pplxRightToolbarWrapper,
+  const $rightToolbarLeftContainer = findOrCreateContainer({
+    $parentElement: $pplxRightToolbarWrapper,
+    internalAttribute:
       DomSelectorsService.internalAttributes.QUERY_BOX_CHILD
         .CPLX_RIGHT_TOOLBAR_COMPONENTS_LEFT_WRAPPER,
-      "prepend",
-    );
-  }
+    position: "prepend",
+  });
 
   return {
     leftToolbar: {
@@ -97,11 +83,15 @@ export function createToolbarPortalContainers({
   };
 }
 
-function findOrCreateContainer(
-  $parentElement: JQuery<HTMLElement>,
-  internalAttribute: string,
-  position: "prepend" | "append",
-): JQuery<HTMLElement> | null {
+function findOrCreateContainer({
+  $parentElement,
+  internalAttribute,
+  position,
+}: {
+  $parentElement: JQuery<HTMLElement>;
+  internalAttribute: string;
+  position: "prepend" | "append";
+}): JQuery<HTMLElement> | null {
   if (!$parentElement?.length) {
     return null;
   }
@@ -138,33 +128,33 @@ export function populateDefaults() {
     .setSelectedLanguageModel(selectedLanguageModel);
 }
 
-export function getActiveQueryBoxTextarea({
+export function getActiveQueryBoxTextbox({
   type,
 }: {
   type?: QueryBoxType;
 } = {}): JQuery<HTMLTextAreaElement> {
   if (!type)
     return $(
-      `${DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.ARBITRARY}:last`,
+      `${DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.ARBITRARY}:last`,
     );
 
   const selectorMap: Record<QueryBoxType, string> = {
-    main: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.MAIN,
-    space: DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.SPACE,
-    "follow-up": DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA.FOLLOW_UP,
+    main: DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.MAIN,
+    space: DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.SPACE,
+    "follow-up": DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX.FOLLOW_UP,
   };
 
   return $(selectorMap[type]);
 }
 
 export function getActiveQueryBox({ type }: { type?: QueryBoxType } = {}) {
-  return getActiveQueryBoxTextarea({
+  return getActiveQueryBoxTextbox({
     type,
   })
-    .parents(DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER)
+    .parents(DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER.ARBITRARY)
     .first();
 }
 
-export function getActiveTextarea(): HTMLTextAreaElement | null {
-  return getActiveQueryBoxTextarea()[0] ?? null;
+export function isContentEditable(textbox: HTMLElement) {
+  return textbox.isContentEditable;
 }

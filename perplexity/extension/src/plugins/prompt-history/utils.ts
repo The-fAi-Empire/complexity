@@ -1,4 +1,7 @@
-import { getActiveQueryBoxTextarea } from "@/plugins/_core/ui/groups/query-box/utils";
+import {
+  getActiveQueryBoxTextbox,
+  isContentEditable,
+} from "@/plugins/_core/ui/groups/query-box/utils";
 import { getPromptHistoryService } from "@/plugins/prompt-history/indexed-db";
 
 let lastUrl = window.location.pathname;
@@ -17,11 +20,15 @@ export const handlePromptSave = async (params?: {
   let prompt = params?.promptString;
 
   if (!params?.promptString) {
-    const $activeQueryBox = getActiveQueryBoxTextarea();
+    const $activeQueryBoxTextbox = getActiveQueryBoxTextbox();
 
-    if (!$activeQueryBox[0]) return;
+    if (!$activeQueryBoxTextbox[0]) return;
 
-    prompt = $activeQueryBox[0].value;
+    if (isContentEditable($activeQueryBoxTextbox[0])) {
+      prompt = $activeQueryBoxTextbox[0].textContent ?? "";
+    } else {
+      prompt = $activeQueryBoxTextbox[0].value;
+    }
   }
 
   if (prompt == null || prompt?.length === 0) return;

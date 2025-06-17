@@ -1,67 +1,56 @@
-type TextareaSelection = {
+export type TextboxSelection = {
   start: number;
   end: number;
   value: string;
 };
 
-export const setTextareaSelection = (
+export function setSelection(
   textarea: HTMLTextAreaElement,
   start: number,
   end: number,
-): void => {
+): void {
   textarea.focus();
   textarea.setSelectionRange(start, end);
-};
+}
 
-export const getTextareaSelection = (
-  textarea: HTMLTextAreaElement,
-): TextareaSelection => ({
-  start: textarea.selectionStart,
-  end: textarea.selectionEnd,
-  value: textarea.value,
-});
+export function getSelection(textarea: HTMLTextAreaElement): TextboxSelection {
+  return {
+    start: textarea.selectionStart,
+    end: textarea.selectionEnd,
+    value: textarea.value,
+  };
+}
 
-export const insertText = (
-  textarea: HTMLTextAreaElement,
-  text: string,
-): void => {
+export function insertText(textarea: HTMLTextAreaElement, text: string): void {
   textarea.focus();
   document.execCommand("insertText", false, text);
-  textarea.dispatchEvent(new Event("input", { bubbles: true }));
-};
+}
 
-export const deleteSelectedText = (textarea: HTMLTextAreaElement): void => {
+export function deleteSelectedText(textarea: HTMLTextAreaElement): void {
   textarea.focus();
-  document.execCommand("delete", false, undefined);
-  textarea.dispatchEvent(new Event("input", { bubbles: true }));
-};
+  document.execCommand("insertText", false, "");
+}
 
-export const getTextareaWordAtCaret = (textarea: HTMLTextAreaElement) => {
-  const { start, end, value } = getTextareaSelection(textarea);
+export function getWordAtCaret(textarea: HTMLTextAreaElement) {
+  const { start, end, value: text } = getSelection(textarea);
 
   if (start !== end) {
     return {
-      value: "",
+      value: text.substring(start, end),
       start: start,
       end: end,
     };
   }
 
-  const text = value;
-  let wordStart = start;
-  let wordEnd = end;
-
-  while (wordStart > 0 && !/\s/.test(text.charAt(wordStart - 1))) {
-    wordStart--;
-  }
-
-  while (wordEnd < text.length && !/\s/.test(text.charAt(wordEnd))) {
-    wordEnd++;
-  }
+  const wordStart = text.slice(0, start).search(/\S+$/);
+  const wordEnd = text.slice(start).search(/\s/);
 
   return {
-    value: text.substring(wordStart, wordEnd),
+    value: text.substring(
+      wordStart,
+      wordEnd === -1 ? text.length : start + wordEnd,
+    ),
     start: wordStart,
-    end: wordEnd,
+    end: wordEnd === -1 ? text.length : start + wordEnd,
   };
-};
+}

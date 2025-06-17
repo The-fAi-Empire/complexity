@@ -1,28 +1,27 @@
 import type { AnchorSlice } from "@/plugins/slash-command/store/slices/anchor";
+import { createTextboxAdapter } from "@/plugins/slash-command/textbox-adapter";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import {
-  deleteSelectedText,
-  getTextareaSelection,
-  getTextareaWordAtCaret,
-  insertText,
-  setTextareaSelection,
-} from "@/utils/textarea-utils";
-import { UiUtils } from "@/utils/ui-utils";
 
-function isQueryBox(target: HTMLElement): target is HTMLTextAreaElement {
-  const tagName = target.tagName;
+function mightBeTextbox(target: HTMLElement): boolean {
+  const tagName = target.tagName.toLowerCase();
+  const isContentEditable = target.isContentEditable;
+  return tagName === "textarea" || isContentEditable;
+}
 
-  if (tagName !== "TEXTAREA") return false;
+function isQueryBoxTextbox(
+  target: HTMLElement,
+): target is HTMLTextAreaElement | (HTMLElement & { isContentEditable: true }) {
+  if (!mightBeTextbox(target)) return false;
 
-  return Object.entries(DomSelectorsService.cachedSync.QUERY_BOX.TEXTAREA).some(
+  return Object.entries(DomSelectorsService.cachedSync.QUERY_BOX.TEXTBOX).some(
     ([_, selector]) => target.matches(selector),
   );
 }
 
-function isEditQueryBox(target: HTMLElement): target is HTMLTextAreaElement {
-  const tagName = target.tagName;
-
-  if (tagName !== "TEXTAREA") return false;
+function isEditQueryBoxTextbox(
+  target: HTMLElement,
+): target is HTMLTextAreaElement {
+  if (!mightBeTextbox(target)) return false;
 
   return target.matches(
     `${DomSelectorsService.cplxAttribute(
@@ -31,76 +30,58 @@ function isEditQueryBox(target: HTMLElement): target is HTMLTextAreaElement {
   );
 }
 
-function createTextareaContentActions(
-  target: HTMLTextAreaElement,
+function createTextboxContentActions(
+  target: HTMLElement,
 ): AnchorSlice["anchor"]["contentActions"] {
+  return createTextboxAdapter(target);
+}
+
+function createAnchorData(
+  target: HTMLElement,
+  anchorElement: HTMLElement,
+  options: {
+    placement: "bottom-start" | "bottom";
+    gutter: number;
+  },
+) {
   return {
-    setSelection: (selection) => {
-      if (!selection) {
-        setTextareaSelection(target, target.value.length, target.value.length);
-        return;
-      }
-
-      setTextareaSelection(target, selection.start, selection.end);
+    element: anchorElement,
+    inputField: target,
+    positioningOptions: {
+      ...options,
+      flip: true,
+      hideWhenDetached: true,
+      getAnchorRect: () => anchorElement.getBoundingClientRect(),
     },
-    getWordAtCaret: () => getTextareaWordAtCaret(target),
-    getSelectedText: () => getTextareaSelection(target),
-    insertText: (text: string) => {
-      insertText(target, text);
-      UiUtils.scrollIntoCaretView(target);
-    },
-    deleteTriggerPhrase: () => {
-      const { start, end } = getTextareaWordAtCaret(target);
-
-      setTextareaSelection(target, start, end);
-      deleteSelectedText(target);
-    },
-    scrollIntoCaretView: () => UiUtils.scrollIntoCaretView(target),
-    getSelection: () => getTextareaSelection(target),
+    contentActions: createTextboxContentActions(target),
   };
 }
 
 export function getAnchor(
   target: HTMLElement,
-):
-  | Pick<
-      AnchorSlice["anchor"],
-      "element" | "inputField" | "positioningOptions" | "contentActions"
-    >
-  | undefined {
-  if (isQueryBox(target)) {
+): Pick<
+  AnchorSlice["anchor"],
+  "element" | "inputField" | "positioningOptions" | "contentActions"
+> | null {
+  if (isQueryBoxTextbox(target)) {
     const anchor = $(target).closest(
-      DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER,
+      DomSelectorsService.cachedSync.QUERY_BOX.WRAPPER.ARBITRARY,
     )[0];
 
-    if (!anchor) return;
+    if (!anchor) return null;
 
-    return {
-      element: anchor,
-      inputField: target,
-      positioningOptions: {
-        placement: "bottom-start",
-        gutter: 5,
-        flip: true,
-        hideWhenDetached: true,
-        getAnchorRect: () => anchor.getBoundingClientRect(),
-      },
-      contentActions: createTextareaContentActions(target),
-    };
+    return createAnchorData(target, anchor, {
+      placement: "bottom-start",
+      gutter: 5,
+    });
   }
 
-  if (isEditQueryBox(target)) {
-    return {
-      element: target,
-      inputField: target,
-      positioningOptions: {
-        placement: "bottom",
-        gutter: 10,
-        flip: true,
-        hideWhenDetached: true,
-        getAnchorRect: () => target.getBoundingClientRect(),
-      },
-      contentActions: createTextareaContentActions(target),
-    };
+  if (isEditQueryBoxTextbox(target)) {
+    return createAnchorData(target, target, {
+      placement: "bottom",
+      gutter: 10,
+    });
   }
+
+  return null;
 }
