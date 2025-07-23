@@ -43,7 +43,7 @@ export function generateUiFontsOverrides({
   }
 
   return `
-body#__next {
+body {
   ${uiFont ? `--font-fk-grotesk: "${uiFont}";` : ""}
   ${uiFont ? `--font-fk-grotesk-neue: "${uiFont}";` : ""}
   ${monoFont ? `--font-berkeley-mono: "${monoFont}";` : ""}

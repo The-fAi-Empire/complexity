@@ -25,7 +25,7 @@ export default function SpacesSearchItemsFooter() {
         title: t("plugin-command-menu.spaces.footer.openInNewTab"),
         keybinding: [Key.Alt, Key.Enter],
         onSelect: () => {
-          openInNewTab(`/collections/${space?.slug}`);
+          openInNewTab(`/spaces/${space?.slug}`);
           commandMenuStore.getState().setOpen(false);
         },
       },
@@ -51,7 +51,7 @@ export default function SpacesSearchItemsFooter() {
         title: t("plugin-command-menu.spaces.footer.goToSpace"),
         keybinding: [Key.Enter],
         onSelect: () => {
-          softNavigate(`/collections/${space?.slug}`);
+          softNavigate(`/spaces/${space?.slug}`);
           commandMenuStore.getState().setOpen(false);
         },
       },

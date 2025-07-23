@@ -1,4 +1,4 @@
-body#__next {
+body {
   &[location="thread"] {
     /* Message Block Dividers */
     [data-cplx-component="message-block"] {

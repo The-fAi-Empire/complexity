@@ -7,6 +7,11 @@ export const PLUGIN_CATEGORIES = {
     label: "Featured",
     description: "Newly added/updated plugins",
   },
+  thread: {
+    label: "Thread Utilities",
+    description:
+      "Provide extra functionalities, productivity tweaks to the AI conversation thread",
+  },
   queryBox: {
     label: "Query Box Utilities",
     description: "Add functionalities/tweaks to the query box",
@@ -14,11 +19,6 @@ export const PLUGIN_CATEGORIES = {
   prompting: {
     label: "Prompting",
     description: "Prompt-related utilities",
-  },
-  thread: {
-    label: "Thread Utilities",
-    description:
-      "Provide extra functionalities, productivity tweaks to the AI conversation thread",
   },
   sidebar: {
     label: "Sidebar Utilities",

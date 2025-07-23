@@ -40,7 +40,7 @@ export async function waitForRouteChangeComplete(
 
 export async function softNavigate(url: string) {
   if (!isInContentScript()) {
-    window.next!.router.push(url);
+    window.history.pushState({}, "", url);
   } else {
     const { sendMessage } = await import("webext-bridge/content-script");
     sendMessage("spa-router:push", { url }, "window");

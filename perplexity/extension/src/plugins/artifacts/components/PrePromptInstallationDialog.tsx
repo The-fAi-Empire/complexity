@@ -24,6 +24,7 @@ import { PluginsStatesService } from "@/services/plugins-states";
 import { PplxApiService } from "@/services/pplx-api";
 import { errorWrapper } from "@/utils/error-wrapper";
 import { fetchTextResource, setCookie } from "@/utils/utils";
+import { softNavigate } from "@/plugins/_core/main-world/spa-router/utils";
 
 function ArtifactsPrePromptInstallationDialog() {
   const navigate = useNavigate();
@@ -62,13 +63,7 @@ function ArtifactsPrePromptInstallationDialog() {
         }),
       )();
 
-      sendMessage(
-        "spa-router:push",
-        {
-          url: `/collections/${data.slug}`,
-        },
-        "window",
-      );
+      softNavigate(`/spaces/${data.slug}`);
     },
     onError: () => {
       toast({

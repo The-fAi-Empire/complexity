@@ -43,7 +43,7 @@ export default function SpaceCommandItems() {
         {data?.map((space) => (
           <a
             key={space.uuid}
-            href={`/collections/${space.slug}`}
+            href={`/spaces/${space.slug}`}
             onClick={(e) => {
               e.preventDefault();
             }}
@@ -54,7 +54,7 @@ export default function SpaceCommandItems() {
               className="x:flex-col x:items-start x:justify-center x:gap-2"
               onSelect={() => {
                 if (isHotkeyPressed(Key.Alt)) {
-                  openInNewTab(`/collections/${space.slug}`);
+                  openInNewTab(`/spaces/${space.slug}`);
                   commandMenuStore.getState().setOpen(false);
                 } else if (isHotkeyPressed(Key.Shift)) {
                   commandMenuStore.getState().pushPage({
@@ -70,7 +70,7 @@ export default function SpaceCommandItems() {
                     sidecarOpen: false,
                   });
                 } else {
-                  softNavigate(`/collections/${space.slug}`);
+                  softNavigate(`/spaces/${space.slug}`);
                   commandMenuStore.getState().setOpen(false);
                 }
               }}

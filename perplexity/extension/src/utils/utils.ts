@@ -207,11 +207,11 @@ export const whereAmI = (() => {
       new MatchPattern(`${hostnameGlob}/spaces`),
       new MatchPattern(`${hostnameGlob}/spaces/`),
       new MatchPattern(`${hostnameGlob}/collections`),
-      new MatchPattern(`${hostnameGlob}/collections/`),
+      new MatchPattern(`${hostnameGlob}/spaces/`),
     ],
     collection: [
       new MatchPattern(`${hostnameGlob}/spaces/*`),
-      new MatchPattern(`${hostnameGlob}/collections/*`),
+      new MatchPattern(`${hostnameGlob}/spaces/*`),
     ],
     library: [new MatchPattern(`${hostnameGlob}/library*`)],
     thread: [new MatchPattern(`${hostnameGlob}/search/*`)],

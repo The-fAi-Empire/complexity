@@ -23,6 +23,6 @@ export async function fetchPplxAuthSession(page: Page) {
 }
 
 export async function fetchPplxUserSettings(page: Page) {
-  const resp = await page.request.get(ENDPOINTS.USER_SETTINGS);
+  const resp = await page.request.get(ENDPOINTS.USER_SETTINGS.INDEX);
   return PplxUserSettingsApiResponseSchema.parse(await resp.json());
 }

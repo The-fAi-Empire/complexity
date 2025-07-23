@@ -7,7 +7,6 @@ import type { ExtensionSettings } from "@/services/extension-settings/types";
 export const ESSENTIALS_ONLY: ExtensionSettings["plugins"] = produce(
   PluginRegistry.fallbackValues,
   (draft) => {
-    draft["queryBox:languageModelSelector"].enabled = true;
     draft["thread:toc"].enabled = true;
     draft["thread:exportThread"].enabled = true;
     draft["thread:betterMessageCopyButtons"].enabled = true;
@@ -18,7 +17,6 @@ export const ESSENTIALS_ONLY: ExtensionSettings["plugins"] = produce(
 export const POWER_USER: ExtensionSettings["plugins"] = produce(
   PluginRegistry.fallbackValues,
   (draft) => {
-    draft["queryBox:languageModelSelector"].enabled = true;
     draft["slashCommand"].enabled = true;
     draft["promptHistory"].enabled = true;
     draft["commandMenu"].enabled = true;

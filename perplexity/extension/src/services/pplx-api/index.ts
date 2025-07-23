@@ -46,7 +46,7 @@ export class PplxApiService {
   }
 
   static async fetchUserSettings(): Promise<PplxUserSettingsApiResponse> {
-    const resp = await fetch(ENDPOINTS.USER_SETTINGS);
+    const resp = await fetch(ENDPOINTS.USER_SETTINGS.INDEX);
 
     const respText = await resp.text();
 
@@ -62,7 +62,7 @@ export class PplxApiService {
   }
 
   static async fetchOrgSettings() {
-    const resp = await fetchTextResource(ENDPOINTS.ORG_SETTINGS);
+    const resp = await fetchTextResource(ENDPOINTS.USER_SETTINGS.ORG_SETTINGS);
 
     const data = PplxOrgSettingsApiResponseSchema.parse(
       jsonUtils.safeParse(resp),
@@ -97,7 +97,7 @@ export class PplxApiService {
   ): Promise<ThreadMessageApiResponse[]> {
     if (!threadSlug) throw new Error("Thread slug is required");
 
-    const url = ENDPOINTS.THREAD(threadSlug);
+    const url = ENDPOINTS.RESOURCES.THREADS.GET_ONE(threadSlug);
 
     const resp = await fetchTextResource(url);
 
@@ -120,7 +120,7 @@ export class PplxApiService {
     limit?: number;
     offset?: number;
   } = {}): Promise<ThreadsSearchApiResponse> {
-    const resp = await fetch(ENDPOINTS.THREADS, {
+    const resp = await fetch(ENDPOINTS.RESOURCES.THREADS.GET_ALL, {
       method: "POST",
       body: JSON.stringify({
         limit,
@@ -139,13 +139,15 @@ export class PplxApiService {
 
   static async fetchSpace(spaceUuid: Space["uuid"]): Promise<SpaceDetails> {
     return SpaceDetailsSchema.parse(
-      JSON.parse(await fetchTextResource(ENDPOINTS.SPACE(spaceUuid))),
+      JSON.parse(
+        await fetchTextResource(ENDPOINTS.RESOURCES.SPACES.GET_ONE(spaceUuid)),
+      ),
     );
   }
 
   static async fetchSpaces(): Promise<Space[]> {
     return SpacesApiResponseSchema.parse(
-      JSON.parse(await fetchTextResource(ENDPOINTS.SPACES)),
+      JSON.parse(await fetchTextResource(ENDPOINTS.RESOURCES.SPACES.GET_ALL)),
     );
   }
 
@@ -225,7 +227,7 @@ export class PplxApiService {
     return SpaceThreadsApiResponseSchema.parse(
       JSON.parse(
         await fetchTextResource(
-          ENDPOINTS.SPACE_THREADS({
+          ENDPOINTS.RESOURCES.SPACES.GET_THREADS({
             spaceSlug,
             limit,
             offset,

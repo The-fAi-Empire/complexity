@@ -15,7 +15,7 @@ export default function SpaceBadge({
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
-          softNavigate(`/collections/${space.slug}`);
+          softNavigate(`/spaces/${space.slug}`);
           commandMenuStore.getState().setOpen(false);
         }}
       >

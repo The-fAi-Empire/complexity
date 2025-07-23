@@ -4,7 +4,7 @@ import { escapeHtmlTags, whereAmI } from "@/utils/utils";
 
 describe("whereAmI", () => {
   it('should return "collection" for collection URLs', () => {
-    expect(whereAmI("https://www.perplexity.ai/collections/example")).toBe(
+    expect(whereAmI("https://www.perplexity.ai/spaces/example")).toBe(
       "collection",
     );
   });
