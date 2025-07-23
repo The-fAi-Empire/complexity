@@ -68,6 +68,8 @@ export const DOM_SELECTORS: DomSelectors = {
   HOME: {
     SLOGAN: ".mb-lg.md\\:absolute.text-center",
     BOTTOM_BAR: ".hidden.pb-md.md\\:block>div",
+    COMET_HOME_MAIN_WRAPPER:
+      ".grid.grid-cols-\\[repeat\\(auto-fill\\,minmax\\(160px\\,1fr\\)\\)\\].gap-3",
   },
   QUERY_BOX: {
     WRAPPER: {

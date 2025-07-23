@@ -12,11 +12,7 @@ import { isInContentScript } from "@/utils/utils";
 
 declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
-    "spa-router:route-change": ({
-      state,
-      trigger,
-      newUrl,
-    }: {
+    "spa-router:route-change": (params: {
       state: "pending" | "complete";
       trigger: RouterEvent;
       newUrl: string;

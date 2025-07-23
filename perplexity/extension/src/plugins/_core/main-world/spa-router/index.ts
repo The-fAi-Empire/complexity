@@ -1,6 +1,5 @@
 import { setupSpaRouterListeners } from "@/plugins/_core/main-world/spa-router/listeners.main-world";
-import { proxyNextRouter } from "@/plugins/_core/main-world/spa-router/spa-router";
-import { waitForNextjsGlobalObj } from "@/plugins/_core/main-world/spa-router/utils";
+import { proxySpaRouter } from "@/plugins/_core/main-world/spa-router/spa-router";
 
 declare module "@/plugins/_core/main-world/types" {
   interface MainWorldCorePluginRegistry {
@@ -10,7 +9,5 @@ declare module "@/plugins/_core/main-world/types" {
 
 onlyMainWorldGuard();
 
-await waitForNextjsGlobalObj();
-
-proxyNextRouter();
+proxySpaRouter();
 setupSpaRouterListeners();

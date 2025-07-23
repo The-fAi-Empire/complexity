@@ -1,23 +1,7 @@
-import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+import { locationWaits } from "@/plugins/_core/main-world/spa-router/location-waits";
 import type { MaybePromise } from "@/types/utils.types";
 import { UiUtils } from "@/utils/ui-utils";
 import { isInContentScript, type whereAmI } from "@/utils/utils";
-
-export async function waitForNextjsGlobalObj(): Promise<void> {
-  return new Promise((resolve) => {
-    const interval = setInterval(() => {
-      if (window.next?.router !== undefined) {
-        $(document.body).attr("data-nextjs-router-ready", "");
-        clearInterval(interval);
-        resolve();
-      }
-    }, 100);
-  });
-}
-
-export function isNextWindowObjectExists() {
-  return window.next !== undefined;
-}
 
 export function applyRouteIdAttribute(location: ReturnType<typeof whereAmI>) {
   $(document.body).attr("location", location);
@@ -26,29 +10,9 @@ export function applyRouteIdAttribute(location: ReturnType<typeof whereAmI>) {
 export async function waitForRouteChangeComplete(
   location: ReturnType<typeof whereAmI>,
 ) {
-  const domSelectors = await DomSelectorsService.mainWorldCached();
-
-  const locationChecks: Partial<
-    Record<ReturnType<typeof whereAmI>, () => MaybePromise<boolean>>
-  > = {
-    thread: checkThreadLoaded,
-    home: checkHomeLoaded,
-  };
-
-  const check = locationChecks[location] ?? UiUtils.waitForSpaIdle;
+  const check = locationWaits[location] ?? UiUtils.waitForSpaIdle;
 
   await waitForConditionOrTimeout(check);
-
-  applyRouteIdAttribute(location);
-
-  async function checkThreadLoaded() {
-    await UiUtils.waitForSpaIdle();
-    return $(domSelectors.THREAD.MESSAGE.INNER_WRAPPER).length > 0;
-  }
-
-  function checkHomeLoaded() {
-    return $(domSelectors.HOME.SLOGAN).length > 0;
-  }
 
   async function waitForConditionOrTimeout(
     condition: () => MaybePromise<boolean>,

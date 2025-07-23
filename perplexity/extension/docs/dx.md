@@ -28,7 +28,14 @@
    pnpm turbo build --filter=./packages/*
    ```
 
-4. Start the development server:
+4. Use the official remote configs registry (optional):
+   Add the following to the `.env` file in the folder `perplexity/extension`:
+
+   ```.env
+   VITE_CPLX_CDN_URL=https://cdn.cplx.app
+   ```
+
+5. Start the development server:
 
    ```bash
    cd perplexity/extension
@@ -38,8 +45,8 @@
    - At the current size of the project, dev server might take up to 30 seconds to finish transpiling the necessary code for the extension to work **initially**.
    - HMR not working? Refer to [HMR Support](./hmr.md).
 
-5. Enable "Developer mode" in your browser
-6. Load the extension from the `perplexity/extension/dist/chrome` folder
+6. Enable "Developer mode" in your browser
+7. Load the extension from the `perplexity/extension/dist/chrome` folder
 
 ### Build Process
 

@@ -9,7 +9,7 @@ export function findNavbar() {
     isInternalNodeExists({
       node: existingNavbar,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.THREAD.NAVBAR,
+        DomSelectorsService.internalAttributes.THREAD.NAVBAR,
       ),
     })
   )
@@ -36,7 +36,7 @@ export function findNavbarOverflowMenuButtonWrapper() {
     isInternalNodeExists({
       node: existingOverflowMenuButtonWrapper,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.SICKY_NAVBAR_CHILD
+        DomSelectorsService.internalAttributes.THREAD.NAVBAR_CHILD
           .OVERFLOW_MENU_BUTTON_WRAPPER,
       ),
     })
@@ -126,7 +126,7 @@ export function findPopper() {
     isInternalNodeExists({
       node: existingPopper,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.THREAD.POPPER.DESKTOP,
+        DomSelectorsService.internalAttributes.THREAD.POPPER.DESKTOP,
       ),
     })
   )

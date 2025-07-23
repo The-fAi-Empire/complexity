@@ -70,7 +70,7 @@ export const handleRewrite = ({
     "reactVdom:triggerRewriteOption",
     {
       messageBlockIndex,
-      optionIndex: 1,
+      optionIndex: 3,
     },
     "window",
   );

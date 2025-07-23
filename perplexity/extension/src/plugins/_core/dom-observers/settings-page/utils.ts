@@ -10,7 +10,7 @@ export function findSidebar() {
     isInternalNodeExists({
       node: existingSidebar,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.SETTINGS_PAGE.SIDEBAR_WRAPPER,
+        DomSelectorsService.internalAttributes.SETTINGS_PAGE.SIDEBAR_WRAPPER,
       ),
     })
   )

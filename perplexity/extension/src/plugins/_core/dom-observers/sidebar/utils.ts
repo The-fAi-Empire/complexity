@@ -10,7 +10,7 @@ export function findSidebarWrapper() {
     isInternalNodeExists({
       node: existingWrapper,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.SIDEBAR.WRAPPER,
+        DomSelectorsService.internalAttributes.SIDEBAR.WRAPPER,
       ),
     })
   )
@@ -41,7 +41,7 @@ export function findMobileTrigger() {
     isInternalNodeExists({
       node: existingMobileTrigger,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.cachedSync.SIDEBAR.MOBILE_TRIGGER,
+        DomSelectorsService.internalAttributes.SIDEBAR.MOBILE_TRIGGER,
       ),
     })
   )

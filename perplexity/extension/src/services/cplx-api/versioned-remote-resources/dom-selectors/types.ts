@@ -56,6 +56,7 @@ export const DomSelectorsSchema = z.object({
   HOME: z.object({
     SLOGAN: z.string(),
     BOTTOM_BAR: z.string(),
+    COMET_HOME_MAIN_WRAPPER: z.string(),
   }),
   QUERY_BOX: z.object({
     WRAPPER: z.object({
