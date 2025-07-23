@@ -198,7 +198,10 @@ export const whereAmI = (() => {
   const hostnameGlob = `https://*.perplexity.ai`;
 
   const patternMap = {
-    home: [new MatchPattern(`${hostnameGlob}/`)],
+    home: [
+      new MatchPattern(`${hostnameGlob}/`),
+      new MatchPattern(`${hostnameGlob}/b/home`),
+    ],
     discover: [new MatchPattern(`${hostnameGlob}/discover*`)],
     collections_page: [
       new MatchPattern(`${hostnameGlob}/spaces`),

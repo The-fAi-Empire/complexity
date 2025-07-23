@@ -9,6 +9,7 @@ import {
   orderKeys,
   normalizeKeyName,
 } from "@/components/hotkey-recorder/utils";
+import { useEvent } from "@/hooks/useEvent";
 import { getPlatform } from "@/hooks/usePlatformDetection";
 
 export function useHotkeyRecorder({
@@ -19,19 +20,11 @@ export function useHotkeyRecorder({
   const [recordedKeys, setRecordedKeys] = useState<Set<string>>(new Set());
   const [savedKeys, setSavedKeys] = useState<string[]>(defaultKeys);
   const [showError, setShowError] = useState(false);
-
-  const keydownHandlerRef = useRef<((e: KeyboardEvent) => void) | null>(null);
-  const keyupHandlerRef = useRef<((e: KeyboardEvent) => void) | null>(null);
   const activeKeysRef = useRef<Set<string>>(new Set());
-  const recordedKeysRef = useRef<Set<string>>(new Set());
 
   useEffect(() => {
     setSavedKeys(defaultKeys);
   }, [defaultKeys]);
-
-  useEffect(() => {
-    recordedKeysRef.current = recordedKeys;
-  }, [recordedKeys]);
 
   const displayKeys = isRecording
     ? recordedKeys?.size
@@ -45,85 +38,70 @@ export function useHotkeyRecorder({
     setShowError(false);
   }, []);
 
-  const start = useCallback(() => {
-    setIsRecording(true);
-    resetKeys();
+  const keydownHandler = useEvent((e: KeyboardEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-    const keydownHandler = (e: KeyboardEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
+    const keyName = normalizeKeyName(e.key);
 
-      const keyName = normalizeKeyName(e.key);
+    const isWindows = getPlatform() === "windows";
+    if (isWindows && keyName === "Meta") {
+      return;
+    }
 
-      const isWindows = getPlatform() === "windows";
-      if (isWindows && keyName === "Meta") {
-        return;
-      }
+    activeKeysRef.current.add(keyName);
+    setRecordedKeys(new Set(activeKeysRef.current));
+  });
 
-      activeKeysRef.current.add(keyName);
-      setRecordedKeys(new Set(activeKeysRef.current));
-    };
+  const keyupHandler = useEvent((e: KeyboardEvent) => {
+    const keyName = normalizeKeyName(e.key);
+    activeKeysRef.current.delete(keyName);
 
-    const keyupHandler = (e: KeyboardEvent) => {
-      const keyName = normalizeKeyName(e.key);
-      activeKeysRef.current.delete(keyName);
-
-      if (
-        activeKeysRef.current.size === 0 &&
-        recordedKeysRef.current.size > 0
-      ) {
-        const isValid = isValidKeyCombination(recordedKeysRef.current);
-        setShowError(!isValid);
-      }
-    };
-
-    keydownHandlerRef.current = keydownHandler;
-    keyupHandlerRef.current = keyupHandler;
-    window.addEventListener("keydown", keydownHandler);
-    window.addEventListener("keyup", keyupHandler);
-  }, [resetKeys]);
+    if (activeKeysRef.current.size === 0 && recordedKeys.size > 0) {
+      const isValid = isValidKeyCombination(recordedKeys);
+      setShowError(!isValid);
+    }
+  });
 
   const stop = useCallback(() => {
     setIsRecording(false);
-
-    if (keydownHandlerRef.current) {
-      window.removeEventListener("keydown", keydownHandlerRef.current);
-      keydownHandlerRef.current = null;
-    }
-
-    if (keyupHandlerRef.current) {
-      window.removeEventListener("keyup", keyupHandlerRef.current);
-      keyupHandlerRef.current = null;
-    }
-
+    window.removeEventListener("keydown", keydownHandler);
+    window.removeEventListener("keyup", keyupHandler);
     activeKeysRef.current = new Set();
-  }, []);
+  }, [keydownHandler, keyupHandler]);
+
+  const start = useCallback(() => {
+    setIsRecording(true);
+    resetKeys();
+    window.addEventListener("keydown", keydownHandler);
+    window.addEventListener("keyup", keyupHandler);
+  }, [resetKeys, keydownHandler, keyupHandler]);
+
+  const handleEscape = useEvent((e: KeyboardEvent) => {
+    if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      stop();
+    }
+  });
 
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (isRecording && e.key === "Escape") {
-        e.preventDefault();
-        e.stopPropagation();
-        stop();
-      }
-    };
-
     if (isRecording) {
       window.addEventListener("keydown", handleEscape);
+    } else {
+      window.removeEventListener("keydown", handleEscape);
     }
 
     return () => {
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [isRecording, stop]);
+  }, [isRecording, stop, handleEscape]);
 
   useEffect(() => {
     if (!recordedKeys?.size) return;
-
     const nonModifierKeys = Array.from(recordedKeys)
       .map((k) => k.toLowerCase())
       .filter((k) => !MODIFIER_KEYS.has(k));
-
     if (nonModifierKeys.length > 1) {
       resetKeys();
       stop();
@@ -153,14 +131,10 @@ export function useHotkeyRecorder({
 
   useEffect(() => {
     return () => {
-      if (keydownHandlerRef.current) {
-        window.removeEventListener("keydown", keydownHandlerRef.current);
-      }
-      if (keyupHandlerRef.current) {
-        window.removeEventListener("keyup", keyupHandlerRef.current);
-      }
+      window.removeEventListener("keydown", keydownHandler);
+      window.removeEventListener("keyup", keyupHandler);
     };
-  }, []);
+  }, [keydownHandler, keyupHandler]);
 
   const HotkeyRecorderComponent = () => (
     <HotkeyRecorderUi

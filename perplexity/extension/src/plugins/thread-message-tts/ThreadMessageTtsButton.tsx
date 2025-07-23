@@ -9,6 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useEvent } from "@/hooks/useEvent";
 import { threadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadMessageContext } from "@/plugins/_core/ui/groups/thread-message-context";
 import usePplxTtsRequest from "@/plugins/thread-message-tts/hooks/usePplxTtsRequest";
@@ -29,35 +30,31 @@ export function ThreadMessageTtsButton() {
     abort,
   } = usePplxTtsRequest();
 
-  const pendingRef = useRef(isPending);
+  const onPlayerComplete = useEvent(() => {
+    if (isPending) return;
+    setPlaying(false);
+    setFirstChunkArrived(false);
+    abort();
+  });
 
-  useEffect(() => {
-    pendingRef.current = isPending;
-  }, [isPending]);
+  const onPlayerStop = useEvent(() => {
+    setPlaying(false);
+    setFirstChunkArrived(false);
+    abort();
+  });
 
   const [player] = useState(() =>
     PplxTtsPlayerCoordinator.getInstance().createPlayer({
       onStart: () => {
         setFirstChunkArrived(true);
       },
-      onComplete: () => {
-        if (pendingRef.current) return;
-        setPlaying(false);
-        setFirstChunkArrived(false);
-        abort();
-      },
-      stop: () => {
-        setPlaying(false);
-        setFirstChunkArrived(false);
-        abort();
-      },
+      onComplete: onPlayerComplete,
+      stop: onPlayerStop,
     }),
   );
 
   const stopTts = useCallback(() => {
     PplxTtsPlayerCoordinator.getInstance().stopAllPlayers();
-    setPlaying(false);
-    setFirstChunkArrived(false);
   }, []);
 
   const initTts = useCallback(
@@ -68,6 +65,7 @@ export function ThreadMessageTtsButton() {
       }
 
       stopTts();
+      abort();
       player.startSession();
       setPlaying(true);
 
@@ -96,7 +94,7 @@ export function ThreadMessageTtsButton() {
         },
       });
     },
-    [playing, player, messageBlockIndex, stopTts, playTts],
+    [playing, player, messageBlockIndex, stopTts, playTts, abort],
   );
 
   useEffect(() => {
