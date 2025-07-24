@@ -3,11 +3,7 @@ import type { ManifestV3Export } from "@crxjs/vite-plugin";
 import { APP_CONFIG } from "./app.config";
 import packageData from ".././package.json";
 
-export type ExtendedManifestV3Export = ManifestV3Export & {
-  optional_host_permissions: string[];
-};
-
-export const baseManifest: ExtendedManifestV3Export = {
+export const baseManifest: ManifestV3Export = {
   manifest_version: 3,
   name: "Complexity | Perplexity AI Supercharged",
   description:

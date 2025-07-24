@@ -40,7 +40,7 @@ export const betterSearchParamsRouterRoute: RouteObject = {
       }),
       waitUntil({
         condition: async () => {
-          const url = new URL(`/search/`, window.location.href);
+          const url = new URL("/search", window.location.href);
 
           url.searchParams.set("q", query);
 
