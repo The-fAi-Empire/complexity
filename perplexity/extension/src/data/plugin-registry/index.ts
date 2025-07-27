@@ -9,6 +9,7 @@
 
 import { z } from "zod";
 
+import { APP_CONFIG } from "@/app.config";
 import type {
   PluginId,
   PluginManifestsMap,
@@ -39,7 +40,7 @@ export class PluginRegistry {
 
     invariant(params != null, `Plugin "${path}" has no definition`);
 
-    if (params.manifest.devOnly) continue;
+    if (!APP_CONFIG.IS_DEV && params.manifest.devOnly) continue;
 
     (PluginRegistry.manifests[params.manifest.id] as TypedPluginManifest<
       keyof PluginsSettingsRegistry

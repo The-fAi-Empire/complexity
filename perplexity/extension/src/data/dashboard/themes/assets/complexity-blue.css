@@ -1,3 +1,8 @@
+::selection {
+  color: var(--primary);
+  background: --alpha(var(--primary) / 30%);
+}
+
 body {
   --background-super-color-100: 59.28% 0.131 255.75;
   --background-super-color-200: 44.28% 0.131 255.75;
@@ -6,6 +11,8 @@ body {
 
   --primary: oklch(44.28% 0.131 255.75);
   --ring: oklch(44.28% 0.131 255.75);
+
+  caret-color: var(--primary);
 }
 
 :root[data-color-scheme="dark"] body {

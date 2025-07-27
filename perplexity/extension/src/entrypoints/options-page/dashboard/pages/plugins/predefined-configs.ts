@@ -36,6 +36,7 @@ export const ALL_PLUGINS: ExtensionSettings["plugins"] = produce(
       const pluginIdKey = key as keyof typeof draft;
 
       const excludedPlugins: PluginId[] = [
+        "queryBox:languageModelSelector",
         "queryBox:submitOnCtrlEnter",
         "thread:customThreadContainerWidth",
         "queryBox:spacesThreadsForceWritingMode",

@@ -20,6 +20,11 @@ export function generateAccentColorOverrides({ light, dark }: ColorPalette) {
   invariant(dark.super200, "dark.super200 is required");
 
   return dedent`
+    ::selection {
+      color: var(--primary);
+      background: --alpha(var(--primary) / 30%);
+    }
+  
     body {
       --background-super-color-100: ${light.super100};
       --background-super-color-200: ${light.super200};
@@ -28,6 +33,8 @@ export function generateAccentColorOverrides({ light, dark }: ColorPalette) {
 
       --primary: oklch(${light.super200});
       --ring: oklch(${light.super200});
+
+      caret-color: var(--primary);
     }
 
     :root[data-color-scheme="dark"] body {

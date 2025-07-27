@@ -23,14 +23,17 @@ export const locationWaits: Partial<
 
   async function checkHomeLoaded() {
     const domSelectors = await getDomSelectors();
-    if (new URL(window.location.href).pathname.includes("/b/home"))
-      return $(domSelectors.HOME.COMET_HOME_MAIN_WRAPPER).length > 0;
-
     return $(domSelectors.HOME.SLOGAN).length > 0;
+  }
+
+  async function checkCometNtpLoaded() {
+    const domSelectors = await getDomSelectors();
+    return $(domSelectors.HOME.COMET_HOME_MAIN_WRAPPER).length > 0;
   }
 
   return {
     thread: checkThreadLoaded,
     home: checkHomeLoaded,
+    comet_ntp: checkCometNtpLoaded,
   };
 })();

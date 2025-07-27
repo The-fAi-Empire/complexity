@@ -71,6 +71,7 @@ async function observeQueryBoxes(location: ReturnType<typeof whereAmI>) {
     Record<ReturnType<typeof whereAmI>, () => MaybePromise<void>>
   > = {
     home: findMainQueryBox,
+    comet_ntp: findMainQueryBox,
     collection: findSpaceQueryBox,
     thread: findFollowUpQueryBox,
   };

@@ -47,9 +47,8 @@ function ColorBanner({ colors }: { colors: string[] }) {
   return (
     <div className="x:relative x:flex x:size-full">
       {colors.map((color, index) => (
-        <div className="x:relative x:size-full">
+        <div key={index} className="x:relative x:size-full">
           <div
-            key={index}
             className="x:size-full"
             style={{ backgroundColor: `oklch(${color})` }}
           />

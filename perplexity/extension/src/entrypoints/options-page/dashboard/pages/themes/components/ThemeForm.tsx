@@ -101,8 +101,7 @@ export function ThemeForm() {
             />
           </div>
           <FormDescription>
-            Make sure entered fonts are installed on your system, or import them
-            in the CSS section below.
+            Make sure entered fonts are installed on your system.
           </FormDescription>
         </FormItem>
 

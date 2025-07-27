@@ -50,13 +50,12 @@ export default function loader() {
 
 const cleanup = () => {
   DomObserver.destroy(createDomObserverId("home"));
-  DomObserver.destroy(createDomObserverId("home", "languageSelector"));
 };
 
 function observeHome(location: ReturnType<typeof whereAmI>) {
   cleanup();
 
-  if (location !== "home") return;
+  if (location !== "home" && location !== "comet_ntp") return;
 
   DomObserver.create(createDomObserverId("home"), {
     target: document.body,

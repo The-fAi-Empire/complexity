@@ -15,7 +15,7 @@ const OBSERVER_ID = {
 };
 
 export function findMainQueryBox() {
-  if (whereAmI() !== "home") {
+  if (whereAmI() !== "home" && whereAmI() !== "comet_ntp") {
     queryBoxesDomObserverStore.getState().setWrapperNodes({
       main: null,
     });
