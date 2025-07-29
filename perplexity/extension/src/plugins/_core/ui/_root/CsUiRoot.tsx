@@ -28,8 +28,8 @@ const { SpacesPageComponents } = lazily(
 const { ThreadComponents } = lazily(
   () => import("@/plugins/_core/ui/route-groups/Thread"),
 );
-const { ThreadCometAssistantComponents } = lazily(
-  () => import("@/plugins/_core/ui/route-groups/ThreadCometAssistant"),
+const { CometAssistantComponents } = lazily(
+  () => import("@/plugins/_core/ui/route-groups/CometAssistant"),
 );
 
 export default function CsUiRoot() {
@@ -39,7 +39,7 @@ export default function CsUiRoot() {
 
       <ThreadComponents />
 
-      <ThreadCometAssistantComponents />
+      <CometAssistantComponents />
 
       <SidebarComponents />
 
@@ -51,9 +51,7 @@ export default function CsUiRoot() {
 
       <QueryBoxComponents />
 
-      <CsUiPluginsGuard
-        excludeLocation={["comet_assistant_home", "thread_comet_assistant"]}
-      >
+      <CsUiPluginsGuard excludeLocation={["comet_assistant"]}>
         <CommandMenuWrapper />
       </CsUiPluginsGuard>
 

@@ -4,14 +4,6 @@ import { createDashboardShortcut } from "@/entrypoints/background/listeners/dash
 import { extensionIconActionListener } from "@/entrypoints/background/listeners/extension-icon-action";
 import { onboardingFlowTrigger } from "@/entrypoints/background/listeners/onboarding-flow-trigger";
 
-declare module "@/types/webext-bridge-overrides" {
-  interface EventHandlers {
-    "bg:getTabId": () => number;
-    "bg:openDirectReleaseNotes": ({ version }: { version: string }) => void;
-    "bg:openOptionsPage": () => void;
-  }
-}
-
 export function setupBackgroundListeners() {
   extensionIconActionListener();
   onboardingFlowTrigger();

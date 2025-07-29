@@ -109,7 +109,7 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
         ]);
       },
     });
-  } else if (location === "thread_comet_assistant") {
+  } else if (location === "comet_assistant") {
     DomObserver.create(createDomObserverId("thread"), {
       target: document.body,
       config: { childList: true, subtree: true },

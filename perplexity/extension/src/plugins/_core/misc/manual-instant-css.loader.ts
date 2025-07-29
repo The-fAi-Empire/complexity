@@ -9,9 +9,8 @@ export default async function loader() {
   if (!(await InstantCssService.hasPermissions())) return;
 
   const cometPages: ReturnType<typeof whereAmI>[] = [
-    "comet_assistant_home",
     "comet_ntp",
-    "thread_comet_assistant",
+    "comet_assistant",
   ];
 
   if (!cometPages.includes(whereAmI())) return;

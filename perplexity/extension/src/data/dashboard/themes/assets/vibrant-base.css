@@ -18,12 +18,12 @@ body {
           color: var(--primary);
         }
       }
-    }
-  }
 
-  /* Inline Code */
-  code:not(pre code) {
-    color: var(--primary);
+      /* Inline Code */
+      code:not(pre code) {
+        color: var(--primary);
+      }
+    }
   }
 
   font-variant-ligatures: none;

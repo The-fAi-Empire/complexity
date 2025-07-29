@@ -13,9 +13,9 @@ const { default: BetterCodeBlocksWrapper } = lazily(
   () => import("@/plugins/thread-better-code-blocks/Wrapper"),
 );
 
-export function ThreadCometAssistantComponents() {
+export function CometAssistantComponents() {
   return (
-    <CsUiPluginsGuard location={["thread_comet_assistant"]}>
+    <CsUiPluginsGuard location={["comet_assistant"]}>
       <BetterCodeBlocksWrapper />
 
       <ThreadQueryHoverContainerExtraButtonsWrapper />
