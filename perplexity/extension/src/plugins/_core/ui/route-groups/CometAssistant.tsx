@@ -12,6 +12,9 @@ const { default: ThreadQueryHoverContainerExtraButtonsWrapper } = lazily(
 const { default: BetterCodeBlocksWrapper } = lazily(
   () => import("@/plugins/thread-better-code-blocks/Wrapper"),
 );
+const { default: ThreadTocWrapper } = lazily(
+  () => import("@/plugins/thread-toc/Wrapper"),
+);
 
 export function CometAssistantComponents() {
   return (
@@ -21,6 +24,8 @@ export function CometAssistantComponents() {
       <ThreadQueryHoverContainerExtraButtonsWrapper />
 
       <ThreadMessageToolbarExtraButtonsWrapper />
+
+      <ThreadTocWrapper />
     </CsUiPluginsGuard>
   );
 }

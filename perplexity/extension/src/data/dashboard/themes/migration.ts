@@ -1,8 +1,8 @@
 import type { Theme } from "@/data/dashboard/themes/theme.types";
 import {
-  generateAccentColorOverrides,
-  generatePalette,
-} from "@/entrypoints/options-page/dashboard/pages/themes/index.public";
+  generateThemeData,
+  initialValues,
+} from "@/data/dashboard/themes/utils";
 
 export function legacyThemeMigration(theme: Theme) {
   if (theme.config == null) return;
@@ -19,18 +19,9 @@ export function legacyThemeMigration(theme: Theme) {
   ) {
     theme.config.accentColorSelection = "custom";
 
-    const palette = generatePalette(theme.config.accentColor);
+    const newData = generateThemeData(theme.config, initialValues);
 
-    theme.displayBannerColors = [palette.light.super200, palette.dark.super200];
-    theme.css = generateAccentColorOverrides({
-      light: {
-        super100: palette.light.super100,
-        super200: palette.light.super200,
-      },
-      dark: {
-        super100: palette.dark.super100,
-        super200: palette.dark.super200,
-      },
-    });
+    theme.css = newData.css;
+    theme.displayBannerColors = newData.displayBannerColors;
   }
 }

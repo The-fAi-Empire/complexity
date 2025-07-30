@@ -91,11 +91,11 @@ function shouldDehydrateQuery(query: Query) {
     }).queryKey,
   ] as unknown as any[][];
 
-  const result = includes.some(
+  const shouldPersist = includes.some(
     (query) => Array.isArray(queryKey) && isSubArray(query, queryKey),
   );
 
-  return result;
+  return shouldPersist;
 }
 
 export async function removeCachedRemoteResources({
@@ -104,12 +104,16 @@ export async function removeCachedRemoteResources({
   queryClient: QueryClient;
 }) {
   queryClient.removeQueries({
-    queryKey: cplxApiQueries.remoteResource.all(),
+    queryKey: cplxApiQueries.all(),
   });
 
-  queryClient.removeQueries({
-    queryKey: cplxApiQueries.versionedRemoteResource.all(),
-  });
+  // queryClient.removeQueries({
+  //   queryKey: cplxApiQueries.remoteResource.all(),
+  // });
+
+  // queryClient.removeQueries({
+  //   queryKey: cplxApiQueries.versionedRemoteResource.all(),
+  // });
 
   persistRemoteResources({ queryClient });
 }

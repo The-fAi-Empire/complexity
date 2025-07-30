@@ -20,8 +20,8 @@ export const DOM_SELECTORS: DomSelectors = {
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.h-headerHeight.absolute + div > div > div[class=""]`,
-        BRANCHED: `.h-headerHeight.absolute + div > div > div[class=""]`,
+        NORMAL: `.h-headerHeight.absolute + div > div > div[class=""],.erp-sidecar\\:pb-0.pb-16`,
+        BRANCHED: `.h-headerHeight.absolute + div > div > div[class=""],.erp-sidecar\\:pb-0.pb-16`,
       },
       MOBILE: {
         NORMAL: `.h-headerHeight.absolute + div div.erp-sidecar\\:pb-0`,
@@ -29,7 +29,7 @@ export const DOM_SELECTORS: DomSelectors = {
       },
     },
     MESSAGE: {
-      OUTER_WRAPPER: "div:not([class])",
+      OUTER_WRAPPER: "div:not([class]),.erp-sidecar\\:pb-0.pb-16",
       INNER_WRAPPER:
         ".dark\\:divide-borderMainDark\\/50:has(>.isolate.mx-auto)",
       QUERY_WRAPPER: ".isolate.mx-auto > .max-w-threadContentWidth:first-child",
@@ -105,7 +105,7 @@ export const DOM_SELECTORS: DomSelectors = {
   SETTINGS_PAGE: {
     SIDEBAR_WRAPPER: ".w-sideBarWidth, .scrollable-container",
     SIDEBAR_CHILD: {
-      BACK_BUTTON: ".mb-3.ml-2.flex.items-center.gap-2",
+      BACK_BUTTON: ".mb-3.ml-2.flex.md\\:px-2",
     },
   },
   STICKY_NAVBAR: ".h-headerHeight.absolute",

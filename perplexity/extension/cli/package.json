@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "@aws-sdk/client-s3": "^3.787.0",
-    "@dotenvx/dotenvx": "^1.39.1",
+    "@dotenvx/dotenvx": "^1.48.4",
     "chrome-webstore-upload": "^3.1.4",
     "commander": "^13.1.0",
-    "glob": "^11.0.1",
+    "glob": "^11.0.3",
     "inquirer": "^12.5.2",
     "mime-types": "^3.0.1",
-    "semver": "^7.7.1",
+    "semver": "^7.7.2",
     "web-ext": "^8.5.0"
   },
   "devDependencies": {
@@ -15,11 +15,11 @@
     "@complexity/eslint-config": "workspace:*",
     "@complexity/typescript-config": "workspace:*",
     "@types/mime-types": "^2.1.4",
-    "@types/node": "^22.14.1",
-    "eslint": "^9.24.0",
-    "prettier": "^3.5.3",
-    "typescript": "5.8.2",
-    "typescript-eslint": "^8.29.0"
+    "@types/node": "^20.17.30",
+    "eslint": "^9.32.0",
+    "prettier": "^3.6.2",
+    "typescript": "5.8.3",
+    "typescript-eslint": "^8.29.1"
   },
   "name": "pplx-ext-release-cli",
   "scripts": {

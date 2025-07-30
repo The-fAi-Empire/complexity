@@ -31,7 +31,7 @@ export default function loader() {
       "cache:domSelectors",
     ],
     loader: () => {
-      const $existingPortals = $("[data-type=portal]");
+      const $existingPortals = $("body > [data-type=portal]");
 
       const $root = $("<div>").attr("id", "complexity-root");
 

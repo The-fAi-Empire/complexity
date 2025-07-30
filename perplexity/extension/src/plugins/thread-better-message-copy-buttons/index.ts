@@ -19,8 +19,8 @@ export default definePlugin({
     title: "Better Message Copy Buttons",
     description:
       "Copy message content without citations. More formatting options coming soon",
-    categories: ["thread"],
-    tags: ["ui"],
+    categories: ["thread", "comet"],
+    tags: ["ui", "cometAssistant"],
     uiGroup: ["thread:messageBlocks:toolbar"],
     dependentDomObservers: ["thread:messageBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],

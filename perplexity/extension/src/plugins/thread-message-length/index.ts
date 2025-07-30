@@ -20,8 +20,8 @@ export default definePlugin({
     title: "Show Message Length",
     description:
       "Show the length of each message in words, characters, and tokens",
-    categories: ["thread"],
-    tags: ["ui"],
+    categories: ["thread", "comet"],
+    tags: ["ui", "cometAssistant"],
     dependentDomObservers: ["thread:messageBlocks"],
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
     uiGroup: [

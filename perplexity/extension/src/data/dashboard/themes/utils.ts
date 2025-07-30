@@ -1,6 +1,83 @@
 import type { Oklch } from "culori";
 import { oklch } from "culori";
 import dedent from "dedent";
+import type { DeepRequired } from "react-hook-form";
+
+import vibrantBaseCss from "@/data/dashboard/themes/assets/vibrant-base.css?inline";
+import {
+  cometColors,
+  cplxColors,
+} from "@/data/dashboard/themes/built-in-colors";
+import type { Theme } from "@/data/dashboard/themes/theme.types";
+import type { ThemeFormValues } from "@/data/dashboard/themes/theme.types";
+
+export const initialValues: DeepRequired<ThemeFormValues> = {
+  title: "Untitled Theme",
+  fonts: { ui: "", mono: "" },
+  accentColor: "",
+  builtInAccentColor: "cplx-blue",
+  accentColorSelection: "built-in",
+  enhanceThreadTypography: false,
+  customCss: "",
+};
+
+type ThemeDataResult = Pick<Theme, "css" | "displayBannerColors">;
+type ColorPaletteForAccent = Parameters<typeof generateAccentColorOverrides>[0];
+
+export function generateThemeData(
+  data: ThemeFormValues,
+  defaultValues: DeepRequired<ThemeFormValues>,
+): ThemeDataResult {
+  const cssParts: string[] = [];
+  let displayBannerColors: string[] = [];
+
+  let accentPalette: ColorPaletteForAccent | undefined;
+
+  if (data.accentColorSelection === "custom" && data.accentColor) {
+    accentPalette = generatePalette(data.accentColor);
+  } else if (data.accentColorSelection === "built-in") {
+    const color = [...cplxColors, ...cometColors].find(
+      (c) => c.value === data.builtInAccentColor,
+    );
+
+    invariant(color, "Invalid built-in color");
+    accentPalette = color.color;
+  }
+
+  if (accentPalette) {
+    cssParts.push(generateAccentColorOverrides(accentPalette));
+    displayBannerColors = [
+      accentPalette.light.super200,
+      accentPalette.dark.super200,
+    ];
+  }
+
+  const fontUiData = {
+    uiFont: data.fonts.ui ?? defaultValues.fonts.ui,
+    monoFont: data.fonts.mono ?? defaultValues.fonts.mono,
+  };
+
+  if (
+    fontUiData.uiFont ||
+    fontUiData.monoFont ||
+    data.enhanceThreadTypography
+  ) {
+    cssParts.push(generateUiFontsOverrides(fontUiData));
+  }
+
+  if (data.enhanceThreadTypography) {
+    cssParts.push(vibrantBaseCss);
+  }
+
+  if (data.customCss) {
+    cssParts.push(data.customCss);
+  }
+
+  return {
+    css: cssParts.join("\n"),
+    displayBannerColors,
+  };
+}
 
 type ColorPalette = {
   light: {

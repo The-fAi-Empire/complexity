@@ -10,7 +10,6 @@ import { createDomObserverId } from "@/plugins/_api/dom-observer/dom-observer.ty
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { useThreadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { useSpaRouter } from "@/plugins/_core/main-world/spa-router/listeners.loader";
-import { whereAmI } from "@/utils/utils";
 
 export const PANEL_WIDTH = 230;
 
@@ -90,11 +89,6 @@ export function usePanelPosition(): PanelPosition | null {
   );
 
   useEffect(() => {
-    if (whereAmI(url) !== "thread") {
-      setPanelPosition(null);
-      return;
-    }
-
     const debouncedUpdate = debounce(() => {
       const newPanelPosition = calculatePosition();
       if (newPanelPosition == null) return;

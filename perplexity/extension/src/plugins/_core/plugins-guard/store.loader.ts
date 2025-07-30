@@ -52,9 +52,13 @@ export default function loader() {
       pplxAuthQueryObserver.subscribe((data) => {
         if (data.data == null) return;
 
+        const userData = data.data.user;
+
         pluginGuardsStore.setState((state) => {
           state.isLoggedIn = Object.keys(data.data).length > 0;
-          const hasActiveSub = data.data.subscription_status !== "none";
+          const hasActiveSub =
+            userData.subscription_status != null &&
+            userData.subscription_status !== "none";
 
           state.hasActiveSub = hasActiveSub;
 
@@ -69,7 +73,7 @@ export default function loader() {
             }
 
             state.subTier =
-              data.data.subscription_tier === "max" ? "max" : "pro";
+              userData.subscription_tier === "max" ? "max" : "pro";
           }
         });
       });

@@ -43,7 +43,7 @@ export function EditThemeProvider({ children, theme }: EditThemeProviderProps) {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ["customTheme", "edit", theme.id],
     mutationFn: async (data: ThemeFormValues) => {
-      const themeData = await generateThemeData(data);
+      const themeData = generateThemeData(data, initialValues);
       await getLocalThemesService().update({
         ...theme,
         ...themeData,

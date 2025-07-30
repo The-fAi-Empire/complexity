@@ -88,5 +88,8 @@
     "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
     "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
     "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"
+  },
+  "chat.instructionsFilesLocations": {
+    ".cursor/ghc-instructions": true
   }
 }

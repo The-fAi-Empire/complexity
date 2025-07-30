@@ -1,4 +1,5 @@
 import { Portal } from "@/components/ui/portal";
+import CsUiPluginsGuard from "@/plugins/_core/plugins-guard/CsUiPluginsGuard";
 import { ThreadMessageContext } from "@/plugins/_core/ui/groups/thread-message-context";
 import { useCreatePortalContainers } from "@/plugins/_core/ui/groups/thread-message-toolbar/useCreatePortalContainers";
 import ThreadBetterMessageCopyButtonWrapper from "@/plugins/thread-better-message-copy-buttons/Wrapper";
@@ -31,7 +32,9 @@ const MemoizedWrapper = memo(function MemoizedWrapper() {
 
       <ThreadMessageTtsButtonWrapper />
 
-      <ThreadBetterRewriteDropdownWrapper />
+      <CsUiPluginsGuard excludeLocation={["comet_assistant"]}>
+        <ThreadBetterRewriteDropdownWrapper />
+      </CsUiPluginsGuard>
 
       <ThreadBetterMessageCopyButtonWrapper />
     </div>

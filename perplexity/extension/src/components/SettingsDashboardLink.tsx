@@ -56,7 +56,7 @@ export function SettingsDashboardLink() {
           <Cplx className="x:size-4 x:fill-foreground" />
           <div>Complexity</div>
         </div>
-        <FaArrowUpRight className="x:ml-auto x:size-3.5" />
+        <FaArrowUpRight className="x:ml-auto x:size-3.5 x:text-muted-foreground" />
       </div>
     </Portal>
   );

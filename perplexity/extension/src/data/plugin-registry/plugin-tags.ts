@@ -16,14 +16,14 @@ export const PLUGIN_CATEGORIES = {
     label: "Query Box Utilities",
     description: "Add functionalities/tweaks to the query box",
   },
-  prompting: {
-    label: "Prompting",
-    description: "Prompt-related utilities",
-  },
   sidebar: {
     label: "Sidebar Utilities",
     description:
       "Add extra functionalities, productivity tweaks to the sidebar",
+  },
+  comet: {
+    label: "Comet Utilities",
+    description: "Plugins that are supported on the Comet browser",
   },
   misc: {
     label: "Miscellaneous",
@@ -48,6 +48,14 @@ export const PLUGIN_TAGS = {
   chromiumOnly: {
     label: "Chromium Only",
     description: "Can only be used on Chromium-based browsers",
+  },
+  cometAssistant: {
+    label: "Comet Assistant",
+    description: "Supported on Comet Assistant",
+  },
+  cometAssistantOnly: {
+    label: "Comet Assistant Only",
+    description: "Can only be used on Comet Assistant",
   },
   ui: {
     label: "UI",

@@ -9,18 +9,25 @@
     "test": "turbo test",
     "build": "turbo build",
     "prepare": "husky",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "check-deps": "manypkg check",
+    "fix-deps": "manypkg fix"
   },
   "devDependencies": {
+    "@manypkg/cli": "^0.25.0",
     "husky": "^9.1.7",
     "lint-staged": "16.1.2",
     "prettier": "^3.6.2",
-    "syncpack": "^13.0.4",
     "turbo": "^2.5.3",
     "typescript": "5.8.3"
   },
   "packageManager": "pnpm@10.13.1",
   "engines": {
     "node": ">=20"
+  },
+  "manypkg": {
+    "defaultBranch": "main",
+    "ignoredRules": [],
+    "workspaceProtocol": "require"
   }
 }

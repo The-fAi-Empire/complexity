@@ -33,8 +33,9 @@ export function CreateThemeProvider({ children }: CreateThemeProviderProps) {
   const { mutateAsync, isPending } = useMutation({
     mutationKey: ["customTheme", "create"],
     mutationFn: async (data: ThemeFormValues) => {
-      const themeData = await generateThemeData(data);
+      const themeData = generateThemeData(data, initialValues);
       const savedThemeId = await getLocalThemesService().add({
+        title: data.title,
         id: `${Date.now()}-${data.title.toLowerCase().replace(/ /g, "-")}`,
         config: data,
         ...themeData,
