@@ -7,6 +7,7 @@ declare module "@/types/webext-bridge-overrides" {
   interface EventHandlers {
     "bg:getTabId": () => number;
     "bg:comet:getSidecarTabId": () => number | undefined;
+    "bg:setTabZoom": ({ zoom }: { zoom: number }) => void;
     "bg:openDirectReleaseNotes": ({ version }: { version: string }) => void;
     "bg:openOptionsPage": () => void;
     "bg:notify": ({ data }: { data: any }) => boolean;
@@ -42,5 +43,39 @@ export function contentScriptListeners() {
     chrome.tabs.create({
       url: `${optionsPageUrl}#/direct-release-notes?version=${version}`,
     });
+  });
+
+  onMessage("bg:setTabZoom", ({ sender, data }) => {
+    const { zoom } = data;
+    const tabId = sender.tabId;
+
+    if (!tabId) return;
+
+    chrome.tabs.setZoomSettings(
+      tabId,
+      {
+        mode: "automatic",
+        scope: "per-tab",
+        defaultZoomFactor: zoom,
+      },
+      function () {
+        if (chrome.runtime.lastError) {
+          console.error(
+            "Failed to set tab zoom settings:",
+            JSON.stringify(chrome.runtime.lastError),
+          );
+          return;
+        }
+
+        chrome.tabs.setZoom(tabId, zoom, () => {
+          if (chrome.runtime.lastError) {
+            console.error(
+              "Failed to set tab zoom:",
+              JSON.stringify(chrome.runtime.lastError),
+            );
+          }
+        });
+      },
+    );
   });
 }

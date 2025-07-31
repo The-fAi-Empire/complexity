@@ -27,7 +27,11 @@ export class PluginsStatesService {
   }
 
   static async featureCompatInlineQueryFn() {
-    return getRemoteResource(featureCompatResourceConfig);
+    const a = await getRemoteResource(featureCompatResourceConfig);
+
+    console.log(a);
+
+    return a;
   }
 
   static cachedEnableStates: PluginsStates | null = null;
