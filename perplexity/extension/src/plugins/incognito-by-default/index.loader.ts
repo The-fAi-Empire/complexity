@@ -10,7 +10,7 @@ declare module "@/plugins/_core/async-dep-registry" {
 export default function loader() {
   asyncLoaderRegistry.register({
     id: "plugin:incognitoByDefault",
-    dependencies: ["cache:pluginsStates"],
+    dependencies: ["cache:pluginsStates", "store:pplxCookies"],
     loader({ "cache:pluginsStates": pluginsStates }) {
       if (!pluginsStates.incognitoByDefault) return;
 
