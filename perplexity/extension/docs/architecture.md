@@ -48,6 +48,19 @@ The architecture uses a modular plugin system to implement features independentl
   - [Settings UI](../src/entrypoints/options-page/dashboard/pages/plugins/components/plugin-settings-uis/loader.ts)
   - Refer to [Build your own plugin](./build-your-own-plugin.md) for more details
 
+### Module Discovery
+
+This repository heavily leverages **Vite's `import.meta.glob`** for automatic module discovery and registration. This eliminates the need for manual imports and enables a true plugin architecture where:
+
+- **Plugin Registry**: Automatically discovers all plugin manifests via `@/plugins/!(_core|_api)/index.ts`
+- **Content Script Loaders**: Auto-loads plugin loaders via `@/plugins/!(_core|_api)/loader.{ts,tsx}` and `@/plugins/**/*.loader.{ts,tsx}`
+- **Settings UIs**: Auto-registers plugin settings components (options-page) via `@/plugins/!(_core|_api)/settings-ui.tsx`
+- **Background Listeners**: Auto-registers event listeners via `@/**/*.background-listener.ts`
+- **Proxy Services**: Auto-registers background services via `@/services/**/*.proxy-service.ts` and `@/**/indexed-db/index.ts`
+- **Internationalization**: Auto-loads locale files via `@/_locales/*.*.ts`, `@/plugins/*/_locales/*.*.ts`, etc.
+
+Create files with the correct naming convention, and they're automatically discovered and integrated into the system without any manual registration steps.
+
 ### Plugin Structure
 
 The folder structure is similar to a typical feature-based structure, where each feature folder contains its own components, hooks, services, types, utils, and data:
@@ -64,75 +77,65 @@ plugins/feature-name/
 
 ## Dependency Boundaries
 
-The project enforces strict dependency boundaries via ESLint:
+The project enforces strict dependency boundaries via ESLint using `eslint-plugin-boundaries`. The configuration is defined in [`eslint-config/boundaries.js`](../eslint-config/boundaries.js).
+
+### Boundary Types
 
 1. **Shared** - Common code including components, hooks, services, types, utils, and data
 2. **Entrypoint** - Entry points for different contexts (background, content scripts, options)
-3. **Core Plugin** - Core plugin functionality and APIs
-4. **Plugin** - Individual feature implementations
+3. **Plugin Core** - Core plugin functionality and APIs (`src/plugins/_api/**/*`, `src/plugins/_core/**/*`)
+4. **Plugin** - Individual feature implementations (`src/plugins/*/**/*`)
+5. **Plugin Public Exports** - Public API surfaces for plugins (`src/plugins/*/**/*.public.*`)
+6. **Plugin Settings UI** - Settings UI components for plugins (`src/plugins/*/**/settings-ui.tsx`)
 
-Dependency flow is strictly controlled:
+### Import Rules
 
-`A → A, B`: A can only import dependencies from itself or B
+Dependency flow is strictly controlled where each boundary type can only import from allowed types:
 
-- `Shared` → `Shared`, `Core Plugin`
-- `Entrypoint` → `Entrypoint`, `Shared`, `Core Plugin`, `Plugin`
-- `Core Plugin` → `Shared`, `Core Plugin`, `Plugin`
-- `Plugin` → `Shared`, `Core Plugin`, `Plugin`
+- **Shared** → `Shared`, `Plugin Core`, `Plugin Public Exports`
+- **Entrypoint** → `Entrypoint`, `Shared`, `Plugin Core`, `Plugin Public Exports`
+- **Plugin Core** → `Shared`, `Plugin Core`, `Plugin`, `Plugin Public Exports`
+- **Plugin** → `Shared`, `Plugin Core`, `Plugin Public Exports`, same plugin only
+- **Plugin Public Exports** → same plugin only
+- **Plugin Settings UI** → `Shared`, `Plugin Core`, `Plugin Public Exports`, same plugin, `options-page` entrypoint
 
 ```mermaid
 flowchart TD
-    Entrypoint([Entrypoint])
-    Shared([Shared])
-    CorePlugin([Core Plugin])
-    Plugin([Plugin])
+    E["Entrypoint<br/><small>Entry points for different contexts</small>"]
+    P["Plugin<br/><small>Individual feature implementations</small>"]
+    S["Shared<br/><small>Common utilities, components, hooks</small>"]
 
-    subgraph Layer1["Layer 1"]
-        direction LR
-        Entrypoint
-    end
+    E -->|"can import"| P
+    P -->|"can import"| S
 
-    subgraph Layer2["Layer 2"]
-        direction LR
-        Shared --- CorePlugin
-    end
+    classDef entrypoint fill:#e3f2fd,stroke:#1976d2,stroke-width:2px
+    classDef plugin fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef shared fill:#e8f5e8,stroke:#388e3c,stroke-width:2px
 
-    subgraph Layer3["Layer 3"]
-        direction LR
-        Plugin
-    end
-
-    Entrypoint -->|imports| Shared
-    Entrypoint -->|imports| CorePlugin
-    Entrypoint -->|imports| Plugin
-
-    Plugin -->|imports| Shared
-    Plugin -->|imports| CorePlugin
-
-    CorePlugin -->|imports| Shared
-    CorePlugin -->|imports| Plugin
-
-    Shared -->|imports| CorePlugin
-
-    classDef entrypoint fill:#d4f1f9,stroke:#1a6f85,stroke-width:2px,color:#333
-    classDef shared fill:#d5f5e3,stroke:#1e8449,stroke-width:2px,color:#333
-    classDef coreplugin fill:#fcf3cf,stroke:#b7950b,stroke-width:2px,color:#333
-    classDef plugin fill:#f5d5f0,stroke:#884ea0,stroke-width:2px,color:#333
-    classDef layer fill:none,stroke:#999,stroke-dasharray:5 5,color:#666
-
-    class Entrypoint entrypoint
-    class Shared shared
-    class CorePlugin coreplugin
-    class Plugin plugin
-    class Layer1,Layer2,Layer3 layer
+    class E entrypoint
+    class P plugin
+    class S shared
 ```
 
-Files are categorized based on their location:
+**Key principle**: Higher layers can import from lower layers, but not vice versa. This prevents circular dependencies and maintains clean architecture.
 
-- Shared: `src/*.ts`, `src/components/**/*`, `src/assets/**/*`, `src/hooks/**/*`, `src/services/**/*`, `src/types/**/*`, `src/utils/**/*`, `src/data/**/*`
-- Entrypoint: `src/entrypoints/**/*`
-- Core Plugin: `src/plugins/_api/**/*`, `src/plugins/_core/**/*`
-- Plugin: `src/plugins/<plugin-name>/**/*`
+### File Categorization
+
+Files are categorized based on their location patterns as defined in the ESLint boundaries configuration:
+
+- **Shared**: `src/*.ts`, `src/components/**/*`, `src/assets/**/*`, `src/hooks/**/*`, `src/services/**/*`, `src/types/**/*`, `src/utils/**/*`, `src/data/**/*`, `src/**/index.public.ts`
+- **Entrypoint**: `src/entrypoints/*/**/*`
+- **Plugin Core**: `src/plugins/_api/**/*`, `src/plugins/_core/**/*`
+- **Plugin**: `src/plugins/*/**/*`
+- **Plugin Public Exports**: `src/plugins/*/**/*.public.*`
+- **Plugin Settings UI**: `src/plugins/*/**/settings-ui.tsx`
+
+### Special Rules
+
+- Plugins can only import from their own plugin directory (same `pluginName`)
+- Plugin Public Exports cannot import from their own plugin's public exports (prevents circular dependencies)
+- Plugin Settings UI can import from the `options-page` entrypoint specifically
+- Files in `**/_locales/**/*` are excluded from boundary checking
 
 ## Data
 

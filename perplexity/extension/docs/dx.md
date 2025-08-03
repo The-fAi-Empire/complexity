@@ -18,6 +18,7 @@
 2. Install dependencies:
 
    ```bash
+   pnpm i -g turbo
    git submodule update --init --recursive
    pnpm install
    pnpm turbo build --filter=./packages/*
@@ -64,7 +65,7 @@ pnpm turbo zip:all
 ## Developer Tools
 
 > [!TIP]
-> For the best experience on VSCode, it is strongly recommended to open the extension as a dedicated workspace.
+> For the best experience on VSCode, it is strongly recommended to open the `/perplexity/extension` as a dedicated workspace.
 
 ### Linting and Formatting
 
@@ -73,7 +74,7 @@ pnpm turbo zip:all
   - Enforces strict null checks ([`@typescript-eslint/strict-boolean-expressions`](https://typescript-eslint.io/rules/strict-boolean-expressions/))
   - Enforces specific filename casing (`PascalCase`, `kebab-case`, `camelCase`)
   - Provides automatic global imports via `unimport` (see [config](../src/types/unimport.config.ts))
-  - Enforces import scoping via [`eslint-plugin-boundaries`](https://github.com/javierbrea/eslint-plugin-boundaries) to maintain a clean architecture with clear dependency directions (see [config](../eslint/boundaries.js))
+  - Enforces import scoping via [`eslint-plugin-boundaries`](https://github.com/javierbrea/eslint-plugin-boundaries) to maintain a clean architecture with clear dependency directions (see [config](../eslint-config/boundaries.js))
 
 ### Development Commands
 
@@ -95,7 +96,6 @@ pnpm turbo zip:all
 - File exclusions to keep the explorer clean
 - You might want to adjust `typescript.tsserver.maxTsServerMemory` to match your system's specs
 - TailwindCSS (v4) IntelliSense support for jQuery's methods
-- i18n-ally (`lokalise.i18n-ally`) pre-configured
 
 ## Misc
 

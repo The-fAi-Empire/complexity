@@ -5,12 +5,12 @@
     "@complexity/eslint-config": "workspace:*",
     "@complexity/typescript-config": "workspace:*",
     "@types/node": "^20.17.30",
-    "eslint": "^9.32.0",
+    "eslint": "catalog:lint",
     "globals": "^16.3.0",
     "prettier": "^3.6.2",
     "tsup": "8.5.0",
-    "typescript": "5.8.3",
-    "typescript-eslint": "^8.29.1",
+    "typescript": "catalog:types",
+    "typescript-eslint": "catalog:lint",
     "vitest": "^3.2.4"
   },
   "files": [
