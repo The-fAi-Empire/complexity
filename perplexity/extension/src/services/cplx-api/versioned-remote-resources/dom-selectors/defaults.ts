@@ -34,18 +34,18 @@ export const DOM_SELECTORS: DomSelectors = {
         ".dark\\:divide-borderMainDark\\/50:has(>.isolate.mx-auto)",
       QUERY_WRAPPER: ".isolate.mx-auto > .max-w-threadContentWidth:first-child",
       QUERY: ".group\\/query",
-      QUERY_HOVER_CONTAINER:
+      QUERY_EDIT_BUTTON_GROUP:
         ".absolute.bottom-0.right-0:not(.pointer-events-none)",
-      QUERY_HOVER_CONTAINER_CHILD: {
+      QUERY_EDIT_BUTTON_GROUP_CHILD: {
         EDIT_QUERY_BUTTON: "button:has(svg[data-icon='pen-to-square'])",
       },
       STICKY_HEADER: ".h-headerHeight.absolute",
       SOURCES: ".gap-sm.grid.grid-cols-4.md\\:px-0",
       ANSWER: "div[id*='markdown-content-']",
       /** The bottom toolbar of the message (share, rewrite, model name, etc.) */
-      BOTTOM_BAR:
+      FOOTER:
         ".gap-y-sm.md\\:gap-y-md.flex.flex-col > .flex.items-center.justify-between",
-      BOTTOM_BAR_CHILD: {
+      FOOTER_CHILD: {
         REWRITE_BUTTON: "button:has(svg.tabler-icon-repeat)",
         COPY_BUTTON: "button[aria-label]:has(svg.tabler-icon-copy)",
         THUMBS_DOWN_BUTTON: "button:has(svg.tabler-icon-thumb-down)",
@@ -68,7 +68,7 @@ export const DOM_SELECTORS: DomSelectors = {
   },
   HOME: {
     SLOGAN: ".mb-lg.md\\:absolute.text-center",
-    BOTTOM_BAR: ".hidden.pb-md.md\\:block>div",
+    FOOTER: ".hidden.pb-md.md\\:block>div",
     COMET_HOME_MAIN_WRAPPER:
       ".grid.grid-cols-\\[repeat\\(auto-fill\\,minmax\\(160px\\,1fr\\)\\)\\].gap-3",
   },
@@ -130,7 +130,7 @@ export const INTERNAL_ATTRIBUTES = {
   },
   HOME: {
     SLOGAN: "home-slogan",
-    BOTTOM_BAR: "home-bottom-bar",
+    FOOTER: "home-footer",
     LANGUAGE_SELECTOR: "home-language-selector",
   },
   THREAD: {
@@ -148,11 +148,11 @@ export const INTERNAL_ATTRIBUTES = {
     MESSAGE: {
       BLOCK: "message-block",
       QUERY: "message-block-query",
-      QUERY_HOVER_CONTAINER: "message-block-query-hover-container",
+      QUERY_EDIT_BUTTON_GROUP: "message-block-query-edit-button-group",
       ANSWER: "message-block-answer",
       CODE_BLOCK: "message-block-code-block",
       MIRRORED_CODE_BLOCK: "mirrored-code-block",
-      BOTTOM_BAR: "message-block-bottom-bar",
+      FOOTER: "message-block-footer",
     },
     ATTACHMENT_DROP_ZONE: "drag-n-drop-file-to-upload",
   },

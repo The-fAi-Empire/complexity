@@ -57,7 +57,7 @@ async function processMessageBlock(
     .attr("data-index", index);
 
   const parsedBlock = parseMessageBlock($wrapper);
-  const { $query, $queryHoverContainer, $sources, $answer, $bottomBar } =
+  const { $query, $queryEditButtonGroup, $sources, $answer, $footer } =
     parsedBlock;
 
   const nodes: MessageBlock["nodes"] = {
@@ -65,8 +65,8 @@ async function processMessageBlock(
     $query,
     $sources,
     $answer,
-    $queryHoverContainer,
-    $bottomBar,
+    $queryEditButtonGroup,
+    $footer,
   };
 
   const content: MessageBlock["content"] = {
@@ -100,37 +100,38 @@ function parseMessageBlock($messageBlock: JQuery<Element>) {
       selectors.QUERY_WRAPPER,
       selectors.SOURCES,
       selectors.ANSWER,
-      selectors.BOTTOM_BAR,
+      selectors.FOOTER,
     ].join(", "),
   );
 
   const $query = $elements.filter(selectors.QUERY_WRAPPER);
   const $sources = $elements.filter(selectors.SOURCES);
   const $answer = $elements.filter(selectors.ANSWER);
-  const $bottomBar = $elements.filter(selectors.BOTTOM_BAR);
+  const $footer = $elements.filter(selectors.FOOTER);
 
-  const $queryHoverContainer = $query.find(selectors.QUERY_HOVER_CONTAINER);
+  const $queryEditButtonGroup = $query.find(selectors.QUERY_EDIT_BUTTON_GROUP);
 
   $query.internalComponentAttr(
     DomSelectorsService.internalAttributes.THREAD.MESSAGE.QUERY,
   );
-  $queryHoverContainer.internalComponentAttr(
-    DomSelectorsService.internalAttributes.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+  $queryEditButtonGroup.internalComponentAttr(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE
+      .QUERY_EDIT_BUTTON_GROUP,
   );
   $answer.internalComponentAttr(
     DomSelectorsService.internalAttributes.THREAD.MESSAGE.ANSWER,
   );
-  $bottomBar.internalComponentAttr(
-    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR,
+  $footer.internalComponentAttr(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.FOOTER,
   );
 
   return {
     $messageBlock,
     $query,
-    $queryHoverContainer,
+    $queryEditButtonGroup,
     $sources,
     $answer,
-    $bottomBar,
+    $footer,
   };
 }
 
@@ -141,7 +142,7 @@ function getMessageBlockStates({
   messageBlockNodes: MessageBlock["nodes"];
   messageBlockFiber: MessageBlockFiberData | undefined;
 }): MessageBlock["states"] {
-  const { $wrapper, $query, $bottomBar } = messageBlockNodes;
+  const { $wrapper, $query, $footer } = messageBlockNodes;
 
   const hasInnerWrapper =
     $wrapper.find(DomSelectorsService.cachedSync.THREAD.MESSAGE.INNER_WRAPPER)
@@ -150,7 +151,7 @@ function getMessageBlockStates({
 
   const isInFlight = isVirtualized
     ? false
-    : (messageBlockFiber?.isInFlight ?? $bottomBar[0] == null);
+    : (messageBlockFiber?.isInFlight ?? $footer[0] == null);
 
   $wrapper.attr("data-inflight", isInFlight ? "true" : "false");
 
@@ -164,17 +165,17 @@ function getMessageBlockStates({
     if (existingReadOnlyAttr != null && existingReadOnlyAttr === "false")
       return false;
 
-    const isQueryHoverContainerPresent =
+    const isQueryEditButtonGroupPresent =
       $query.find(
-        DomSelectorsService.cachedSync.THREAD.MESSAGE.QUERY_HOVER_CONTAINER,
+        DomSelectorsService.cachedSync.THREAD.MESSAGE.QUERY_EDIT_BUTTON_GROUP,
       ).length > 0;
 
     $wrapper.attr(
       "data-read-only",
-      isQueryHoverContainerPresent ? "false" : "true",
+      isQueryEditButtonGroupPresent ? "false" : "true",
     );
 
-    return !isQueryHoverContainerPresent;
+    return !isQueryEditButtonGroupPresent;
   })();
 
   return {

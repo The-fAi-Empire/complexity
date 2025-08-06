@@ -14,8 +14,8 @@ export async function triggerRewriteOption(params: {
   const selector = `${DomSelectorsService.cplxAttribute(
     DomSelectorsService.internalAttributes.THREAD.MESSAGE.BLOCK,
   )}[data-index="${messageBlockIndex}"] ${DomSelectorsService.cplxAttribute(
-    DomSelectorsService.internalAttributes.THREAD.MESSAGE.BOTTOM_BAR,
-  )} ${domSelectors.THREAD.MESSAGE.BOTTOM_BAR_CHILD.REWRITE_BUTTON}`;
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE.FOOTER,
+  )} ${domSelectors.THREAD.MESSAGE.FOOTER_CHILD.REWRITE_BUTTON}`;
 
   const $rewriteButtonWrapper = $(selector).parent().parent();
 

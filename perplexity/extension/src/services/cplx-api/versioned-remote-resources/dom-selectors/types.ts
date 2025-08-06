@@ -26,15 +26,15 @@ export const DomSelectorsSchema = z.object({
       INNER_WRAPPER: z.string(),
       QUERY_WRAPPER: z.string(),
       QUERY: z.string(),
-      QUERY_HOVER_CONTAINER: z.string(),
-      QUERY_HOVER_CONTAINER_CHILD: z.object({
+      QUERY_EDIT_BUTTON_GROUP: z.string(),
+      QUERY_EDIT_BUTTON_GROUP_CHILD: z.object({
         EDIT_QUERY_BUTTON: z.string(),
       }),
       STICKY_HEADER: z.string(),
       SOURCES: z.string(),
       ANSWER: z.string(),
-      BOTTOM_BAR: z.string(),
-      BOTTOM_BAR_CHILD: z.object({
+      FOOTER: z.string(),
+      FOOTER_CHILD: z.object({
         REWRITE_BUTTON: z.string(),
         COPY_BUTTON: z.string(),
         THUMBS_DOWN_BUTTON: z.string(),
@@ -55,7 +55,7 @@ export const DomSelectorsSchema = z.object({
   }),
   HOME: z.object({
     SLOGAN: z.string(),
-    BOTTOM_BAR: z.string(),
+    FOOTER: z.string(),
     COMET_HOME_MAIN_WRAPPER: z.string(),
   }),
   QUERY_BOX: z.object({

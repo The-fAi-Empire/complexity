@@ -5,10 +5,10 @@ export type MessageBlock = {
   nodes: {
     $wrapper: JQuery<HTMLElement>;
     $query: JQuery<HTMLElement>;
-    $queryHoverContainer: JQuery<HTMLElement>;
+    $queryEditButtonGroup: JQuery<HTMLElement>;
     $sources: JQuery<HTMLElement>;
     $answer: JQuery<HTMLElement>;
-    $bottomBar: JQuery<HTMLElement>;
+    $footer: JQuery<HTMLElement>;
   };
   content: {
     backendUuid: string;

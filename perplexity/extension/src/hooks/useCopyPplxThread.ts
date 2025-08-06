@@ -98,16 +98,15 @@ async function copyMessageWithCitations({
     ]?.content;
 
   if (content == null) {
-    const $bottomBar =
+    const $footer =
       threadMessageBlocksDomObserverStore.getState().messageBlocks?.[
         messageBlockIndex
-      ]?.nodes.$bottomBar;
+      ]?.nodes.$footer;
 
-    if (!$bottomBar || !$bottomBar.length) return;
+    if (!$footer || !$footer.length) return;
 
-    const $copyButton = $bottomBar.find(
-      DomSelectorsService.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD
-        .COPY_BUTTON,
+    const $copyButton = $footer.find(
+      DomSelectorsService.cachedSync.THREAD.MESSAGE.FOOTER_CHILD.COPY_BUTTON,
     );
 
     if (!$copyButton.length) return;

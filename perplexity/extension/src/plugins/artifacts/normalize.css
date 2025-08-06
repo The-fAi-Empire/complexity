@@ -3,7 +3,7 @@
 body {
   &[data-cplx-artifact-active-panel] {
     /* Hide bottom bar buttons' labels */
-    [data-cplx-component="message-block-bottom-bar"]
+    [data-cplx-component="message-block-footer"]
       .text-align-center.relative.truncate.leading-loose.-mb-px {
       display: none;
     }

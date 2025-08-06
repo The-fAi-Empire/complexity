@@ -26,7 +26,7 @@ export default definePlugin({
     dependentMainWorldCorePlugins: ["spaRouter", "reactVdom"],
     uiGroup: [
       "thread:messageBlocks:toolbar",
-      "thread:messageBlocks:queryHoverContainer",
+      "thread:messageBlocks:queryEditButtonGroup",
     ],
   },
   settingsSchema: {

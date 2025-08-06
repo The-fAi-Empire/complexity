@@ -1,4 +1,4 @@
-[data-cplx-component="message-block-bottom-bar"] > :first-child {
+[data-cplx-component="message-block-footer"] > :first-child {
   > div:nth-last-child(2), /* on Comet */
   > div:last-child { /* on other browsers */
     &:has(svg.tabler-icon-repeat) {

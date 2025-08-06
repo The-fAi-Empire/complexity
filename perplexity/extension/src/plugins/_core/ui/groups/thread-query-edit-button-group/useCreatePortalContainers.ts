@@ -1,7 +1,7 @@
 import { useThreadMessageBlocksDomObserverStore } from "@/plugins/_core/dom-observers/thread/message-blocks/store";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 
-const OBSERVER_ID = "query-hover-container-cplx-toolbars-wrapper";
+const OBSERVER_ID = "query-edit-button-group-cplx-toolbars-wrapper";
 
 export function useCreatePortalContainers(): (Element | null)[] {
   const messageBlocks = useThreadMessageBlocksDomObserverStore(
@@ -15,7 +15,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
     if (messageBlock.states.isEditingQuery || messageBlock.states.isInFlight)
       return null;
 
-    const $target = messageBlock.nodes.$queryHoverContainer.find(
+    const $target = messageBlock.nodes.$queryEditButtonGroup.find(
       '[data-testid="edit-query-button-group"]',
     );
 

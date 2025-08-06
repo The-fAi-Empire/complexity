@@ -12,7 +12,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
   if (messageBlocks == null) return [];
 
   return messageBlocks.map((messageBlock) => {
-    const $existingPortalContainer = messageBlock.nodes.$bottomBar.find(
+    const $existingPortalContainer = messageBlock.nodes.$footer.find(
       `div${DomSelectorsService.cplxAttribute(OBSERVER_ID)}`,
     );
 
@@ -20,10 +20,9 @@ export function useCreatePortalContainers(): (Element | null)[] {
 
     const $portalContainer = $("<div>").internalComponentAttr(OBSERVER_ID);
 
-    messageBlock.nodes.$bottomBar
+    messageBlock.nodes.$footer
       .find(
-        DomSelectorsService.cachedSync.THREAD.MESSAGE.BOTTOM_BAR_CHILD
-          .COPY_BUTTON,
+        DomSelectorsService.cachedSync.THREAD.MESSAGE.FOOTER_CHILD.COPY_BUTTON,
       )
       .before($portalContainer);
 
