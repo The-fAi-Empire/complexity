@@ -16,7 +16,7 @@ export function useCreatePortalContainers(): (Element | null)[] {
       return null;
 
     const $target = messageBlock.nodes.$queryHoverContainer.find(
-      ">div.bg-background-100",
+      '[data-testid="edit-query-button-group"]',
     );
 
     const $existingPortalContainer = $target.find(

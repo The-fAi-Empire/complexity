@@ -16,6 +16,7 @@ import vitePluginForceRestartOnChanges from "./vite-plugins/vite-plugin-force-re
 import vitePluginReloadOnDynamicallyInjectedStyleChanges from "./vite-plugins/vite-plugin-reload-on-dynamically-injected-style-changes";
 import viteTouchGlobalCss from "./vite-plugins/vite-plugin-touch-global-css";
 import viteMoveHtmlPlugin from "./vite-plugins/vite-plugin-move-html";
+import viteTailwindVarsCustomPrefix from "./vite-plugins/vite-plugin-tailwind-vars-custom-prefix";
 // import viteRemoveStaticCssFromManifest from "./vite-plugins/vite-plugin-remove-static-css-from-manifest";
 
 export default defineConfig(() => ({
@@ -43,6 +44,7 @@ export default defineConfig(() => ({
     }),
     react(),
     tailwindcss(),
+    viteTailwindVarsCustomPrefix(),
     Unimport.vite(unimportConfig),
 
     // dev

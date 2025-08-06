@@ -102,11 +102,11 @@ export function generateAccentColorOverrides({ light, dark }: ColorPalette) {
       background: --alpha(var(--primary) / 30%);
     }
   
-    body {
+    :root {
       --background-super-color-100: ${light.super100};
-      --background-super-color-200: ${light.super200};
+      --background-super-color: ${light.super200};
       --dark-background-super-color-100: ${dark.super100};
-      --dark-background-super-color-200: ${dark.super200};
+      --dark-background-super-color: ${dark.super200};
 
       --primary: oklch(${light.super200});
       --ring: oklch(${light.super200});
@@ -114,12 +114,12 @@ export function generateAccentColorOverrides({ light, dark }: ColorPalette) {
       caret-color: var(--primary);
     }
 
-    :root[data-color-scheme="dark"] body {
+    :root[data-color-scheme="dark"] {
         --primary: oklch(${dark.super200});
         --ring: oklch(${dark.super200});
 
         --background-super-color-100: var(--dark-background-super-color-100);
-        --background-super-color-200: var(--dark-background-super-color-200);
+        --background-super-color: var(--dark-background-super-color);
       }
   `;
 }

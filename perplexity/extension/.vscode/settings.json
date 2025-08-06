@@ -1,56 +1,57 @@
 {
+  "catppuccin-icons.specificFolders": false,
+  "chat.instructionsFilesLocations": {
+    ".cursor/ghc-instructions": true
+  },
   "eslint.useFlatConfig": true,
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "files.exclude": {
-    "**/*.tsbuildinfo": true,
     "**/.DS_Store": true,
     "**/.git": true,
     "**/.hg": true,
     "**/.svn": true,
     "**/.turbo": true,
+    "**/*.tsbuildinfo": true,
     "**/CVS": true,
-    "**/Thumbs.db": true,
-    "**/node_modules": true
+    "**/node_modules": true,
+    "**/Thumbs.db": true
   },
   "files.watcherExclude": {
-    "**/*.tsbuildinfo": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/.hg/store/**": true,
     "**/.turbo": true,
+    "**/*.tsbuildinfo": true,
     "**/build/**/*": true,
     "**/dist/**/*": true,
     "**/node_modules/*/**": true
   },
-
   "i18n-ally.annotations": false,
+  "i18n-ally.displayLanguage": "en",
   "i18n-ally.editor.preferEditor": false,
   "i18n-ally.enabledFrameworks": ["custom"],
   "i18n-ally.enabledParsers": ["ts"],
+  "i18n-ally.fullReloadOnChanged": true,
   "i18n-ally.keystyle": "nested",
   "i18n-ally.localesPaths": ["src/_locales", "src/plugins/*/_locales"],
-  "i18n-ally.pathMatcher": "{namespace}.{locale}.ts",
   "i18n-ally.namespace": true,
+  "i18n-ally.pathMatcher": "{namespace}.{locale}.ts",
   "i18n-ally.readonly": true,
   "i18n-ally.sourceLanguage": "en",
-  "i18n-ally.displayLanguage": "en",
-  "i18n-ally.fullReloadOnChanged": true,
-
   "npm.exclude": ["**/build", "**/dist/**"],
   "npm.scriptExplorerExclude": ["preinstall"],
   "search.exclude": {
+    "**/.turbo": true,
     "**/*.code-search": true,
     "**/*.tsbuildinfo": true,
-    "**/.turbo": true,
     "**/bower_components": true,
     "**/build/**/*": true,
     "**/dist/**/*": true,
     "**/node_modules": true,
     "**/public/locales/**/*": true
   },
-
   "tailwindCSS.experimental.classRegex": [
     [
       "addClass\\(\\s*([\"\\'`].*?[\"\\'`])\\s*\\)",
@@ -64,7 +65,6 @@
     ["cn\\(([^)]*)\\)", "(?:\"([^\"]*)\")|(?:'([^']*)')|(?:`([^`]*)`)"]
   ],
   "tailwindCSS.experimental.configFile": "src/assets/index.css",
-
   "typescript.format.enable": false,
   "typescript.tsdk": "node_modules\\typescript\\lib",
   "typescript.tsserver.maxTsServerMemory": 8192,
@@ -73,7 +73,6 @@
     "watchDirectory": "useFsEvents",
     "watchFile": "useFsEventsOnParentDirectory"
   },
-
   "window.title": "${dirty}🧩 Perplexity AI Enhancer${separator}${activeRepositoryBranchName}${separator}${activeEditorShort}",
   "workbench.editor.customLabels.patterns": {
     "**/src/**/*.remote-resources.ts": "Remote Resources - ${dirname}",
@@ -88,8 +87,5 @@
     "**/src/plugins/*/index.ts": "Plugin Manifest - ${dirname}",
     "**/src/plugins/*/loader.{ts,tsx}": "Plugin Loader - ${dirname}",
     "**/src/plugins/*/settings-ui.{ts,tsx}": "Plugin Settings UI - ${dirname}"
-  },
-  "chat.instructionsFilesLocations": {
-    ".cursor/ghc-instructions": true
   }
 }
