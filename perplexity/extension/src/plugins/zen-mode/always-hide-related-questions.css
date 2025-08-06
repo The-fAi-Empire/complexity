@@ -1,11 +1,7 @@
 body[data-cplx-zen-mode-always-hide-related-questions="true"][location="thread"]
-  [data-cplx-component="message-block"]
-  .pb-threadInputHeightWithPadding
-  > div
+  [data-cplx-component="message-block"]:last-of-type
+  .first\:mt-0
   > div:last-child
-  > div
-  > div
-  > div
-  > [class=""]:last-child {
+  > .animate-in.fade-in {
   display: none;
 }
