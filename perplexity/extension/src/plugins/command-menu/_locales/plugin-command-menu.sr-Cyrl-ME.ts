@@ -9,27 +9,27 @@ export default {
     searchPlaceholder: "Претрага...",
   },
   actions: {
-    createNewThread: "Креирај нову дискусију",
+    createNewThread: "Створи нову нит",
     toggleIncognitoEnable: "Укључи инкогнито режим",
     toggleIncognitoDisable: "Искључи инкогнито режим",
-    toggleLightMode: "Промијени на свијетли режим",
-    toggleDarkMode: "Промијени на тамни режим",
+    toggleLightMode: "Промени на светли режим",
+    toggleDarkMode: "Промени на тамни режим",
   },
   navigation: {
     home: "Почетна",
     library: "Библиотека",
     spaces: "Простори",
-    discover: "Откривање",
+    discover: "Откривај",
     settings: "Подешавања",
     labs: "Лабораторије",
     current: "Тренутно",
-    openInNewTab: "Отвори у новој картици",
+    openInNewTab: "Отвори у новом табу",
     goTo: "Иди на {destination}",
   },
   search: {
-    threads: "Дискусије",
+    threads: "Нити",
     spaces: "Простори",
-    threadsPlaceholder: "Претражи дискусије...",
+    threadsPlaceholder: "Претражи нити...",
     spacesPlaceholder: "Претражи просторе...",
   },
   groups: {
@@ -39,14 +39,14 @@ export default {
   },
   spaces: {
     footer: {
-      openInNewTab: "Отвори у новој картици",
+      openInNewTab: "Отвори у новом табу",
       searchInSpace: "Претражи у простору",
-      goToSpace: "Иди на простор",
+      goToSpace: "Иди у простор",
       searchSpacePlaceholder: "Претражи {spaceName}...",
     },
     commandItems: {
-      errorFetching: "Грешка при преузимању простора",
-      noSpacesFound: "Нису пронађени простори",
+      errorFetching: "Грешка при дохватању простора",
+      noSpacesFound: "Нема пронађених простора",
     },
     preview: {
       description: "Опис",
@@ -57,12 +57,36 @@ export default {
   },
   threads: {
     commandItems: {
-      errorFetching: "Грешка при преузимању дискусија",
-      noThreadsFound: "Нису пронађене дискусије",
+      errorFetching: "Грешка при дохватању нити",
+      noThreadsFound: "Нема пронађених нити",
+    },
+    filters: {
+      sort: {
+        newest: "Најновије",
+        newestFirst: "Најновије прво",
+        oldest: "Најстарије",
+        oldestFirst: "Најстарије прво",
+        label: "Сортирај:",
+      },
+      source: {
+        all: "Све",
+        label: "Извор:",
+      },
+      temporaryThreads: {
+        show: "Прикажи",
+        hide: "Сакриј",
+        label: "Привремене нити:",
+        placeholder: "Привремене нити",
+      },
+      type: {
+        all: "Све",
+        label: "Тип:",
+        placeholder: "Тип",
+      },
     },
   },
   common: {
-    noResults: "Нису пронађени резултати",
+    noResults: "Нема резултата",
     current: "Тренутно",
   },
 } as const satisfies LanguageMessages;

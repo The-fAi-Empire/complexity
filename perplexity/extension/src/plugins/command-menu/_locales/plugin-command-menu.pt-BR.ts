@@ -2,16 +2,16 @@ import { type LanguageMessages } from "@complexity/i18n";
 
 export default {
   sidecar: {
-    showPreviews: "Mostrar prévias",
-    hidePreviews: "Ocultar prévias",
+    showPreviews: "Mostrar visualizações",
+    hidePreviews: "Ocultar visualizações",
   },
   input: {
     searchPlaceholder: "Pesquisar...",
   },
   actions: {
     createNewThread: "Criar nova conversa",
-    toggleIncognitoEnable: "Ativar modo anônimo",
-    toggleIncognitoDisable: "Desativar modo anônimo",
+    toggleIncognitoEnable: "Ativar modo incógnito",
+    toggleIncognitoDisable: "Desativar modo incógnito",
     toggleLightMode: "Mudar para modo claro",
     toggleDarkMode: "Mudar para modo escuro",
   },
@@ -59,6 +59,30 @@ export default {
     commandItems: {
       errorFetching: "Erro ao buscar conversas",
       noThreadsFound: "Nenhuma conversa encontrada",
+    },
+    filters: {
+      sort: {
+        newest: "Mais recentes",
+        newestFirst: "Mais recentes primeiro",
+        oldest: "Mais antigas",
+        oldestFirst: "Mais antigas primeiro",
+        label: "Ordenar:",
+      },
+      source: {
+        all: "Todas",
+        label: "Origem:",
+      },
+      temporaryThreads: {
+        show: "Mostrar",
+        hide: "Ocultar",
+        label: "Conversas temporárias:",
+        placeholder: "Conversas temporárias",
+      },
+      type: {
+        all: "Todas",
+        label: "Tipo:",
+        placeholder: "Tipo",
+      },
     },
   },
   common: {

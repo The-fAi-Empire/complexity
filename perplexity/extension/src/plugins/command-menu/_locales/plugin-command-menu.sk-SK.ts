@@ -2,16 +2,16 @@ import { type LanguageMessages } from "@complexity/i18n";
 
 export default {
   sidecar: {
-    showPreviews: "Zobraziť ukážky",
-    hidePreviews: "Skryť ukážky",
+    showPreviews: "Zobraziť náhľady",
+    hidePreviews: "Skryť náhľady",
   },
   input: {
     searchPlaceholder: "Hľadať...",
   },
   actions: {
-    createNewThread: "Vytvoriť novú konverzáciu",
-    toggleIncognitoEnable: "Povoliť režim inkognito",
-    toggleIncognitoDisable: "Zakázať režim inkognito",
+    createNewThread: "Vytvoriť nové vlákno",
+    toggleIncognitoEnable: "Zapnúť inkognito režim",
+    toggleIncognitoDisable: "Vypnúť inkognito režim",
     toggleLightMode: "Prepnúť na svetlý režim",
     toggleDarkMode: "Prepnúť na tmavý režim",
   },
@@ -19,17 +19,17 @@ export default {
     home: "Domov",
     library: "Knižnica",
     spaces: "Priestory",
-    discover: "Objavovať",
+    discover: "Objaviť",
     settings: "Nastavenia",
     labs: "Laboratóriá",
     current: "Aktuálne",
-    openInNewTab: "Otvoriť na novej karte",
+    openInNewTab: "Otvoriť v novej karte",
     goTo: "Prejsť na {destination}",
   },
   search: {
-    threads: "Konverzácie",
+    threads: "Vlákna",
     spaces: "Priestory",
-    threadsPlaceholder: "Hľadať konverzácie...",
+    threadsPlaceholder: "Hľadať vlákna...",
     spacesPlaceholder: "Hľadať priestory...",
   },
   groups: {
@@ -39,26 +39,50 @@ export default {
   },
   spaces: {
     footer: {
-      openInNewTab: "Otvoriť na novej karte",
+      openInNewTab: "Otvoriť v novej karte",
       searchInSpace: "Hľadať v priestore",
       goToSpace: "Prejsť do priestoru",
       searchSpacePlaceholder: "Hľadať {spaceName}...",
     },
     commandItems: {
-      errorFetching: "Chyba pri načítaní priestorov",
+      errorFetching: "Chyba pri načítavaní priestorov",
       noSpacesFound: "Nenašli sa žiadne priestory",
     },
     preview: {
       description: "Popis",
-      instructions: "Inštrukcie",
+      instructions: "Pokyny",
       files: "Súbory ({count:number})",
       webLinks: "Webové odkazy ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "Chyba pri načítaní konverzácií",
-      noThreadsFound: "Nenašli sa žiadne konverzácie",
+      errorFetching: "Chyba pri načítavaní vlákien",
+      noThreadsFound: "Nenašli sa žiadne vlákna",
+    },
+    filters: {
+      sort: {
+        newest: "Najnovšie",
+        newestFirst: "Najnovšie prvé",
+        oldest: "Najstaršie",
+        oldestFirst: "Najstaršie prvé",
+        label: "Zoradiť:",
+      },
+      source: {
+        all: "Všetko",
+        label: "Zdroj:",
+      },
+      temporaryThreads: {
+        show: "Zobraziť",
+        hide: "Skryť",
+        label: "Dočasné vlákna:",
+        placeholder: "Dočasné vlákna",
+      },
+      type: {
+        all: "Všetko",
+        label: "Typ:",
+        placeholder: "Typ",
+      },
     },
   },
   common: {

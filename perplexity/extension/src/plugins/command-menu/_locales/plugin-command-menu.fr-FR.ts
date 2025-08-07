@@ -9,11 +9,11 @@ export default {
     searchPlaceholder: "Rechercher...",
   },
   actions: {
-    createNewThread: "Créer une nouvelle conversation",
-    toggleIncognitoEnable: "Activer le mode navigation privée",
-    toggleIncognitoDisable: "Désactiver le mode navigation privée",
-    toggleLightMode: "Passer au mode clair",
-    toggleDarkMode: "Passer au mode sombre",
+    createNewThread: "Créer un nouveau fil",
+    toggleIncognitoEnable: "Activer le mode incognito",
+    toggleIncognitoDisable: "Désactiver le mode incognito",
+    toggleLightMode: "Passer en mode clair",
+    toggleDarkMode: "Passer en mode sombre",
   },
   navigation: {
     home: "Accueil",
@@ -27,9 +27,9 @@ export default {
     goTo: "Aller à {destination}",
   },
   search: {
-    threads: "Conversations",
+    threads: "Fils",
     spaces: "Espaces",
-    threadsPlaceholder: "Rechercher des conversations...",
+    threadsPlaceholder: "Rechercher des fils...",
     spacesPlaceholder: "Rechercher des espaces...",
   },
   groups: {
@@ -57,8 +57,32 @@ export default {
   },
   threads: {
     commandItems: {
-      errorFetching: "Erreur lors de la récupération des conversations",
-      noThreadsFound: "Aucune conversation trouvée",
+      errorFetching: "Erreur lors de la récupération des fils",
+      noThreadsFound: "Aucun fil trouvé",
+    },
+    filters: {
+      sort: {
+        newest: "Plus récents",
+        newestFirst: "Plus récents en premier",
+        oldest: "Plus anciens",
+        oldestFirst: "Plus anciens en premier",
+        label: "Trier :",
+      },
+      source: {
+        all: "Tous",
+        label: "Source :",
+      },
+      temporaryThreads: {
+        show: "Afficher",
+        hide: "Masquer",
+        label: "Fils temporaires :",
+        placeholder: "Fils temporaires",
+      },
+      type: {
+        all: "Tous",
+        label: "Type :",
+        placeholder: "Type",
+      },
     },
   },
   common: {

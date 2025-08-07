@@ -1,6 +1,7 @@
 import { useCommandMenuStore } from "@/plugins/command-menu/store";
+import type { PageStack } from "@/plugins/command-menu/store/slices/pages/types";
 
-export function useCurrentPage() {
+export function useCurrentPage(): PageStack | null {
   const pageStack = useCommandMenuStore((state) => state.pageStack);
 
   if (pageStack.length === 0) return null;

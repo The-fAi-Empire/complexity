@@ -10,8 +10,8 @@ export default {
   },
   actions: {
     createNewThread: "Vytvořit nové vlákno",
-    toggleIncognitoEnable: "Povolit režim inkognito",
-    toggleIncognitoDisable: "Zakázat režim inkognito",
+    toggleIncognitoEnable: "Zapnout režim inkognito",
+    toggleIncognitoDisable: "Vypnout režim inkognito",
     toggleLightMode: "Přepnout na světlý režim",
     toggleDarkMode: "Přepnout na tmavý režim",
   },
@@ -19,11 +19,11 @@ export default {
     home: "Domů",
     library: "Knihovna",
     spaces: "Prostory",
-    discover: "Objevovat",
+    discover: "Objevit",
     settings: "Nastavení",
     labs: "Laboratoře",
     current: "Aktuální",
-    openInNewTab: "Otevřít v nové záložce",
+    openInNewTab: "Otevřít v nové kartě",
     goTo: "Přejít na {destination}",
   },
   search: {
@@ -35,22 +35,22 @@ export default {
   groups: {
     actions: "Akce",
     navigation: "Navigace",
-    search: "Hledat",
+    search: "Hledání",
   },
   spaces: {
     footer: {
-      openInNewTab: "Otevřít v nové záložce",
+      openInNewTab: "Otevřít v nové kartě",
       searchInSpace: "Hledat v prostoru",
       goToSpace: "Přejít do prostoru",
       searchSpacePlaceholder: "Hledat {spaceName}...",
     },
     commandItems: {
       errorFetching: "Chyba při načítání prostorů",
-      noSpacesFound: "Žádné prostory nenalezeny",
+      noSpacesFound: "Nenalezeny žádné prostory",
     },
     preview: {
       description: "Popis",
-      instructions: "Instrukce",
+      instructions: "Pokyny",
       files: "Soubory ({count:number})",
       webLinks: "Webové odkazy ({count:number})",
     },
@@ -58,11 +58,35 @@ export default {
   threads: {
     commandItems: {
       errorFetching: "Chyba při načítání vláken",
-      noThreadsFound: "Žádná vlákna nenalezena",
+      noThreadsFound: "Nenalezena žádná vlákna",
+    },
+    filters: {
+      sort: {
+        newest: "Nejnovější",
+        newestFirst: "Nejnovější první",
+        oldest: "Nejstarší",
+        oldestFirst: "Nejstarší první",
+        label: "Seřadit:",
+      },
+      source: {
+        all: "Vše",
+        label: "Zdroj:",
+      },
+      temporaryThreads: {
+        show: "Zobrazit",
+        hide: "Skrýt",
+        label: "Dočasná vlákna:",
+        placeholder: "Dočasná vlákna",
+      },
+      type: {
+        all: "Vše",
+        label: "Typ:",
+        placeholder: "Typ",
+      },
     },
   },
   common: {
-    noResults: "Žádné výsledky nenalezeny",
+    noResults: "Nenalezeny žádné výsledky",
     current: "Aktuální",
   },
 } as const satisfies LanguageMessages;

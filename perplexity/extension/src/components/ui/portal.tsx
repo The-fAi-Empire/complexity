@@ -12,7 +12,7 @@ export function Portal({ children, container }: PortalProps) {
   return (
     <ArkPortal
       container={{
-        current: container ?? $("#complexity-root")[0]!,
+        current: container ?? $("#complexity-root")[0] ?? $("#app")[0]!,
       }}
     >
       {children}

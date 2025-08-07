@@ -18,19 +18,19 @@ export default {
   navigation: {
     home: "홈",
     library: "라이브러리",
-    spaces: "스페이스",
-    discover: "탐색",
+    spaces: "공간",
+    discover: "발견",
     settings: "설정",
     labs: "실험실",
     current: "현재",
     openInNewTab: "새 탭에서 열기",
-    goTo: "{destination}(으)로 이동",
+    goTo: "{destination}로 이동",
   },
   search: {
     threads: "스레드",
-    spaces: "스페이스",
+    spaces: "공간",
     threadsPlaceholder: "스레드 검색...",
-    spacesPlaceholder: "스페이스 검색...",
+    spacesPlaceholder: "공간 검색...",
   },
   groups: {
     actions: "작업",
@@ -40,13 +40,13 @@ export default {
   spaces: {
     footer: {
       openInNewTab: "새 탭에서 열기",
-      searchInSpace: "스페이스에서 검색",
-      goToSpace: "스페이스로 이동",
+      searchInSpace: "공간에서 검색",
+      goToSpace: "공간으로 이동",
       searchSpacePlaceholder: "{spaceName} 검색...",
     },
     commandItems: {
-      errorFetching: "스페이스 가져오기 오류",
-      noSpacesFound: "스페이스를 찾을 수 없음",
+      errorFetching: "공간 가져오기 오류",
+      noSpacesFound: "공간을 찾을 수 없음",
     },
     preview: {
       description: "설명",
@@ -59,6 +59,30 @@ export default {
     commandItems: {
       errorFetching: "스레드 가져오기 오류",
       noThreadsFound: "스레드를 찾을 수 없음",
+    },
+    filters: {
+      sort: {
+        newest: "최신",
+        newestFirst: "최신 순",
+        oldest: "오래된",
+        oldestFirst: "오래된 순",
+        label: "정렬:",
+      },
+      source: {
+        all: "전체",
+        label: "소스:",
+      },
+      temporaryThreads: {
+        show: "표시",
+        hide: "숨기기",
+        label: "임시 스레드:",
+        placeholder: "임시 스레드",
+      },
+      type: {
+        all: "전체",
+        label: "유형:",
+        placeholder: "유형",
+      },
     },
   },
   common: {

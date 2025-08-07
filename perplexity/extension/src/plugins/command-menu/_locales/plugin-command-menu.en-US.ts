@@ -60,6 +60,30 @@ export default {
       errorFetching: "Error fetching Threads",
       noThreadsFound: "No Threads found",
     },
+    filters: {
+      sort: {
+        newest: "Newest",
+        newestFirst: "Newest First",
+        oldest: "Oldest",
+        oldestFirst: "Oldest First",
+        label: "Sort:",
+      },
+      source: {
+        all: "All",
+        label: "Source:",
+      },
+      temporaryThreads: {
+        show: "Show",
+        hide: "Hide",
+        label: "Temp Threads:",
+        placeholder: "Temporary Threads",
+      },
+      type: {
+        all: "All",
+        label: "Type:",
+        placeholder: "Type",
+      },
+    },
   },
   common: {
     noResults: "No results found",

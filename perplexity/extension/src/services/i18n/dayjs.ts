@@ -27,7 +27,13 @@ export function unixTimestampToDate({
 }
 
 export function formatRelativeTime(date: string) {
-  return dayjs.utc(date).local().fromNow();
+  const now = dayjs();
+  const input = dayjs.utc(date).local();
+  const diffHours = now.diff(input, "hour");
+  if (diffHours < 24) {
+    return input.fromNow();
+  }
+  return input.format("ll");
 }
 
 export async function initializeDayjsLocale() {

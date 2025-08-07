@@ -157,22 +157,26 @@ export function SelectItem({
             "x:transition-all x:data-[highlighted]:bg-secondary",
             "x:justify-between x:text-muted-foreground x:data-[state=checked]:text-primary",
             {
-              "x:flex x:justify-between": multiple,
               "x:bg-secondary": value.includes(props.item),
             },
             className,
           )}
           {...props}
         >
-          {children}
-          {(multiple || checkboxOnSingleItem) && value.includes(props.item) && (
-            <FaCheck
-              className={cn(
-                "x:ml-auto x:size-3.5 x:shrink-0",
-                checkIconClassName,
+          <div
+            className={cn({
+              "x:flex x:w-full x:items-center x:justify-between x:gap-4":
+                checkboxOnSingleItem || multiple,
+            })}
+          >
+            <div className="x:flex x:items-center x:gap-2">{children}</div>
+            {(multiple || checkboxOnSingleItem) &&
+              value.includes(props.item) && (
+                <FaCheck
+                  className={cn("x:size-3.5 x:shrink-0", checkIconClassName)}
+                />
               )}
-            />
-          )}
+          </div>
         </ArkSelect.Item>
       )}
     </ArkSelect.Context>

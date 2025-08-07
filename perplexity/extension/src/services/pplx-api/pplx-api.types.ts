@@ -94,7 +94,7 @@ export type ThreadMessageApiResponse = z.infer<
   typeof ThreadMessageApiResponseSchema
 >;
 
-export const ThreadSearchApiSchema = z.object({
+export const ThreadSearchResponseApiSchema = z.object({
   thread_number: z.number(),
   last_query_datetime: z.string(),
   mode: z.string(),
@@ -116,13 +116,27 @@ export const ThreadSearchApiSchema = z.object({
   has_next_page: z.boolean(),
 });
 
-export type ThreadSearchApi = z.infer<typeof ThreadSearchApiSchema>;
+export type ThreadSearchResponseApi = z.infer<
+  typeof ThreadSearchResponseApiSchema
+>;
 
-export const ThreadsSearchApiResponseSchema = z.array(ThreadSearchApiSchema);
+export const ThreadsSearchApiResponseSchema = z.array(
+  ThreadSearchResponseApiSchema,
+);
 
 export type ThreadsSearchApiResponse = z.infer<
   typeof ThreadsSearchApiResponseSchema
 >;
+
+export type ThreadsSearchPayload = {
+  searchValue?: string;
+  limit?: number;
+  offset?: number;
+  ascending?: boolean;
+  threadTypeFilter?: "research" | "labs";
+  withTemporaryThreads?: boolean;
+  querySourceFilter?: "comet";
+};
 
 export const SpaceThreadsApiResponseSchema = ThreadsSearchApiResponseSchema;
 

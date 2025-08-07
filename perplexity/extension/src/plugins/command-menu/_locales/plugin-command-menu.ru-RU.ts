@@ -9,9 +9,9 @@ export default {
     searchPlaceholder: "Поиск...",
   },
   actions: {
-    createNewThread: "Создать новый тред",
+    createNewThread: "Создать новую ветку",
     toggleIncognitoEnable: "Включить режим инкогнито",
-    toggleIncognitoDisable: "Выключить режим инкогнито",
+    toggleIncognitoDisable: "Отключить режим инкогнито",
     toggleLightMode: "Переключить на светлый режим",
     toggleDarkMode: "Переключить на тёмный режим",
   },
@@ -27,9 +27,9 @@ export default {
     goTo: "Перейти к {destination}",
   },
   search: {
-    threads: "Треды",
+    threads: "Ветки",
     spaces: "Пространства",
-    threadsPlaceholder: "Поиск тредов...",
+    threadsPlaceholder: "Поиск веток...",
     spacesPlaceholder: "Поиск пространств...",
   },
   groups: {
@@ -45,7 +45,7 @@ export default {
       searchSpacePlaceholder: "Поиск {spaceName}...",
     },
     commandItems: {
-      errorFetching: "Ошибка при получении пространств",
+      errorFetching: "Ошибка получения пространств",
       noSpacesFound: "Пространства не найдены",
     },
     preview: {
@@ -57,8 +57,32 @@ export default {
   },
   threads: {
     commandItems: {
-      errorFetching: "Ошибка при получении тредов",
-      noThreadsFound: "Треды не найдены",
+      errorFetching: "Ошибка получения веток",
+      noThreadsFound: "Ветки не найдены",
+    },
+    filters: {
+      sort: {
+        newest: "Новейшие",
+        newestFirst: "Новейшие сначала",
+        oldest: "Старейшие",
+        oldestFirst: "Старейшие сначала",
+        label: "Сортировка:",
+      },
+      source: {
+        all: "Все",
+        label: "Источник:",
+      },
+      temporaryThreads: {
+        show: "Показать",
+        hide: "Скрыть",
+        label: "Временные ветки:",
+        placeholder: "Временные ветки",
+      },
+      type: {
+        all: "Все",
+        label: "Тип:",
+        placeholder: "Тип",
+      },
     },
   },
   common: {

@@ -14,6 +14,8 @@ export default function SpaceThreadCommandItems({
 }: {
   spaceSlug: Space["slug"];
 }) {
+  useCommandMenuStore((store) => store.open);
+
   const searchValue = useDebounce(
     useCommandMenuStore((store) => store.searchValue),
     300,

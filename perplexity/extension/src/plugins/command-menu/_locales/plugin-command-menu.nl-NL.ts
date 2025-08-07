@@ -9,27 +9,27 @@ export default {
     searchPlaceholder: "Zoeken...",
   },
   actions: {
-    createNewThread: "Nieuwe thread maken",
-    toggleIncognitoEnable: "Incognitomodus inschakelen",
-    toggleIncognitoDisable: "Incognitomodus uitschakelen",
+    createNewThread: "Nieuwe draad maken",
+    toggleIncognitoEnable: "Incognito-modus inschakelen",
+    toggleIncognitoDisable: "Incognito-modus uitschakelen",
     toggleLightMode: "Overschakelen naar lichte modus",
     toggleDarkMode: "Overschakelen naar donkere modus",
   },
   navigation: {
-    home: "Home",
+    home: "Startpagina",
     library: "Bibliotheek",
     spaces: "Ruimtes",
     discover: "Ontdekken",
     settings: "Instellingen",
-    labs: "Labs",
-    current: "Huidig",
+    labs: "Laboratoria",
+    current: "Huidige",
     openInNewTab: "Openen in nieuw tabblad",
     goTo: "Ga naar {destination}",
   },
   search: {
-    threads: "Threads",
+    threads: "Draden",
     spaces: "Ruimtes",
-    threadsPlaceholder: "Threads zoeken...",
+    threadsPlaceholder: "Draden zoeken...",
     spacesPlaceholder: "Ruimtes zoeken...",
   },
   groups: {
@@ -42,7 +42,7 @@ export default {
       openInNewTab: "Openen in nieuw tabblad",
       searchInSpace: "Zoeken in ruimte",
       goToSpace: "Ga naar ruimte",
-      searchSpacePlaceholder: "Zoeken in {spaceName}...",
+      searchSpacePlaceholder: "Zoek {spaceName}...",
     },
     commandItems: {
       errorFetching: "Fout bij ophalen van ruimtes",
@@ -57,12 +57,36 @@ export default {
   },
   threads: {
     commandItems: {
-      errorFetching: "Fout bij ophalen van threads",
-      noThreadsFound: "Geen threads gevonden",
+      errorFetching: "Fout bij ophalen van draden",
+      noThreadsFound: "Geen draden gevonden",
+    },
+    filters: {
+      sort: {
+        newest: "Nieuwste",
+        newestFirst: "Nieuwste eerst",
+        oldest: "Oudste",
+        oldestFirst: "Oudste eerst",
+        label: "Sorteren:",
+      },
+      source: {
+        all: "Alle",
+        label: "Bron:",
+      },
+      temporaryThreads: {
+        show: "Tonen",
+        hide: "Verbergen",
+        label: "Tijdelijke draden:",
+        placeholder: "Tijdelijke draden",
+      },
+      type: {
+        all: "Alle",
+        label: "Type:",
+        placeholder: "Type",
+      },
     },
   },
   common: {
     noResults: "Geen resultaten gevonden",
-    current: "Huidig",
+    current: "Huidige",
   },
 } as const satisfies LanguageMessages;

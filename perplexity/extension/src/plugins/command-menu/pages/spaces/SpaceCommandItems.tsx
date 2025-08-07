@@ -25,6 +25,8 @@ import usePplxSpaces from "@/services/pplx-api/hooks/usePplxSpaces";
 import { emojiCodeToString } from "@/utils/utils";
 
 export default function SpaceCommandItems() {
+  useCommandMenuStore((store) => store.open);
+
   const sidecarOpen = useCommandMenuStore((store) => store.sidecarOpen);
 
   const { data, isLoading, isError } = usePplxSpaces();

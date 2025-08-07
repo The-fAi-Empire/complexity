@@ -9,7 +9,7 @@ export default {
     searchPlaceholder: "Keresés...",
   },
   actions: {
-    createNewThread: "Új beszélgetés létrehozása",
+    createNewThread: "Új szál létrehozása",
     toggleIncognitoEnable: "Inkognitó mód bekapcsolása",
     toggleIncognitoDisable: "Inkognitó mód kikapcsolása",
     toggleLightMode: "Váltás világos módra",
@@ -27,9 +27,9 @@ export default {
     goTo: "Ugrás ide: {destination}",
   },
   search: {
-    threads: "Beszélgetések",
+    threads: "Szálak",
     spaces: "Terek",
-    threadsPlaceholder: "Beszélgetések keresése...",
+    threadsPlaceholder: "Szálak keresése...",
     spacesPlaceholder: "Terek keresése...",
   },
   groups: {
@@ -45,20 +45,44 @@ export default {
       searchSpacePlaceholder: "{spaceName} keresése...",
     },
     commandItems: {
-      errorFetching: "Hiba a terek betöltésekor",
+      errorFetching: "Hiba a terek lekérése során",
       noSpacesFound: "Nem találhatók terek",
     },
     preview: {
       description: "Leírás",
       instructions: "Utasítások",
       files: "Fájlok ({count:number})",
-      webLinks: "Webes hivatkozások ({count:number})",
+      webLinks: "Webes linkek ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "Hiba a beszélgetések betöltésekor",
-      noThreadsFound: "Nem találhatók beszélgetések",
+      errorFetching: "Hiba a szálak lekérése során",
+      noThreadsFound: "Nem találhatók szálak",
+    },
+    filters: {
+      sort: {
+        newest: "Legújabb",
+        newestFirst: "Legújabb először",
+        oldest: "Legrégebbi",
+        oldestFirst: "Legrégebbi először",
+        label: "Rendezés:",
+      },
+      source: {
+        all: "Összes",
+        label: "Forrás:",
+      },
+      temporaryThreads: {
+        show: "Megjelenítés",
+        hide: "Elrejtés",
+        label: "Ideiglenes szálak:",
+        placeholder: "Ideiglenes szálak",
+      },
+      type: {
+        all: "Összes",
+        label: "Típus:",
+        placeholder: "Típus",
+      },
     },
   },
   common: {

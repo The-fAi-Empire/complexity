@@ -26,7 +26,7 @@ export default function ArtifactsPluginSettingsUi() {
             For the AI to acknowledge the ability to use Artifacts, you need to
             use this{" "}
             <a
-              href="https://cdn.cplx.app/prompts/artifacts-instruction.md"
+              href="https://cdn.cplx.app/resources/artifacts-instruction.md"
               target="_blank"
               rel="noopener noreferrer"
               className="x:text-primary x:hover:underline"
@@ -110,8 +110,9 @@ export default function ArtifactsPluginSettingsUi() {
                   <td className="x:border x:border-border x:p-2 x:text-center x:text-muted-foreground">
                     any premium models
                   </td>
-                  <td className="x:border x:border-border x:p-2 x:text-center">
-                    Works best with DeepSeek-R1 & o3-mini
+                  <td className="x:border x:border-border x:p-2 x:text-center x:text-balance">
+                    Works best with any premium models (except Sonar - please
+                    don&apos;t use it for any purposes)
                   </td>
                 </tr>
                 <tr>

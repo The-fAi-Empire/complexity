@@ -12,6 +12,7 @@ import type {
   ThreadsSearchApiResponse,
   PplxUserSettingsApiResponse,
   SpaceDetails,
+  ThreadsSearchPayload,
 } from "@/services/pplx-api/pplx-api.types";
 import {
   PplxOrgSettingsApiResponseSchema,
@@ -115,17 +116,21 @@ export class PplxApiService {
     searchValue = "",
     limit = 20,
     offset = 0,
-  }: {
-    searchValue?: string;
-    limit?: number;
-    offset?: number;
-  } = {}): Promise<ThreadsSearchApiResponse> {
+    ascending,
+    querySourceFilter,
+    threadTypeFilter,
+    withTemporaryThreads,
+  }: ThreadsSearchPayload = {}): Promise<ThreadsSearchApiResponse> {
     const resp = await fetch(ENDPOINTS.RESOURCES.THREADS.GET_ALL, {
       method: "POST",
       body: JSON.stringify({
         limit,
         offset,
         search_term: searchValue,
+        ascending,
+        thread_type_filter: threadTypeFilter,
+        query_source_filter: querySourceFilter,
+        with_temporary_threads: withTemporaryThreads,
       }),
       headers: {
         "Content-Type": "application/json",

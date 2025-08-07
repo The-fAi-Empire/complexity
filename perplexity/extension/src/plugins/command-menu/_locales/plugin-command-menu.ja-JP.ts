@@ -45,20 +45,44 @@ export default {
       searchSpacePlaceholder: "{spaceName}を検索...",
     },
     commandItems: {
-      errorFetching: "スペースの取得中にエラーが発生しました",
+      errorFetching: "スペースの取得エラー",
       noSpacesFound: "スペースが見つかりません",
     },
     preview: {
       description: "説明",
-      instructions: "指示",
+      instructions: "手順",
       files: "ファイル ({count:number})",
       webLinks: "ウェブリンク ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "スレッドの取得中にエラーが発生しました",
+      errorFetching: "スレッドの取得エラー",
       noThreadsFound: "スレッドが見つかりません",
+    },
+    filters: {
+      sort: {
+        newest: "最新",
+        newestFirst: "最新順",
+        oldest: "最古",
+        oldestFirst: "最古順",
+        label: "並び替え:",
+      },
+      source: {
+        all: "すべて",
+        label: "ソース:",
+      },
+      temporaryThreads: {
+        show: "表示",
+        hide: "非表示",
+        label: "一時的なスレッド:",
+        placeholder: "一時的なスレッド",
+      },
+      type: {
+        all: "すべて",
+        label: "タイプ:",
+        placeholder: "タイプ",
+      },
     },
   },
   common: {

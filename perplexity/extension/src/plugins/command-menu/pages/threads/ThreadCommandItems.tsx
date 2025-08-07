@@ -2,6 +2,7 @@ import { useDebounce } from "@uidotdev/usehooks";
 
 import { CommandGroup } from "@/components/ui/command";
 import { CommandItemSkeleton } from "@/components/ui/command";
+import { useThreadsSearchFilters } from "@/plugins/command-menu/pages/threads/filters/context";
 import ThreadItem from "@/plugins/command-menu/pages/threads/ThreadItem";
 import ThreadListLoader from "@/plugins/command-menu/pages/threads/ThreadListLoader";
 import useLoadMoreItems from "@/plugins/command-menu/pages/threads/useLoadMoreItems";
@@ -9,10 +10,14 @@ import usePplxInfiniteThreads from "@/plugins/command-menu/pages/threads/usePplx
 import { useCommandMenuStore } from "@/plugins/command-menu/store";
 
 export default function ThreadCommandItems() {
+  useCommandMenuStore((store) => store.open);
+
   const searchValue = useDebounce(
     useCommandMenuStore((store) => store.searchValue),
     300,
   );
+
+  const filters = useThreadsSearchFilters();
 
   const {
     data,
@@ -24,7 +29,11 @@ export default function ThreadCommandItems() {
     isPlaceholderData,
     isFetchingNextPage,
   } = usePplxInfiniteThreads({
-    searchTerm: searchValue,
+    searchValue,
+    ascending: filters.state.ascending,
+    querySourceFilter: filters.state.querySourceFilter,
+    threadTypeFilter: filters.state.threadTypeFilter,
+    withTemporaryThreads: filters.state.withTemporaryThreads,
   });
 
   const { triggerRef } = useLoadMoreItems({

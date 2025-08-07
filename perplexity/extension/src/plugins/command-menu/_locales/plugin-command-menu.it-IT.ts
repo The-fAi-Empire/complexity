@@ -9,11 +9,11 @@ export default {
     searchPlaceholder: "Cerca...",
   },
   actions: {
-    createNewThread: "Crea nuova discussione",
-    toggleIncognitoEnable: "Attiva modalità incognito",
-    toggleIncognitoDisable: "Disattiva modalità incognito",
-    toggleLightMode: "Passa alla modalità chiara",
-    toggleDarkMode: "Passa alla modalità scura",
+    createNewThread: "Crea nuovo thread",
+    toggleIncognitoEnable: "Abilita modalità incognito",
+    toggleIncognitoDisable: "Disabilita modalità incognito",
+    toggleLightMode: "Cambia in modalità chiara",
+    toggleDarkMode: "Cambia in modalità scura",
   },
   navigation: {
     home: "Home",
@@ -22,14 +22,14 @@ export default {
     discover: "Scopri",
     settings: "Impostazioni",
     labs: "Laboratori",
-    current: "Attuale",
+    current: "Corrente",
     openInNewTab: "Apri in nuova scheda",
     goTo: "Vai a {destination}",
   },
   search: {
-    threads: "Discussioni",
+    threads: "Thread",
     spaces: "Spazi",
-    threadsPlaceholder: "Cerca discussioni...",
+    threadsPlaceholder: "Cerca thread...",
     spacesPlaceholder: "Cerca spazi...",
   },
   groups: {
@@ -57,12 +57,36 @@ export default {
   },
   threads: {
     commandItems: {
-      errorFetching: "Errore nel recupero delle discussioni",
-      noThreadsFound: "Nessuna discussione trovata",
+      errorFetching: "Errore nel recupero dei thread",
+      noThreadsFound: "Nessun thread trovato",
+    },
+    filters: {
+      sort: {
+        newest: "Più recenti",
+        newestFirst: "Più recenti prima",
+        oldest: "Più vecchi",
+        oldestFirst: "Più vecchi prima",
+        label: "Ordina:",
+      },
+      source: {
+        all: "Tutti",
+        label: "Origine:",
+      },
+      temporaryThreads: {
+        show: "Mostra",
+        hide: "Nascondi",
+        label: "Thread temporanei:",
+        placeholder: "Thread temporanei",
+      },
+      type: {
+        all: "Tutti",
+        label: "Tipo:",
+        placeholder: "Tipo",
+      },
     },
   },
   common: {
     noResults: "Nessun risultato trovato",
-    current: "Attuale",
+    current: "Corrente",
   },
 } as const satisfies LanguageMessages;

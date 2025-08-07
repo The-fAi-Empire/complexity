@@ -2,18 +2,18 @@ import { type LanguageMessages } from "@complexity/i18n";
 
 export default {
   sidecar: {
-    showPreviews: "Εμφάνιση προεπισκοπήσεων",
-    hidePreviews: "Απόκρυψη προεπισκοπήσεων",
+    showPreviews: "Εμφάνιση Προεπισκοπήσεων",
+    hidePreviews: "Απόκρυψη Προεπισκοπήσεων",
   },
   input: {
     searchPlaceholder: "Αναζήτηση...",
   },
   actions: {
-    createNewThread: "Δημιουργία νέας συζήτησης",
-    toggleIncognitoEnable: "Ενεργοποίηση λειτουργίας ανώνυμης περιήγησης",
-    toggleIncognitoDisable: "Απενεργοποίηση λειτουργίας ανώνυμης περιήγησης",
-    toggleLightMode: "Αλλαγή σε φωτεινό θέμα",
-    toggleDarkMode: "Αλλαγή σε σκοτεινό θέμα",
+    createNewThread: "Δημιουργία Νέου Νήματος",
+    toggleIncognitoEnable: "Ενεργοποίηση Λειτουργίας Ανώνυμου",
+    toggleIncognitoDisable: "Απενεργοποίηση Λειτουργίας Ανώνυμου",
+    toggleLightMode: "Αλλαγή σε Φωτεινή Λειτουργία",
+    toggleDarkMode: "Αλλαγή σε Σκοτεινή Λειτουργία",
   },
   navigation: {
     home: "Αρχική",
@@ -27,10 +27,10 @@ export default {
     goTo: "Μετάβαση στο {destination}",
   },
   search: {
-    threads: "Συζητήσεις",
+    threads: "Νήματα",
     spaces: "Χώροι",
-    threadsPlaceholder: "Αναζήτηση συζητήσεων...",
-    spacesPlaceholder: "Αναζήτηση χώρων...",
+    threadsPlaceholder: "Αναζήτηση Νημάτων...",
+    spacesPlaceholder: "Αναζήτηση Χώρων...",
   },
   groups: {
     actions: "Ενέργειες",
@@ -40,25 +40,49 @@ export default {
   spaces: {
     footer: {
       openInNewTab: "Άνοιγμα σε νέα καρτέλα",
-      searchInSpace: "Αναζήτηση στο χώρο",
-      goToSpace: "Μετάβαση στο χώρο",
-      searchSpacePlaceholder: "Αναζήτηση στο {spaceName}...",
+      searchInSpace: "Αναζήτηση στον Χώρο",
+      goToSpace: "Μετάβαση στον Χώρο",
+      searchSpacePlaceholder: "Αναζήτηση {spaceName}...",
     },
     commandItems: {
-      errorFetching: "Σφάλμα κατά τη λήψη χώρων",
-      noSpacesFound: "Δεν βρέθηκαν χώροι",
+      errorFetching: "Σφάλμα λήψης Χώρων",
+      noSpacesFound: "Δεν βρέθηκαν Χώροι",
     },
     preview: {
       description: "Περιγραφή",
       instructions: "Οδηγίες",
       files: "Αρχεία ({count:number})",
-      webLinks: "Σύνδεσμοι ιστού ({count:number})",
+      webLinks: "Σύνδεσμοι Ιστού ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "Σφάλμα κατά τη λήψη συζητήσεων",
-      noThreadsFound: "Δεν βρέθηκαν συζητήσεις",
+      errorFetching: "Σφάλμα λήψης Νημάτων",
+      noThreadsFound: "Δεν βρέθηκαν Νήματα",
+    },
+    filters: {
+      sort: {
+        newest: "Νεότερα",
+        newestFirst: "Νεότερα Πρώτα",
+        oldest: "Παλαιότερα",
+        oldestFirst: "Παλαιότερα Πρώτα",
+        label: "Ταξινόμηση:",
+      },
+      source: {
+        all: "Όλα",
+        label: "Πηγή:",
+      },
+      temporaryThreads: {
+        show: "Εμφάνιση",
+        hide: "Απόκρυψη",
+        label: "Προσωρινά Νήματα:",
+        placeholder: "Προσωρινά Νήματα",
+      },
+      type: {
+        all: "Όλα",
+        label: "Τύπος:",
+        placeholder: "Τύπος",
+      },
     },
   },
   common: {

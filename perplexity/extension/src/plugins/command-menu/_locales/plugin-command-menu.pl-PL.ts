@@ -12,8 +12,8 @@ export default {
     createNewThread: "Utwórz nowy wątek",
     toggleIncognitoEnable: "Włącz tryb incognito",
     toggleIncognitoDisable: "Wyłącz tryb incognito",
-    toggleLightMode: "Zmień na jasny motyw",
-    toggleDarkMode: "Zmień na ciemny motyw",
+    toggleLightMode: "Przełącz na tryb jasny",
+    toggleDarkMode: "Przełącz na tryb ciemny",
   },
   navigation: {
     home: "Strona główna",
@@ -35,14 +35,14 @@ export default {
   groups: {
     actions: "Akcje",
     navigation: "Nawigacja",
-    search: "Szukaj",
+    search: "Wyszukiwanie",
   },
   spaces: {
     footer: {
       openInNewTab: "Otwórz w nowej karcie",
       searchInSpace: "Szukaj w przestrzeni",
       goToSpace: "Przejdź do przestrzeni",
-      searchSpacePlaceholder: "Szukaj w {spaceName}...",
+      searchSpacePlaceholder: "Szukaj {spaceName}...",
     },
     commandItems: {
       errorFetching: "Błąd podczas pobierania przestrzeni",
@@ -59,6 +59,30 @@ export default {
     commandItems: {
       errorFetching: "Błąd podczas pobierania wątków",
       noThreadsFound: "Nie znaleziono wątków",
+    },
+    filters: {
+      sort: {
+        newest: "Najnowsze",
+        newestFirst: "Najnowsze pierwsze",
+        oldest: "Najstarsze",
+        oldestFirst: "Najstarsze pierwsze",
+        label: "Sortuj:",
+      },
+      source: {
+        all: "Wszystkie",
+        label: "Źródło:",
+      },
+      temporaryThreads: {
+        show: "Pokaż",
+        hide: "Ukryj",
+        label: "Tymczasowe wątki:",
+        placeholder: "Tymczasowe wątki",
+      },
+      type: {
+        all: "Wszystkie",
+        label: "Typ:",
+        placeholder: "Typ",
+      },
     },
   },
   common: {

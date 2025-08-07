@@ -34,6 +34,15 @@ export const pplxLocalLanguageModels = {
       icon: "gemini",
     },
     {
+      label: "GPT-5",
+      shortLabel: "GPT-5",
+      code: "gpt5",
+      isReasoning: false,
+      limitKey: "gpt4_limit",
+      isMax: false,
+      icon: "openai",
+    },
+    {
       label: "o3 Pro",
       shortLabel: "o3 Pro",
       code: "o3pro",
@@ -81,14 +90,6 @@ export const pplxLocalLanguageModels = {
       isReasoning: false,
       limitKey: "gpt4_limit",
       icon: "xai",
-    },
-    {
-      label: "DeepSeek R1 (1776)",
-      shortLabel: "R1",
-      code: "r1",
-      isReasoning: true,
-      limitKey: "gpt4_limit",
-      icon: "deepseek",
     },
     {
       label: "Sonar",

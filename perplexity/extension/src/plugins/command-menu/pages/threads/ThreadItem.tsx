@@ -15,11 +15,11 @@ import { useCurrentPage } from "@/plugins/command-menu/hooks/useCurrentPage";
 import SpaceBadge from "@/plugins/command-menu/pages/threads/SpaceBadge";
 import { commandMenuStore } from "@/plugins/command-menu/store";
 import { formatRelativeTime } from "@/services/i18n";
-import type { ThreadSearchApi } from "@/services/pplx-api/pplx-api.types";
+import type { ThreadSearchResponseApi } from "@/services/pplx-api/pplx-api.types";
 import { jsonUtils } from "@/utils/utils";
 
 type ThreadItemProps = {
-  thread: ThreadSearchApi;
+  thread: ThreadSearchResponseApi;
   searchValue: string;
 };
 

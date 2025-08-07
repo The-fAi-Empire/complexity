@@ -3,10 +3,10 @@ import type { PageStack } from "@/plugins/command-menu/store/slices/pages/types"
 import type { BoundStateCreator } from "@/plugins/command-menu/store/types";
 
 export type PagesStackSlice = {
-  pageStack: PageStack<CommandMenuPageId>[];
+  pageStack: PageStack[];
   pushPage: <P extends CommandMenuPageId>(page: PageStack<P>) => void;
-  popPage: () => PageStack<CommandMenuPageId> | undefined;
-  peekPage: () => PageStack<CommandMenuPageId> | undefined;
+  popPage: () => PageStack | undefined;
+  peekPage: () => PageStack | undefined;
   reset: () => void;
 };
 
@@ -39,7 +39,7 @@ export const createPagesStackSlice: BoundStateCreator<PagesStackSlice> = (
       ];
     }
 
-    newStack.push(page);
+    newStack.push(page as PageStack);
 
     set({
       pageStack: newStack,

@@ -6,10 +6,10 @@ export default {
     hidePreviews: "Ascunde previzualizări",
   },
   input: {
-    searchPlaceholder: "Caută...",
+    searchPlaceholder: "Căutare...",
   },
   actions: {
-    createNewThread: "Creează conversație nouă",
+    createNewThread: "Creează fir nou",
     toggleIncognitoEnable: "Activează modul incognito",
     toggleIncognitoDisable: "Dezactivează modul incognito",
     toggleLightMode: "Schimbă la modul luminos",
@@ -23,13 +23,13 @@ export default {
     settings: "Setări",
     labs: "Laboratoare",
     current: "Curent",
-    openInNewTab: "Deschide în filă nouă",
-    goTo: "Mergi la {destination}",
+    openInNewTab: "Deschide în tab nou",
+    goTo: "Du-te la {destination}",
   },
   search: {
-    threads: "Conversații",
+    threads: "Fire",
     spaces: "Spații",
-    threadsPlaceholder: "Caută conversații...",
+    threadsPlaceholder: "Caută fire...",
     spacesPlaceholder: "Caută spații...",
   },
   groups: {
@@ -39,9 +39,9 @@ export default {
   },
   spaces: {
     footer: {
-      openInNewTab: "Deschide în filă nouă",
+      openInNewTab: "Deschide în tab nou",
       searchInSpace: "Caută în spațiu",
-      goToSpace: "Mergi la spațiu",
+      goToSpace: "Du-te la spațiu",
       searchSpacePlaceholder: "Caută {spaceName}...",
     },
     commandItems: {
@@ -52,13 +52,37 @@ export default {
       description: "Descriere",
       instructions: "Instrucțiuni",
       files: "Fișiere ({count:number})",
-      webLinks: "Linkuri web ({count:number})",
+      webLinks: "Link-uri web ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "Eroare la preluarea conversațiilor",
-      noThreadsFound: "Nu s-au găsit conversații",
+      errorFetching: "Eroare la preluarea firelor",
+      noThreadsFound: "Nu s-au găsit fire",
+    },
+    filters: {
+      sort: {
+        newest: "Cele mai noi",
+        newestFirst: "Cele mai noi primul",
+        oldest: "Cele mai vechi",
+        oldestFirst: "Cele mai vechi primul",
+        label: "Sortează:",
+      },
+      source: {
+        all: "Toate",
+        label: "Sursă:",
+      },
+      temporaryThreads: {
+        show: "Afișează",
+        hide: "Ascunde",
+        label: "Fire temporare:",
+        placeholder: "Fire temporare",
+      },
+      type: {
+        all: "Toate",
+        label: "Tip:",
+        placeholder: "Tip",
+      },
     },
   },
   common: {

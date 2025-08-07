@@ -20,12 +20,12 @@ export const DOM_SELECTORS: DomSelectors = {
     /** The container that wraps all messages */
     CONTAINER: {
       DESKTOP: {
-        NORMAL: `.h-headerHeight.absolute + div > div > div[class=""],.erp-sidecar\\:pb-0.pb-16`,
-        BRANCHED: `.h-headerHeight.absolute + div > div > div[class=""],.erp-sidecar\\:pb-0.pb-16`,
+        NORMAL: `.h-headerHeight.absolute + div > div > div:last-child`,
+        BRANCHED: `.h-headerHeight.absolute + div > div > div:last-child`,
       },
       MOBILE: {
-        NORMAL: `.h-headerHeight.absolute + div div.erp-sidecar\\:pb-0`,
-        BRANCHED: `.h-headerHeight.absolute + div div.erp-sidecar\\:pb-0`,
+        NORMAL: `.h-headerHeight.absolute + div > div > div:last-child`,
+        BRANCHED: `.h-headerHeight.absolute + div > div > div:last-child`,
       },
     },
     MESSAGE: {

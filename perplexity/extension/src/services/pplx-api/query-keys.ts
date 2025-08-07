@@ -1,7 +1,10 @@
 import { infiniteQueryOptions, queryOptions } from "@tanstack/react-query";
 
 import { PplxApiService } from "@/services/pplx-api";
-import type { Space } from "@/services/pplx-api/pplx-api.types";
+import type {
+  Space,
+  ThreadsSearchPayload,
+} from "@/services/pplx-api/pplx-api.types";
 
 export const pplxApiQueries = {
   all: () => ["pplxApi"] as const,
@@ -55,19 +58,19 @@ export const pplxApiQueries = {
       all: () => [...pplxApiQueries.threads.all(), "infinite"] as const,
       detail: ({
         initialPageParam,
-        searchTerm,
+        ...searchParams
       }: {
         initialPageParam?: number;
-        searchTerm?: string;
-      }) =>
+      } & ThreadsSearchPayload) =>
         infiniteQueryOptions({
           queryKey: [
             ...pplxApiQueries.threads.infinite.all(),
-            { searchTerm },
+            { ...searchParams },
           ] as const,
           queryFn: (ctx) =>
+            // temp hard-coded limit and offset for pagination
             PplxApiService.fetchThreads({
-              searchValue: searchTerm,
+              ...searchParams,
               limit: 20,
               offset: ctx.pageParam * 20,
             }),

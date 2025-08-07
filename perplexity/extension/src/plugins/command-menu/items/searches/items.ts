@@ -19,7 +19,7 @@ export const getRawItems = (): CommandItemProps[] => [
         searchPlaceholder: t("plugin-command-menu.search.threadsPlaceholder"),
         shouldLocalFilter: false,
         sidecarOpen: false,
-        args: undefined,
+        args: {},
       });
     },
     priority: 0,

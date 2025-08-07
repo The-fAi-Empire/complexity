@@ -87,7 +87,7 @@ function shouldDehydrateQuery(query: Query) {
     pplxApiQueries.spaces.all(),
     pplxApiQueries.threads.infinite.detail({
       initialPageParam: 0,
-      searchTerm: "",
+      searchValue: "",
     }).queryKey,
   ] as unknown as any[][];
 

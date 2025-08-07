@@ -10,7 +10,7 @@ body[data-cplx-zen-mode="true"] {
   .group\/sidebar {
     display: none;
 
-    & + [class^="erp"][style^="padding"] {
+    & + [class^="erp"][style^="padding"]:not([data-erp="tab"] *) {
       @apply x:pl-2!;
     }
   }
@@ -22,5 +22,9 @@ body[data-cplx-zen-mode="true"] {
     > div:last-child
     > .animate-in.fade-in {
     display: none;
+  }
+
+  &[location="comet_ntp"] [style="margin-left: -36px;"] {
+    margin-left: 0 !important;
   }
 }

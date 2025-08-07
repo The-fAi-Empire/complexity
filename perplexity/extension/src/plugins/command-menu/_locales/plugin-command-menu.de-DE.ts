@@ -18,19 +18,19 @@ export default {
   navigation: {
     home: "Startseite",
     library: "Bibliothek",
-    spaces: "Spaces",
+    spaces: "Bereiche",
     discover: "Entdecken",
     settings: "Einstellungen",
     labs: "Labs",
     current: "Aktuell",
     openInNewTab: "In neuem Tab öffnen",
-    goTo: "Zu {destination} gehen",
+    goTo: "Gehe zu {destination}",
   },
   search: {
     threads: "Threads",
-    spaces: "Spaces",
-    threadsPlaceholder: "Threads durchsuchen...",
-    spacesPlaceholder: "Spaces durchsuchen...",
+    spaces: "Bereiche",
+    threadsPlaceholder: "Threads suchen...",
+    spacesPlaceholder: "Bereiche suchen...",
   },
   groups: {
     actions: "Aktionen",
@@ -40,25 +40,49 @@ export default {
   spaces: {
     footer: {
       openInNewTab: "In neuem Tab öffnen",
-      searchInSpace: "In Space suchen",
-      goToSpace: "Zum Space gehen",
+      searchInSpace: "Im Bereich suchen",
+      goToSpace: "Zum Bereich gehen",
       searchSpacePlaceholder: "{spaceName} durchsuchen...",
     },
     commandItems: {
-      errorFetching: "Fehler beim Abrufen von Spaces",
-      noSpacesFound: "Keine Spaces gefunden",
+      errorFetching: "Fehler beim Abrufen der Bereiche",
+      noSpacesFound: "Keine Bereiche gefunden",
     },
     preview: {
       description: "Beschreibung",
       instructions: "Anweisungen",
       files: "Dateien ({count:number})",
-      webLinks: "Weblinks ({count:number})",
+      webLinks: "Web-Links ({count:number})",
     },
   },
   threads: {
     commandItems: {
-      errorFetching: "Fehler beim Abrufen von Threads",
+      errorFetching: "Fehler beim Abrufen der Threads",
       noThreadsFound: "Keine Threads gefunden",
+    },
+    filters: {
+      sort: {
+        newest: "Neueste",
+        newestFirst: "Neueste zuerst",
+        oldest: "Älteste",
+        oldestFirst: "Älteste zuerst",
+        label: "Sortieren:",
+      },
+      source: {
+        all: "Alle",
+        label: "Quelle:",
+      },
+      temporaryThreads: {
+        show: "Anzeigen",
+        hide: "Ausblenden",
+        label: "Temporäre Threads:",
+        placeholder: "Temporäre Threads",
+      },
+      type: {
+        all: "Alle",
+        label: "Typ:",
+        placeholder: "Typ",
+      },
     },
   },
   common: {

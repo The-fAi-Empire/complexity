@@ -16,7 +16,7 @@ export default async function loader() {
 
   new QueryObserver(queryClient, {
     queryKey: pplxApiQueries.threads.infinite.detail({
-      searchTerm: "",
+      searchValue: "",
       initialPageParam: 0,
     }).queryKey,
     enabled: false,
@@ -29,7 +29,7 @@ export default async function loader() {
   queryClient.ensureQueryData(pplxApiQueries.spaces.detail());
   queryClient.ensureInfiniteQueryData(
     pplxApiQueries.threads.infinite.detail({
-      searchTerm: "",
+      searchValue: "",
       initialPageParam: 0,
     }),
   );

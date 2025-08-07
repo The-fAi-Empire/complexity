@@ -71,10 +71,11 @@ export function CommandMenu() {
       dialogContentProps={{
         className: cn({
           "x:max-w-[1000px]": sidecarOpen,
-          "x:max-w-xl": !sidecarOpen,
+          "x:max-w-3xl": !sidecarOpen,
         }),
       }}
       open={open}
+      unmountOnExit={false}
       onOpenChange={({ open }) => setOpen(open)}
     >
       <Command
