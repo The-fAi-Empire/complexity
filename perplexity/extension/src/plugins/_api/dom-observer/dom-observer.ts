@@ -13,6 +13,7 @@ import { ExtensionSettingsService } from "@/services/extension-settings";
 export class DomObserver {
   private static instance: DomObserver;
   private DEFAULT_DEBOUNCE_TIME: number;
+  private throttler;
   private debounceConfig: { leading: boolean; trailing: boolean };
 
   private static instances = new Map<DomObserverId, DomObserverInstance>();
@@ -28,6 +29,8 @@ export class DomObserver {
     this.debounceConfig = isEnergySavingMode
       ? { leading: false, trailing: true }
       : { leading: true, trailing: true };
+
+    this.throttler = throttle;
   }
 
   static getInstance(): DomObserver {
@@ -229,7 +232,7 @@ export class DomObserver {
   ): MutationCallback {
     const instance = DomObserver.getInstance();
 
-    const throttledCallback = throttle(
+    const throttledCallback = instance.throttler(
       config.onMutation,
       config.debounceTime ?? instance.DEFAULT_DEBOUNCE_TIME,
       instance.debounceConfig,

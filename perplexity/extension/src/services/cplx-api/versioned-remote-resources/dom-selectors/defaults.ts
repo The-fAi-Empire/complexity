@@ -18,7 +18,7 @@ export const DOM_SELECTORS: DomSelectors = {
     PAGE_WRAPPER: ".h-\\[100dvh\\] > .max-h-screen",
     WRAPPER: ".h-headerHeight.absolute + div",
     /** The container that wraps all messages */
-    CONTAINER: {
+    MESSAGE_BLOCKS_WRAPPER: {
       DESKTOP: {
         NORMAL: `.h-headerHeight.absolute + div > div > div:last-child`,
         BRANCHED: `.h-headerHeight.absolute + div > div > div:last-child`,
@@ -141,6 +141,7 @@ export const INTERNAL_ATTRIBUTES = {
     },
     PAGE_WRAPPER: "thread-page-wrapper",
     WRAPPER: "thread-wrapper",
+    MESSAGE_BLOCKS_WRAPPER: "thread-message-blocks-wrapper",
     TOC_CONTAINER: "thread-toc-container",
     POPPER: {
       DESKTOP: "thread-popper-desktop",

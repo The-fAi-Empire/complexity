@@ -1,6 +1,32 @@
+import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { threadDomObserverStore } from "@/plugins/_core/dom-observers/thread/store";
 import { isInternalNodeExists } from "@/plugins/_core/dom-observers/utils";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
+
+export function findPageWrapper() {
+  const existingPageWrapper =
+    threadDomObserverStore.getState().$pageWrapper?.[0];
+
+  if (
+    isInternalNodeExists({
+      node: existingPageWrapper,
+      selector: DomSelectorsService.cplxAttribute(
+        DomSelectorsService.internalAttributes.THREAD.PAGE_WRAPPER,
+      ),
+    })
+  )
+    return;
+
+  const $pageWrapper = $(DomSelectorsService.cachedSync.THREAD.PAGE_WRAPPER);
+
+  $pageWrapper.internalComponentAttr(
+    DomSelectorsService.internalAttributes.THREAD.PAGE_WRAPPER,
+  );
+
+  threadDomObserverStore.setState({
+    $pageWrapper,
+  });
+}
 
 export function findNavbar() {
   const existingNavbar = threadDomObserverStore.getState().$navbar?.[0];
@@ -94,28 +120,50 @@ export function findWrapper() {
   });
 }
 
-export function findPageWrapper() {
-  const existingPageWrapper =
-    threadDomObserverStore.getState().$pageWrapper?.[0];
+export function findMessageBlocksWrapper() {
+  const existingWrapper =
+    threadDomObserverStore.getState().$messageBlocksWrapper?.[0];
 
   if (
     isInternalNodeExists({
-      node: existingPageWrapper,
+      node: existingWrapper,
       selector: DomSelectorsService.cplxAttribute(
-        DomSelectorsService.internalAttributes.THREAD.PAGE_WRAPPER,
+        DomSelectorsService.internalAttributes.THREAD.MESSAGE_BLOCKS_WRAPPER,
       ),
     })
   )
     return;
 
-  const $pageWrapper = $(DomSelectorsService.cachedSync.THREAD.PAGE_WRAPPER);
+  const $messageBlocksWrapper = (() => {
+    const isMobile = isMobileStore.getState().isMobile;
 
-  $pageWrapper.internalComponentAttr(
-    DomSelectorsService.internalAttributes.THREAD.PAGE_WRAPPER,
+    let $target = $(
+      isMobile
+        ? DomSelectorsService.cachedSync.THREAD.MESSAGE_BLOCKS_WRAPPER.MOBILE
+            .NORMAL
+        : DomSelectorsService.cachedSync.THREAD.MESSAGE_BLOCKS_WRAPPER.DESKTOP
+            .NORMAL,
+    );
+
+    if (!$target.length) {
+      $target = $(
+        isMobile
+          ? DomSelectorsService.cachedSync.THREAD.MESSAGE_BLOCKS_WRAPPER.MOBILE
+              .BRANCHED
+          : DomSelectorsService.cachedSync.THREAD.MESSAGE_BLOCKS_WRAPPER.DESKTOP
+              .BRANCHED,
+      );
+    }
+
+    return $target;
+  })();
+
+  $messageBlocksWrapper.internalComponentAttr(
+    DomSelectorsService.internalAttributes.THREAD.MESSAGE_BLOCKS_WRAPPER,
   );
 
   threadDomObserverStore.setState({
-    $pageWrapper,
+    $messageBlocksWrapper,
   });
 }
 

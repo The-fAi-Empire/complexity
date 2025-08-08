@@ -1,3 +1,5 @@
+import debounce from "lodash/debounce";
+
 import {
   CallbackQueue,
   createTaskId,
@@ -45,14 +47,18 @@ function cleanup() {
 
 function observeThreadMessageBlocks() {
   threadDomObserverStore.subscribe(
-    (store) => store.$wrapper,
-    ($threadWrapper) => {
+    (store) => store.$messageBlocksWrapper,
+    ($threadMessageBlocksWrapper) => {
       cleanup();
 
-      if ($threadWrapper == null || !$threadWrapper[0]) return;
+      if (
+        $threadMessageBlocksWrapper == null ||
+        !$threadMessageBlocksWrapper[0]
+      )
+        return;
 
       DomObserver.create(createDomObserverId("thread", "messageBlocks"), {
-        target: $threadWrapper[0],
+        target: $threadMessageBlocksWrapper[0],
         config: { childList: true, subtree: true },
         onMutation,
       });
@@ -64,19 +70,38 @@ function observeThreadMessageBlocks() {
 }
 
 async function onMutation() {
-  const messageBlocks = await findMessageBlocks();
+  const $threadMessagesContainer =
+    threadDomObserverStore.getState().$messageBlocksWrapper;
+
+  if (
+    $threadMessagesContainer == null ||
+    !hasContentChanged($threadMessagesContainer)
+  )
+    return;
+
+  const messageBlocks = await findMessageBlocks($threadMessagesContainer);
 
   if (messageBlocks == null) return;
 
-  const isAnyMessageBlockInFlight = messageBlocks.some(
-    (block) => block.states.isInFlight,
-  );
+  let isAnyMessageBlockInFlight = false;
+  let isAnyMessageBlockVirtualized = false;
+
+  for (const block of messageBlocks) {
+    if (block.states.isInFlight) {
+      isAnyMessageBlockInFlight = true;
+    }
+    if (block.states.isVirtualized) {
+      isAnyMessageBlockVirtualized = true;
+    }
+
+    if (isAnyMessageBlockInFlight && isAnyMessageBlockVirtualized) {
+      break;
+    }
+  }
 
   // in case the in-flight message is virtualized, no further DOM mutations will occur so we need to force trigger the observer
-  if (isAnyMessageBlockInFlight) {
-    setTimeout(() => {
-      DomObserver.forceTrigger(createDomObserverId("thread", "messageBlocks"));
-    }, 100);
+  if (isAnyMessageBlockInFlight && isAnyMessageBlockVirtualized) {
+    scheduleObserverForceTrigger();
   }
 
   threadDomObserverStore.setState((store) => {
@@ -92,3 +117,21 @@ async function onMutation() {
     createTaskId("thread", "messageBlocks"),
   );
 }
+
+function hasContentChanged($threadMessagesContainer: JQuery<HTMLElement>) {
+  const prevTextContent =
+    $threadMessagesContainer.data("prevTextContent") ?? "";
+  const currentTextContent = $threadMessagesContainer[0]?.textContent ?? "";
+
+  const result = prevTextContent !== currentTextContent;
+
+  if (result) {
+    $threadMessagesContainer.data("prevTextContent", currentTextContent);
+  }
+
+  return result;
+}
+
+const scheduleObserverForceTrigger = debounce(() => {
+  DomObserver.forceTrigger(createDomObserverId("thread", "messageBlocks"));
+}, 100);

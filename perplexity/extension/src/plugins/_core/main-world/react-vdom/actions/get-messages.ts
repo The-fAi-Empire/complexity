@@ -3,7 +3,6 @@ import type { LanguageModelCode } from "@/services/cplx-api/remote-resources/ppl
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { errorWrapper } from "@/utils/error-wrapper";
 import type { PplxWebResult } from "@/utils/thread-export";
-import { UiUtils } from "@/utils/ui-utils";
 import { getReactFiberKey } from "@/utils/utils";
 
 export type MessageBlockFiberData = {
@@ -31,8 +30,11 @@ export async function getMessages({
 }: { remoteFiberNodePath?: string[] } = {}): Promise<
   MessageBlockFiberData[] | null
 > {
-  const domSelectors = await DomSelectorsService.mainWorldCached();
-  const $messagesContainer = UiUtils.getMessagesContainer(domSelectors);
+  const $messagesContainer = $(
+    DomSelectorsService.cplxAttribute(
+      DomSelectorsService.internalAttributes.THREAD.MESSAGE_BLOCKS_WRAPPER,
+    ),
+  );
 
   if (!$messagesContainer[0]) return null;
 

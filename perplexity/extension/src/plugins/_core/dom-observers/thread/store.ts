@@ -3,10 +3,11 @@ import { immer } from "zustand/middleware/immer";
 import { createWithEqualityFn } from "zustand/traditional";
 
 type ThreadDomObserverStoreType = {
+  $pageWrapper: JQuery<HTMLElement> | null;
   $navbar: JQuery<HTMLElement> | null;
   $overflowMenuButtonWrapper: JQuery<HTMLElement> | null;
   $wrapper: JQuery<HTMLElement> | null;
-  $pageWrapper: JQuery<HTMLElement> | null;
+  $messageBlocksWrapper: JQuery<HTMLElement> | null;
   $popper: JQuery<HTMLElement> | null;
   states: {
     isInFlight: boolean; // >= 1 message is in-flight
@@ -23,6 +24,7 @@ export const threadDomObserverStore =
           $overflowMenuButtonWrapper: null,
           $wrapper: null,
           $pageWrapper: null,
+          $messageBlocksWrapper: null,
           $popper: null,
           states: {
             isInFlight: false,
@@ -34,6 +36,7 @@ export const threadDomObserverStore =
               $wrapper: null,
               $pageWrapper: null,
               $popper: null,
+              $messageBlocksWrapper: null,
               states: {
                 isInFlight: false,
               },

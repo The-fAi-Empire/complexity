@@ -5,7 +5,6 @@ import type { MessageBlock } from "@/plugins/_core/dom-observers/thread/message-
 import { type MessageBlockFiberData } from "@/plugins/_core/main-world/react-vdom/actions/get-messages";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
 import { getVersionedRemoteResource } from "@/services/cplx-api/versioned-remote-resources/utils";
-import { UiUtils } from "@/utils/ui-utils";
 
 const remoteFiberNodePath = (
   await getVersionedRemoteResource(
@@ -13,9 +12,9 @@ const remoteFiberNodePath = (
   )
 ).split(".");
 
-export async function findMessageBlocks(): Promise<MessageBlock[] | null> {
-  const $threadMessagesContainer = UiUtils.getMessagesContainer();
-
+export async function findMessageBlocks(
+  $threadMessagesContainer: JQuery<HTMLElement>,
+): Promise<MessageBlock[] | null> {
   if (!$threadMessagesContainer[0]) return null;
 
   const $messageBlockElements = $threadMessagesContainer.find(

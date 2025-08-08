@@ -14,6 +14,7 @@ import {
   findPopper,
   findWrapper,
   findPageWrapper,
+  findMessageBlocksWrapper,
 } from "@/plugins/_core/dom-observers/thread/utils";
 import { shouldEnableCoreObserver } from "@/plugins/_core/dom-observers/utils";
 import { spaRouteChangeCompleteSubscribe } from "@/plugins/_core/main-world/spa-router/listeners.loader";
@@ -91,20 +92,24 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
             callback: findPageWrapper,
           },
           {
-            id: createTaskId("thread", "wrapper"),
-            callback: findWrapper,
-          },
-          {
             id: createTaskId("thread", "navbar"),
             callback: findNavbar,
           },
           {
-            id: createTaskId("thread", "popper"),
-            callback: findPopper,
-          },
-          {
             id: createTaskId("thread", "navbarOverflowMenuButton"),
             callback: findNavbarOverflowMenuButtonWrapper,
+          },
+          {
+            id: createTaskId("thread", "wrapper"),
+            callback: findWrapper,
+          },
+          {
+            id: createTaskId("thread", "messageBlocksWrapper"),
+            callback: findMessageBlocksWrapper,
+          },
+          {
+            id: createTaskId("thread", "popper"),
+            callback: findPopper,
           },
         ]);
       },
@@ -122,6 +127,10 @@ function observeThread(location: ReturnType<typeof whereAmI>) {
           {
             id: createTaskId("thread", "wrapper"),
             callback: findWrapper,
+          },
+          {
+            id: createTaskId("thread", "messageBlocksWrapper"),
+            callback: findMessageBlocksWrapper,
           },
         ]);
       },

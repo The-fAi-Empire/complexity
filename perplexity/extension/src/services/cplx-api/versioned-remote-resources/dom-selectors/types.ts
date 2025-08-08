@@ -11,7 +11,7 @@ export const DomSelectorsSchema = z.object({
     NAVBAR: z.string(),
     PAGE_WRAPPER: z.string(),
     WRAPPER: z.string(),
-    CONTAINER: z.object({
+    MESSAGE_BLOCKS_WRAPPER: z.object({
       DESKTOP: z.object({
         NORMAL: z.string(),
         BRANCHED: z.string(),

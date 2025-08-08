@@ -1,34 +1,8 @@
-import { isMobileStore } from "@/hooks/use-is-mobile-store";
 import { DomSelectorsService } from "@/services/cplx-api/versioned-remote-resources/dom-selectors";
-import type { DomSelectors } from "@/services/cplx-api/versioned-remote-resources/dom-selectors/types";
 
 export class UiUtils {
   static isDarkTheme() {
     return $("html").attr("data-color-scheme") === "dark";
-  }
-
-  static getMessagesContainer(domSelectors?: DomSelectors) {
-    const isMobile = isMobileStore.getState().isMobile;
-
-    let $messagesContainer = $(
-      isMobile
-        ? (domSelectors ?? DomSelectorsService.cachedSync).THREAD.CONTAINER
-            .MOBILE.NORMAL
-        : (domSelectors ?? DomSelectorsService.cachedSync).THREAD.CONTAINER
-            .DESKTOP.NORMAL,
-    );
-
-    if (!$messagesContainer.length) {
-      $messagesContainer = $(
-        isMobile
-          ? (domSelectors ?? DomSelectorsService.cachedSync).THREAD.CONTAINER
-              .MOBILE.BRANCHED
-          : (domSelectors ?? DomSelectorsService.cachedSync).THREAD.CONTAINER
-              .DESKTOP.BRANCHED,
-      );
-    }
-
-    return $messagesContainer;
   }
 
   static getStickyNavbar() {
