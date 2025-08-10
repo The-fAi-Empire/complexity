@@ -1,4 +1,4 @@
-import { internalWebSocketStore } from "@/plugins/_core/global-stores/web-socket";
+import { internalWebSocketStore } from "@/plugins/_core/global-stores/index.public";
 import { ENDPOINTS } from "@/services/pplx-api/endpoints";
 
 export async function saveUserSettingsViaFetch(

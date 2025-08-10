@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { internalWebSocketStore } from "@/plugins/_core/global-stores/web-socket";
+import { internalWebSocketStore } from "@/plugins/_core/global-stores/index.public";
 import type { ImageModel } from "@/services/cplx-api/remote-resources/pplx-image-models/types";
 import { ENDPOINTS } from "@/services/pplx-api/endpoints";
 import type {
