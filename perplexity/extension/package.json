@@ -104,7 +104,6 @@
     "mermaid": "^11.9.0",
     "minimatch": "^10.0.3",
     "postcss": "^8.5.6",
-    "postcss-prefix-keyframe": "^0.0.1",
     "prettier": "catalog:lint",
     "prettier-plugin-tailwindcss": "^0.6.14",
     "tailwindcss": "^4.1.11",
